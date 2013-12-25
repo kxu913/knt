@@ -10,12 +10,15 @@
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
 	<build>
-		<finalName>common</finalName>
+		<finalName>frontpage</finalName>
 	</build>
-	<artifactId>common</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>frontpage</artifactId>
+	<packaging>war</packaging>
 	<dependencies>
-		
+		<dependency>
+			<groupId>com.knt</groupId>
+			<artifactId>common</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

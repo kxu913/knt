@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false" name="localCache">
+
+	<diskStore path="java.io.tmpdir/ehcache/hope/local" />
+
+	<!-- DefaultCache setting. -->
+	<defaultCache maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		overflowToDisk="true" maxEntriesLocalDisk="100000" />
+	<!-- 持久化Cache，不过期 -->
+	<cache name="persistentCache" overflowToDisk="true" eternal="true"
+		diskPersistent="false" maxElementsInMemory="1000"
+		memoryStoreEvictionPolicy="LRU" />
+		
+	<cache name="oftenCache" overflowToDisk="true" eternal="false"
+        diskPersistent="false" timeToLiveSeconds="21600" timeToIdleSeconds="1800"
+        maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" />
+        
+    <cache name="5minutesCache" overflowToDisk="true" eternal="false"
+        diskPersistent="false" timeToLiveSeconds="300" timeToIdleSeconds="0"
+        maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" />
+		
+</ehcache>

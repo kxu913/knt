@@ -1,0 +1,59 @@
+/*基本信息*/
+body {
+	background: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 100%;
+	line-height: 1em;
+	color: #4e4e4e;
+	min-width: 920px;
+	border-top: 10pxsolid #0c0e0e margin :   0px;
+	text-align: center;
+}
+
+
+
+/* page header*/
+#Header {
+	display:block;
+	height: 40px;
+	background: #FFCC99
+}
+
+#Footer {
+	display:block;
+	height: 40px;
+	background: #00FFFF;
+}
+
+.clear { /* generic container (i.e. div) for floating buttons */
+	overflow: hidden;
+	width: 100%;
+}
+
+a.button {
+	background: transparent url('../img/button.jpg') no-repeat -1px -165px;
+	color: #444;
+	display: block;
+	float: left;
+	font-size: 15px large;
+	height: 30px;
+	width: 91px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a.button span {
+	display: block;
+	padding: 7px 0 0px 0px; /* push text down 1px */
+}
+
+a.button:active span {
+	background-position: bottom left;
+	padding: 7px 0 0px 0px; /* push text down 1px */
+}
+
+a.button:active {
+	background: transparent url('../img/button.jpg') no-repeat -1px -122px;
+	/* color: #00FFFF;*/
+	outline: none; /* hide dotted outline in Firefox */
+}

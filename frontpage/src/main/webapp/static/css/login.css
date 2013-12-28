@@ -1,0 +1,58 @@
+/*container*/
+#container {
+	margin: 0 auto;
+	margin-top: 10%;
+	width: 30%;
+}
+
+/* page header*/
+#Header {
+	height: 40px;
+	background: #FFCC99
+}
+
+#PageBody {
+	height: 200px;
+	background: #CCFF00
+}
+
+.loginText {
+	width: 15%;
+	font: 20px Tahoma;
+	float: left;
+	margin-left: 10px;
+	text-align: left;
+}
+
+.loginInput {
+	width: 80%;
+	float: right;
+	margin-left: 0px;
+}
+
+.login_input {
+	width: 90%;
+}
+
+.input_space {
+	padding-top: 20px;
+}
+
+.buttonClass {
+	margin-top: 5px;
+	float: right;
+	width: 50%;
+}
+
+.registClass {
+	float: left;
+}
+
+.loginClass {
+	float: right;
+	margin-right: 10px;
+}
+
+#regist {
+	width: 40px;
+}

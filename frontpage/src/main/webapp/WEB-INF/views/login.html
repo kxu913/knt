@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Login</title>
+<link href="../../static/css/common.css" rel="stylesheet"
+	type="text/css" />
+<link href="../../static/css/login.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="../../static/js/jquery/jquery-2.0.2.js"></script>
+<script type="text/javascript"
+	src="../../static/js/jquery/jquery.json-2.4.js"></script>
+<script type="text/javascript" src="../../static/js/login.js"></script>
+</head>
+
+<body>
+
+	<div id="container">
+		<div id="Header">Love Login</div>
+		<div id="PageBody">
+			<div id="loginDiv" class="input_space">
+				<div class="loginText">Login:</div>
+				<div class="loginInput">
+					<input class="login_input" id="loginName" type="text" />
+				</div>
+			</div>
+
+			<div id="passwordDiv" class="input_space">
+				<div class="loginText">Password:</div>
+				<div class="loginInput">
+					<input class="login_input" id="password" type="password" />
+				</div>
+			</div>
+		</div>
+		<div id="Footer">
+			<div class="buttonClass">
+				<div class="registClass">
+					<a class="button" onclick="this.blur();"><span>注册</span></a>
+				</div>
+				<div class="loginClass">
+					<a class="button" onclick="login()"><span>登陆</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

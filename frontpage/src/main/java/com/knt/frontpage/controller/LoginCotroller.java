@@ -2,21 +2,19 @@ package com.knt.frontpage.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.knt.frontpage.security.CaptchaUsernamePasswordToken;
 
 @Controller
 public class LoginCotroller {
@@ -25,17 +23,10 @@ public class LoginCotroller {
 	public ModelAndView login(HttpServletRequest request) {
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("password");
-		String verifyCode = WebUtils.getCleanParam(request, "captcha");
-		String captcha = (String) request.getSession().getAttribute(
-				com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
-		System.out.println(verifyCode + "  " + captcha);
-		UsernamePasswordToken token = new UsernamePasswordToken(username,
-				password);
+		String captcha = request.getParameter("captcha");
+		CaptchaUsernamePasswordToken token = new CaptchaUsernamePasswordToken(username,
+				password,true,request.getRemoteHost(), captcha);
 		ModelAndView modelAndView = new ModelAndView();
-		token.setRememberMe(true);
-		System.out.println("为了验证登录用户而封装的token为"
-				+ ReflectionToStringBuilder.toString(token,
-						ToStringStyle.MULTI_LINE_STYLE));
 		// 获取当前的Subject
 		Subject currentUser = SecurityUtils.getSubject();
 		try {

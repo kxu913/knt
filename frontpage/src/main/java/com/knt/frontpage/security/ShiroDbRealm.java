@@ -3,11 +3,11 @@ package com.knt.frontpage.security;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -15,6 +15,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.knt.core.MappForMybatis;
+import com.knt.frontpage.exception.IncorrectCaptchaException;
 import com.knt.mapping.UserMapper;
 import com.knt.model.User;
 
@@ -25,7 +26,6 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
-		System.out.println("11111111111");
 		String username = (String) principals.fromRealm(getName()).iterator()
 				.next();
 
@@ -49,11 +49,24 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authcToken) throws AuthenticationException {
-		System.out.println("222222222");
-		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
+		CaptchaUsernamePasswordToken token = (CaptchaUsernamePasswordToken) authcToken;
 		// 通过表单接收的用户名
 		String username = token.getUsername();
+		String captcha = token.getCaptcha();
+		System.out.println(token.getCaptcha());
+		String _captcha = (String) SecurityUtils
+				.getSubject()
+				.getSession()
+				.getAttribute(
+						com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+		System.out.println(captcha + "  " + _captcha);
+		if (null == captcha || !captcha.equalsIgnoreCase(_captcha)) {
+			throw new IncorrectCaptchaException("验证码错误！");
+		}
 
+		// 在调用了login方法后,SecurityManager会收到AuthenticationToken,并将其发送给已配置的Realm执行必须的认证检查
+		// 每个Realm都能在必要时对提交的AuthenticationTokens作出反应
+		// 所以这一步在调用login(token)方法时,它会走到MyRealm.doGetAuthenticationInfo()方法中,具体验证方式详见此方法
 		if (username != null && !"".equals(username)) {
 			UserMapper mapper = businessManager.getMapper(UserMapper.class);
 			User user = mapper.getUserByName(username);

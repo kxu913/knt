@@ -1,93 +1,99 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.knt.mapping.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.knt.model.User" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="userName" property="username" jdbcType="VARCHAR" />
-    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="VARCHAR" />
-    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+	<resultMap id="BaseResultMap" type="com.knt.model.User" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="userName" property="username" jdbcType="VARCHAR" />
+		<result column="nickName" property="nickname" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
     id, userName, nickName, sex, birthday
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
+		<include refid="Base_Column_List" />
     from t_user
     where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.knt.model.User" >
+	</delete>
+	<insert id="insert" parameterType="com.knt.model.User" >
     insert into t_user (id, userName, nickName, 
       sex, birthday)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.knt.model.User" >
+	</insert>
+	<insert id="insertSelective" parameterType="com.knt.model.User" >
     insert into t_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
         id,
-      </if>
-      <if test="username != null" >
+			</if>
+			<if test="username != null" >
         userName,
-      </if>
-      <if test="nickname != null" >
+			</if>
+			<if test="nickname != null" >
         nickName,
-      </if>
-      <if test="sex != null" >
+			</if>
+			<if test="sex != null" >
         sex,
-      </if>
-      <if test="birthday != null" >
+			</if>
+			<if test="birthday != null" >
         birthday,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
         #{id,jdbcType=INTEGER},
-      </if>
-      <if test="username != null" >
+			</if>
+			<if test="username != null" >
         #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="nickname != null" >
+			</if>
+			<if test="nickname != null" >
         #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
+			</if>
+			<if test="sex != null" >
         #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null" >
+			</if>
+			<if test="birthday != null" >
         #{birthday,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.knt.model.User" >
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.knt.model.User" >
     update t_user
-    <set >
-      <if test="username != null" >
+		<set >
+			<if test="username != null" >
         userName = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="nickname != null" >
+			</if>
+			<if test="nickname != null" >
         nickName = #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
+			</if>
+			<if test="sex != null" >
         sex = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null" >
+			</if>
+			<if test="birthday != null" >
         birthday = #{birthday,jdbcType=TIMESTAMP},
-      </if>
-    </set>
+			</if>
+		</set>
     where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.knt.model.User" >
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.knt.model.User" >
     update t_user
     set userName = #{username,jdbcType=VARCHAR},
       nickName = #{nickname,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+	</update>
+	<select id="getUserByName" resultMap="BaseResultMap" parameterType="string">
+	select 
+		<include refid="Base_Column_List" />
+   			 from t_user
+   	where userName = #{userName,jdbcType=VARCHAR} limit 1
+	</select>
 </mapper>

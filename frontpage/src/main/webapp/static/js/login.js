@@ -1,14 +1,9 @@
 function login() {
 	$(function() {
-		$.get("/frontpage/user/login", {
-			loginName : $("#loginName").val(),
-			password : $("#password").val()
-		}
-//		, function(data) {
-//			// data contains the result
-//				// Assign result to the sum id
-//				$("#sum").replaceWith('<span id="sum">' + data + '</span>');
-//			}
-		);
+		var loginName = $("#loginName").val();
+		var password = $("#password").val();
+		var verifyCode = $("#kaptcha").val();
+		window.location.href = "/frontpage/login?loginName=" + loginName
+				+ "&password=" + password + "&captcha="+verifyCode;
 	});
 }

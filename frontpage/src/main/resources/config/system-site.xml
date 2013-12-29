@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <siteInfo>
-	<siteName>彩云网</siteName>
-	<siteUrl>http://localhost:8080/Empire</siteUrl>
-	<keywords>keywords,keywords,keywords</keywords>
-	<description>description,description </description>
-	<copyright>Copyright © 2004-2013   彩云网版权所有</copyright>
-	<companyName>彩云网</companyName>
-	<companyAddress>东莞常平</companyAddress>
-	<phone>0755-25685123</phone>
-	<fax>0755-25683500</fax>
-	<recordNumber>粤ICP备11100761号</recordNumber>
-	<systemEmail>service@treeyun.com</systemEmail>
-	<serviceTel>400-6162-333</serviceTel>
-	<defaultCityCode>441900</defaultCityCode>
-	<callingSystemIp>192.168.1.112</callingSystemIp>
-	<smsSendUrl>http://58.61.157.231:8081/http2/sendMessage.do</smsSendUrl>
-	<smsReportUrl>http://58.61.157.231:8081/http2/receiveReport.do</smsReportUrl>
-	<smsBalanceUrl>http://58.61.157.231:8081/http2/getBalance.do</smsBalanceUrl>
-	<smsOrgId>3541</smsOrgId>
-	<smsUserName>admin</smsUserName>
-	<smsPassword>13602366506</smsPassword>
+	<siteName>Test</siteName>
+	<siteUrl>http://localhost:8080/frontpage</siteUrl>
 </siteInfo>
 

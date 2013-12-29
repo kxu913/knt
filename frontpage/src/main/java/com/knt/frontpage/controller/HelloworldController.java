@@ -10,7 +10,7 @@ public class HelloworldController {
 	@RequestMapping("/index")
 	public ModelAndView simple() {
 
-		ModelAndView modelAndView = new ModelAndView("index");
+		ModelAndView modelAndView = new ModelAndView("user/userDetail");
 		modelAndView.addObject("message", "success");
 		return modelAndView;
 

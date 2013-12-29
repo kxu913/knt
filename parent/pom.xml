@@ -29,6 +29,9 @@
 		<dozer.version>5.4.0</dozer.version>
 		<google.guava.version>14.0.1</google.guava.version>
 		<jackson.version>2.1.4</jackson.version>
+		<shiro.version>1.2.1</shiro.version>
+		<kaptcha.version>2.3.2</kaptcha.version>
+
 	</properties>
 
 	<dependencyManagement>
@@ -168,6 +171,34 @@
 				<version>${jackson.version}</version>
 			</dependency>
 			<!-- json end -->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-ehcache</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-spring</artifactId>
+				<version>${shiro.version}</version>
+				
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-cas</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<!-- mvn install:install-file -Dfile=C:\Users\kevin\git\knt\frontpage\lib\kaptcha-2.3.2.jar -DgroupId=com.google.code -DartifactId=kaptcha -Dversion=2.3.2 -Dpackaging=jar -->
+			<dependency>
+				<groupId>com.google.code</groupId>
+				<artifactId>kaptcha</artifactId>
+				<version>${kaptcha.version}</version>
+			</dependency>
+			
 		</dependencies>
 
 	</dependencyManagement>

@@ -3,14 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Login</title>
-<link href="../../static/css/common.css" rel="stylesheet"
+<link href="${system.siteUrl}/static/css/common.css" rel="stylesheet"
 	type="text/css" />
-<link href="../../static/css/login.css" rel="stylesheet" type="text/css" />
+<link href="${system.siteUrl}/static/css/login.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript"
-	src="../../static/js/jquery/jquery-2.0.2.js"></script>
+	src="${system.siteUrl}/static/js/jquery/jquery-2.0.2.js"></script>
 <script type="text/javascript"
-	src="../../static/js/jquery/jquery.json-2.4.js"></script>
-<script type="text/javascript" src="../../static/js/login.js"></script>
+	src="${system.siteUrl}/static/js/jquery/jquery.json-2.4.js"></script>
+<script type="text/javascript" src="${system.siteUrl}/static/js/login.js"></script>
 </head>
 
 <body>
@@ -31,6 +31,19 @@
 					<input class="login_input" id="password" type="password" />
 				</div>
 			</div>
+			
+			 <div class="passwordDiv" class="input_space">
+			 <div class="loginText">VerifyCode:</div>
+                        <div class="loginInput">
+                            <input type="text" id="kaptcha" name="kaptcha" value=""/>
+                            
+                        </div>
+                        <div class="loginInput">
+                            <img src="kaptcha.jpg" id="kaptchaImage" width="90" height="40" />
+                            <a id="fulshKaptchaImage">看不清，<br>换一张</a>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
 		</div>
 		<div id="Footer">
 			<div class="buttonClass">

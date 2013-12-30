@@ -1,7 +1,7 @@
 package com.knt.frontpage.security;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -16,8 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.knt.core.MappForMybatis;
 import com.knt.frontpage.exception.IncorrectCaptchaException;
-import com.knt.mapping.UserMapper;
-import com.knt.model.User;
+import com.knt.mapping.PermissionMapper;
+import com.knt.mapping.RoleMapper;
+import com.knt.mapping.UserForTestMapper;
+import com.knt.model.Permission;
+import com.knt.model.Role;
+import com.knt.model.UserForTest;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 	@Autowired
@@ -31,15 +35,29 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
 		if (username != null) {
 			// 查询用户授权信息
-			UserMapper mapper = businessManager.getMapper(UserMapper.class);
-			User user = mapper.getUserByName(username);
+			UserForTestMapper mapper = businessManager
+					.getMapper(UserForTestMapper.class);
+			UserForTest user = mapper.selectByUserName(username);
 
 			if (user != null) {
-				Collection<String> pers = new ArrayList<String>();
-				pers.add(username);
-				SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-				info.addStringPermissions(pers);
-				return info;
+				RoleMapper roleMapper = businessManager
+						.getMapper(RoleMapper.class);
+				Role role = roleMapper.getRoleByUserName(username);
+				PermissionMapper permissionMapper = businessManager
+						.getMapper(PermissionMapper.class);
+				List<Permission> pers = permissionMapper
+						.getPemissionByUserName(username);
+				if (role != null) {
+					SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+					info.addRole(role.getPermission());
+					for (Permission per : pers) {
+						System.out.println(role.getPermission() + ":" + per.getName());
+//						list.add(role.getPermission() + ":" + per.getName());
+						info.addStringPermission(role.getPermission() + ":" + per.getName());
+					}
+					
+					return info;
+				}
 			}
 		}
 
@@ -54,9 +72,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		String username = token.getUsername();
 		String captcha = token.getCaptcha();
 		System.out.println(token.getCaptcha());
-		String _captcha = (String) SecurityUtils
-				.getSubject()
-				.getSession()
+		String _captcha = (String) SecurityUtils.getSubject().getSession()
 				.getAttribute(
 						com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 		System.out.println(captcha + "  " + _captcha);
@@ -68,12 +84,13 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		// 每个Realm都能在必要时对提交的AuthenticationTokens作出反应
 		// 所以这一步在调用login(token)方法时,它会走到MyRealm.doGetAuthenticationInfo()方法中,具体验证方式详见此方法
 		if (username != null && !"".equals(username)) {
-			UserMapper mapper = businessManager.getMapper(UserMapper.class);
-			User user = mapper.getUserByName(username);
+			UserForTestMapper mapper = businessManager
+					.getMapper(UserForTestMapper.class);
+			UserForTest user = mapper.selectByUserName(username);
 
 			if (user != null) {
-				return new SimpleAuthenticationInfo(user.getUsername(),
-						user.getNickname(), getName());
+				return new SimpleAuthenticationInfo(user.getUsername(), user
+						.getPassword(), getName());
 			}
 		}
 

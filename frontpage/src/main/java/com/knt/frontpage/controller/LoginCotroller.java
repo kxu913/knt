@@ -24,8 +24,8 @@ public class LoginCotroller {
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("password");
 		String captcha = request.getParameter("captcha");
-		CaptchaUsernamePasswordToken token = new CaptchaUsernamePasswordToken(username,
-				password,true,request.getRemoteHost(), captcha);
+		CaptchaUsernamePasswordToken token = new CaptchaUsernamePasswordToken(
+				username, password, true, request.getRemoteHost(), captcha);
 		ModelAndView modelAndView = new ModelAndView();
 		// 获取当前的Subject
 		Subject currentUser = SecurityUtils.getSubject();
@@ -57,17 +57,58 @@ public class LoginCotroller {
 		}
 		// 验证是否登录成功
 		if (currentUser.isAuthenticated()) {
-			System.out.println("用户[" + username
-					+ "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
-			modelAndView.setViewName("user/userDetail");
+			// if (currentUser.hasRole("user")) {
+			// try {
+			// currentUser.checkPermission("view");
+			// modelAndView.setViewName("user/userDetail");
+			// modelAndView.addObject("userName", username);
+			// modelAndView.addObject("password", password);
+			// } catch (Exception e) {
+			// System.out.println("用户[" + username + "]没有查看权限");
+			// return null;
+			// }
+			// try {
+			// currentUser.checkPermission("add");
+			// modelAndView.setViewName("user/addUser");
+			// modelAndView.addObject("userName", username);
+			// modelAndView.addObject("password", password);
+			// } catch (Exception e) {
+			// System.out.println("用户[" + username + "]没有新增权限");
+			// return null;
+			// }
+			//
+			// }
+			// if (currentUser.hasRole("admin")) {
+			// try {
+			// currentUser.checkPermission("view");
+			// modelAndView.setViewName("admin/adminDetail");
+			// modelAndView.addObject("userName", username);
+			// modelAndView.addObject("password", password);
+			// } catch (Exception e) {
+			// System.out.println("用户[" + username + "]没有查看权限");
+			// return null;
+			// }
+			// try {
+			// currentUser.checkPermission("add");
+			// modelAndView.setViewName("admin/addAdmin");
+			// modelAndView.addObject("userName", username);
+			// modelAndView.addObject("password", password);
+			// } catch (Exception e) {
+			// System.out.println("用户[" + username + "]没有新增权限");
+			// return null;
+			// }
+			// }
+			//
+			// } else {
+			// token.clear();
+			// modelAndView.setViewName("login");
 			modelAndView.addObject("userName", username);
-			modelAndView.addObject("nickName", password);
-		} else {
-			token.clear();
-			modelAndView.setViewName("login");
+			modelAndView.addObject("password", password);
+			modelAndView.setViewName("index");
+			return modelAndView;
 		}
 		// if (loginName == null || "".equals(loginName)) {
-		// modelAndView.setViewName("login");
+		modelAndView.setViewName("login");
 		// return modelAndView;
 		// }
 		return modelAndView;

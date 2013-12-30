@@ -11,15 +11,16 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login" />
 		<property name="successUrl" value="/welcome" />
-		<property name="unauthorizedUrl" value="/403。html"/> 
-		<property name="filters"> 
-			 <ref local="filterMap" />
-		</property>
+		<property name="unauthorizedUrl" value="/403.html"/> 
 		<property name="filterChainDefinitions">
 			<value>
-				/login* = authc
-				/kaptcha = anon
-				/index* = authc
+				/user/* = authc, perms[user:view]
+				/user/* = authc, perms[admin:view]
+				/admin/addAdmain* = authc, perms["admin:view,admin:add"]
+				/admin/* == authc,perms[admin:view]
+				/kaptcha* = anon
+				/static/* = anon
+				/* = authc
 			</value>
 		</property>
 	</bean>

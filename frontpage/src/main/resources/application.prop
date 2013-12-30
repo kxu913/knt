@@ -1,7 +1,7 @@
 # MySQL
 # -----------------------------------------
 jdbc.driver=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://localhost:3307/love?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull
+jdbc.url=jdbc:mysql://localhost:3306/test?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull
 jdbc.username=root
 jdbc.password=888888
 

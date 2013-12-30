@@ -246,6 +246,5 @@
 	<modules>
 		<module>../common</module>
 		<module>../frontpage</module>
-		<module>../backend</module>
 	</modules>
 </project>

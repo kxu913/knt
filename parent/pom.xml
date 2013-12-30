@@ -29,7 +29,7 @@
 		<dozer.version>5.4.0</dozer.version>
 		<google.guava.version>14.0.1</google.guava.version>
 		<jackson.version>2.1.4</jackson.version>
-		<shiro.version>1.2.1</shiro.version>
+		<shiro.version>1.2.2</shiro.version>
 		<kaptcha.version>2.3.2</kaptcha.version>
 
 	</properties>

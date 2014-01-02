@@ -3,58 +3,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Login</title>
-<link href="${system.siteUrl}/static/css/common.css" rel="stylesheet"
+<link href="${system.siteUrl}/static/css/login.css" rel="stylesheet"
 	type="text/css" />
-<link href="${system.siteUrl}/static/css/login.css" rel="stylesheet" type="text/css" />
+<link href="${system.siteUrl}/static/css/bootstrap/bootstrap.css" rel="stylesheet"
+	type="text/css" />
 <script type="text/javascript"
 	src="${system.siteUrl}/static/js/jquery/jquery-2.0.2.js"></script>
 <script type="text/javascript"
 	src="${system.siteUrl}/static/js/jquery/jquery.json-2.4.js"></script>
-<script type="text/javascript" src="${system.siteUrl}/static/js/login.js"></script>
+<script type="text/javascript"
+	src="${system.siteUrl}/static/js/bootstrap/bootstrap.js"></script>
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+<script type="text/javascript"
+	src="${system.siteUrl}/static/js/login.js"></script>
 </head>
-
 <body>
 
 	<div id="container">
-		<div id="Header">Love Login</div>
-		<div id="PageBody">
-			<div id="loginDiv" class="input_space">
-				<div class="loginText">Login:</div>
-				<div class="loginInput">
-					<input class="login_input" id="loginName" type="text" />
-				</div>
-			</div>
-
-			<div id="passwordDiv" class="input_space">
-				<div class="loginText">Password:</div>
-				<div class="loginInput">
-					<input class="login_input" id="password" type="password" />
-				</div>
-			</div>
-			
-			 <div class="passwordDiv" class="input_space">
-			 <div class="loginText">VerifyCode:</div>
-                        <div class="loginInput">
-                            <input type="text" id="kaptcha" name="kaptcha" value=""/>
-                            
-                        </div>
-                        <div class="loginInput">
-                            <img src="kaptcha.jpg" id="kaptchaImage" width="90" height="40" />
-                            <a id="fulshKaptchaImage">看不清，<br>换一张</a>
-                        </div>
-                        <div class="clr"></div>
-                    </div>
-		</div>
-		<div id="Footer">
-			<div class="buttonClass">
-				<div class="registClass">
-					<a class="button" onclick="this.blur();"><span>注册</span></a>
-				</div>
-				<div class="loginClass">
-					<a class="button" onclick="login()"><span>登陆</span></a>
-				</div>
+		<div class="form-signin">
+			<h2 class="form-signin-heading">Please sign in</h2>
+			<input type="text" id="loginName" class="form-control" placeholder="用戶名：" required
+				autofocus> 
+			<input type="password" id=password class="form-control"
+				placeholder="密碼：" required>
+			<input type="text" class="form-control" id="kaptcha" name="kaptcha" placeholder="验证码：" required>
+			<img src="kaptcha.jpg" id="kaptchaImage"/>
+			<a id="fulshKaptchaImage" style="cursor: pointer">换一张</a> 
+			<div class="clr"></div>
+			<label class="checkbox"> 
+			<input type="checkbox"
+				value="remember-me"> 记住我 </label>
+			<div class='row-fluid'> 
+			<button class="span4 offset4 btn btn-lg btn-primary"  onclick="login()">登陆</button>
+			<button class="span4 btn btn-lg btn-primary" >注册</button>
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

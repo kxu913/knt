@@ -1,5 +1,6 @@
 package com.knt.mapping;
 
+
 import com.knt.model.User;
 
 public interface UserMapper {
@@ -16,4 +17,5 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     
     User getUserByName(String  userName);
+    
 }

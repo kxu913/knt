@@ -96,4 +96,10 @@
    			 from t_user
    	where userName = #{userName,jdbcType=VARCHAR} limit 1
 	</select>
+	
+	<select id="getUserList"  resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+   		from t_user
+	</select>
 </mapper>

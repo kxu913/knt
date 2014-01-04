@@ -1,5 +1,7 @@
 package com.knt.mapping;
 
+import java.util.List;
+
 import com.knt.model.UserForTest;
 
 public interface UserForTestMapper {
@@ -16,5 +18,9 @@ public interface UserForTestMapper {
 	int updateByPrimaryKey(UserForTest record);
 
 	UserForTest selectByUserName(String userName);
+	
+    List<UserForTest> getUserList();
+    
+    List<UserForTest> getAdminList();
 
 }

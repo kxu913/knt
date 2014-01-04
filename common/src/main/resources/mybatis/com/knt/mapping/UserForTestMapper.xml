@@ -13,27 +13,27 @@
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
 		<include refid="Base_Column_List" />
-    from user
+    from t_user
     where id = #{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
 		<include refid="Base_Column_List" />
-    from user
+    from t_user
     where userName = #{userName,jdbcType=VARCHAR} limit 1
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user
+    delete from t_user
     where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.knt.model.UserForTest" >
-    insert into user (id, userName, password, 
+    insert into t_user (id, userName, password, 
       groupId)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{groupid,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" parameterType="com.knt.model.UserForTest" >
-    insert into user
+    insert into t_user
 		<trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="id != null" >
         id,
@@ -64,7 +64,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.knt.model.UserForTest" >
-    update user
+    update t_user
 		<set >
 			<if test="username != null" >
         userName = #{username,jdbcType=VARCHAR},
@@ -79,10 +79,16 @@
     where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.knt.model.UserForTest" >
-    update user
+    update t_user
     set userName = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       groupId = #{groupid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
 	</update>
+	
+	<select id="getUserList"  resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+   		from t_user
+	</select>
 </mapper>

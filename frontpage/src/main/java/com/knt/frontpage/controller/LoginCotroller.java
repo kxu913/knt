@@ -104,13 +104,22 @@ public class LoginCotroller {
 			// modelAndView.setViewName("login");
 			modelAndView.addObject("userName", username);
 			modelAndView.addObject("password", password);
-			modelAndView.setViewName("index");
+			modelAndView.setViewName("admin/adminDetail");
 			return modelAndView;
 		}
 		// if (loginName == null || "".equals(loginName)) {
 		modelAndView.setViewName("login");
 		// return modelAndView;
 		// }
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/loginoff", method = RequestMethod.GET)
+	public ModelAndView logoff(){
+		ModelAndView modelAndView = new ModelAndView();
+		Subject currentUser = SecurityUtils.getSubject();
+		currentUser.logout();
+		modelAndView.setViewName("login");
 		return modelAndView;
 	}
 }

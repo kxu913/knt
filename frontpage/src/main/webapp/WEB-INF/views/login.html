@@ -3,9 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Login</title>
-<link href="${system.siteUrl}/static/css/login.css" rel="stylesheet"
-	type="text/css" />
+
 <link href="${system.siteUrl}/static/css/bootstrap/bootstrap.css" rel="stylesheet"
+	type="text/css" />
+<link href="${system.siteUrl}/static/css/login.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript"
 	src="${system.siteUrl}/static/js/jquery/jquery-2.0.2.js"></script>
@@ -13,7 +14,6 @@
 	src="${system.siteUrl}/static/js/jquery/jquery.json-2.4.js"></script>
 <script type="text/javascript"
 	src="${system.siteUrl}/static/js/bootstrap/bootstrap.js"></script>
-<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
 <script type="text/javascript"
 	src="${system.siteUrl}/static/js/login.js"></script>
 </head>
@@ -28,7 +28,7 @@
 				placeholder="密碼：" required>
 			<input type="text" class="form-control" id="kaptcha" name="kaptcha" placeholder="验证码：" required>
 			<img src="kaptcha.jpg" id="kaptchaImage"/>
-			<a id="fulshKaptchaImage" style="cursor: pointer">换一张</a> 
+			<a id="fulshKaptchaImage" style="cursor: pointer" onclick="fulshKaptchaImage()">换一张</a> 
 			<div class="clr"></div>
 			<label class="checkbox"> 
 			<input type="checkbox"

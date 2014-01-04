@@ -7,3 +7,7 @@ function login() {
 				+ "&password=" + password + "&captcha="+verifyCode;
 	});
 }
+
+function fulshKaptchaImage(){
+	$("#kaptchaImage").attr("src", "/frontpage/kaptcha.jpg?" + Math.floor(Math.random()*100) ); 
+}

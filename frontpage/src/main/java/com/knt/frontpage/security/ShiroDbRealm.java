@@ -1,6 +1,5 @@
 package com.knt.frontpage.security;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;

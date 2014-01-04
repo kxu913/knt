@@ -3,9 +3,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Welcome</title>
+<link href="${system.siteUrl}/static/css/bootstrap/bootstrap.css"
+	rel="stylesheet" type="text/css" />
+<link href="${system.siteUrl}/static/css/adminDetail.css"
+	rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="${system.siteUrl}/static/js/jquery/jquery-2.0.2.js"></script>
+<script type="text/javascript"
+	src="${system.siteUrl}/static/js/jquery/jquery.json-2.4.js"></script>
+<script type="text/javascript"
+	src="${system.siteUrl}/static/js/bootstrap/bootstrap.js"></script>
+<script type="text/javascript"
+	src="${system.siteUrl}/static/js/adminDetail.js"></script>
 </head>
 <body>
-admin + ${userName} + ${password} +"-------------"
-<h3>test click to user page </h3> <a href="/frontpage/user/userDetail">click here</a>
+
+	<div class="navbar">
+		<div class="navbar-inner">
+			<ul class="nav">
+				<li class="active"><a href="#">首页</a></li>
+				<li><a href="#">自我介绍</a></li>
+				<li><a href="#">产品介绍</a></li>
+			</ul>
+			<button type="submit" class="btn pull-right" onclick="logoff()">Log out</button>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span2">
+				<div class="well sidebar-nav">
+					<ul class="nav nav-list">
+						<li class="nav-header">系统管理</li>
+						<li class="active" id="admin"><a href="#"
+							onclick='adminManage()'>管理员管理</a></li>
+						<li id="user"><a href="#" onclick='userManage()'>用户管理</a></li>
+						<li class="nav-header">订单管理</li>
+						<li id="order"><a href="#" onclick='orderList()'>订单列表</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="span10">
+				<div id="tableDiv"></div>
+			</div>
+
+		</div>
+	</div>
+
+
 </body>
 </html>

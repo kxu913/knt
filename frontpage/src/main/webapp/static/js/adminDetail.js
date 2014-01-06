@@ -41,8 +41,7 @@ function createTable(divName, rowCount, cellCount) {
 }
 
 function createTableUnsync(divName) {
-	$
-			.ajax({
+	$.ajax({
 				url : '/frontpage/getUserList',
 				dataType : "json",
 				success : function(data) {

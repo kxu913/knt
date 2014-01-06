@@ -9,7 +9,7 @@
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/login" />
+		<property name="loginUrl" value="/login.do" />
 		<property name="successUrl" value="/welcome" />
 		<property name="unauthorizedUrl" value="/403.html"/> 
 		<property name="filterChainDefinitions">
@@ -20,6 +20,7 @@
 				/admin/* == authc,perms[admin:view]
 				/kaptcha* = anon
 				/static/* = anon
+				/login.html = anon
 				/* = authc
 			</value>
 		</property>

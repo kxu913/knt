@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.knt.core.MappForMybatis;
 import com.knt.frontpage.core.JsonUtil;
@@ -26,5 +27,11 @@ public class UserController {
 		UserForTestMapper mapper = businessManager.getMapper(UserForTestMapper.class); 
 		List<UserForTest> list = mapper.getUserList();
 		return JsonUtil.beanListToJson(response, list);
+	}
+	@RequestMapping(value = "/admin/adminDetail", method = RequestMethod.GET)
+	public ModelAndView adminDetail(HttpServletResponse response) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/adminDetail");
+		return modelAndView;
 	}
 }

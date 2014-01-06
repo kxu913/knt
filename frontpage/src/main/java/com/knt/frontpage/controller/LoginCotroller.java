@@ -1,5 +1,6 @@
 package com.knt.frontpage.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -19,7 +20,8 @@ import com.knt.frontpage.security.CaptchaUsernamePasswordToken;
 @Controller
 public class LoginCotroller {
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
 	public ModelAndView login(HttpServletRequest request) {
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("password");
@@ -104,22 +106,19 @@ public class LoginCotroller {
 			// modelAndView.setViewName("login");
 			modelAndView.addObject("userName", username);
 			modelAndView.addObject("password", password);
-			modelAndView.setViewName("admin/adminDetail");
+			modelAndView.setViewName("redirect:admin/adminDetail");
 			return modelAndView;
 		}
-		// if (loginName == null || "".equals(loginName)) {
-		modelAndView.setViewName("login");
-		// return modelAndView;
-		// }
+		modelAndView.setViewName("redirect:login.html");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/loginoff", method = RequestMethod.GET)
-	public ModelAndView logoff(){
+	public ModelAndView logoff() {
 		ModelAndView modelAndView = new ModelAndView();
 		Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
-		modelAndView.setViewName("login");
+		modelAndView.setViewName("redirect:login.html");
 		return modelAndView;
 	}
 }

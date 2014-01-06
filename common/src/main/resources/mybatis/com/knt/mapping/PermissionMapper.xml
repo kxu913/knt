@@ -23,7 +23,7 @@
     inner join t_role_pers_mapping b on a.id = b.persId
 	inner join t_role c on b.roleId=c.id
 	inner join t_group d on c.id=d.roleId
-	inner join user e on d.id=e.groupId
+	inner join t_user e on d.id=e.groupId
 	where e.userName=#{userName,jdbcType=VARCHAR}
   </select>
   

@@ -21,7 +21,7 @@
     a.id, a.permission, a.description
     from t_role a 
     inner join t_group b on a.id=b.roleId
-	inner join user c on c.groupId=b.id
+	inner join t_user c on c.groupId=b.id
     where c.userName= #{userName,jdbcType=VARCHAR}
   </select>
   

@@ -2,15 +2,19 @@ package com.knt.frontpage.security;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.knt.core.MappForMybatis;
@@ -21,6 +25,7 @@ import com.knt.mapping.UserForTestMapper;
 import com.knt.model.Permission;
 import com.knt.model.Role;
 import com.knt.model.UserForTest;
+import com.knt.util.PasswordUtil;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 	@Autowired
@@ -50,11 +55,13 @@ public class ShiroDbRealm extends AuthorizingRealm {
 					SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 					info.addRole(role.getPermission());
 					for (Permission per : pers) {
-						System.out.println(role.getPermission() + ":" + per.getName());
-//						list.add(role.getPermission() + ":" + per.getName());
-						info.addStringPermission(role.getPermission() + ":" + per.getName());
+						System.out.println(role.getPermission() + ":"
+								+ per.getName());
+						// list.add(role.getPermission() + ":" + per.getName());
+						info.addStringPermission(role.getPermission() + ":"
+								+ per.getName());
 					}
-					
+
 					return info;
 				}
 			}
@@ -71,7 +78,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		String username = token.getUsername();
 		String captcha = token.getCaptcha();
 		System.out.println(token.getCaptcha());
-		String _captcha = (String) SecurityUtils.getSubject().getSession()
+		String _captcha = (String) SecurityUtils
+				.getSubject()
+				.getSession()
 				.getAttribute(
 						com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 		System.out.println(captcha + "  " + _captcha);
@@ -88,12 +97,27 @@ public class ShiroDbRealm extends AuthorizingRealm {
 			UserForTest user = mapper.selectByUserName(username);
 
 			if (user != null) {
-				return new SimpleAuthenticationInfo(user.getUsername(), user
-						.getPassword(), getName());
+				byte[] salt = PasswordUtil.getSalt();
+				String password = PasswordUtil.entryptPassword(salt,
+						user.getPassword());
+				return new SimpleAuthenticationInfo(user.getUsername(),
+						password, ByteSource.Util.bytes(salt), getName());
 			}
 		}
 
 		return null;
+	}
+
+	/**
+	 * 设定Password校验的Hash算法与迭代次数.
+	 */
+	@PostConstruct
+	public void initCredentialsMatcher() {
+		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(
+				PasswordUtil.HASH_ALGORITHM);
+		matcher.setHashIterations(PasswordUtil.HASH_INTERATIONS);
+
+		setCredentialsMatcher(matcher);
 	}
 
 }

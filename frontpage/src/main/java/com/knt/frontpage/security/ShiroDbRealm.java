@@ -78,9 +78,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		String username = token.getUsername();
 		String captcha = token.getCaptcha();
 		System.out.println(token.getCaptcha());
-		String _captcha = (String) SecurityUtils
-				.getSubject()
-				.getSession()
+		String _captcha = (String) SecurityUtils.getSubject().getSession()
 				.getAttribute(
 						com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 		System.out.println(captcha + "  " + _captcha);
@@ -97,11 +95,12 @@ public class ShiroDbRealm extends AuthorizingRealm {
 			UserForTest user = mapper.selectByUserName(username);
 
 			if (user != null) {
-				byte[] salt = PasswordUtil.getSalt();
-				String password = PasswordUtil.entryptPassword(salt,
-						user.getPassword());
+//				byte[] salt = PasswordUtil.getSalt();
+//				String password = PasswordUtil.entryptPassword(salt, user
+//						.getPassword());
+				System.out.println("Realm : " + user.getPassword());
 				return new SimpleAuthenticationInfo(user.getUsername(),
-						password, ByteSource.Util.bytes(salt), getName());
+						user.getPassword(),ByteSource.Util.bytes(user.getSalt()), getName());
 			}
 		}
 
@@ -113,11 +112,12 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	 */
 	@PostConstruct
 	public void initCredentialsMatcher() {
+		setAuthenticationTokenClass(CaptchaUsernamePasswordToken.class);
 		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(
 				PasswordUtil.HASH_ALGORITHM);
 		matcher.setHashIterations(PasswordUtil.HASH_INTERATIONS);
-
 		setCredentialsMatcher(matcher);
+		
 	}
 
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import com.fasterxml.jackson.databind.JavaType;
 import com.google.common.collect.Maps;
 import com.knt.mapper.JsonMapper;
@@ -114,5 +115,10 @@ public class JsonUtil {
 		JavaType beanListType = mapper.createCollectionType(collectionClass, elementClasses);
 		List<?> beanList = mapper.fromJson(jsonString, beanListType);
 		return beanList;
+	}
+
+	public static <T> String beanToJson(HttpServletResponse response,
+			T t) {
+		return mapper.toJson(t);
 	}
 }

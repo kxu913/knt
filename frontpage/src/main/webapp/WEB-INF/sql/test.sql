@@ -116,29 +116,30 @@ INSERT INTO `t_role_pers_mapping` VALUES (1,1,1),(2,1,2),(3,2,2),(4,3,2);
 UNLOCK TABLES;
 
 --
--- Table structure for table `user`
+-- Table structure for table `t_user`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `t_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
+CREATE TABLE `t_user` (
   `id` int(11) NOT NULL,
-  `userName` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  `groupId` int(11) DEFAULT NULL,
+  `userName` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `groupId` int(11) NOT NULL,
+  `salt` blob NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `t_user`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'test','test',1),(2,'admin','test',2),(3,'admin1','test',3);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `t_user` WRITE;
+/*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
+INSERT INTO `t_user` VALUES (1,'test','6b184708b3d6a0a73210a642fe3304024e416f16',1,'8à1kût');
+/*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -150,4 +151,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-12-30 17:28:31
+-- Dump completed on 2014-01-07 12:12:47

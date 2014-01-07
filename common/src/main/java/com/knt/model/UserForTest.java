@@ -8,8 +8,19 @@ public class UserForTest {
     private String password;
 
     private Integer groupid;
+    
+    private byte[] salt;
+    
 
-    public Integer getId() {
+    public byte[] getSalt() {
+		return salt;
+	}
+
+	public void setSalt(byte[] salt) {
+		this.salt = salt;
+	}
+
+	public Integer getId() {
         return id;
     }
 

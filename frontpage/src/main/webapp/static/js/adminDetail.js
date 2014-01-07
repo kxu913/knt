@@ -18,31 +18,9 @@ function orderList() {
 	$("#tableDiv").empty();
 }
 
-function createTable(divName, rowCount, cellCount) {
-	$("#" + divName).empty();
-	var table = $("<table class=\"table table-striped table-bordered table-hover\">");
-	table.appendTo($("#" + divName));
-	var tr = $("<tr></tr>");
-	tr.appendTo(table);
-	for (var i = 0; i < cellCount; i++) {
-		var th = $("<th> th " + i + "</th>");
-		th.appendTo(tr);
-	}
-
-	for (var i = 0; i < rowCount; i++) {
-		var tr = $("<tr onclick=\"getTDs(this)\"></tr>");
-		tr.appendTo(table);
-		for (var j = 0; j < cellCount; j++) {
-			var td = $("<td id=\"id" + j + "\">" + i * j + "</td>");
-			td.appendTo(tr);
-		}
-	}
-	$("#" + divName).append("</table>");
-}
-
-function createTableUnsync(divName) {
+function createTable(divName) {
 	$.ajax({
-				url : '/frontpage/getUserList',
+				url : '/frontpage/userList',
 				dataType : "json",
 				success : function(data) {
 					$("#" + divName).empty();
@@ -55,11 +33,11 @@ function createTableUnsync(divName) {
 					var th = $("<th>密码 </th>");
 					th.appendTo(tr);
 					$.each(data, function(i, v) {
-						var tr = $("<tr onclick=\"getTDs(this)\"></tr>");
+						var tr = $("<tr ondblclick=\"getTDs(this)\"></tr>");
 						tr.appendTo(table);
 						$.each(v, function(j, val) {
 							if (j === "username" || j === "password") {
-								var td = $("<td id=\"id" + val + "\">" + val
+								var td = $("<td>" + val
 										+ "</td>");
 								td.appendTo(tr);
 							}
@@ -73,14 +51,21 @@ function createTableUnsync(divName) {
 
 function getTDs(tr) {
 	var tds = tr.children;
-	for (i = 0; i < tds.length; i++) {
-		alert(tds[0].getValue());
-	}
+	var userName = tds[0].innerHTML;
+	$.ajax({
+		url : '/frontpage/userDetail',
+		dataType : "json",
+		success:function(data){
+			$.each(data,function(i,v){
+				alert(i+":"+v);
+			});
+		}
+	});
 }
 function logoff(){
 	window.location.href = "/frontpage/loginoff";
 }
 
 $(document).ready(function() {
-	createTableUnsync("tableDiv");
+	createTable("tableDiv");
 });

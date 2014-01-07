@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.knt.frontpage.security.CaptchaUsernamePasswordToken;
-import com.knt.util.PasswordUtil;
 
 @Controller
 public class LoginCotroller {
@@ -27,8 +26,6 @@ public class LoginCotroller {
 		String password = request.getParameter("password");
 		String captcha = request.getParameter("captcha");
 		System.out.println(username + " : " + password);
-		String _password = PasswordUtil.entryptPassword(PasswordUtil.getSalt(),
-				password);
 		CaptchaUsernamePasswordToken token = new CaptchaUsernamePasswordToken(
 				username, password, true, request.getRemoteHost(), captcha);
 		ModelAndView modelAndView = new ModelAndView();
@@ -109,6 +106,7 @@ public class LoginCotroller {
 			// modelAndView.setViewName("login");
 			modelAndView.addObject("userName", username);
 			modelAndView.addObject("password", password);
+			
 			modelAndView.setViewName("redirect:admin/adminDetail");
 			return modelAndView;
 		}

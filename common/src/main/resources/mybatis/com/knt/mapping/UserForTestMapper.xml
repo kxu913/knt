@@ -6,9 +6,10 @@
 		<result column="userName" property="username" jdbcType="VARCHAR" />
 		<result column="password" property="password" jdbcType="VARCHAR" />
 		<result column="groupId" property="groupid" jdbcType="INTEGER" />
+		<result column="salt" property="salt" jdbcType="BLOB" />
 	</resultMap>
 	<sql id="Base_Column_List" >
-    id, userName, password, groupId
+    id, userName, password, groupId,salt
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,9 +29,9 @@
 	</delete>
 	<insert id="insert" parameterType="com.knt.model.UserForTest" >
     insert into t_user (id, userName, password, 
-      groupId)
+      groupId,salt)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{groupid,jdbcType=INTEGER})
+      #{groupid,jdbcType=INTEGER},#{salt,jdbcType=BLOB})
 	</insert>
 	<insert id="insertSelective" parameterType="com.knt.model.UserForTest" >
     insert into t_user
@@ -47,6 +48,9 @@
 			<if test="groupid != null" >
         groupId,
 			</if>
+			<if test="salt != null" >
+        salt,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides="," >
 			<if test="id != null" >
@@ -60,6 +64,9 @@
 			</if>
 			<if test="groupid != null" >
         #{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="salt != null" >
+         #{salt,jdbcType=BLOB},
 			</if>
 		</trim>
 	</insert>

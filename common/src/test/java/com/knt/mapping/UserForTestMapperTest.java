@@ -28,7 +28,9 @@ public class UserForTestMapperTest {
 		user.setGroupid(1);
 		user.setId(4);
 		user.setUsername("test");
-		user.setPassword(PasswordUtil.entryptPassword(PasswordUtil.getSalt(), "test2"));
+		byte[] salt = PasswordUtil.getSalt();
+		user.setSalt(salt);
+		user.setPassword(PasswordUtil.entryptPassword(salt, "test"));
 		mapper.insert(user);
 	}
 

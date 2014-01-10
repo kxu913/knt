@@ -135,10 +135,6 @@ CREATE TABLE `t_user` (
 --
 -- Dumping data for table `t_user`
 --
-
-LOCK TABLES `t_user` WRITE;
-/*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
-INSERT INTO `t_user` VALUES (1,'test','6b184708b3d6a0a73210a642fe3304024e416f16',1,'8à1kût');
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

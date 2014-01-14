@@ -10,9 +10,30 @@
 	<artifactId>ny6design_web</artifactId>
 	<packaging>war</packaging>
 	<name>ny6design Webapp</name>
-	<dependencies>
-	</dependencies>
 	<build>
 		<finalName>ny6design</finalName>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.ny6design</groupId>
+			<artifactId>ny6design_core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+	</dependencies>
 </project>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ny6design.mapper.CategoryMapper">
+
+    <select id="getCategoryList" resultType="jo.geun.entity.Category">
+        select fcategoryId as categoryId, fname as name, forder as 'order', 
+               fparentId  as  parentId , fupdatetime as updatetime
+        from t_category 
+        where fparentId = #{parentId} 
+        order by forder;
+    </select>
+    
+    <select id="getAllSubCategoryList" resultType="jo.geun.entity.Category">
+        select fcategoryId as categoryId, fname as name, forder as 'order', 
+               fparentId  as  parentId , fupdatetime as updatetime
+        from t_category 
+        where fparentId != -1 
+        order by forder;
+    </select>
+    
+    <insert id="insertCategory"  useGeneratedKeys="true" keyProperty="categoryId" parameterType="jo.geun.entity.Category">
+
+        insert into t_category (fname,            forder, 
+                                fparentid,                fvalidated, 
+                                fupdatetime)
+                        (select #{name} as fname, max(forder) + 1 as forder, 
+                                #{parentId} as fparentid, 
+                                #{validated} as fvalidated,
+                                #{updateTime} as fupdatetime
+                         from t_category
+                         where fparentid = #{parentId});
+    </insert>
+    
+    <update id="updateCategory">
+        update t_category set
+                fname = #{name},
+                forder = #{order},
+                fparentid = #{parentId},
+                fupdatetime = #{updateTime}
+        where fcategoryId = #{categoryId}
+    </update>
+    
+    <update id="updateOrder">
+        update t_category set
+                forder = #{order},
+                fupdatetime = #{updateTime}
+        where fcategoryId = #{categoryId}
+    </update>
+    
+    <update id="updateValidation" parameterType="map" >
+        update t_category set
+                fvalidated = #{validated},
+                fupdatetime = #{updateTime}
+        where fcategoryId = #{categoryId}
+    </update>
+    
+    <delete id="deleteCategory">
+        delete from t_category where fcategoryId = #{categoryId}
+    </delete>
+</mapper>

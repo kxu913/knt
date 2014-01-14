@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 -->
+	<classPathEntry
+		location="C:/Users/kxu/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar" />
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<!-- 去除自动生成的注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/ny6design" userId="root"
+			password="888888">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:自动生成代码的位置 -->
+		<javaModelGenerator targetPackage="com.ny6design.model"
+			targetProject="C:\Users\kevin\git\knt\ny6design\ny6design_core\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.ny6design.mapper"
+			targetProject="C:\Users\kevin\git\knt\ny6design\ny6design_core\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.ny6design.mapper" targetProject="C:\Users\kevin\git\knt\ny6design\ny6design_core\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
+		<!--
+			<table tableName="user" domainObjectName="UserForTest"
+				enableCountByExample="false" enableUpdateByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				selectByExampleQueryId="false" escapeWildcards="true"/>
+			
+		<table tableName="t_role" domainObjectName="Role"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>
+		<table tableName="t_group" domainObjectName="Group"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>
+			-->
+			<table tableName="t_permissions" domainObjectName="Permission"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>
+	</context>
+
+</generatorConfiguration>

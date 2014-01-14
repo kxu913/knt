@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ny6design.mapper.ProductMapper">
+
+    <resultMap id="ProductResultMap" type="jo.geun.entity.Product" >  
+        <id property = "productId" column="fproductid" />
+        
+        <result property="name" column="fname"/>  
+        <result property="displayName" column="fdisplayname"/> 
+        <result property="categoryId" column="fcategoryid"/>
+        <result property="saleFlag" column="fsaleflag"/>
+        <result property="shipTime" column="fshiptime"/>
+        <result property="description" column="fdescription"/>
+        <result property="soldOutFlag" column="fsoldoutflag"/>
+        <result property="recommend" column="frecommend"/>
+        <result property="sellQty" column="fsellqty"/>       
+        <result property="inventoryQty" column="finventoryqty"/>
+        <result property="availableDate" column="favailabledate"/>
+        <result property="validation" column="fvalidation"/>
+        <result property="createTime" column="fcreatetime"/>
+        
+        <collection property="pictureSources" ofType="jo.geun.entity.ProductPic">
+            <result property="source" column="fsource"/>
+        </collection>
+        <collection property="prices" ofType="jo.geun.entity.ProductPrice">
+            <result property="color" column="fcolor"/>
+            <result property="unit" column="funit"/>
+            <result property="weight" column="fweight"/>
+            <result property="originalPrice" column="forginalprice"/>
+            <result property="ourPrice" column="fourprice"/>           
+            <result property="salePrice1" column="fsaleprice1"/>
+            <result property="salePrice2" column="fsaleprice2"/>
+            <result property="salePrice3" column="fsaleprice3"/>
+            <result property="specialPrice" column="fspecialprice"/>
+            <result property="condition" column="fcondition"/>
+            <result property="updatedTime" column="fupdatedTime"/>
+        </collection>
+    </resultMap> 
+       
+    <select id="getProduct" parameterType="long" resultMap="ProductResultMap">
+        select t1.fproductid, t1.fname, t1.fdisplayname, t1.fdescription, 
+               t1.fcategoryid, t1.fsaleflag, t1.fshiptime, t1.fsellqty, t1.finventoryqty,
+               t1.favailabledate, t1.fvalidation, t1.fupdatedtime, t1.fcreatetime
+       from t_product t1, t_product_pic t2
+       where t1.fproductid = t2.fproductid and fproductid = #{productId}
+    </select>
+    
+    <select id="getProductpageList" resultMap="ProductResultMap" parameterType="map">
+       select V.fproductid, V.fname, V.fdisplayname, V.fdescription, 
+        V.fcategoryid, V.fsaleflag,V.frecommend, V.fshiptime, V.fsellqty, V.finventoryqty, 
+        V.favailabledate, V.fvalidation, V.fupdatedtime, 
+        V.fcreatetime, t2.fsource,t3.fcolor,t3.fcondition, t3.forginalprice, 
+        t3.fourprice, t3.fsaleprice1, t3.fsaleprice2, t3.fsaleprice3, 
+        t3.fspecialprice, t3.funit, t3.fweight 
+     from (select t1.fproductid, t1.fname, t1.fdisplayname, t1.fdescription, 
+        t1.fcategoryid, t1.fsaleflag,t1.frecommend, t1.fshiptime, t1.fsellqty, t1.finventoryqty, 
+        t1.favailabledate, t1.fvalidation, t1.fupdatedtime, 
+        t1.fcreatetime
+       from t_product t1 
+       where t1.fcategoryid = #{categoryId}
+       limit #{start}, #{end}) V
+       left join t_product_pic t2 on t1.fproductid = t2.fproductid 
+       left join t_product_price t3 on t1.fproductid = t3.fproductid
+       order by t1.fproductId
+    </select>
+    
+    <select id="getProductCount" resultType="Integer"  parameterType="Long">
+        select count(fproductId) 
+        from t_product
+        where fcategoryid = #{categoryId}
+    </select>
+    
+    <select id="getRecommendProductList" resultMap="ProductResultMap">
+     select V.fproductid, V.fname, V.fdisplayname, V.fdescription, 
+        V.fcategoryid, V.fsaleflag,V.frecommend, V.fshiptime, V.fsellqty, V.finventoryqty, 
+        V.favailabledate, V.fvalidation, V.fupdatedtime, 
+        V.fcreatetime, t2.fsource,t3.fcolor,t3.fcondition, t3.forginalprice, 
+        t3.fourprice, t3.fsaleprice1, t3.fsaleprice2, t3.fsaleprice3, 
+        t3.fspecialprice, t3.funit, t3.fweight 
+     from (select t1.fproductid, t1.fname, t1.fdisplayname, t1.fdescription, 
+        t1.fcategoryid, t1.fsaleflag,t1.frecommend, t1.fshiptime, t1.fsellqty, t1.finventoryqty, 
+        t1.favailabledate, t1.fvalidation, t1.fupdatedtime, 
+        t1.fcreatetime
+       from t_product t1 
+       where t1.frecommend = 1) V
+    left join t_product_pic t2 on V.fproductid = t2.fproductid 
+    left join t_product_price t3 on V.fproductid = t3.fproductid
+    order by V.fproductId
+    </select>
+    
+    
+    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="productId" parameterType="jo.geun.entity.Product">
+        insert into t_product(
+        fname, fdisplayname, fcategoryid, fsaleflag, fshiptime,fdescription,
+        fsoldoutflag,frecommend, fsellqty,finventoryqty, fvalidation, favailabledate, 
+         fupdatedtime, fcreatetime)
+         VALUES (
+         #{name}, #{displayName}, #{categoryId}, #{saleFlag}, #{shipTime}, #{description},
+         #{soldOutFlag}, #{recommend}, #{sellQty}, #{inventoryQty}, #{validation}, #{availableDate}, 
+         #{updatedTime}, #{createTime});
+    </insert>
+    
+    <insert id="insertProductPrice" useGeneratedKeys="true" keyProperty="priceId" parameterType="jo.geun.entity.ProductPrice">
+        insert into t_product_price(
+        fproductid, fcolor, funit, fweight, forginalprice,fqty,
+        fourprice, fsaleprice1,fsaleprice2,fsaleprice3, fcondition, 
+        fspecialprice,fupdatedtime)
+         VALUES (
+         #{productId}, #{color}, #{unit}, #{weight}, #{originalPrice}, #{qty},
+         #{type}, #{ourPrice}, #{salePrice1},#{salePrice2},#{salePrice3}, #{condition},
+         #{specialPrice}, #{updatedTime});
+    </insert>
+    
+    <insert id="insertProductPicture" useGeneratedKeys="true" keyProperty="picId" parameterType="jo.geun.entity.ProductPic">
+        insert into t_product_pic(
+        `fproductid`, `fsource`, `fupdatedtime`)
+         VALUES (
+         #{productId}, #{source},#{updatedTime});
+    </insert>
+    
+    
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<?xml-stylesheet type="text/xsl" href="convert.xsl"?>
+<root>
+<head>
+		<meta http-equiv="Content-Language" content="en-us"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link href="style.css" rel="stylesheet" type="text/css"/>
+		<title>Wholesale gemstone beads, Bead Supplies, Ny6design Bead store in Allen, near Plano, Dallas</title>
+		<meta name="keywords" content="Wholesale gemstone beads, Bead Supplies, Bead store in Allen, near Plano, Dallas, Wholesale Beads Semi precious gemstones, Wholesale beads, wholesale gemstone beads, Coral beads, pearl beads, turquoise beads, Semi precious gemstone Earrings ,necklace, semi precious gemstone pendants, semi-gemstone, Wholesale Beads, Jewelry, agate, amazonite, amber, amethyst, Citrine, garnet, jade, jasper, NY6Design.com"/>
+		<meta name="description" content="Wholesale gemstone beads, Bead Supplies, Bead store in Allen, near Plano, Dallas, Wholesale Beads ,Semi precious gemstones, , Up to 75% OFF for wholesale direct to you from our Dallas showroom, please go to www. NY6 Design.com"/>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script src="/js/self.js"></script>
+		<script>
+			logbarHeight = "30px";
+			logbarHeight2 = "35px";
+			logo = "100px";
+			toolx = "50px";
+			search = "350px";
+			leftWidth = "160";
+			mainWidth = "960";
+			contentWidth = "800px";
+			full = "100%";
+			half='50%';
+			mainWidth = Math.max(Math.floor(screen.width*0.8),mainWidth);
+			leftWidth = Math.max(Math.floor(screen.width*0.8/6),leftWidth);
+			contentWidth = mainWidth - leftWidth;
+			//mainWidth = Math.max(screen.width,mainWidth);
+
+			function loadLayout(url, currentID) {
+				$.get( url, function( data ) {
+				$( currentID ).html( data );
+
+				if ($( currentID ).attr('afterLoad')) {eval($( currentID ).attr('afterLoad'))}
+			} 	) } ;
+			
+			
+			
+		</script>
+	</head>
+	<page theme='dark-hive'>
+<navMenuBar name="navMenuBar">
+
+<menuitem name="addMore1" caption='new menu'>
+<menuitem name="addMore" caption='new menu'/>
+</menuitem>
+</navMenuBar>
+</page>
+</root>

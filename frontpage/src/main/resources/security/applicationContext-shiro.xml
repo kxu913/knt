@@ -14,13 +14,14 @@
 		<property name="unauthorizedUrl" value="/403.html"/> 
 		<property name="filterChainDefinitions">
 			<value>
+				/ = anon
+				/login.html = anon
 				/user/* = authc, perms[user:view]
 				/user/* = authc, perms[admin:view]
 				/admin/addAdmain* = authc, perms["admin:view,admin:add"]
 				/admin/* == authc,perms[admin:view]
 				/kaptcha* = anon
 				/static/* = anon
-				/login.html = anon
 				/* = authc
 			</value>
 		</property>

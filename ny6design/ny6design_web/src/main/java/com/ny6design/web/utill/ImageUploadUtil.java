@@ -19,7 +19,7 @@ import com.ny6design.utility.RandomUtils;
 import com.ny6design.utility.ScaleImage;
 
 /**
- * 
+ * for image upload
  * @author kevin
  * 
  */

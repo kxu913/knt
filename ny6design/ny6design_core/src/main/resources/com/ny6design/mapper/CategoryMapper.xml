@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ny6design.mapper.CategoryMapper">
 
-    <select id="getCategoryList" resultType="jo.geun.entity.Category">
+    <select id="getCategoryList" resultType="com.ny6design.model.Category">
         select fcategoryId as categoryId, fname as name, forder as 'order', 
                fparentId  as  parentId , fupdatetime as updatetime
         from t_category 
@@ -12,7 +12,7 @@
         order by forder;
     </select>
     
-    <select id="getAllSubCategoryList" resultType="jo.geun.entity.Category">
+    <select id="getAllSubCategoryList" resultType="com.ny6design.model.Category">
         select fcategoryId as categoryId, fname as name, forder as 'order', 
                fparentId  as  parentId , fupdatetime as updatetime
         from t_category 
@@ -20,7 +20,7 @@
         order by forder;
     </select>
     
-    <insert id="insertCategory"  useGeneratedKeys="true" keyProperty="categoryId" parameterType="jo.geun.entity.Category">
+    <insert id="insertCategory"  useGeneratedKeys="true" keyProperty="categoryId" parameterType="com.ny6design.model.Category">
 
         insert into t_category (fname,            forder, 
                                 fparentid,                fvalidated, 

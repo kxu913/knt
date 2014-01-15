@@ -27,10 +27,10 @@ public class UserForTestMapperTest {
 		UserForTest user = new UserForTest();
 		user.setGroupid(1);
 		user.setId(4);
-		user.setUsername("test");
+		user.setUsername("test1");
 		byte[] salt = PasswordUtil.getSalt();
 		user.setSalt(salt);
-		user.setPassword(PasswordUtil.entryptPassword(salt, "test"));
+		user.setPassword(PasswordUtil.entryptPassword(salt, "test1"));
 		mapper.insert(user);
 	}
 

@@ -24,10 +24,8 @@ public class HtmlGeneratorTest {
 
 			String convertHtml = HtmlGenerator.convert(inputStream,
 					"convert.xsl");
-
-			System.out.println(HtmlGenerator.search(convertHtml, "//h3/.."));
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
+			System.out.println(convertHtml);
+//			System.out.println(HtmlGenerator.search(convertHtml, "//h3/.."));
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

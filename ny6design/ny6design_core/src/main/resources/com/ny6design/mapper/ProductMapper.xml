@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ny6design.mapper.ProductMapper">
 
-    <resultMap id="ProductResultMap" type="jo.geun.entity.Product" >  
+    <resultMap id="ProductResultMap" type="com.ny6design.model.Product" >  
         <id property = "productId" column="fproductid" />
         
         <result property="name" column="fname"/>  
@@ -21,10 +21,10 @@
         <result property="validation" column="fvalidation"/>
         <result property="createTime" column="fcreatetime"/>
         
-        <collection property="pictureSources" ofType="jo.geun.entity.ProductPic">
+        <collection property="pictureSources" ofType="com.ny6design.model.ProductPic">
             <result property="source" column="fsource"/>
         </collection>
-        <collection property="prices" ofType="jo.geun.entity.ProductPrice">
+        <collection property="prices" ofType="com.ny6design.model.ProductPrice">
             <result property="color" column="fcolor"/>
             <result property="unit" column="funit"/>
             <result property="weight" column="fweight"/>
@@ -91,7 +91,7 @@
     </select>
     
     
-    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="productId" parameterType="jo.geun.entity.Product">
+    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="productId" parameterType="com.ny6design.model.Product">
         insert into t_product(
         fname, fdisplayname, fcategoryid, fsaleflag, fshiptime,fdescription,
         fsoldoutflag,frecommend, fsellqty,finventoryqty, fvalidation, favailabledate, 
@@ -102,7 +102,7 @@
          #{updatedTime}, #{createTime});
     </insert>
     
-    <insert id="insertProductPrice" useGeneratedKeys="true" keyProperty="priceId" parameterType="jo.geun.entity.ProductPrice">
+    <insert id="insertProductPrice" useGeneratedKeys="true" keyProperty="priceId" parameterType="com.ny6design.model.ProductPrice">
         insert into t_product_price(
         fproductid, fcolor, funit, fweight, forginalprice,fqty,
         fourprice, fsaleprice1,fsaleprice2,fsaleprice3, fcondition, 
@@ -113,7 +113,7 @@
          #{specialPrice}, #{updatedTime});
     </insert>
     
-    <insert id="insertProductPicture" useGeneratedKeys="true" keyProperty="picId" parameterType="jo.geun.entity.ProductPic">
+    <insert id="insertProductPicture" useGeneratedKeys="true" keyProperty="picId" parameterType="com.ny6design.model.ProductPic">
         insert into t_product_pic(
         `fproductid`, `fsource`, `fupdatedtime`)
          VALUES (

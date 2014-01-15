@@ -23,7 +23,7 @@ import com.ny6design.utility.ScaleImage;
  * @author kevin
  * 
  */
-public class ImageUploadUtil {
+public class ImageUploadUtil {  
 
 	private String imagePath = "/imageFile/"
 			+ new SimpleDateFormat("yyyyMMdd").format(new Date()) + "";
@@ -131,7 +131,7 @@ public class ImageUploadUtil {
 				BufferedImage tag = new BufferedImage(THUMNAIL_WIDTH,
 						THUMNAIL_HEIGHT, BufferedImage.TYPE_INT_RGB);
 				tag.getGraphics().drawImage(img, 0, 0, THUMNAIL_WIDTH,
-						THUMNAIL_HEIGHT, null); // ������С���ͼ
+						THUMNAIL_HEIGHT, null); // 锟斤拷锟斤拷锟斤拷小锟斤拷锟酵�
 				FileOutputStream out = new FileOutputStream(uploadFileLocation2);
 				ImageIO.write(tag, "jpg", out);
 

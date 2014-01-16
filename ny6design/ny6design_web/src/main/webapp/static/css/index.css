@@ -1,0 +1,12 @@
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+.container {
+	min-width: 970px;
+}
+.logo {
+	background-image: url(../img/logo.png);
+	height:100px;
+}

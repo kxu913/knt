@@ -6,7 +6,29 @@ body {
 .container {
 	min-width: 970px;
 }
+
 .logo {
 	background-image: url(../img/logo.png);
-	height:100px;
+	height: 100px;
+}
+
+.well {
+	background-image: -webkit-linear-gradient(top, #ffffff 0%, #f5f5f5 100%);
+	background-image: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
+	padding: 0 5 10 5;
+	display: block;
+}
+
+.header-img {
+	background-image: url(../img/left_12.jpg);
+	display: block;
+	height: 28px;
+	margin: 5px 2px 5px 2px;
+}
+
+.test font {
+	border-bottom: 1px solid #1c7dcb;
+	padding-bottom: 1px;
+	text-decoration: none;
+	color: #1c7dcb;
 }

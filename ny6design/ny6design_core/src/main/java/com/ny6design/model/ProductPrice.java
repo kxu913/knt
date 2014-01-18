@@ -1,13 +1,13 @@
 package com.ny6design.model;
 
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+
 /**
  * 
  * @author kevin
- *
+ * 
  */
 public class ProductPrice implements Serializable {
 
@@ -28,6 +28,13 @@ public class ProductPrice implements Serializable {
 
 	private BigDecimal ourPrice;
 
+	private int qty;
+
+	private String condition1;
+	private String condition2;
+	private String condition3;
+	private Timestamp updatedTime;
+
 	private BigDecimal salePrice1;
 
 	private BigDecimal salePrice2;
@@ -37,6 +44,30 @@ public class ProductPrice implements Serializable {
 	private BigDecimal originalPrice;
 
 	private BigDecimal specialPrice;
+
+	public String getCondition1() {
+		return condition1;
+	}
+
+	public void setCondition1(String condition1) {
+		this.condition1 = condition1;
+	}
+
+	public String getCondition2() {
+		return condition2;
+	}
+
+	public void setCondition2(String condition2) {
+		this.condition2 = condition2;
+	}
+
+	public String getCondition3() {
+		return condition3;
+	}
+
+	public void setCondition3(String condition3) {
+		this.condition3 = condition3;
+	}
 
 	public long getPriceId() {
 		return priceId;
@@ -134,14 +165,6 @@ public class ProductPrice implements Serializable {
 		this.ourPrice = ourPrice;
 	}
 
-	public String getCondition() {
-		return condition;
-	}
-
-	public void setCondition(String condition) {
-		this.condition = condition;
-	}
-
 	public Timestamp getUpdatedTime() {
 		return updatedTime;
 	}
@@ -149,11 +172,5 @@ public class ProductPrice implements Serializable {
 	public void setUpdatedTime(Timestamp updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-
-	private int qty;
-
-	private String condition;
-
-	private Timestamp updatedTime;
 
 }

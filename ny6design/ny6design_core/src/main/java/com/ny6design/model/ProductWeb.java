@@ -191,26 +191,6 @@ public class ProductWeb extends Product implements Serializable {
 
 	private String weight;
 
-	public void constructPriceList() {
-
-		List<ProductPrice> priceList = new ArrayList<ProductPrice>();
-		Timestamp current = new Timestamp(System.currentTimeMillis());
-		// original price
-		ProductPrice price = new ProductPrice();
-		price.setColor(getColor());
-		price.setCondition(getCondition());
-		price.setUnit(getUnit());
-		price.setQty(getInventoryQty());
-		price.setUpdatedTime(current);
-		price.setOriginalPrice(getOriginalPrice());
-		price.setOurPrice(getSalePrice());
-		price.setSalePrice1(getDiscountPrice1());
-		price.setSalePrice2(getDiscountPrice2());
-		price.setSalePrice3(getDiscountPrice3());
-		priceList.add(price);
-
-		this.setPrices(priceList);
-	}
 
 	// ------------------------------------------------------------- ProductPic
 	private List<String> sources = new ArrayList<String>();

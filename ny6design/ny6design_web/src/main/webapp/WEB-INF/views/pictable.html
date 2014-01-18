@@ -1,0 +1,34 @@
+<table class="table table-bordered">
+	<tr>
+		#foreach($product as $!productList)
+		<td width="20%"><img src=$!{product.pictureSources[0].source}
+			style='height: 160px; width: 190px'></img></td> 
+		#end
+	</tr>
+	<tr>
+		#foreach($product as $!productList)
+		<td>
+			<table class="table table-bordered">
+				<tr>
+					<td rowspan="2"><img src="static/img/buy-now.jpg"></img></td>
+					<td class='success'>$product.prices[0].condition1</td>
+					<td class='warning' width="20%" bgcolor="#F6F6F6">$product.prices[0].condition2</td>
+					<td class='danger'>$product.prices[0].condition3</td>
+				</tr>
+				<tr>
+					<td class='success'>$${product.prices[0].salePrice1}</td>
+					<td class='warning' width="20%" bgcolor="#F6F6F6">$${product.prices[0].salePrice2}</td>
+					<td class='danger'>${product.prices[0].salePrice3}</td>
+				</tr>
+			</table>
+		</td> 
+		#end
+	</tr>
+	<tr>
+		#foreach($product as $!productList)
+		<td>
+			<h5>$!{product.description}</h5>
+		</td> 
+		#end
+	</tr>
+</table>

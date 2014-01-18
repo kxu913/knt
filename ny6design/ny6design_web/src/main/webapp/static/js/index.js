@@ -52,7 +52,17 @@ function loadCategories() {
 		}
 	});
 }
+
+function loadProducts(){
+	$.ajax({
+		url : '/ny6design_web/getProductList',
+		success : function(data, status){
+			$("#productList").html(data);
+		}
+	});
+}
 $(document).ready(function() {
 	loadMessages();
 	loadCategories();
+	loadProducts();
 });

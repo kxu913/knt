@@ -10,5 +10,7 @@
 			format="yyyy-MM-dd HH:mm:ss" />
 		<tool key="escape" class="org.apache.velocity.tools.generic.EscapeTool" />
 		<tool key="math" class="org.apache.velocity.tools.generic.MathTool" />
+		<tool key="number" class="org.apache.velocity.tools.generic.NumberTool" format="#0.00"/>
 	</toolbox>
+	
 </tools>

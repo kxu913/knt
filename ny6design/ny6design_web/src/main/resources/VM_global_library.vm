@@ -1,0 +1,56 @@
+#**
+ * Sets the $page_title key, so if it ever changes,
+ * it need only be changed here.
+ *#
+#macro( Title $string )
+  #set( $page_title = $!string )
+#end
+
+#macro( Keywords $string )
+  #set( $meta_Keywords = $!string )
+#end
+
+#macro( Description $string )
+  #set( $meta_Description = $!string )
+#end
+
+#macro( Nav_Desc $string )
+  #set( $nav_desc = $!string )
+#end
+#macro( Nav_Menu_Id $string )
+  #set( $nav_menu_id = $!string )
+#end
+
+#**
+* 定义menu的名称,nav名称
+*#
+#macro( menu_nav_name $menu $nav )
+ #if($menu)
+   #set( $menu_name = $menu)
+ #end
+ #if($nav)
+   #set( $nav_name = $nav)
+ #end
+#end
+
+#**
+* 后台menu选定输出class
+*#
+#macro(font_menu_active $string )#if($menu_name == $string)class="on"#end#end
+
+#**
+* 后台menu选定输出class
+*#
+#macro(menu_active $string )#if($menu_name == $string)class="active"#end#end
+
+#**
+* 导航选定输出class
+*#
+#macro(nav_active $string)#if($nav_name == $string)class="active"#end#end
+
+#**
+*form表单令牌，防止重复提交
+*#
+#macro(Token)
+<input type="hidden" name="$!token.tokenName()" value="$!token.tokenValue()">
+#end

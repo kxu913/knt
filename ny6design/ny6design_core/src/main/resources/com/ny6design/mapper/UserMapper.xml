@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ny6design.mapper.UserMapper" >
+	<resultMap id="BaseResultMap" type="com.ny6design.model.User" >
+		<id column="userId" property="userid" jdbcType="INTEGER" />
+		<result column="emailAddress" property="emailaddress" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="firstName" property="firstname" jdbcType="VARCHAR" />
+		<result column="lastName" property="lastname" jdbcType="VARCHAR" />
+		<result column="addressId" property="addressid" jdbcType="INTEGER" />
+		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+		<result column="fax" property="fax" jdbcType="VARCHAR" />
+		<result column="taxId" property="taxid" jdbcType="DECIMAL" />
+		<result column="fromId" property="fromid" jdbcType="INTEGER" />
+		<result column="factive" property="factive" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+    userId, emailAddress, password, firstName, lastName, addressId, telephone, fax, taxId, 
+    fromId, factive
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+		<include refid="Base_Column_List" />
+    from t_user
+    where userId = #{userid,jdbcType=INTEGER}
+	</select>
+  
+	<select id="selectUser" resultMap="BaseResultMap" parameterType="map" >
+    select 
+		<include refid="Base_Column_List" />
+    from t_user
+    where emailAddress = #{emailAddress,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR} limit 1;
+	</select>
+  
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_user
+    where userId = #{userid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="userid" parameterType="com.ny6design.model.User" >
+    insert into t_user (emailAddress, password, 
+      firstName, lastName, addressId, 
+      telephone, fax, taxId, 
+      fromId, factive)
+    values (#{emailaddress,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{firstname,jdbcType=VARCHAR}, #{lastname,jdbcType=VARCHAR}, #{addressid,jdbcType=INTEGER}, 
+      #{telephone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{taxid,jdbcType=DECIMAL}, 
+      #{fromid,jdbcType=INTEGER}, #{factive,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ny6design.model.User" >
+    insert into t_user
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="userid != null" >
+        userId,
+			</if>
+			<if test="emailaddress != null" >
+        emailAddress,
+			</if>
+			<if test="password != null" >
+        password,
+			</if>
+			<if test="firstname != null" >
+        firstName,
+			</if>
+			<if test="lastname != null" >
+        lastName,
+			</if>
+			<if test="addressid != null" >
+        addressId,
+			</if>
+			<if test="telephone != null" >
+        telephone,
+			</if>
+			<if test="fax != null" >
+        fax,
+			</if>
+			<if test="taxid != null" >
+        taxId,
+			</if>
+			<if test="fromid != null" >
+        fromId,
+			</if>
+			<if test="factive != null" >
+        factive,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+			</if>
+			<if test="emailaddress != null" >
+        #{emailaddress,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="firstname != null" >
+        #{firstname,jdbcType=VARCHAR},
+			</if>
+			<if test="lastname != null" >
+        #{lastname,jdbcType=VARCHAR},
+			</if>
+			<if test="addressid != null" >
+        #{addressid,jdbcType=INTEGER},
+			</if>
+			<if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="taxid != null" >
+        #{taxid,jdbcType=DECIMAL},
+			</if>
+			<if test="fromid != null" >
+        #{fromid,jdbcType=INTEGER},
+			</if>
+			<if test="factive != null" >
+        #{factive,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ny6design.model.User" >
+    update t_user
+		<set >
+			<if test="emailaddress != null" >
+        emailAddress = #{emailaddress,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="firstname != null" >
+        firstName = #{firstname,jdbcType=VARCHAR},
+			</if>
+			<if test="lastname != null" >
+        lastName = #{lastname,jdbcType=VARCHAR},
+			</if>
+			<if test="addressid != null" >
+        addressId = #{addressid,jdbcType=INTEGER},
+			</if>
+			<if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null" >
+        fax = #{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="taxid != null" >
+        taxId = #{taxid,jdbcType=DECIMAL},
+			</if>
+			<if test="fromid != null" >
+        fromId = #{fromid,jdbcType=INTEGER},
+			</if>
+			<if test="factive != null" >
+        factive = #{factive,jdbcType=VARCHAR},
+			</if>
+		</set>
+    where userId = #{userid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ny6design.model.User" >
+    update t_user
+    set emailAddress = #{emailaddress,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      firstName = #{firstname,jdbcType=VARCHAR},
+      lastName = #{lastname,jdbcType=VARCHAR},
+      addressId = #{addressid,jdbcType=INTEGER},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      taxId = #{taxid,jdbcType=DECIMAL},
+      fromId = #{fromid,jdbcType=INTEGER},
+      factive = #{factive,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=INTEGER}
+	</update>
+</mapper>

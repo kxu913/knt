@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ny6design.mapper.CountryMapper" >
+	<resultMap id="BaseResultMap" type="com.ny6design.model.Country" >
+		<id column="code" property="code" jdbcType="VARCHAR" />
+		<result column="fdescription" property="fdescription" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+    code, fdescription
+	</sql>
+	<select id="getAllCountries" resultMap="BaseResultMap">
+    select 
+		<include refid="Base_Column_List" />
+    from e_country
+    order by code asc;
+	</select>
+
+</mapper>

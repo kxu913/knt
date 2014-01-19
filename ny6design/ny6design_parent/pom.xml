@@ -34,6 +34,7 @@
 		<shiro.version>1.2.2</shiro.version>
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<commons-codec.version>1.6</commons-codec.version>
+		<notificatio.version>develop-SNAPSHOT</notificatio.version>
 
 	</properties>
 
@@ -208,6 +209,14 @@
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
 				<version>${commons-codec.version}</version>
+			</dependency>
+			
+			
+			<!-- mvn install:install-file -Dfile=C:\Users\***\notification-develop-SNAPSHOT.jar -DgroupId=com.kevin -DartifactId=notification -Dversion=develop-SNAPSHOT -Dpackaging=jar -->
+			<dependency>
+				<groupId>com.kevin</groupId>
+				<artifactId>notification</artifactId>
+				<version>${notificatio.version}</version>
 			</dependency>
 		</dependencies>
 

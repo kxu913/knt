@@ -3,7 +3,7 @@
 <generatorConfiguration>
 	<!-- classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 -->
 	<classPathEntry
-		location="C:/Users/kxu/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar" />
+		location="C:/Users/kevin/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar" />
 
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 
@@ -14,7 +14,7 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/ny6design" userId="root"
+			connectionURL="jdbc:mysql://localhost:3307/ny6design" userId="root"
 			password="888888">
 		</jdbcConnection>
 
@@ -39,21 +39,42 @@
 
 		<!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
 		<!--
-			<table tableName="user" domainObjectName="UserForTest"
+				<table tableName="user" domainObjectName="UserForTest"
+					enableCountByExample="false" enableUpdateByExample="false"
+					enableDeleteByExample="false" enableSelectByExample="false"
+					selectByExampleQueryId="false" escapeWildcards="true"/>
+
+			<table tableName="t_role" domainObjectName="Role"
 				enableCountByExample="false" enableUpdateByExample="false"
 				enableDeleteByExample="false" enableSelectByExample="false"
 				selectByExampleQueryId="false" escapeWildcards="true"/>
+			<table tableName="t_group" domainObjectName="Group"
+				enableCountByExample="false" enableUpdateByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				selectByExampleQueryId="false" escapeWildcards="true"/>
+				-->
+		<!--<table tableName="t_message" domainObjectName="UserMessage"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>-->
+		<table tableName="e_country" domainObjectName="Country"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>
 			
-		<table tableName="t_role" domainObjectName="Role"
+		<table tableName="e_from" domainObjectName="FromMessage"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" escapeWildcards="true"/>
-		<table tableName="t_group" domainObjectName="Group"
+		<table tableName="e_states" domainObjectName="States"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" escapeWildcards="true"/>
-			-->
-			<table tableName="t_permissions" domainObjectName="Permission"
+		<table tableName="t_address" domainObjectName="Address"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>
+		<table tableName="t_user" domainObjectName="User"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" escapeWildcards="true"/>

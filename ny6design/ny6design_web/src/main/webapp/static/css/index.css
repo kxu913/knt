@@ -64,3 +64,11 @@ td img {
 	width: 200px; //
 	max-height: 200px;
 }
+
+.control-label{
+	width : 200px;
+	font-size: 9px;
+}
+.form-group{
+	margin-bottom: 10px;
+}

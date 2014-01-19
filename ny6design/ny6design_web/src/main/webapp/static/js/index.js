@@ -17,6 +17,15 @@ function loadMessages() {
 	});
 }
 
+function loadToolBar() {
+	$.ajax({
+		url : '/ny6design_web/getToolBar',
+		success : function(data, status) {
+			$("#toolbar").html(data);
+		}
+	});
+}
+
 function loadCategories() {
 	$.ajax({
 		url : '/ny6design_web/getAllCategoryList',
@@ -53,15 +62,59 @@ function loadCategories() {
 	});
 }
 
-function loadProducts(){
+function loadProducts() {
 	$.ajax({
 		url : '/ny6design_web/getProductList',
-		success : function(data, status){
+		success : function(data, status) {
 			$("#productList").html(data);
 		}
 	});
 }
+
+function login() {
+	$.ajax({
+		url : '/ny6design_web/doLogin',
+		success : function(data, status) {
+			$("#productList").html(data);
+		}
+	});
+}
+
+function doLogin() {
+	var emailAddress = $("#inputEmail3").val();
+	var password = $("#inputPassword3").val();
+	$.ajax({
+		url : '/ny6design_web/login',
+		type : 'POST',
+		data : {
+			email : emailAddress,
+			password : password,
+			url : window.location.pathname
+		},
+		success : function(data, status) {
+			if (typeof (data.errormsg) !== "undefined") {
+				$("#errorMsg").html(data.errormsg);
+			} else {
+				window.location.href = data.url;
+			}
+		}
+	});
+}
+
+function doRegister() {
+	initSelect();
+	$.ajax({
+		url : '/ny6design_web/doRegist',
+		success : function(data, status) {
+			$("#productList").html(data);
+		}
+	});
+}
+function loginOut() {
+	location.href = '/ny6design_web/loginOut';
+}
 $(document).ready(function() {
+	loadToolBar();
 	loadMessages();
 	loadCategories();
 	loadProducts();

@@ -5,6 +5,7 @@
 	<description>导入applicationContext文件列表</description>
 	<!-- security -->
 	<import resource="security/applicationContext-shiro.xml" />
+	<import resource="email/applicationContext-email.xml" />
 	<!-- cacheManager工厂类，指定ehcache.xml的位置 -->
 	<bean id="cacheManager"
 		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">

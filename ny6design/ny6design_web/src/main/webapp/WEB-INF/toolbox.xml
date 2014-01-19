@@ -4,6 +4,7 @@
 		<tool key="params" class="org.apache.velocity.tools.view.tools.ParameterParser" />
 		<tool key="cookie" class="org.apache.velocity.tools.view.CookieTool" />
 		<tool key="escapeTool" class="org.apache.velocity.tools.generic.EscapeTool" />
+		<tool key="null" class="org.apache.velocity.tools.generic.NullTool"/>
 	</toolbox>
 	<toolbox scope="application">
 		<tool key="date" class="org.apache.velocity.tools.generic.DateTool"
@@ -11,6 +12,7 @@
 		<tool key="escape" class="org.apache.velocity.tools.generic.EscapeTool" />
 		<tool key="math" class="org.apache.velocity.tools.generic.MathTool" />
 		<tool key="number" class="org.apache.velocity.tools.generic.NumberTool" format="#0.00"/>
+		<tool key="null" class="org.apache.velocity.tools.generic.NullTool"/>
 	</toolbox>
 	
 </tools>

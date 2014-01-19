@@ -87,11 +87,19 @@
 		<property name="suffix" value=".html" />
 		<property name="exposeRequestAttributes" value="true" />
 		<property name="exposeSessionAttributes" value="true" />
+		<property name="allowSessionOverride" value="true"/>  
 		<property name="exposeSpringMacroHelpers" value="true" />
 		<property name="requestContextAttribute" value="rc" />
-		<property name="viewClass" value="org.springframework.web.servlet.view.velocity.VelocityView"></property>
-		<property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml" />
-
+		<property name="attributes">
+			<map>
+				<entry key="date">
+					<bean class="org.apache.velocity.tools.generic.DateTool" />
+				</entry>
+				<entry key="null">
+					<bean class="com.ny6design.web.tool.NullTool" />
+				</entry>
+			</map>
+		</property>
 		<property name="contentType" value="text/html; charset=utf-8"></property>
 	</bean>
 </beans>

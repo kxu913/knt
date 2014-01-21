@@ -76,7 +76,7 @@ public class RegisterController {
 			user.setFactive("1");
 			userMapper.updateByPrimaryKey(user);
 			request.getSession().setAttribute("userName",
-					user.getEmailaddress());
+					user.getFirstname() + " " + user.getLastname());
 		}
 		return "redirect:index.html";
 	}
@@ -195,7 +195,7 @@ public class RegisterController {
 		user.setFactive("0");
 		user.setFax(fax);
 		user.setFirstname(firstName);
-		//TODO
+		// TODO
 		user.setFromid(1);
 		user.setLastname(lastName);
 		user.setPassword(password);
@@ -213,8 +213,7 @@ public class RegisterController {
 				notify.setSubject("Verify email");
 				notify.setToEmail(emailAddress);
 				Map<String, Object> context = new HashMap<String, Object>();
-				context.put(
-						"link",
+				context.put("link",
 						"http://localhost:8080/ny6design_web/verifyEmail?userId="
 								+ userId + "&time="
 								+ System.currentTimeMillis());

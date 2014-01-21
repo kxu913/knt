@@ -56,7 +56,7 @@ public class LoginController {
 		if (user != null) {
 			rtn.put(CONSTANT.EMAIL, email);
 			rtn.put(CONSTANT.URL, url);
-			request.getSession().setAttribute("userName", email);
+			request.getSession().setAttribute("userName", user.getFirstname()+ " "+user.getLastname());
 		} else {
 			rtn.put(CONSTANT.ERROR_MESSAGE, "Eamil or password error!");
 		}

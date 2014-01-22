@@ -219,7 +219,7 @@
 				<artifactId>notification</artifactId>
 				<version>${notificatio.version}</version>
 			</dependency>
-			
+			<!-- mvn install:install-file -Dfile=C:\Users\***\security-develop-SNAPSHOT.jar -DgroupId=com.kevin -DartifactId=security -Dversion=develop-SNAPSHOT -Dpackaging=jar -->
 			<dependency>
 				<groupId>com.kevin</groupId>
 				<artifactId>security</artifactId>

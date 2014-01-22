@@ -35,6 +35,7 @@
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<commons-codec.version>1.6</commons-codec.version>
 		<notificatio.version>develop-SNAPSHOT</notificatio.version>
+		<security.version>develop-SNAPSHOT</security.version>
 
 	</properties>
 
@@ -217,6 +218,12 @@
 				<groupId>com.kevin</groupId>
 				<artifactId>notification</artifactId>
 				<version>${notificatio.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.kevin</groupId>
+				<artifactId>security</artifactId>
+				<version>${security.version}</version>
 			</dependency>
 		</dependencies>
 

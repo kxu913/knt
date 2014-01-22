@@ -18,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
 	User selectUser(Map<String, Object> params);
+	
+	User selectUserByEmail(String emailAddress);
 }

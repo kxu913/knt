@@ -3,113 +3,123 @@ package com.ny6design.model;
 import java.math.BigDecimal;
 
 public class User {
-    private Integer userid;
+	private Integer userid;
 
-    private String emailaddress;
+	private String emailaddress;
 
-    private String password;
+	private String password;
 
-    private String firstname;
+	private String firstname;
 
-    private String lastname;
+	private String lastname;
 
-    private Integer addressid;
+	private Integer addressid;
 
-    private String telephone;
+	private String telephone;
 
-    private String fax;
+	private String fax;
 
-    private BigDecimal taxid;
+	private BigDecimal taxid;
 
-    private Integer fromid;
+	private Integer fromid;
 
-    private String factive;
+	private String factive;
+	// used for password
+	private byte[] salt;
 
-    public Integer getUserid() {
-        return userid;
-    }
+	public byte[] getSalt() {
+		return salt;
+	}
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
+	public void setSalt(byte[] salt) {
+		this.salt = salt;
+	}
 
-    public String getEmailaddress() {
-        return emailaddress;
-    }
+	public Integer getUserid() {
+		return userid;
+	}
 
-    public void setEmailaddress(String emailaddress) {
-        this.emailaddress = emailaddress == null ? null : emailaddress.trim();
-    }
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getEmailaddress() {
+		return emailaddress;
+	}
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
+	public void setEmailaddress(String emailaddress) {
+		this.emailaddress = emailaddress == null ? null : emailaddress.trim();
+	}
 
-    public String getFirstname() {
-        return firstname;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname == null ? null : firstname.trim();
-    }
+	public void setPassword(String password) {
+		this.password = password == null ? null : password.trim();
+	}
 
-    public String getLastname() {
-        return lastname;
-    }
+	public String getFirstname() {
+		return firstname;
+	}
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname == null ? null : lastname.trim();
-    }
+	public void setFirstname(String firstname) {
+		this.firstname = firstname == null ? null : firstname.trim();
+	}
 
-    public Integer getAddressid() {
-        return addressid;
-    }
+	public String getLastname() {
+		return lastname;
+	}
 
-    public void setAddressid(Integer addressid) {
-        this.addressid = addressid;
-    }
+	public void setLastname(String lastname) {
+		this.lastname = lastname == null ? null : lastname.trim();
+	}
 
-    public String getTelephone() {
-        return telephone;
-    }
+	public Integer getAddressid() {
+		return addressid;
+	}
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone == null ? null : telephone.trim();
-    }
+	public void setAddressid(Integer addressid) {
+		this.addressid = addressid;
+	}
 
-    public String getFax() {
-        return fax;
-    }
+	public String getTelephone() {
+		return telephone;
+	}
 
-    public void setFax(String fax) {
-        this.fax = fax == null ? null : fax.trim();
-    }
+	public void setTelephone(String telephone) {
+		this.telephone = telephone == null ? null : telephone.trim();
+	}
 
-    public BigDecimal getTaxid() {
-        return taxid;
-    }
+	public String getFax() {
+		return fax;
+	}
 
-    public void setTaxid(BigDecimal taxid) {
-        this.taxid = taxid;
-    }
+	public void setFax(String fax) {
+		this.fax = fax == null ? null : fax.trim();
+	}
 
-    public Integer getFromid() {
-        return fromid;
-    }
+	public BigDecimal getTaxid() {
+		return taxid;
+	}
 
-    public void setFromid(Integer fromid) {
-        this.fromid = fromid;
-    }
+	public void setTaxid(BigDecimal taxid) {
+		this.taxid = taxid;
+	}
 
-    public String getFactive() {
-        return factive;
-    }
+	public Integer getFromid() {
+		return fromid;
+	}
 
-    public void setFactive(String factive) {
-        this.factive = factive == null ? null : factive.trim();
-    }
+	public void setFromid(Integer fromid) {
+		this.fromid = fromid;
+	}
+
+	public String getFactive() {
+		return factive;
+	}
+
+	public void setFactive(String factive) {
+		this.factive = factive == null ? null : factive.trim();
+	}
 }

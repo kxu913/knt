@@ -9,14 +9,7 @@
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/login.do" />
-		<property name="successUrl" value="/welcome" />
-		<property name="unauthorizedUrl" value="/403.html"/> 
-		<property name="filters">
-			<util:map>
-				<entry key="authc" value-ref="formAuthenticationFilter"/>
-			</util:map>
-		</property>
+		
 		<property name="filterChainDefinitions">
 			<value>
 				/* = anon
@@ -24,26 +17,14 @@
 		</property>
 	</bean>
 	
-	<bean id="filterMap" class="java.util.LinkedHashMap">
-		<constructor-arg>
-			<map>
-				<entry key="authc" value-ref="formAuthenticationFilter" />
-			</map>
-		</constructor-arg>
-	</bean>
 	
-	<bean id="formAuthenticationFilter" 
-		class="com.ny6design.web.security.CaptchaFormAuthenticationFilter"/>
-		
-		
 	<!-- Shiro's main business-tier object for web-enabled applications -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="shiroDbRealm" />
 	</bean>
  
-	<bean id="simpleRealm" class="com.ny6design.web.security.SimpleRealm"></bean>
 	<!-- 項目自定义的Realm -->
-	<bean id="shiroDbRealm" class="com.ny6design.web.security.SimpleRealm">
+	<bean id="shiroDbRealm" class="com.ny6design.web.security.ShiroDbRealm">
 		<property name="cacheManager" ref="shiroEhcacheManager" />
 	</bean>
 	

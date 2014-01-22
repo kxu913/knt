@@ -31,6 +31,7 @@ import com.ny6design.model.Country;
 import com.ny6design.model.FromMessage;
 import com.ny6design.model.States;
 import com.ny6design.model.User;
+import com.ny6design.service.UserService;
 import com.ny6design.web.constant.CONSTANT;
 
 /**
@@ -51,7 +52,7 @@ public class RegisterController {
 	@Autowired
 	AddressMapper addressMapper;
 	@Autowired
-	UserMapper userMapper;
+	UserService userService;
 
 	private final ExecutorService executor = Executors
 			.newSingleThreadExecutor();
@@ -71,10 +72,10 @@ public class RegisterController {
 	@RequestMapping("/verifyEmail")
 	public String verifyEmail(HttpServletRequest request,
 			@RequestParam int userId, @RequestParam long time) {
-		User user = userMapper.selectByPrimaryKey(userId);
+		User user = userService.selectByPrimaryKey(userId);
 		if (user != null) {
 			user.setFactive("1");
-			userMapper.updateByPrimaryKey(user);
+			userService.updateByPrimaryKey(user);
 			request.getSession().setAttribute("userName",
 					user.getFirstname() + " " + user.getLastname());
 		}
@@ -202,7 +203,7 @@ public class RegisterController {
 		// TODO
 		user.setTaxid(BigDecimal.ONE);
 		user.setTelephone(telephone);
-		userMapper.insert(user);
+		userService.insert(user);
 		final int userId = user.getUserid();
 		executor.submit(new Runnable() {
 

@@ -1,0 +1,25 @@
+.panel-heading {
+	padding: 0px;
+	vertical-align: middle;
+}
+
+.list-group-item {
+	padding: 0px;
+}
+
+.text-center {
+	padding-top: 5px;
+}
+
+table tr th {
+	text-align: center;
+	background-color: #F5F5F5;
+}
+
+table tr td {
+	text-align: center;
+}
+
+a{
+	cursor: pointer;
+}

@@ -1,5 +1,7 @@
 package com.ny6design.service;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kevin.security.util.PasswordUtil;
 import com.ny6design.mapper.UserMapper;
 import com.ny6design.model.User;
+import com.ny6design.model.UserDetail;
 
 /**
  * 
@@ -39,5 +42,9 @@ public class UserService {
 
 	public void updateByPrimaryKey(User user) {
 		userMapper.updateByPrimaryKey(user);
+	}
+	
+	public List<UserDetail> getAllUsers(){
+		return userMapper.getAllUsers();
 	}
 }

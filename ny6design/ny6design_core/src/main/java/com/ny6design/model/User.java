@@ -1,6 +1,7 @@
 package com.ny6design.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class User {
 	private Integer userid;
@@ -26,6 +27,10 @@ public class User {
 	private String factive;
 	// used for password
 	private byte[] salt;
+	
+	private Date updateTime;
+	
+	private boolean isAdmin;
 
 	public byte[] getSalt() {
 		return salt;
@@ -122,4 +127,21 @@ public class User {
 	public void setFactive(String factive) {
 		this.factive = factive == null ? null : factive.trim();
 	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
 }

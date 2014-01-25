@@ -1,69 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Ny6Desgin_Admin</title>
 
-<link href="static/css/bootstrap/bootstrap.css" rel="stylesheet"
-	type="text/css" />
-<link href="static/css/bootstrap/bootstrap-theme.css" rel="stylesheet"
-	type="text/css" />
-<link rel="stylesheet" type="text/css"
-	href="static/css/jquery/jquery-ui-1.10.0.custom.css" />
-<link rel="stylesheet" type="text/css" href="static/css/admin.css" />
-</head>
-<body>
-	<div>
-		<ol class="breadcrumb" style="text-align: center;margin:0px;">
-			<li>User Manage</li>
-		</ol>
-	</div>
-	<div class="row" style="margin: 0px;">
-		<div class="col-lg-2  col-md-2" style="margin:0px;padding: 0px">
-			<div class="input-group">
-				<span class="input-group-addon">Keywords</span> 
-				<input type="text" class="form-control" placeholder="Username">
-			</div>
-		</div>
-		<div class="col-lg-8  col-md-8" >
-			<form class="navbar-form navbar-left" style="margin:0px;padding: 0px">
-				<button type="submit" class="btn btn-success">
-					<span class="glyphicon glyphicon-search"> </span> Search     
-				</button>
-				<button type="submit" class="btn btn-success">
-					<span class="glyphicon glyphicon-search"> </span> View All
-				</button>
-			</form>
+<div>
+	<ol class="breadcrumb" style="text-align: center; margin: 0px;">
+		<li>User Manage</li>
+	</ol>
+</div>
+<div class="row" style="margin: 0px;">
+	<div class="col-lg-2  col-md-2" style="margin: 0px; padding: 0px">
+		<div class="input-group">
+			<span class="input-group-addon">Keywords</span> <input type="text"
+				class="form-control" placeholder="Username">
 		</div>
 	</div>
-	
-	<div class="table-responsive" style="padding-top: 10px">
-		
-		<table class="table table-hover table-bordered">
-			<tr>
-				<th>Firstname</th>
-				<th>Lastname</th>
-				<th>Email</th>
-				<th>Telephone</th>
-				<th>Country</th>
-				<th>state</th>
-				<th>address</th>
-				<th>Regdate</th>
-				<th>Operation</th>
-			</tr>
-			#foreach($user as $!userList)
-				<tr>
-					<td>$user.firstname</td>
-					<td>$user.lastname</td>
-					<td>$user.emailaddress</td>
-					<td>$user.telephone</td>
-					<td>$user.countryDesc</td>
-					<td>$user.stateDesc</td>
-					<td>$user.address</td>
-					<td>$user.updateTime</td>
-					<td><img src="static/img/aa.gif"></td>
-				</tr>
-				#end
-		</table>
+	<div class="col-lg-8  col-md-8">
+		<form class="navbar-form navbar-left"
+			style="margin: 0px; padding: 0px">
+			<button type="submit" class="btn btn-success">
+				<span class="glyphicon glyphicon-search"> </span> Search
+			</button>
+			<button type="submit" class="btn btn-success">
+				<span class="glyphicon glyphicon-search"> </span> View All
+			</button>
+		</form>
 	</div>
-</body>
+</div>
+
+<div class="table-responsive" style="padding-top: 10px">
+
+	<table class="table table-hover table-bordered">
+		<tr>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Email</th>
+			<th>Telephone</th>
+			<th>Country</th>
+			<th>state</th>
+			<th>address</th>
+			<th>Regdate</th>
+			<th>Operation</th>
+		</tr>
+		#foreach($user as $!userList)
+		<tr>
+			<td>$user.firstname</td>
+			<td>$user.lastname</td>
+			<td>$user.emailaddress</td>
+			<td>$user.telephone</td>
+			<td>$user.countryDesc</td>
+			<td>$user.stateDesc</td>
+			<td>$user.address</td>
+			<td>$user.updateTime</td>
+			<td><img src="static/img/aa.gif"></td>
+		</tr>
+		#end
+	</table>
+</div>

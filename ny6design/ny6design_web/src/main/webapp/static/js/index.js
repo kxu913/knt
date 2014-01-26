@@ -138,18 +138,6 @@ function loadProducts() {
 	});
 }
 
-function login() {
-	if (tab !== 0) {
-		loadCategories();
-		tab = 0;
-	}
-	$.ajax({
-		url : '/ny6design_web/doLogin',
-		success : function(data, status) {
-			$("#productList").html(data);
-		}
-	});
-}
 
 function doLogin() {
 	var emailAddress = $("#inputEmail3").val();
@@ -172,6 +160,19 @@ function doLogin() {
 	});
 }
 
+function login() {
+	if (tab !== 0) {
+		loadCategories();
+		tab = 0;
+	}
+	$.ajax({
+		url : '/ny6design_web/doLogin',
+		success : function(data, status) {
+			$("#productList").html(data);
+		}
+	});
+}
+
 function doRegister() {
 	if (tab !== 0) {
 		loadCategories();
@@ -190,6 +191,5 @@ function doRegister() {
 $(document).ready(function() {
 	loadToolBar();
 	loadMessages();
-	loadCategories();
 	loadProducts();
 });

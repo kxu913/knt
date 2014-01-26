@@ -3,6 +3,8 @@ package com.ny6design.service;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import com.ny6design.model.UserDetail;
  */
 @Service
 public class UserService {
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private UserMapper userMapper;
 
@@ -36,6 +39,13 @@ public class UserService {
 		userMapper.insert(user);
 	}
 
+	private void update(User user) {
+		byte[] salt = PasswordUtil.getSalt();
+		user.setSalt(salt);
+		user.setPassword(PasswordUtil.entryptPassword(salt, user.getPassword()));
+		userMapper.updateByPrimaryKeySelective(user);
+	}
+
 	public User selectByPrimaryKey(int userId) {
 		return userMapper.selectByPrimaryKey(userId);
 	}
@@ -43,8 +53,28 @@ public class UserService {
 	public void updateByPrimaryKey(User user) {
 		userMapper.updateByPrimaryKey(user);
 	}
-	
-	public List<UserDetail> getAllUsers(){
+
+	public List<UserDetail> getAllUsers() {
 		return userMapper.getAllUsers();
 	}
+
+	public UserDetail getUserById(String userId) {
+		if (StringUtils.isNotEmpty(userId)) {
+			return userMapper.getUserById(Integer.parseInt(userId));
+		} else {
+			if (log.isWarnEnabled()) {
+				log.warn("Empty UserId!");
+			}
+			return null;
+		}
+	}
+
+	public void save(User user) {
+		if (user.getUserid() != null) {
+			this.update(user);
+		} else {
+			this.insert(user);
+		}
+	}
+
 }

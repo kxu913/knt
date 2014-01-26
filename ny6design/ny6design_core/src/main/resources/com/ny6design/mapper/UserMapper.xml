@@ -14,10 +14,34 @@
 		<result column="taxId" property="taxid" jdbcType="DECIMAL" />
 		<result column="fromId" property="fromid" jdbcType="INTEGER" />
 		<result column="factive" property="factive" jdbcType="VARCHAR" />
+		<result column="isAdmin" property="isAdmin" jdbcType="INTEGER" />
+		<result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
 	</resultMap>
+	
+	<resultMap id="UserDetailMap" type="com.ny6design.model.UserDetail" >
+		<result column="userId" property="userid" jdbcType="INTEGER" />
+		<result column="emailAddress" property="emailaddress" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="firstName" property="firstname" jdbcType="VARCHAR" />
+		<result column="lastName" property="lastname" jdbcType="VARCHAR" />
+		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+		<result column="isAdmin" property="isAdmin" jdbcType="INTEGER" />
+		<result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+		
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="town" property="town" jdbcType="VARCHAR" />
+		<result column="countryDesc" property="countryDesc" jdbcType="VARCHAR" />
+		<result column="stateDesc" property="stateDesc" jdbcType="VARCHAR" />
+		<result column="countryCode" property="countryCode" jdbcType="VARCHAR" />
+		<result column="stateCode" property="stateCode" jdbcType="VARCHAR" />
+		<result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+		<result column="fax" property="fax" jdbcType="VARCHAR" />
+		<result column="fromId" property="fromid" jdbcType="INTEGER" />
+	</resultMap>
+	
 	<sql id="Base_Column_List" >
     userId, emailAddress, password, salt, firstName, lastName, addressId, telephone, fax, taxId, 
-    fromId, factive
+    fromId, factive,isAdmin,updateTime
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -48,11 +72,11 @@
     insert into t_user (emailAddress, password, salt,
       firstName, lastName, addressId, 
       telephone, fax, taxId, 
-      fromId, factive)
+      fromId, factive,updateTime)
     values (#{emailaddress,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=BLOB},
       #{firstname,jdbcType=VARCHAR}, #{lastname,jdbcType=VARCHAR}, #{addressid,jdbcType=INTEGER}, 
       #{telephone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{taxid,jdbcType=DECIMAL}, 
-      #{fromid,jdbcType=INTEGER}, #{factive,jdbcType=VARCHAR})
+      #{fromid,jdbcType=INTEGER}, #{factive,jdbcType=VARCHAR}, #{updateTime})
 	</insert>
 	<insert id="insertSelective" parameterType="com.ny6design.model.User" >
     insert into t_user
@@ -93,6 +117,12 @@
 			<if test="factive != null" >
         factive,
 			</if>
+			<if test="isAdmin != null" >
+        isAdmin,
+			</if>
+			<if test="updateTime != null" >
+        updateTime,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides="," >
 			<if test="userid != null" >
@@ -131,6 +161,12 @@
 			<if test="factive != null" >
         #{factive,jdbcType=VARCHAR},
 			</if>
+			<if test="isAdmin != null" >
+        #{isAdmin},
+			</if>
+			<if test="updateTime != null" >
+        #{updateTime},
+			</if>
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.ny6design.model.User" >
@@ -141,6 +177,9 @@
 			</if>
 			<if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="salt != null" >
+        salt = #{salt,jdbcType=BLOB},
 			</if>
 			<if test="firstname != null" >
         firstName = #{firstname,jdbcType=VARCHAR},
@@ -166,6 +205,12 @@
 			<if test="factive != null" >
         factive = #{factive,jdbcType=VARCHAR},
 			</if>
+			<if test="isAdmin != null" >
+        isAdmin = #{isAdmin},
+			</if>
+			<if test="updateTime != null" >
+        updateTime = #{updateTime},
+			</if>
 		</set>
     where userId = #{userid,jdbcType=INTEGER}
 	</update>
@@ -173,6 +218,7 @@
     update t_user
     set emailAddress = #{emailaddress,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=BLOB},
       firstName = #{firstname,jdbcType=VARCHAR},
       lastName = #{lastname,jdbcType=VARCHAR},
       addressId = #{addressid,jdbcType=INTEGER},
@@ -180,7 +226,31 @@
       fax = #{fax,jdbcType=VARCHAR},
       taxId = #{taxid,jdbcType=DECIMAL},
       fromId = #{fromid,jdbcType=INTEGER},
-      factive = #{factive,jdbcType=VARCHAR}
+      factive = #{factive,jdbcType=VARCHAR},
+      isAdmin = #{isAdmin,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=VARCHAR},
     where userId = #{userid,jdbcType=INTEGER}
 	</update>
+	
+	<select id="getAllUsers"  resultMap="UserDetailMap">
+			select a.userId, a.emailAddress, a.password,a.firstName,a.lastName ,a.isAdmin, a.fromId,
+				a.telephone, a.updateTime, b.address,b.town, b.countryCode, b.stateCode,
+				c.fdescription as countryDesc, d.fdescription as stateDesc
+				from t_user a
+				inner join t_address b on a.addressId= b.addressId
+				inner join e_country c on b.countryCode = c.code
+				inner join e_states d on b.stateCode= d.code
+			where isAdmin !=1
+	</select>
+	<select id="getUserById"  resultMap="UserDetailMap" parameterType="long">
+			select a.userId, a.emailAddress, a.password,a.firstName,a.lastName ,a.isAdmin, a.fromId,
+				a.fax, a.telephone, a.updateTime, 
+				b.address,b.town, b.countryCode, b.stateCode, b.zipcode,
+				c.fdescription as countryDesc, d.fdescription as stateDesc
+				from t_user a
+				inner join t_address b on a.addressId= b.addressId
+				inner join e_country c on b.countryCode = c.code
+				inner join e_states d on b.stateCode= d.code
+			where userId = #{userid,jdbcType=INTEGER}
+	</select>
 </mapper>

@@ -14,6 +14,7 @@ public class UserDetail implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int userid;
 	private String emailaddress;
 	private String password;
 	private String firstname;
@@ -24,8 +25,21 @@ public class UserDetail implements Serializable {
 
 	private String address;
 	private String town;
+	private String countryCode;
 	private String countryDesc;
+	private String stateCode;
 	private String stateDesc;
+	private String zipcode;
+	private String fax;
+	private int fromid;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 
 	public String getEmailaddress() {
 		return emailaddress;
@@ -113,6 +127,46 @@ public class UserDetail implements Serializable {
 
 	public void setStateDesc(String stateDesc) {
 		this.stateDesc = stateDesc;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
+	public String getStateCode() {
+		return stateCode;
+	}
+
+	public void setStateCode(String stateCode) {
+		this.stateCode = stateCode;
+	}
+
+	public int getFromid() {
+		return fromid;
+	}
+
+	public void setFromid(int fromid) {
+		this.fromid = fromid;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
 	}
 
 }

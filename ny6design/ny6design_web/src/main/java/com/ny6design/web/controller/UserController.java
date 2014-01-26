@@ -34,14 +34,36 @@ public class UserController {
 		return new ModelAndView("member-list", model);
 
 	}
-	
+
 	@RequestMapping("getUserById")
-	public ModelAndView getUserById(ModelMap model, HttpServletRequest request){
+	public ModelAndView getUserById(ModelMap model, HttpServletRequest request) {
 		String userId = request.getParameter("userId");
 		if (log.isTraceEnabled()) {
 			log.trace("Invoke Get User by Id!" + userId);
 		}
 		model.put("user", userService.getUserById(userId));
-		return new ModelAndView("member-edit",model);
+		return new ModelAndView("member-edit", model);
 	}
+
+	@RequestMapping("getUserByIdForAcct")
+	public ModelAndView getUserByIdForAcct(ModelMap model,
+			HttpServletRequest request) {
+		if (request.getSession().getAttribute("userid") != null) {
+			String userId = request.getSession().getAttribute("userid")
+					.toString();
+			if (log.isTraceEnabled()) {
+				log.trace("Invoke Get User by Id!" + userId);
+			}
+			model.put("user", userService.getUserById(userId));
+		}
+		return new ModelAndView("account-edit", model);
+	}
+	
+	@RequestMapping("gotoMyAccount")
+	public ModelAndView gotoMyAccount() {
+		return new ModelAndView("account");
+	}
+	
+	
+
 }

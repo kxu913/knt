@@ -1,0 +1,143 @@
+	<ol class="breadcrumb">
+		<li><a>MemberCenter</a></li>
+		<li class="active">My account</li>
+	</ol>
+	<form class="form-horizontal" role="form">
+		<input type="hidden" id="userid" value="$!{user.userid}">
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="inputPassword" class="col-sm-2 control-label">Password
+				*</label>
+			<div class="col-sm-3">
+				<input type="password" class="form-control" id="inputPassword"
+					placeholder="Password">
+			</div>
+			<div class="col-sm-4 control-label" for="inputPassword" style="text-align: left">
+				<label id="errorMsg1" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="inputConfirmedPassword" class="col-sm-2 control-label">PasswordConfirm
+				*</label>
+			<div class="col-sm-3">
+				<input type="password" class="form-control" id="inputConfirmedPassword"
+					placeholder="Confirm Password">
+			</div>
+			<div class="col-sm-4 control-label" for="inputConfirmedPassword" style="text-align: left">
+				<label id="errorMsg2" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="firstName" class="col-sm-2 control-label">First
+				Name *</label>
+			<div class="col-sm-3">
+				<input type="input" value="$!{user.firstname}" class="form-control" id="firstName"
+					placeholder="FirstName">
+			</div>
+			<div class="col-sm-4 control-label" for="firstName" style="text-align: left">
+				<label id="errorMsg3" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="lastName" class="col-sm-2 control-label">Last
+				Name *</label>
+			<div class="col-sm-3">
+				<input type="input" value="$!{user.lastname}" class="form-control" id="lastName"
+					placeholder="LastName">
+			</div>
+			<div class="col-sm-4 control-label" for="lastName" style="text-align: left">
+				<label id="errorMsg4" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="address" class="col-sm-2 control-label">Address *</label>
+			<div class="col-sm-3">
+				<input type="input" value="$!{user.address}" class="form-control" id="address"
+					placeholder="Address">
+			</div>
+			<div class="col-sm-4 control-label" for="address" style="text-align: left">
+				<label id="errorMsg5" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="town" class="col-sm-2 control-label">Town *</label>
+			<div class="col-sm-3">
+				<input type="input" value="$!{user.town}" class="form-control" id="town"
+					placeholder="Town">
+			</div>
+			<div class="col-sm-4 control-label" for="town" style="text-align: left">
+				<label id="errorMsg6" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="statedId" class="col-sm-2 control-label">State *</label>
+			<input type="hidden" id="_stateCode" value="$!{user.stateCode}">
+			<div class="col-sm-3" id="stateDiv">
+				<select class="form-control" id="statedId">
+				</select>
+			</div>
+			<div class="col-sm-4 control-label" for="statedId" style="text-align: left">
+				<label id="errorMsg7" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="zipcode" class="col-sm-2 control-label">Zip Code
+				*</label>
+			<div class="col-sm-3">
+				<input type="input" value="$!{user.zipcode}" class="form-control" id="zipcode"
+					placeholder="Zip Code">
+			</div>
+			<div class="col-sm-4 control-label" for="zipcode" style="text-align: left">
+				<label id="errorMsg8" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="countryId" class="col-sm-2 control-label">Country *</label>
+			<div class="col-sm-3" id="countryDiv">
+				<select class="form-control" id="countryId">
+				</select>
+			</div>
+			<div class="col-sm-4 control-label" for="countryId" style="text-align: left">
+				<label id="errorMsg9" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="telephone" class="col-sm-2 control-label">Telephone
+				*</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control" value="$!{user.telephone}" id="telephone"
+					placeholder="Telephone">
+			</div>
+			<div class="col-sm-4 control-label" for="telephone" style="text-align: left">
+				<label id="errorMsg10" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<label for="fax" class="col-sm-2 control-label">Fax</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control input-small" value="$!{user.fax}" id="fax"
+					placeholder="Fax">
+			</div>
+			<div class="col-sm-4 control-label" for="fax" style="text-align: left">
+				<label id="errorMsg11" style="color: red"></label>
+			</div>
+		</div>
+
+		<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+			<div class="col-sm-offset-3 col-sm-1">
+				<button type="button" class="btn btn-danger" onclick="register(1)">Submit</button>
+			</div>
+			<div class="col-sm-1">
+				<button type="button" class="btn btn-primary" onclick="loadUsers()">Go Back</button>
+			</div>
+		</div>
+	</form>

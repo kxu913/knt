@@ -1,5 +1,5 @@
 function loadMessages() {
-	$.ajax( {
+	$.ajax({
 		url : '/ny6design_web/latestMessage',
 		dataType : "json",
 		success : function(data, status) {
@@ -18,7 +18,7 @@ function loadMessages() {
 }
 
 function loadToolBar() {
-	$.ajax( {
+	$.ajax({
 		url : '/ny6design_web/getToolBar',
 		success : function(data, status) {
 			$("#toolbar").html(data);
@@ -27,7 +27,7 @@ function loadToolBar() {
 }
 
 function loadCategories() {
-	$.ajax( {
+	$.ajax({
 		url : '/ny6design_web/getAllCategoryList',
 		dataType : "json",
 		success : function(data, status) {
@@ -50,7 +50,7 @@ function loadCategories() {
 							.find("a").text(name);
 				}
 			});
-			$(appendDiv).accordion( {
+			$(appendDiv).accordion({
 				collapsible : true,
 				navigation : true,
 				clearStyle : true,
@@ -63,7 +63,7 @@ function loadCategories() {
 }
 
 function loadProducts() {
-	$.ajax( {
+	$.ajax({
 		url : '/ny6design_web/getProductList',
 		success : function(data, status) {
 			$("#productList").html(data);
@@ -72,7 +72,7 @@ function loadProducts() {
 }
 
 function login() {
-	$.ajax( {
+	$.ajax({
 		url : '/ny6design_web/doLogin',
 		success : function(data, status) {
 			$("#productList").html(data);
@@ -83,7 +83,7 @@ function login() {
 function doLogin() {
 	var emailAddress = $("#inputEmail3").val();
 	var password = $("#inputPassword3").val();
-	$.ajax( {
+	$.ajax({
 		url : '/ny6design_web/login',
 		type : 'POST',
 		data : {
@@ -103,7 +103,7 @@ function doLogin() {
 
 function doRegister() {
 	initSelect();
-	$.ajax( {
+	$.ajax({
 		url : '/ny6design_web/doRegist',
 		success : function(data, status) {
 			$("#ads").html("");
@@ -111,7 +111,9 @@ function doRegister() {
 		}
 	});
 }
-
+function gotoMyAccount() {
+	location.href = '/ny6design_web/account.html';
+}
 function loginOut() {
 	location.href = '/ny6design_web/loginOut';
 }

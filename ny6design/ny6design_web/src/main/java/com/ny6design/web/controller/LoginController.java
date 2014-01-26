@@ -70,6 +70,8 @@ public class LoginController {
 					rtn.put(CONSTANT.URL, url);
 					request.getSession().setAttribute("userName",
 							user.getFirstname() + " " + user.getLastname());
+					request.getSession().setAttribute("userid",
+							user.getUserid());
 				}
 				if (log.isInfoEnabled()) {
 					log.info("对用户[" + email + "]进行登录验证..验证通过");

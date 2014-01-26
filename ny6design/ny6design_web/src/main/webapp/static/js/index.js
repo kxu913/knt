@@ -1,5 +1,6 @@
 var tab = 0;
 function loadUserPanel() {
+	$('#mnCategory').empty();
 	$.ajax({
 		url : '/ny6design_web/loadUserPanel',
 		success : function(data, status) {
@@ -100,8 +101,9 @@ function loadCategories() {
 		url : '/ny6design_web/getAllCategoryList',
 		dataType : "json",
 		success : function(data, status) {
-			$('#mnCategory').html("");
-			var appendDiv = "#mnCategory";
+			$('#mnCategory').empty();
+			$('#mnCategory').append("<div id='child'></div>");
+			var appendDiv = "#child";
 			$.each(data, function(key, val) {
 				id = val["categoryId"];
 				order = val["order"];
@@ -127,6 +129,7 @@ function loadCategories() {
 			});
 		}
 	});
+	
 }
 
 function loadProducts() {
@@ -191,5 +194,6 @@ function doRegister() {
 $(document).ready(function() {
 	loadToolBar();
 	loadMessages();
+	loadCategories();
 	loadProducts();
 });

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Login</title>
+
+<link href="static/css/bootstrap/bootstrap.css" rel="stylesheet"
+	type="text/css" />
+<link href="static/css/login_admin.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+	<div id="container">
+		<div class="form-signin">
+			<h2 class="form-signin-heading">Please Sign in</h2>
+			<input type="text" id="loginName" class="form-control"
+				placeholder="EmailAddress" required autofocus> <input
+				type="password" id=password class="form-control"
+				placeholder="Password" required>
+				<div>
+					<div class="col-sm-offset-5 col-sm-9">
+						<p id="errorMsg" style="color: red"></p>
+					</div>
+				</div>
+			<div class="form-group">
+				<div class="col-sm-offset-8 col-sm-12">
+					<button type="submit" class="btn btn-lg btn-primary"
+						onclick="adminLogin()">Sign in</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="static/js/jquery/jquery-2.0.2.js"></script>
+	<script type="text/javascript">
+		function adminLogin() {
+
+			var emailAddress = $("#loginName").val();
+			var password = $("#password").val();
+			$.ajax({
+				url : '/ny6design_web/login',
+				type : 'POST',
+				data : {
+					email : emailAddress,
+					password : password,
+					url : 'admin.html'
+				},
+				success : function(data, status) {
+					$("#errorMsg").html(data.errormsg);
+					if (typeof (data.errormsg) !== "undefined") {
+						$("#errorMsg").html(data.errormsg);
+					} else {
+						window.location.href = data.url;
+					}
+				}
+			});
+
+		}
+	</script>
+</body>
+</html>

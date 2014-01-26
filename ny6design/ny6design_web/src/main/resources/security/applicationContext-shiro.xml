@@ -9,9 +9,13 @@
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		
+		<property name="loginUrl" value="/login_admin.html" />
+		<property name="successUrl" value="admin.html" />
+		<property name="unauthorizedUrl" value="/403.html"/> 
 		<property name="filterChainDefinitions">
 			<value>
+				/admin* = authc, perms["admin:all"]
+				/admin/* = authc, perms["admin:all"]
 				/* = anon
 			</value>
 		</property>

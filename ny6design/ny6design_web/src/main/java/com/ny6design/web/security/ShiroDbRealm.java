@@ -43,8 +43,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		if (emailAddress != null) {
 			// 查询用户授权信息
 			User user = userService.findUserByEmail(emailAddress);
-			if (user != null) {
+			if (user != null && user.isAdmin()) {
 				SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+				info.addStringPermission("admin:all");
 				return info;
 			}
 		}

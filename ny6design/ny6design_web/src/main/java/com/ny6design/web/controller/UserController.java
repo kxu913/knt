@@ -1,5 +1,8 @@
 package com.ny6design.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +33,15 @@ public class UserController {
 		model.put("userList", userService.getAllUsers());
 		return new ModelAndView("member-list", model);
 
+	}
+	
+	@RequestMapping("getUserById")
+	public ModelAndView getUserById(ModelMap model, HttpServletRequest request){
+		String userId = request.getParameter("userId");
+		if (log.isTraceEnabled()) {
+			log.trace("Invoke Get User by Id!" + userId);
+		}
+		model.put("user", userService.getUserById(userId));
+		return new ModelAndView("member-edit",model);
 	}
 }

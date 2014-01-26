@@ -53,7 +53,9 @@ function initSelect() {
 	});
 }
 
-function register() {
+function register(isUpdate) {
+
+	var userid = $("#userid").val();
 	var emailAddress = $("#inputEmail").val();
 	var password = $("#inputPassword").val();
 	var confirmedPassword = $("#inputConfirmedPassword").val();
@@ -73,11 +75,12 @@ function register() {
 	var fax = $("#fax").val();
 
 	var taxId = $("#taxId").val();
-	var hearUs =  $("#hearUs option:selected").attr("id");
+	var hearUs = $("#hearUs option:selected").attr("id");
 	$.ajax({
 		url : '/ny6design_web/register',
 		type : 'POST',
 		data : {
+			userid : userid,
 			emailAddress : emailAddress,
 			password : password,
 			confirmedPassword : confirmedPassword,
@@ -92,7 +95,7 @@ function register() {
 			fax : fax,
 			taxId : taxId,
 			hearUs : hearUs,
-			url : window.location.pathname
+			url : window.location.href
 
 		},
 		success : function(data, status) {
@@ -106,7 +109,11 @@ function register() {
 					}
 				}
 			} else {
-				window.location.href = data.url;
+				if (typeof (isUpdate) !== "undefined") {
+					loadUsers();
+				} else {
+					window.location.href = data.url;
+				}
 			}
 		}
 	});

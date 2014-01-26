@@ -25,7 +25,6 @@ import com.ny6design.mapper.AddressMapper;
 import com.ny6design.mapper.CountryMapper;
 import com.ny6design.mapper.FromMessageMapper;
 import com.ny6design.mapper.StatesMapper;
-import com.ny6design.mapper.UserMapper;
 import com.ny6design.model.Address;
 import com.ny6design.model.Country;
 import com.ny6design.model.FromMessage;
@@ -94,8 +93,11 @@ public class RegisterController {
 	public Map<String, Object> register(HttpServletRequest request,
 			HttpServletResponse response) {
 		Map<String, Object> rtn = new HashMap<String, Object>();
+		String userid = request.getParameter("userid");
+		boolean isUpdate = StringUtils.isNotEmpty(userid)
+				&& !"0".equalsIgnoreCase(userid);
 		final String emailAddress = request.getParameter("emailAddress");
-		if (StringUtils.isEmpty(emailAddress)) {
+		if (!isUpdate && StringUtils.isEmpty(emailAddress)) {
 			rtn.put("index", 0);
 			rtn.put(CONSTANT.ERROR_MESSAGE, "email address can't be null");
 			return rtn;
@@ -174,7 +176,7 @@ public class RegisterController {
 			return rtn;
 		}
 		String hearUs = request.getParameter("hearUs");
-		if (StringUtils.isEmpty(hearUs)) {
+		if (!isUpdate && StringUtils.isEmpty(hearUs)) {
 			rtn.put("index", 13);
 			rtn.put(CONSTANT.ERROR_MESSAGE, "please select one!");
 			return rtn;
@@ -191,58 +193,55 @@ public class RegisterController {
 		addressMapper.insert(_address);
 
 		User user = new User();
+		// if contains userId, update user.
+		if (isUpdate) {
+			user.setUserid(Integer.parseInt(userid));
+		}
 		user.setAddressid(_address.getAddressid());
-		user.setEmailaddress(emailAddress);
+		if (!isUpdate) {
+			user.setEmailaddress(emailAddress);
+		}
 		user.setFactive("0");
 		user.setFax(fax);
 		user.setFirstname(firstName);
-		// TODO
-		user.setFromid(1);
+		if (!isUpdate) {
+			user.setFromid(Integer.parseInt(hearUs));
+		}
 		user.setLastname(lastName);
 		user.setPassword(password);
-		// TODO
-		user.setTaxid(BigDecimal.ONE);
+		if (!isUpdate) {
+			user.setTaxid(new BigDecimal(taxId));
+		}
 		user.setTelephone(telephone);
-		userService.insert(user);
+		userService.save(user);
 		final int userId = user.getUserid();
-		executor.submit(new Runnable() {
+		if (!isUpdate) {
+			executor.submit(new Runnable() {
 
-			@Override
-			public void run() {
-				EmailNotify notify = new EmailNotify();
-				notify.setFromEmail("kxu913@gmail.com");
-				notify.setSubject("Verify email");
-				notify.setToEmail(emailAddress);
-				Map<String, Object> context = new HashMap<String, Object>();
-				context.put("link",
-						"http://localhost:8080/ny6design_web/verifyEmail?userId="
-								+ userId + "&time="
-								+ System.currentTimeMillis());
+				@Override
+				public void run() {
+					EmailNotify notify = new EmailNotify();
+					notify.setFromEmail("kxu913@gmail.com");
+					notify.setSubject("Verify email");
+					notify.setToEmail(emailAddress);
+					Map<String, Object> context = new HashMap<String, Object>();
+					context.put(
+							"link",
+							"http://localhost:8080/ny6design_web/verifyEmail?userId="
+									+ userId + "&time="
+									+ System.currentTimeMillis());
 
-				notify.setTemplateName("test.vm");
-				notify.setContext(context);
-				try {
-					mimeMailService.sendPredefinedTemplateMail(notify);
-				} catch (MessagingException e) {
-					e.printStackTrace();
+					notify.setTemplateName("test.vm");
+					notify.setContext(context);
+					try {
+						mimeMailService.sendPredefinedTemplateMail(notify);
+					} catch (MessagingException e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
+			});
+		}
 		return rtn;
-	}
-
-	private EmailNotify createNotification() {
-		EmailNotify notify = new EmailNotify();
-		notify.setFromEmail("kxu913@gmail.com");
-		notify.setSubject("test");
-		notify.setToEmail("5522913@qq.com");
-		Map<String, Object> context = new HashMap<String, Object>();
-		context.put("username", "kevin");
-		context.put("link", "click me!");
-
-		notify.setTemplateName("test.vm");
-		notify.setContext(context);
-		return notify;
 	}
 
 }

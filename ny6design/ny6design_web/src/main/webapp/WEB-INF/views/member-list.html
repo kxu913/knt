@@ -1,7 +1,7 @@
 
 <div>
 	<ol class="breadcrumb" style="text-align: center; margin: 0px;">
-		<li>User Manage</li>
+		<li><strong>User Manage</strong></li>
 	</ol>
 </div>
 <div class="row" style="margin: 0px;">
@@ -28,6 +28,7 @@
 
 	<table class="table table-hover table-bordered">
 		<tr>
+			<th style="display: none">userid</th>
 			<th>Firstname</th>
 			<th>Lastname</th>
 			<th>Email</th>
@@ -39,14 +40,16 @@
 			<th>Operation</th>
 		</tr>
 		#foreach($user as $!userList)
+		
 		<tr>
-			<td>$user.firstname</td>
-			<td>$user.lastname</td>
-			<td>$user.emailaddress</td>
-			<td>$user.telephone</td>
+			<td style="display: none">$user.userid</td>
+			<td onclick="editUser(this)"><a>$user.firstname</a></td>
+			<td><a>$user.lastname</a></td>
+			<td><a>$user.emailaddress</a></td>
+			<td><a>$user.telephone</a></td>
 			<td>$user.countryDesc</td>
 			<td>$user.stateDesc</td>
-			<td>$user.address</td>
+			<td><a>$user.address</a></td>
 			<td>$user.updateTime</td>
 			<td><img src="static/img/aa.gif"></td>
 		</tr>

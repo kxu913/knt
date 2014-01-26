@@ -24,4 +24,6 @@ public interface UserMapper {
 	User selectUserByEmail(String emailAddress);
 	
 	List<UserDetail> getAllUsers();
+	
+	UserDetail getUserById(Integer userId);
 }

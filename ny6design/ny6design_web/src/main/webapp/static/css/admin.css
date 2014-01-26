@@ -23,3 +23,7 @@ table tr td {
 a{
 	cursor: pointer;
 }
+.form-group-margin{
+	margin-left: 0px;
+	margin-right: 0px;
+}

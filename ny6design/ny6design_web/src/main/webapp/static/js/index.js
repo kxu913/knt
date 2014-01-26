@@ -1,3 +1,81 @@
+var tab = 0;
+function loadUserPanel() {
+	$.ajax({
+		url : '/ny6design_web/loadUserPanel',
+		success : function(data, status) {
+			$("#mnCategory").html(data);
+		}
+	});
+}
+
+function gotoMyAccount() {
+	loadUserPanel();
+	loadUser();
+}
+
+function loadUser() {
+	if (tab !== 1) {
+		loadUserPanel();
+		tab = 1;
+	}
+	$.ajax({
+		url : '/ny6design_web/getUserByIdForAcct',
+		success : function(data, status) {
+			$("#productList").html(data);
+			var countryCode = $("#_countryCode").val();
+			var stateCode = $("#_stateCode").val();
+			$.ajax({
+				url : '/ny6design_web/getAllCountries',
+				success : function(data, status) {
+					var select = $("#countryId");
+					$.each(data, function(key, val) {
+						var id = val["code"];
+						var description = val["fdescription"];
+						var option;
+						if (countryCode === id) {
+							option = $("<option id='" + id + "' selected>" + description + "</option>");
+						} else {
+							option = $("<option id='" + id + "'>" + description + "</option>");
+						}
+						option.appendTo(select);
+					});
+				}
+			});
+
+			$.ajax({
+				url : '/ny6design_web/getAllStates',
+				success : function(data, status) {
+					var select = $("#statedId");
+					var initOption = $("<option value='-1'>Please choose!</option>");
+					initOption.appendTo(select);
+					$.each(data, function(key, val) {
+						var id = val["code"];
+						var description = val["fdescription"];
+						var option;
+						if (stateCode === id) {
+							option = $("<option id='" + id + "' selected>" + description + "</option>");
+						} else {
+							option = $("<option id='" + id + "'>" + description + "</option>");
+						}
+						option.appendTo(select);
+					});
+				}
+			});
+		}
+	});
+}
+function loginOut() {
+	location.href = '/ny6design_web/loginOut';
+}
+function loadToolBar() {
+	$.ajax({
+		url : '/ny6design_web/getToolBar',
+		success : function(data, status) {
+			$("#toolbar").html(data);
+		}
+	});
+}
+
 function loadMessages() {
 	$.ajax({
 		url : '/ny6design_web/latestMessage',
@@ -17,20 +95,12 @@ function loadMessages() {
 	});
 }
 
-function loadToolBar() {
-	$.ajax({
-		url : '/ny6design_web/getToolBar',
-		success : function(data, status) {
-			$("#toolbar").html(data);
-		}
-	});
-}
-
 function loadCategories() {
 	$.ajax({
 		url : '/ny6design_web/getAllCategoryList',
 		dataType : "json",
 		success : function(data, status) {
+			$('#mnCategory').html("");
 			var appendDiv = "#mnCategory";
 			$.each(data, function(key, val) {
 				id = val["categoryId"];
@@ -38,16 +108,13 @@ function loadCategories() {
 				pid = val["parentId"];
 				name = val["name"];
 				if (-1 == pid) {
-					newItem = $(appendDiv).append(
-							'<div><h3><a/></h3><div><ul></ul></div></div>');
-					$(newItem).find('>div:last').attr('id', 'category' + id)
-							.find("h3 a").text(name);
+					newItem = $(appendDiv).append('<div><h3><a/></h3><div><ul></ul></div></div>');
+					$(newItem).find('>div:last').attr('id', 'category' + id).find("h3 a").text(name);
 
 				} else {
 					pNode = '#category' + pid;
 					newItem = $(pNode).find('ul').append("<li><a/></li>");
-					$(newItem).find('>li:last').attr('id', 'category' + id)
-							.find("a").text(name);
+					$(newItem).find('>li:last').attr('id', 'category' + id).find("a").text(name);
 				}
 			});
 			$(appendDiv).accordion({
@@ -72,6 +139,10 @@ function loadProducts() {
 }
 
 function login() {
+	if (tab !== 0) {
+		loadCategories();
+		tab = 0;
+	}
 	$.ajax({
 		url : '/ny6design_web/doLogin',
 		success : function(data, status) {
@@ -102,6 +173,10 @@ function doLogin() {
 }
 
 function doRegister() {
+	if (tab !== 0) {
+		loadCategories();
+		tab = 0;
+	}
 	initSelect();
 	$.ajax({
 		url : '/ny6design_web/doRegist',
@@ -111,12 +186,7 @@ function doRegister() {
 		}
 	});
 }
-function gotoMyAccount() {
-	location.href = '/ny6design_web/account.html';
-}
-function loginOut() {
-	location.href = '/ny6design_web/loginOut';
-}
+
 $(document).ready(function() {
 	loadToolBar();
 	loadMessages();

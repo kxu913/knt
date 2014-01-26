@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ny6design.service.UserService;
@@ -59,11 +60,8 @@ public class UserController {
 		return new ModelAndView("account-edit", model);
 	}
 	
-	@RequestMapping("gotoMyAccount")
-	public ModelAndView gotoMyAccount() {
-		return new ModelAndView("account");
+	@RequestMapping(value = "/loadUserPanel", method = { RequestMethod.GET })
+	public String doLogin() {
+		return "userpanel";
 	}
-	
-	
-
 }

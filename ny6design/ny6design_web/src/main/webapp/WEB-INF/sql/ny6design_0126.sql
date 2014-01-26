@@ -4,13 +4,9 @@
 /*!40101 SET SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES */;
 /*!40103 SET SQL_NOTES='ON' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS */;
-/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
 
 
-# Host: localhost:3307    Database: ny6design
+# Host: localhost:3306    Database: ny6design
 # ------------------------------------------------------
 # Server version 5.6.7-rc
 
@@ -31,8 +27,6 @@ CREATE TABLE `e_country` (
 #
 # Dumping data for table e_country
 #
-LOCK TABLES `e_country` WRITE;
-/*!40000 ALTER TABLE `e_country` DISABLE KEYS */;
 
 INSERT INTO `e_country` VALUES ('AD','Andorra');
 INSERT INTO `e_country` VALUES ('AE','United Arab Emirates');
@@ -137,8 +131,6 @@ INSERT INTO `e_country` VALUES ('KM','Comoros');
 INSERT INTO `e_country` VALUES ('KN','Saint Kitts and Nevis');
 INSERT INTO `e_country` VALUES ('KR','Korea Republic');
 INSERT INTO `e_country` VALUES ('US','United States');
-/*!40000 ALTER TABLE `e_country` ENABLE KEYS */;
-UNLOCK TABLES;
 
 #
 # Table structure for table e_from
@@ -153,8 +145,6 @@ CREATE TABLE `e_from` (
 #
 # Dumping data for table e_from
 #
-LOCK TABLES `e_from` WRITE;
-/*!40000 ALTER TABLE `e_from` DISABLE KEYS */;
 
 INSERT INTO `e_from` VALUES (1,'Link from another site');
 INSERT INTO `e_from` VALUES (2,'Yahoo Search engine');
@@ -163,8 +153,6 @@ INSERT INTO `e_from` VALUES (4,'Email promotion');
 INSERT INTO `e_from` VALUES (5,'Referred by friend');
 INSERT INTO `e_from` VALUES (6,'Saw an Ad');
 INSERT INTO `e_from` VALUES (7,'Other');
-/*!40000 ALTER TABLE `e_from` ENABLE KEYS */;
-UNLOCK TABLES;
 
 #
 # Table structure for table e_states
@@ -179,16 +167,12 @@ CREATE TABLE `e_states` (
 #
 # Dumping data for table e_states
 #
-LOCK TABLES `e_states` WRITE;
-/*!40000 ALTER TABLE `e_states` DISABLE KEYS */;
 
 INSERT INTO `e_states` VALUES ('AA','Armed Forces Americas');
 INSERT INTO `e_states` VALUES ('FL','Florida');
 INSERT INTO `e_states` VALUES ('GA','Georgia');
 INSERT INTO `e_states` VALUES ('NY','New York');
 INSERT INTO `e_states` VALUES ('TX','Texas');
-/*!40000 ALTER TABLE `e_states` ENABLE KEYS */;
-UNLOCK TABLES;
 
 #
 # Table structure for table t_address
@@ -202,13 +186,11 @@ CREATE TABLE `t_address` (
   `zipcode` varchar(20) COLLATE utf8_bin NOT NULL DEFAULT '',
   `address` varchar(60) COLLATE utf8_bin NOT NULL DEFAULT '',
   PRIMARY KEY (`addressId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 #
 # Dumping data for table t_address
 #
-LOCK TABLES `t_address` WRITE;
-/*!40000 ALTER TABLE `t_address` DISABLE KEYS */;
 
 INSERT INTO `t_address` VALUES (1,'US','AA','1','s','1');
 INSERT INTO `t_address` VALUES (2,'US','AA','1','s','1');
@@ -217,8 +199,26 @@ INSERT INTO `t_address` VALUES (4,'US','TAX','town','ts','test');
 INSERT INTO `t_address` VALUES (5,'US','AA','1','s','1');
 INSERT INTO `t_address` VALUES (6,'US','AA','1','s','1');
 INSERT INTO `t_address` VALUES (7,'US','AA','1','1','1');
-/*!40000 ALTER TABLE `t_address` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `t_address` VALUES (8,'US','AA','1','1','1');
+INSERT INTO `t_address` VALUES (9,'US','AA','1','1','1');
+INSERT INTO `t_address` VALUES (10,'BN','NY','1','1','1');
+INSERT INTO `t_address` VALUES (11,'BF','NY','18','18','18');
+INSERT INTO `t_address` VALUES (12,'BF','NY','18','18','18');
+INSERT INTO `t_address` VALUES (13,'AD','NY','18','18','18');
+INSERT INTO `t_address` VALUES (14,'AD','NY','18','18','18');
+INSERT INTO `t_address` VALUES (15,'AD','NY','18','18','18');
+INSERT INTO `t_address` VALUES (16,'AD','NY','18','18','18');
+INSERT INTO `t_address` VALUES (17,'AD','NY','18','18','18');
+INSERT INTO `t_address` VALUES (18,'GN','FL','1','1','1');
+INSERT INTO `t_address` VALUES (19,'AD','NY','18','18','18');
+INSERT INTO `t_address` VALUES (20,'KM','FL','1','1','1');
+INSERT INTO `t_address` VALUES (21,'AD','FL','1','1','1');
+INSERT INTO `t_address` VALUES (22,'KR','FL','2','2','2');
+INSERT INTO `t_address` VALUES (23,'AD','FL','2','2','2');
+INSERT INTO `t_address` VALUES (24,'US','AA','ptny6','ptny6','ptny6');
+INSERT INTO `t_address` VALUES (25,'KN','FL','t1','1','t1');
+INSERT INTO `t_address` VALUES (26,'KH','FL','2','2','22');
+INSERT INTO `t_address` VALUES (27,'US','TX','3','3','3');
 
 #
 # Table structure for table t_category
@@ -238,8 +238,6 @@ CREATE TABLE `t_category` (
 #
 # Dumping data for table t_category
 #
-LOCK TABLES `t_category` WRITE;
-/*!40000 ALTER TABLE `t_category` DISABLE KEYS */;
 
 INSERT INTO `t_category` VALUES (164,'CLEARANCE!!',1,-1,1,'2014-01-03 17:28:05');
 INSERT INTO `t_category` VALUES (165,'This_Month_items',1,164,1,'2014-01-03 17:28:05');
@@ -302,8 +300,6 @@ INSERT INTO `t_category` VALUES (221,'Trendy_Handbag',1,220,1,'2014-01-03 17:28:
 INSERT INTO `t_category` VALUES (222,'Others',14,-1,1,'2014-01-03 17:28:11');
 INSERT INTO `t_category` VALUES (223,'Jewelry Class',1,222,1,'2014-01-03 17:28:11');
 INSERT INTO `t_category` VALUES (224,'Others gemstone',2,222,1,'2014-01-03 17:28:11');
-/*!40000 ALTER TABLE `t_category` ENABLE KEYS */;
-UNLOCK TABLES;
 
 #
 # Table structure for table t_message
@@ -321,8 +317,6 @@ CREATE TABLE `t_message` (
 #
 # Dumping data for table t_message
 #
-LOCK TABLES `t_message` WRITE;
-/*!40000 ALTER TABLE `t_message` DISABLE KEYS */;
 
 INSERT INTO `t_message` VALUES (1,1,'The \"CUSTOM MAKE JEWELRY ORDER\" was great! \"MAKE IN U.S.A.\" Finished Jewelry Order with small quantity and COMPARATIVE PRICE are what you looking for!','2014-01-18 12:34:44');
 INSERT INTO `t_message` VALUES (2,1,'These bead strands are so perfect &amp; the quality is above all other suppliers!!! Can\'t wait to make them into some beautiful jewelry!!!','2014-01-18 12:34:44');
@@ -334,8 +328,6 @@ INSERT INTO `t_message` VALUES (7,1,'I recently became interested in making jewe
 INSERT INTO `t_message` VALUES (8,1,'Thank you for your wonderful service. My order was delivered very quickly and with the extra care taken in packing everything arrived in perfect condition.','2014-01-18 12:34:45');
 INSERT INTO `t_message` VALUES (9,1,'LOVEEEE THE BEADS, I LEFT A SUPER MARVELOUS FEEDBACK BECAUSE YOU GUYS DESERVED. I WILL KEEP SHOPPING WITH YOU GUYS. THANKS YOU SO MUCH FOR THE FAST SERVICE, THE EXCELLENT WELL PACKEDAND TGHE CARE YOU PUT WHEN WRAPING AND SHIPPING THIS FOR ME. IT MAKE ME TRUST AND FEEL TRANQUIL WHEN BUYING WITH YOU.... CONGRATULATIONS AND KEEP IT UP GUYS. I SAVED YOU IN MY FAVORITE SELLER LIST AND WILL SEE YOU SOON IN THE SHOW ROOM;O) KIND REGARDS, CLAUDIA H','2014-01-18 12:34:45');
 INSERT INTO `t_message` VALUES (10,1,'Quality of beads is excellent and choices are immense! Order enough items and shipping is free and cost of items reduces nicely. Will come back for more; highly recommend this seller!','2014-01-18 12:34:45');
-/*!40000 ALTER TABLE `t_message` ENABLE KEYS */;
-UNLOCK TABLES;
 
 #
 # Table structure for table t_product
@@ -364,11 +356,7 @@ CREATE TABLE `t_product` (
 #
 # Dumping data for table t_product
 #
-LOCK TABLES `t_product` WRITE;
-/*!40000 ALTER TABLE `t_product` DISABLE KEYS */;
 
-/*!40000 ALTER TABLE `t_product` ENABLE KEYS */;
-UNLOCK TABLES;
 
 #
 # Table structure for table t_product_pic
@@ -386,11 +374,7 @@ CREATE TABLE `t_product_pic` (
 #
 # Dumping data for table t_product_pic
 #
-LOCK TABLES `t_product_pic` WRITE;
-/*!40000 ALTER TABLE `t_product_pic` DISABLE KEYS */;
 
-/*!40000 ALTER TABLE `t_product_pic` ENABLE KEYS */;
-UNLOCK TABLES;
 
 #
 # Table structure for table t_product_price
@@ -418,11 +402,7 @@ CREATE TABLE `t_product_price` (
 #
 # Dumping data for table t_product_price
 #
-LOCK TABLES `t_product_price` WRITE;
-/*!40000 ALTER TABLE `t_product_price` DISABLE KEYS */;
 
-/*!40000 ALTER TABLE `t_product_price` ENABLE KEYS */;
-UNLOCK TABLES;
 
 #
 # Table structure for table t_user
@@ -432,6 +412,7 @@ CREATE TABLE `t_user` (
   `userId` int(11) NOT NULL AUTO_INCREMENT,
   `emailAddress` varchar(80) COLLATE utf8_bin NOT NULL DEFAULT '',
   `password` varchar(80) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `salt` blob NOT NULL,
   `firstName` varchar(80) COLLATE utf8_bin NOT NULL DEFAULT '',
   `lastName` varchar(80) COLLATE utf8_bin NOT NULL DEFAULT '',
   `addressId` int(11) NOT NULL DEFAULT '0',
@@ -440,22 +421,19 @@ CREATE TABLE `t_user` (
   `taxId` decimal(10,3) DEFAULT NULL,
   `fromId` int(11) NOT NULL DEFAULT '0',
   `factive` varchar(1) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `isAdmin` tinyint(3) NOT NULL DEFAULT '0',
+  `updateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 #
 # Dumping data for table t_user
 #
-LOCK TABLES `t_user` WRITE;
-/*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
 
-INSERT INTO `t_user` VALUES (1,'5522913@qq.com','test','1','1',5,'s','s',1,1,'0');
-INSERT INTO `t_user` VALUES (2,'5522913@qq.com','test','1','1',6,'s','s',1,1,'0');
-INSERT INTO `t_user` VALUES (3,'5522913@qq.com','1','1','1',7,'1','1',1,1,'0');
-/*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `t_user` VALUES (1,'ptny6','cdac894bb6a4cb80e846bc3a025fd262349b839c',Char(0x25,0x26,0x56,0x15,0x86,0xA0,0xCE,0xCD),'ptny6','ptny6',24,'123456','123456',1,1,'0',1,'2014-01-26 14:06:48');
+INSERT INTO `t_user` VALUES (2,'t1@test.com','925c62e35dd303f719e9ce382e8a35f86e2d1e53',Char(0xC4,0x25,0xED,0xA9,0x3F,0xD0,0xEE,0x04),'t1','t1',25,'1','1',1,1,'0',0,'2014-01-26 14:03:27');
+INSERT INTO `t_user` VALUES (3,'t2@test.com','1f1fb6431a2de8bb6dcf43c8b4878ee0dae3e4fa',Char(0x7E,0xE8,0xB3,0x3E,0x87,0x02,0x9F,0x5B),'2','2',26,'2','2',2,5,'0',0,'2014-01-26 14:04:45');
+INSERT INTO `t_user` VALUES (4,'t3@test.com','22e6673fd5335b1a580e8cb0cfa01396c2dc8118',Char(0x66,0xB3,0xE6,0x1E,0xB9,0xE3,0x48,0x2D),'3','3',27,'3','3',3,6,'0',0,'2014-01-26 14:05:12');
 
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

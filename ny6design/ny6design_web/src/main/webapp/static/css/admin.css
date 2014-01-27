@@ -20,10 +20,11 @@ table tr td {
 	text-align: center;
 }
 
-a{
-	cursor: pointer;
-}
 .form-group-margin{
 	margin-left: 0px;
 	margin-right: 0px;
+}
+
+a{
+	cursor: pointer;
 }

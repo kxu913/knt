@@ -72,3 +72,6 @@ td img {
 .form-group{
 	margin-bottom: 10px;
 }
+a{
+	cursor: pointer;
+}

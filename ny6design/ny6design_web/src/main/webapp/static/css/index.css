@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-	min-width: 970px;
+	min-width: 800px;
 }
 
 .logo {
@@ -36,6 +36,10 @@ td img {
 	margin: 5px 2px 5px 2px;
 }
 
+#mnCategory {
+	max-width: 200px;
+}
+
 .ui-accordion .ui-accordion-content {
 	
 }
@@ -65,13 +69,15 @@ td img {
 	max-height: 200px;
 }
 
-.control-label{
-	width : 200px;
+.control-label {
+	width: 200px;
 	font-size: 9px;
 }
-.form-group{
+
+.form-group {
 	margin-bottom: 10px;
 }
-a{
+
+a {
 	cursor: pointer;
 }

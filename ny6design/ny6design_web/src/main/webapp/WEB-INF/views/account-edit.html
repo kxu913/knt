@@ -1,3 +1,45 @@
+#if($null.isNull($userName))
+
+<div style="padding: 10px 0px 0px 10px;">
+	<p class="text-warning">
+		<strong>Home :: Please Sign in first, if you are a member</strong>
+	</p>
+	<HR color=#987cb9 SIZE=3 />
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+			<div class="col-sm-3">
+				<input type="email" class="form-control" id="inputEmail3"
+					placeholder="Email" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-2 control-label">Password:</label>
+			<div class="col-sm-3">
+				<input type="password" class="form-control" id="inputPassword3"
+					placeholder="Password">
+			</div>
+			<label for="inputPassword3" class="col-sm-2 control-label"
+				style="text-align: left" >Forget password?</label>
+		</div>
+		
+		<div>
+			<div class="col-sm-offset-3 col-sm-9">
+				<p id="errorMsg" style="color: red"></p>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-9">
+				<button type="button" class="btn btn-primary" onclick="doLogin()">Submit
+					to login in</button>
+			</div>
+		</div>
+
+	</form>
+
+</div>
+#else
 <ol class="breadcrumb">
 	<li><a>MemberCenter</a></li>
 	<li class="active">My account</li>
@@ -152,3 +194,4 @@
 		</div>
 	</div>
 </form>
+#end

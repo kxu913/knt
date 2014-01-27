@@ -181,11 +181,11 @@ function doRegister() {
 		loadCategories();
 		tab = 0;
 	}
-	initSelect();
 	$.ajax({
 		url : '/ny6design_web/doRegist',
 		success : function(data, status) {
 			$("#ads").html("");
+			initSelect();
 			$("#productList").html(data);
 		}
 	});

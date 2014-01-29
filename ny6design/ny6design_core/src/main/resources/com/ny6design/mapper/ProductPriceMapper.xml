@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ny6design.mapper.ProductPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.ny6design.model.ProductPrice" >
+    <id column="product_discount_id" property="productDiscountId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="customer_group_id" property="customerGroupId" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="date_start" property="dateStart" jdbcType="DATE" />
+    <result column="date_end" property="dateEnd" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_discount_id, product_id, customer_group_id, quantity, priority, price, date_start, 
+    date_end
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_price
+    where product_discount_id = #{productDiscountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_product_price
+    where product_discount_id = #{productDiscountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ny6design.model.ProductPrice" useGeneratedKeys ="true" keyProperty ="product_discount_id">
+    insert into t_product_price ( product_id, customer_group_id, 
+      quantity, priority, price, 
+      date_start, date_end)
+    values (#{productId}, #{customerGroupId}, 
+      #{quantity}, #{priority}, #{price}, 
+      #{dateStart}, #{dateEnd})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ny6design.model.ProductPrice" >
+    insert into t_product_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productDiscountId != null" >
+        product_discount_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="customerGroupId != null" >
+        customer_group_id,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="dateStart != null" >
+        date_start,
+      </if>
+      <if test="dateEnd != null" >
+        date_end,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productDiscountId != null" >
+        #{productDiscountId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="customerGroupId != null" >
+        #{customerGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="dateStart != null" >
+        #{dateStart,jdbcType=DATE},
+      </if>
+      <if test="dateEnd != null" >
+        #{dateEnd,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ny6design.model.ProductPrice" >
+    update t_product_price
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="customerGroupId != null" >
+        customer_group_id = #{customerGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="dateStart != null" >
+        date_start = #{dateStart,jdbcType=DATE},
+      </if>
+      <if test="dateEnd != null" >
+        date_end = #{dateEnd,jdbcType=DATE},
+      </if>
+    </set>
+    where product_discount_id = #{productDiscountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ny6design.model.ProductPrice" >
+    update t_product_price
+    set product_id = #{productId,jdbcType=INTEGER},
+      customer_group_id = #{customerGroupId,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      date_start = #{dateStart,jdbcType=DATE},
+      date_end = #{dateEnd,jdbcType=DATE}
+    where product_discount_id = #{productDiscountId,jdbcType=INTEGER}
+  </update>
+</mapper>

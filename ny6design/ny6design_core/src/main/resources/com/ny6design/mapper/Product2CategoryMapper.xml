@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ny6design.mapper.Product2CategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.ny6design.model.Product2CategoryKey" >
+    <id column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <id column="fproduct_id" property="productId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.ny6design.model.Product2CategoryKey" >
+    delete from t_product_to_category
+    where category_id = #{categoryId,jdbcType=INTEGER}
+      and product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ny6design.model.Product2CategoryKey" >
+    insert into t_product_to_category (category_id, product_id)
+    values (#{categoryId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ny6design.model.Product2CategoryKey" >
+    insert into t_product_to_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

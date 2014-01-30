@@ -34,6 +34,11 @@
 		<shiro.version>1.2.2</shiro.version>
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<commons-codec.version>1.6</commons-codec.version>
+		<assertj.version>1.5.0</assertj.version>
+		<mockito.version>1.9.5</mockito.version>
+		<powermock.version>1.5.3</powermock.version>
+		<guava.version>16.0</guava.version>
+		<joda-time.version>2.3</joda-time.version>
 		<notificatio.version>develop-SNAPSHOT</notificatio.version>
 		<security.version>develop-SNAPSHOT</security.version>
 
@@ -212,6 +217,25 @@
 				<version>${commons-codec.version}</version>
 			</dependency>
 			
+			<!-- google java library -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<!-- joda -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda-time.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time-jsptags</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+
 			
 			<!-- mvn install:install-file -Dfile=C:\Users\***\notification-develop-SNAPSHOT.jar -DgroupId=com.kevin -DartifactId=notification -Dversion=develop-SNAPSHOT -Dpackaging=jar -->
 			<dependency>
@@ -236,7 +260,41 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
+		
+		<!-- assertj -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${assertj.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- mockito -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-all</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+			
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>

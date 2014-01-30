@@ -1,124 +1,111 @@
-<?xml version="1.0" encoding="UTF-8" ?>  
-    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ny6design.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.ny6design.model.Product">
+    <id column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="sku" jdbcType="VARCHAR" property="sku" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="stock_status_id" jdbcType="INTEGER" property="stockStatusId" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="manufacturer_id" jdbcType="INTEGER" property="manufacturerId" />
+    <result column="shipping" jdbcType="INTEGER" property="shipping" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="tax_class_id" jdbcType="INTEGER" property="taxClassId" />
+    <result column="date_available" jdbcType="DATE" property="dateAvailable" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="weight_class_id" jdbcType="INTEGER" property="weightClassId" />
+    <result column="length" jdbcType="DECIMAL" property="length" />
+    <result column="width" jdbcType="DECIMAL" property="width" />
+    <result column="height" jdbcType="DECIMAL" property="height" />
+    <result column="length_class_id" jdbcType="INTEGER" property="lengthClassId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="date_added" jdbcType="TIMESTAMP" property="dateAdded" />
+    <result column="date_modified" jdbcType="TIMESTAMP" property="dateModified" />
+    <result column="viewed" jdbcType="INTEGER" property="viewed" />
+    <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
+    <result column="subtract" jdbcType="INTEGER" property="subtract" />
+    <result column="minimum" jdbcType="INTEGER" property="minimum" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    product_id, model, sku, location, quantity, stock_status_id, image, manufacturer_id, 
+    shipping, price, tax_class_id, date_available, weight, weight_class_id, length, width, 
+    height, length_class_id, status, date_added, date_modified, viewed, sort_order, subtract, 
+    minimum, cost
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertProduct" parameterType="com.ny6design.model.Product" useGeneratedKeys ="true" keyProperty ="productId">
+    insert into t_product (model, sku, 
+      location, quantity, stock_status_id, 
+      image, manufacturer_id, shipping, 
+      price, tax_class_id, date_available, 
+      weight, weight_class_id, length, 
+      width, height, length_class_id, 
+      status, date_added, date_modified, 
+      viewed, sort_order, subtract, 
+      minimum, cost)
+    values (#{model}, #{sku}, 
+      #{location}, #{quantity}, #{stockStatusId}, 
+      #{image}, #{manufacturerId}, #{shipping}, 
+      #{price}, #{taxClassId}, #{dateAvailable}, 
+      #{weight}, #{weightClassId}, #{length}, 
+      #{width}, #{height}, #{lengthClassId}, 
+      #{status}, #{dateAdded}, #{dateModified}, 
+      #{viewed}, #{sortOrder}, #{subtract}, 
+      #{minimum}, #{cost})
+  </insert>
 
-    <resultMap id="ProductResultMap" type="com.ny6design.model.Product" >  
-        <id property = "productId" column="fproductid" />
-        
-        <result property="name" column="fname"/>  
-        <result property="displayName" column="fdisplayname"/> 
-        <result property="categoryId" column="fcategoryid"/>
-        <result property="saleFlag" column="fsaleflag"/>
-        <result property="shipTime" column="fshiptime"/>
-        <result property="description" column="fdescription"/>
-        <result property="soldOutFlag" column="fsoldoutflag"/>
-        <result property="recommend" column="frecommend"/>
-        <result property="sellQty" column="fsellqty"/>       
-        <result property="inventoryQty" column="finventoryqty"/>
-        <result property="availableDate" column="favailabledate"/>
-        <result property="validation" column="fvalidation"/>
-        <result property="createTime" column="fcreatetime"/>
-        
-        <collection property="pictureSources" ofType="com.ny6design.model.ProductPic">
-            <result property="source" column="fsource"/>
-        </collection>
-        <collection property="prices" ofType="com.ny6design.model.ProductPrice">
-            <result property="color" column="fcolor"/>
-            <result property="unit" column="funit"/>
-            <result property="weight" column="fweight"/>
-            <result property="originalPrice" column="forginalprice"/>
-            <result property="ourPrice" column="fourprice"/>           
-            <result property="salePrice1" column="fsaleprice1"/>
-            <result property="salePrice2" column="fsaleprice2"/>
-            <result property="salePrice3" column="fsaleprice3"/>
-            <result property="specialPrice" column="fspecialprice"/>
-            <result property="condition" column="fcondition"/>
-            <result property="updatedTime" column="fupdatedTime"/>
-        </collection>
-    </resultMap> 
-       
-    <select id="getProduct" parameterType="long" resultMap="ProductResultMap">
-        select t1.fproductid, t1.fname, t1.fdisplayname, t1.fdescription, 
-               t1.fcategoryid, t1.fsaleflag, t1.fshiptime, t1.fsellqty, t1.finventoryqty,
-               t1.favailabledate, t1.fvalidation, t1.fupdatedtime, t1.fcreatetime
-       from t_product t1, t_product_pic t2
-       where t1.fproductid = t2.fproductid and fproductid = #{productId}
-    </select>
-    
-    <select id="getProductpageList" resultMap="ProductResultMap" parameterType="map">
-       select V.fproductid, V.fname, V.fdisplayname, V.fdescription, 
-        V.fcategoryid, V.fsaleflag,V.frecommend, V.fshiptime, V.fsellqty, V.finventoryqty, 
-        V.favailabledate, V.fvalidation, V.fupdatedtime, 
-        V.fcreatetime, t2.fsource,t3.fcolor,t3.fcondition, t3.forginalprice, 
-        t3.fourprice, t3.fsaleprice1, t3.fsaleprice2, t3.fsaleprice3, 
-        t3.fspecialprice, t3.funit, t3.fweight 
-     from (select t1.fproductid, t1.fname, t1.fdisplayname, t1.fdescription, 
-        t1.fcategoryid, t1.fsaleflag,t1.frecommend, t1.fshiptime, t1.fsellqty, t1.finventoryqty, 
-        t1.favailabledate, t1.fvalidation, t1.fupdatedtime, 
-        t1.fcreatetime
-       from t_product t1 
-       where t1.fcategoryid = #{categoryId}
-       limit #{start}, #{end}) V
-       left join t_product_pic t2 on t1.fproductid = t2.fproductid 
-       left join t_product_price t3 on t1.fproductid = t3.fproductid
-       order by t1.fproductId
-    </select>
-    
-    <select id="getProductCount" resultType="Integer"  parameterType="Long">
-        select count(fproductId) 
-        from t_product
-        where fcategoryid = #{categoryId}
-    </select>
-    
-    <select id="getRecommendProductList" resultMap="ProductResultMap">
-     select V.fproductid, V.fname, V.fdisplayname, V.fdescription, 
-        V.fcategoryid, V.fsaleflag,V.frecommend, V.fshiptime, V.fsellqty, V.finventoryqty, 
-        V.favailabledate, V.fvalidation, V.fupdatedtime, 
-        V.fcreatetime, t2.fsource,t3.fcolor,t3.fcondition, t3.forginalprice, 
-        t3.fourprice, t3.fsaleprice1, t3.fsaleprice2, t3.fsaleprice3, 
-        t3.fspecialprice, t3.funit, t3.fweight 
-     from (select t1.fproductid, t1.fname, t1.fdisplayname, t1.fdescription, 
-        t1.fcategoryid, t1.fsaleflag,t1.frecommend, t1.fshiptime, t1.fsellqty, t1.finventoryqty, 
-        t1.favailabledate, t1.fvalidation, t1.fupdatedtime, 
-        t1.fcreatetime
-       from t_product t1 
-       where t1.frecommend = 1) V
-    left join t_product_pic t2 on V.fproductid = t2.fproductid 
-    left join t_product_price t3 on V.fproductid = t3.fproductid
-    order by V.fproductId
-    </select>
-    
-    
-    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="productId" parameterType="com.ny6design.model.Product">
-        insert into t_product(
-        fname, fdisplayname, fcategoryid, fsaleflag, fshiptime,fdescription,
-        fsoldoutflag,frecommend, fsellqty,finventoryqty, fvalidation, favailabledate, 
-         fupdatedtime, fcreatetime)
-         VALUES (
-         #{name}, #{displayName}, #{categoryId}, #{saleFlag}, #{shipTime}, #{description},
-         #{soldOutFlag}, #{recommend}, #{sellQty}, #{inventoryQty}, #{validation}, #{availableDate}, 
-         #{updatedTime}, #{createTime});
-    </insert>
-    
-    <insert id="insertProductPrice" useGeneratedKeys="true" keyProperty="priceId" parameterType="com.ny6design.model.ProductPrice">
-        insert into t_product_price(
-        fproductid, fcolor, funit, fweight, forginalprice,fqty,
-        fourprice, fsaleprice1,fsaleprice2,fsaleprice3, fcondition, 
-        fspecialprice,fupdatedtime)
-         VALUES (
-         #{productId}, #{color}, #{unit}, #{weight}, #{originalPrice}, #{qty},
-         #{type}, #{ourPrice}, #{salePrice1},#{salePrice2},#{salePrice3}, #{condition},
-         #{specialPrice}, #{updatedTime});
-    </insert>
-    
-    <insert id="insertProductPicture" useGeneratedKeys="true" keyProperty="picId" parameterType="com.ny6design.model.ProductPic">
-        insert into t_product_pic(
-        `fproductid`, `fsource`, `fupdatedtime`)
-         VALUES (
-         #{productId}, #{source},#{updatedTime});
-    </insert>
-    
+   <!-- product vs product_desc -->
+   <resultMap type="com.ny6design.model.Product" id="pordAndDescAndPrice">
+   	<id property="productId" column="product_id"/>
+   	<association property="productDesc" column="product_id" javaType="com.ny6design.model.ProductDescription" select="getDesc4Product"/>
+   	<collection property="productPriceList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductPrice" select="getPrice4Product"/>
+   </resultMap>
+   
+   	<select id="getPrice4Product" resultType="com.ny6design.model.ProductPrice">
+	  SELECT * FROM t_product_price WHERE product_id = #{product_id}
+	</select>
+	
+	<select id="getDesc4Product" resultType="com.ny6design.model.ProductDescription">
+	  SELECT * FROM t_product_description WHERE product_id = #{product_id}
+	</select>
+	
+   <select id="getProductsByCategory" parameterType="long" resultMap="pordAndDescAndPrice">
+    SELECT  p.*
+	FROM t_product as p, t_product_to_category as pc
+	where  pc.product_id=p.product_id
+	and pc.category_id= #{categoryId}
+   </select>
+   
+   
+   <resultMap type="com.ny6design.model.Product" id="prodDetail">
+   	<id property="productId" column="product_id"/>
+   	<association property="productDesc" column="product_id" javaType="com.ny6design.model.ProductDescription" select="getDesc4Product"/>
+   	<collection property="productImageList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductImage" select="getImage4Product"/>
+   	<collection property="productPriceList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductPrice" select="getPrice4Product"/>
+   </resultMap>
+   <select id="getProductDetail" resultMap="prodDetail">
+		select
+			*
+		from 
+			t_product
+		where 
+			product_id = #{product_id}
+   </select>
+   <select id="getImage4Product" resultType="com.ny6design.model.ProductImage">
+	  SELECT * FROM t_product_image WHERE product_id = #{product_id}
+	</select>
     
 </mapper>

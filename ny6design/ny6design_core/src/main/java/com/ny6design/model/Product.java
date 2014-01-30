@@ -1,187 +1,326 @@
 package com.ny6design.model;
 
-
-import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
-/**
- * 
- * @author kevin
- *
- */
-public class Product implements Serializable {
 
-	private static final long serialVersionUID = 451949797460417653L;
+import com.google.common.collect.Lists;
 
-	private long productId;
+public class Product {
+    private Integer productId;
 
-	private String name;
+    private String model;
 
-	private String displayName;
+    private String sku;
 
-	private long categoryId;
+    private String location;
 
-	private int saleFlag;
+    private Integer quantity;
 
-	private String shipTime;
+    private Integer stockStatusId;
 
-	private int sellQty;
+    private String image;
 
-	private int inventoryQty;
+    private Integer manufacturerId;
 
-	private Date availableDate;
+    private Integer shipping;
 
-	private int validation = 1;
+    private BigDecimal price;
 
-	private Timestamp updatedTime;
+    private Integer taxClassId;
 
-	private Timestamp createTime;
+    private Date dateAvailable;
 
-	private List<ProductPic> pictureSources;
+    private BigDecimal weight;
 
-	private List<ProductPrice> prices;
+    private Integer weightClassId;
 
-	private int soldOutFlag;
+    private BigDecimal length;
 
-	private int recommend;
+    private BigDecimal width;
 
-	private String description;
+    private BigDecimal height;
 
-	public int getRecommend() {
-		return recommend;
+    private Integer lengthClassId;
+
+    private Integer status;
+
+    private Date dateAdded;
+
+    private Date dateModified;
+
+    private Integer viewed;
+
+    private Integer sortOrder;
+
+    private Integer subtract;
+
+    private Integer minimum;
+
+    private BigDecimal cost;
+    
+	private ProductDescription productDesc;
+	private Category category;
+	private List<ProductImage> productImageList = Lists.newArrayList();
+	private List<ProductPrice> productPriceList = Lists.newArrayList();
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model == null ? null : model.trim();
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku == null ? null : sku.trim();
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location == null ? null : location.trim();
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getStockStatusId() {
+        return stockStatusId;
+    }
+
+    public void setStockStatusId(Integer stockStatusId) {
+        this.stockStatusId = stockStatusId;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image == null ? null : image.trim();
+    }
+
+    public Integer getManufacturerId() {
+        return manufacturerId;
+    }
+
+    public void setManufacturerId(Integer manufacturerId) {
+        this.manufacturerId = manufacturerId;
+    }
+
+    public Integer getShipping() {
+        return shipping;
+    }
+
+    public void setShipping(Integer shipping) {
+        this.shipping = shipping;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getTaxClassId() {
+        return taxClassId;
+    }
+
+    public void setTaxClassId(Integer taxClassId) {
+        this.taxClassId = taxClassId;
+    }
+
+    public Date getDateAvailable() {
+        return dateAvailable;
+    }
+
+    public void setDateAvailable(Date dateAvailable) {
+        this.dateAvailable = dateAvailable;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+
+    public Integer getWeightClassId() {
+        return weightClassId;
+    }
+
+    public void setWeightClassId(Integer weightClassId) {
+        this.weightClassId = weightClassId;
+    }
+
+    public BigDecimal getLength() {
+        return length;
+    }
+
+    public void setLength(BigDecimal length) {
+        this.length = length;
+    }
+
+    public BigDecimal getWidth() {
+        return width;
+    }
+
+    public void setWidth(BigDecimal width) {
+        this.width = width;
+    }
+
+    public BigDecimal getHeight() {
+        return height;
+    }
+
+    public void setHeight(BigDecimal height) {
+        this.height = height;
+    }
+
+    public Integer getLengthClassId() {
+        return lengthClassId;
+    }
+
+    public void setLengthClassId(Integer lengthClassId) {
+        this.lengthClassId = lengthClassId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    public Date getDateModified() {
+        return dateModified;
+    }
+
+    public void setDateModified(Date dateModified) {
+        this.dateModified = dateModified;
+    }
+
+    public Integer getViewed() {
+        return viewed;
+    }
+
+    public void setViewed(Integer viewed) {
+        this.viewed = viewed;
+    }
+
+    public Integer getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(Integer sortOrder) {
+        this.sortOrder = sortOrder;
+    }
+
+    public Integer getSubtract() {
+        return subtract;
+    }
+
+    public void setSubtract(Integer subtract) {
+        this.subtract = subtract;
+    }
+
+    public Integer getMinimum() {
+        return minimum;
+    }
+
+    public void setMinimum(Integer minimum) {
+        this.minimum = minimum;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+	public ProductDescription getProductDesc() {
+		return productDesc;
 	}
 
-	public void setRecommend(int recommend) {
-		this.recommend = recommend;
+	public void setProductDesc(ProductDescription productDesc) {
+		this.productDesc = productDesc;
 	}
 
-	public int getSoldOutFlag() {
-		return soldOutFlag;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setSoldOutFlag(int soldOutFlag) {
-		this.soldOutFlag = soldOutFlag;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public long getProductId() {
-		return productId;
+	public List<ProductImage> getProductImageList() {
+		return productImageList;
 	}
 
-	public void setProductId(long productId) {
-		this.productId = productId;
+	public void setProductImageList(List<ProductImage> productImageList) {
+		this.productImageList = productImageList;
 	}
 
-	public String getName() {
-		return name;
+	public List<ProductPrice> getProductPriceList() {
+		return productPriceList;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductPriceList(List<ProductPrice> productPriceList) {
+		this.productPriceList = productPriceList;
 	}
 
-	public String getDisplayName() {
-		return displayName;
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", model=" + model
+				+ ", sku=" + sku + ", location=" + location + ", quantity="
+				+ quantity + ", stockStatusId=" + stockStatusId + ", image="
+				+ image + ", manufacturerId=" + manufacturerId + ", shipping="
+				+ shipping + ", price=" + price + ", taxClassId=" + taxClassId
+				+ ", dateAvailable=" + dateAvailable + ", weight=" + weight
+				+ ", weightClassId=" + weightClassId + ", length=" + length
+				+ ", width=" + width + ", height=" + height
+				+ ", lengthClassId=" + lengthClassId + ", status=" + status
+				+ ", dateAdded=" + dateAdded + ", dateModified=" + dateModified
+				+ ", viewed=" + viewed + ", sortOrder=" + sortOrder
+				+ ", subtract=" + subtract + ", minimum=" + minimum + ", cost="
+				+ cost + ", productDesc=" + productDesc + ", category="
+				+ category + ", productImageList=" + productImageList
+				+ ", productPriceList=" + productPriceList + "]";
 	}
-
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
-
-	public long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(long categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public int getSaleFlag() {
-		return saleFlag;
-	}
-
-	public void setSaleFlag(int saleFlag) {
-		this.saleFlag = saleFlag;
-	}
-
-	public String getShipTime() {
-		return shipTime;
-	}
-
-	public void setShipTime(String shipTime) {
-		this.shipTime = shipTime;
-	}
-
-	public int getSellQty() {
-		return sellQty;
-	}
-
-	public void setSellQty(int sellQty) {
-		this.sellQty = sellQty;
-	}
-
-	public int getInventoryQty() {
-		return inventoryQty;
-	}
-
-	public void setInventoryQty(int inventoryQty) {
-		this.inventoryQty = inventoryQty;
-	}
-
-	public Date getAvailableDate() {
-		return availableDate;
-	}
-
-	public void setAvailableDate(Date availableDate) {
-		this.availableDate = availableDate;
-	}
-
-	public int getValidation() {
-		return validation;
-	}
-
-	public void setValidation(int validation) {
-		this.validation = validation;
-	}
-
-	public Timestamp getUpdatedTime() {
-		return updatedTime;
-	}
-
-	public void setUpdatedTime(Timestamp updatedTime) {
-		this.updatedTime = updatedTime;
-	}
-
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
-
-	public List<ProductPic> getPictureSources() {
-		return pictureSources;
-	}
-
-	public void setPictureSources(List<ProductPic> pictureSources) {
-		this.pictureSources = pictureSources;
-	}
-
-	public List<ProductPrice> getPrices() {
-		return prices;
-	}
-
-	public void setPrices(List<ProductPrice> prices) {
-		this.prices = prices;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+    
 }

@@ -88,6 +88,19 @@
 			<artifactId>security</artifactId>
 		</dependency>
 		<!-- json end -->
+		
+		<!-- GENERAL UTILS start -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+		<!-- GENERAL UTILS end -->
+	
 	</dependencies>
 	<build>
 		<plugins>

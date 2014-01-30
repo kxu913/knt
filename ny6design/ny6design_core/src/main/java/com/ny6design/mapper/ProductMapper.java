@@ -1,32 +1,24 @@
 package com.ny6design.mapper;
 
-
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.ny6design.model.Product;
-import com.ny6design.model.ProductPic;
+import com.ny6design.model.ProductDescription;
 import com.ny6design.model.ProductPrice;
-/**
- * 
- * @author kevin
- *
- */
+
 public interface ProductMapper {
-	
-	public Product getProduct(long productId);
-	
-	public void insertProduct(Product product);
+    int deleteByPrimaryKey(Integer productId);
 
-	public void insertProductPrice(ProductPrice price);
+    int insertProduct(Product record);
 
-	public void insertProductPicture(ProductPic picture);
+    Product selectByPrimaryKey(Integer productId);
 
-	public List<Product> getProductPageList(@Param("categoryId") long categoryId, @Param("start") int start, @Param("end") int end);
-
-	public List<Product> getRecommendProductList();
-
-	public int getProductCount(long categoryId);
-	
+    Product getProductDetail(Integer productId);
+    
+    List<ProductDescription> getDesc4Product(Integer productId);
+    
+    List<ProductPrice> getPrice4Product(Integer productId);
+    
+    List<Product> getProductsByCategory(Integer categoryId);
+    
 }

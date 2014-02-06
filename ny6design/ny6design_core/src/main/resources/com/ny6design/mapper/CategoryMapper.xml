@@ -20,6 +20,15 @@
         order by forder;
     </select>
     
+    <!-- 查询当前结点名，父子结点名 , 目前支持两级菜单，再多得改程序-->
+    <select id="getCategoryInfo" resultType="com.ny6design.model.Category">
+        select t1.fname AS parentName, t2.fname as name, t2.fcategoryId as categoryId,
+        t2.forder as 'order',   t2.fparentId  as  parentId , t2.fupdatetime as updatetime
+		FROM t_category AS t1
+		LEFT outer JOIN t_category AS t2 ON t2.fparentId = t1.fcategoryId
+		where t2.fcategoryId=#{categoryId} 
+    </select>
+    
     <insert id="insertCategory"  useGeneratedKeys="true" keyProperty="categoryId" parameterType="com.ny6design.model.Category">
 
         insert into t_category (fname,            forder, 

@@ -2,6 +2,7 @@ package com.ny6design.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Arrays;
 /**
  * 
  * @author kevin
@@ -14,6 +15,8 @@ public class Category implements Serializable{
 	private long categoryId;
 	
 	private String name;
+	private String parentName;
+	private String[] childrenName;//not used now 2014/2/6
 	
 	private int order = 1;
 	
@@ -73,4 +76,29 @@ public class Category implements Serializable{
 		this.parentId = parentId;
 	}
 
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+
+	public String[] getChildrenName() {
+		return childrenName;
+	}
+
+	public void setChildrenName(String[] childrenName) {
+		this.childrenName = childrenName;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [categoryId=" + categoryId + ", name=" + name
+				+ ", parentName=" + parentName + ", childName="
+				+ Arrays.toString(childrenName) + ", order=" + order
+				+ ", parentId=" + parentId + ", validated=" + validated
+				+ ", updateTime=" + updateTime + "]";
+	}
+	
 }

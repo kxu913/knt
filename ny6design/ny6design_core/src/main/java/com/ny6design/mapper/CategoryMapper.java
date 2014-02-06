@@ -30,5 +30,6 @@ public interface CategoryMapper {
 	
 	
 	public void updateValidation(@Param("categoryId") long categoryId, @Param("validated") int validated, @Param("updateTime") Timestamp updateTime);
-
+	
+	public Category getCategoryInfo(long categoryId);
 }

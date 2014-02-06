@@ -46,5 +46,11 @@ public class CategoryServiceTest {
 		assertTrue(contain);
 		categoryService.deleteCategory(id);
 	}
-
+	
+	@Test
+	public void testGetCategoryInfo(){
+		Category category = categoryService.getCategoryInfo(184);
+		assertNotNull(category);
+		assertNotNull(category.getCategoryId());
+	}
 }

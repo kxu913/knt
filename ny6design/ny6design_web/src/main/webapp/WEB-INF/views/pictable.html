@@ -13,12 +13,12 @@
 				<tr>
 					<td rowspan="2"><img src="static/img/buy-now.jpg"></img></td>
 					#foreach($prodPrice as $!product.productPriceList)
-					<td class='success'>$prodPrice.quantity</td>
+					<td class='success'>$prodPrice.quantity +</td>
 					#end
 				</tr>
 				<tr>
 					#foreach($prodPrice as $!product.productPriceList)
-					<td class='success'>$${prodPrice.price}</td>
+					<td class='success'>${prodPrice.price}</td>
 					#end
 				</tr>
 			</table>

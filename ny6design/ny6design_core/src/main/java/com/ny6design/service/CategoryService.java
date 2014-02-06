@@ -87,5 +87,9 @@ public class CategoryService {
 		}
 		
 	}
+	
+	public Category getCategoryInfo(long categoryId){
+		return mapper.getCategoryInfo(categoryId);
+	}
 
 }

@@ -162,5 +162,9 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="findAllUnreplyQuestion"></select>
+  <select id="findQuestionsByStatus" resultMap="BaseResultMap" parameterType="int">
+      select  <include refid="Base_Column_List" />
+    	from t_question
+      where status = #{status}
+  </select>
 </mapper>

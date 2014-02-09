@@ -30,6 +30,6 @@ public class QuestionService {
 	}
 	
 	public List<Question> findAllUnreplyQuestion(){
-		return questionMapper.findAllUnreplyQuestion();
+		return questionMapper.findQuestionsByStatus(0);
 	}
 }

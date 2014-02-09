@@ -17,5 +17,5 @@ public interface QuestionMapper {
 
     int updateByPrimaryKey(Question record);
 
-	List<Question> findAllUnreplyQuestion();
+	List<Question> findQuestionsByStatus(int status);
 }

@@ -17,6 +17,9 @@ public class Question {
 
     private String address;
 
+    /**
+     * 0 means new question, 1 means replied
+     */
     private Integer status;
 
     private Integer userid;

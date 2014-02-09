@@ -190,10 +190,13 @@ function doRegister() {
 		}
 	});
 }
-
-$(document).ready(function() {
+function init(){
 	loadToolBar();
 	loadMessages();
 	loadCategories();
 	loadProducts();
+}
+
+$(document).ready(function() {
+	init();
 });

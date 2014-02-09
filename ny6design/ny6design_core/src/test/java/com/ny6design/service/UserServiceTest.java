@@ -25,7 +25,14 @@ public class UserServiceTest {
 	public void testGetAllUsers() {
 		List<UserDetail> list = userService.getAllUsers();
 		assertNotNull(list);
-		System.out.println(list.get(0).getCountryDesc());
+		System.out.println(list.get(0).getUserid());
+	}
+	
+	@Test
+	public void testSearchUsers(){
+		List<UserDetail> list = userService.searchUsers("2");
+		assertNotNull(list);
+		System.out.println(list.get(0).getUserid());
 	}
 
 }

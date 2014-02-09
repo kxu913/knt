@@ -242,6 +242,19 @@
 				inner join e_states d on b.stateCode= d.code
 			where isAdmin !=1
 	</select>
+	
+	<select id="searchUsers" resultMap="UserDetailMap" parameterType="string">
+		select a.userId, a.emailAddress, a.password,a.firstName,a.lastName ,a.isAdmin, a.fromId,
+				a.telephone, a.updateTime, b.address,b.town, b.countryCode, b.stateCode,
+				c.fdescription as countryDesc, d.fdescription as stateDesc
+				from t_user a
+				inner join t_address b on a.addressId= b.addressId
+				inner join e_country c on b.countryCode = c.code
+				inner join e_states d on b.stateCode= d.code
+			where isAdmin !=1 and (
+ 				a.lastName like #{keyword} or a.firstName like #{keyword} 
+			)
+	</select>
 	<select id="getUserById"  resultMap="UserDetailMap" parameterType="long">
 			select a.userId, a.emailAddress, a.password,a.firstName,a.lastName ,a.isAdmin, a.fromId,
 				a.fax, a.telephone, a.updateTime, 

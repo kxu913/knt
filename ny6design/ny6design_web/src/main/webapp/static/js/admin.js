@@ -6,6 +6,19 @@ function loadUsers() {
 		}
 	});
 }
+
+function searchUser(){
+	var keyword = $("#keyword").val();
+	$.ajax({
+		url : '/ny6design_web/searchUsers',
+		data : {
+			keyword : keyword
+		},
+		success : function(data, status) {
+			$("#maintable").html(data);
+		}
+	});
+}
 function backIndex(){
 	location.href = '/ny6design_web/loginOut';
 }

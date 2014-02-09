@@ -7,6 +7,15 @@ function loadUsers() {
 	});
 }
 
+function loadQuestions(){
+	$.ajax({
+		url : '/ny6design_web/getUnrepliedQuestions',
+		success : function(data, status) {
+			$("#maintable").html(data);
+		}
+	});
+}
+
 function searchUser(){
 	var keyword = $("#keyword").val();
 	$.ajax({

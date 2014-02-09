@@ -73,6 +73,10 @@ function loadToolBar() {
 		url : '/ny6design_web/getToolBar',
 		success : function(data, status) {
 			$("#toolbar").html(data);
+			$('#questionId').leanModal({
+				top : 100,
+				closeButton : ".modal_close"
+			});
 		}
 	});
 }
@@ -129,7 +133,7 @@ function loadCategories() {
 			});
 		}
 	});
-	
+
 }
 
 function loadProducts() {
@@ -140,7 +144,6 @@ function loadProducts() {
 		}
 	});
 }
-
 
 function doLogin() {
 	var emailAddress = $("#inputEmail3").val();
@@ -190,13 +193,53 @@ function doRegister() {
 		}
 	});
 }
-function init(){
+function init() {
 	loadToolBar();
 	loadMessages();
 	loadCategories();
 	loadProducts();
+
 }
 
+function closeModal(id) {
+	$("#lean_overlay").fadeOut(200);
+	$("#" + id).css({
+		"display" : "none"
+	});
+}
+
+function submitQeustion(){
+	var firstName = $("#firstName").val();
+	var lastName = $("#lastName").val();
+	
+	var tel = $("#tel").val();
+	var email = $("#email").val();
+	
+	var address = $("#address").val();
+	var extra = $("#extra").val();
+	
+	$.ajax({
+		url : '/ny6design_web/submitQuestion',
+		type : 'POST',
+		data : {
+			firstName : firstName,
+			lastName : lastName,
+			tel : tel,
+			email : email,
+			address : address,
+			extra : extra
+		},
+		success : function(data, status) {
+			if (data ===0 ) {
+				alert("Your question submit successful!");
+				closeModal("addQuestion");
+			} else {
+				alert("Your question submit failed! please check your input");
+			}
+		}
+	});
+}
 $(document).ready(function() {
 	init();
+
 });

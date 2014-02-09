@@ -60,10 +60,11 @@ public class Product {
     private BigDecimal cost;
     
 	private ProductDescription productDesc;
-	private Category category;
+	private Long categoryId;
 	private List<ProductImage> productImageList = Lists.newArrayList();
 	private List<ProductPrice> productPriceList = Lists.newArrayList();
 
+	
     public Integer getProductId() {
         return productId;
     }
@@ -280,12 +281,12 @@ public class Product {
 		this.productDesc = productDesc;
 	}
 
-	public Category getCategory() {
-		return category;
+	public long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public List<ProductImage> getProductImageList() {
@@ -318,8 +319,8 @@ public class Product {
 				+ ", dateAdded=" + dateAdded + ", dateModified=" + dateModified
 				+ ", viewed=" + viewed + ", sortOrder=" + sortOrder
 				+ ", subtract=" + subtract + ", minimum=" + minimum + ", cost="
-				+ cost + ", productDesc=" + productDesc + ", category="
-				+ category + ", productImageList=" + productImageList
+				+ cost + ", productDesc=" + productDesc + ", categoryId="
+				+ categoryId + ", productImageList=" + productImageList
 				+ ", productPriceList=" + productPriceList + "]";
 	}
     

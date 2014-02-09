@@ -97,7 +97,7 @@ CREATE TABLE `t_product_to_category` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 INSERT INTO `ny6design`.`t_product_to_category` (`product_id`, `category_id`) VALUES ('49', '184');
 INSERT INTO `ny6design`.`t_product_to_category` (`product_id`, `category_id`) VALUES ('50', '184');
-INSERT INTO `ny6design`.`t_product_to_category` (`product_id`, `category_id`) VALUES ('50', '184');
+INSERT INTO `ny6design`.`t_product_to_category` (`product_id`, `category_id`) VALUES ('51', '184');
 
 
 DROP TABLE IF EXISTS `t_stock_status`;
@@ -107,7 +107,6 @@ CREATE TABLE `t_stock_status` (
   `name` varchar(32) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`stock_status_id`,`language_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
 INSERT INTO `ny6design`.`t_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES ('1', '1', 'In Stock');
 INSERT INTO `ny6design`.`t_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES ('2', '1', 'Out Of Stock');
 INSERT INTO `ny6design`.`t_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES ('3', '1', '2 - 3 Days');

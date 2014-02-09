@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ny6design.mapper.ProductMapper;
 import com.ny6design.model.Product;
+import com.ny6design.service.CategoryService;
 import com.ny6design.service.ProductService;
 
 /**
@@ -21,6 +22,9 @@ import com.ny6design.service.ProductService;
 @Controller
 public class ProductController {
 
+	@Autowired
+	CategoryService categoryService;
+	
 	@Autowired
 	ProductService service;
 	@Autowired
@@ -39,6 +43,7 @@ public class ProductController {
 		Product product = productMapper.getProductDetail(productId);
 
 		model.put("product", product);
+		model.put("catergory", categoryService.getCategoryInfo(product.getCategoryId()));
 		return new ModelAndView ("pdetail",model);
 	}
 

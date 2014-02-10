@@ -15,7 +15,6 @@ import com.ny6design.service.UserMessageMapperService;
  * @author kevin
  * 
  */
-@Controller
 public class MessageController {
 	@Autowired
 	UserMessageMapperService userMessageMapperService;

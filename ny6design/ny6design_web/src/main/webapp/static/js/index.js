@@ -193,6 +193,20 @@ function doRegister() {
 		}
 	});
 }
+
+function showFeedback(){
+	$.ajax({
+		url : '/ny6design_web/listFeedback',
+		success : function(data, status) {
+			$("#ads").html("");
+			$("#productList").html(data);
+			$('#feedbackId').leanModal({
+				top : 100,
+				closeButton : ".modal_close"
+			});
+		}
+	});
+}
 function init() {
 	loadToolBar();
 	loadMessages();

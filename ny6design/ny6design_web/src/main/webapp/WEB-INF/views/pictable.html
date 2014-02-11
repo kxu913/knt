@@ -12,14 +12,10 @@
 			<table class="table table-bordered">
 				<tr>
 					<td rowspan="2"><img src="static/img/buy-now.jpg"></img></td>
-					#foreach($prodPrice as $!product.productPriceList)
-					<td class='success'>$prodPrice.quantity +</td>
-					#end
+					#getLabelName($product)
 				</tr>
 				<tr>
-					#foreach($prodPrice as $!product.productPriceList)
-					<td class='success'>${prodPrice.price}</td>
-					#end
+					#getLabelValue($product)
 				</tr>
 			</table>
 		</td> 
@@ -33,3 +29,36 @@
 		#end
 	</tr>
 </table>
+
+
+#macro(getLabelName $product) 
+	#foreach($prodPrice as $!product.productPriceList)
+		#if($foreach.count==1 )
+			#set ($styleClass="success")
+		#elseif($foreach.count==2 )
+			#set ($styleClass="warning")
+		#elseif($foreach.count==3 )
+			#set ($styleClass="danger")
+		#end
+		<td class='$styleClass'>
+			$prodPrice.quantity +
+		</td>
+	#end 
+#end 
+
+
+#macro(getLabelValue $product) 
+	#foreach($prodPrice as $!product.productPriceList)
+		#if($foreach.count==1 )
+			#set ($styleClass="success")
+		#elseif($foreach.count==2 )
+			#set ($styleClass="warning")
+		#elseif($foreach.count==3 )
+			#set ($styleClass="danger")
+		#end
+		<td class='$styleClass'>
+			$numberTool.format("0.00",$prodPrice.price)
+		</td>
+	#end 
+#end 
+

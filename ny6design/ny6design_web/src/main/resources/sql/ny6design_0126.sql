@@ -9,8 +9,9 @@
 # Host: localhost:3306    Database: ny6design
 # ------------------------------------------------------
 # Server version 5.6.7-rc
+DROP DATABASE IF EXISTS `ny6design`;
+CREATE DATABASE `ny6design` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
 
-CREATE DATABASE `ny6design` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;DROP DATABASE IF EXISTS `ny6design`;
 
 USE `ny6design`;
 
@@ -329,79 +330,6 @@ INSERT INTO `t_message` VALUES (8,1,'Thank you for your wonderful service. My or
 INSERT INTO `t_message` VALUES (9,1,'LOVEEEE THE BEADS, I LEFT A SUPER MARVELOUS FEEDBACK BECAUSE YOU GUYS DESERVED. I WILL KEEP SHOPPING WITH YOU GUYS. THANKS YOU SO MUCH FOR THE FAST SERVICE, THE EXCELLENT WELL PACKEDAND TGHE CARE YOU PUT WHEN WRAPING AND SHIPPING THIS FOR ME. IT MAKE ME TRUST AND FEEL TRANQUIL WHEN BUYING WITH YOU.... CONGRATULATIONS AND KEEP IT UP GUYS. I SAVED YOU IN MY FAVORITE SELLER LIST AND WILL SEE YOU SOON IN THE SHOW ROOM;O) KIND REGARDS, CLAUDIA H','2014-01-18 12:34:45');
 INSERT INTO `t_message` VALUES (10,1,'Quality of beads is excellent and choices are immense! Order enough items and shipping is free and cost of items reduces nicely. Will come back for more; highly recommend this seller!','2014-01-18 12:34:45');
 
-#
-# Table structure for table t_product
-#
-
-CREATE TABLE `t_product` (
-  `fproductid` int(11) NOT NULL AUTO_INCREMENT,
-  `fname` varchar(100) NOT NULL,
-  `fdisplayname` varchar(100) DEFAULT NULL,
-  `fdescription` varchar(100) DEFAULT NULL,
-  `fcategoryid` int(10) DEFAULT NULL,
-  `fsaleflag` tinyint(5) DEFAULT NULL COMMENT 'bit represition: 00001 for hot item, 00010 for specials, 00100 for new item,01000 for mixsale\n',
-  `fshiptime` varchar(100) DEFAULT NULL,
-  `fsellqty` int(10) DEFAULT NULL,
-  `finventoryqty` int(10) DEFAULT NULL,
-  `fvalidation` tinyint(1) DEFAULT '1',
-  `favailabledate` date DEFAULT NULL,
-  `fupdatedtime` datetime DEFAULT NULL,
-  `fcreatetime` datetime DEFAULT NULL,
-  `fsoldoutflag` tinyint(1) DEFAULT '1' COMMENT '0 is for  not showing, 1 is for showing  on the picture.',
-  `frecommend` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`fproductid`),
-  UNIQUE KEY `fid_UNIQUE` (`fproductid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Dumping data for table t_product
-#
-
-
-#
-# Table structure for table t_product_pic
-#
-
-CREATE TABLE `t_product_pic` (
-  `fpicid` int(10) NOT NULL AUTO_INCREMENT,
-  `fproductid` int(10) NOT NULL,
-  `fsource` varchar(100) NOT NULL,
-  `fupdatedtime` datetime DEFAULT NULL,
-  PRIMARY KEY (`fpicid`),
-  UNIQUE KEY `fpicid_UNIQUE` (`fpicid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Dumping data for table t_product_pic
-#
-
-
-#
-# Table structure for table t_product_price
-#
-
-CREATE TABLE `t_product_price` (
-  `fpriceid` int(10) NOT NULL AUTO_INCREMENT,
-  `fproductid` int(10) NOT NULL,
-  `fcolor` varchar(100) DEFAULT NULL,
-  `funit` varchar(50) DEFAULT NULL,
-  `fweight` varchar(100) DEFAULT NULL,
-  `fourprice` decimal(8,2) DEFAULT NULL,
-  `fqty` int(10) DEFAULT NULL,
-  `fcondition` varchar(100) DEFAULT NULL,
-  `fupdatedtime` datetime DEFAULT NULL,
-  `forginalprice` decimal(8,2) DEFAULT NULL,
-  `fsaleprice1` decimal(8,2) DEFAULT NULL,
-  `fsaleprice2` decimal(8,2) DEFAULT NULL,
-  `fsaleprice3` decimal(8,2) DEFAULT NULL,
-  `fspecialprice` decimal(8,2) DEFAULT NULL,
-  PRIMARY KEY (`fpriceid`),
-  UNIQUE KEY `fproductpriceid_UNIQUE` (`fpriceid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Dumping data for table t_product_price
-#
 
 
 #

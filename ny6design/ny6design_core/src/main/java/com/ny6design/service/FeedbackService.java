@@ -31,4 +31,13 @@ public class FeedbackService {
 		feedBackMapper.insert(feedback);
 	}
 
+	public int updateRecommend(int _feedbackId, String recommed) {
+		FeedBack feedback = feedBackMapper.selectByPrimaryKey(_feedbackId);
+		if (feedback != null) {
+			feedback.setRecommend(Short.parseShort(recommed));
+			return feedBackMapper.updateByPrimaryKey(feedback);
+		}
+		return 0;
+	}
+
 }

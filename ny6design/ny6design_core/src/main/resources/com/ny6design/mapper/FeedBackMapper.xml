@@ -27,14 +27,14 @@
     <select id="getRecommendFeedback" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from t_message order by fupdatetime 
+    from t_message where recommend = 1 order by fupdatetime desc
     limit #{count,jdbcType=INTEGER}
   </select>
   
     <select id="getAllFeedback" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from t_message order by fupdatetime
+    from t_message order by fupdatetime desc
   </select>
   
   

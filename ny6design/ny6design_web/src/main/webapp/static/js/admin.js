@@ -7,7 +7,7 @@ function loadUsers() {
 	});
 }
 
-function loadQuestions(){
+function loadQuestions() {
 	$.ajax({
 		url : '/ny6design_web/getUnrepliedQuestions',
 		success : function(data, status) {
@@ -16,7 +16,32 @@ function loadQuestions(){
 	});
 }
 
-function searchUser(){
+function loadFeedback() {
+	$.ajax({
+		url : '/ny6design_web/listFeedbackForAdminpage',
+		success : function(data, status) {
+			$("#maintable").html(data);
+		}
+	});
+}
+
+function updateRecommend(_a, recommend) {
+	var feedbackId = _a.parentElement.parentElement.children[0].innerHTML;
+	$.ajax({
+		url : '/ny6design_web/updateRecommend',
+		data : {
+			feedbackId : feedbackId,
+			recommend : recommend
+		},
+		success : function(data, status) {
+			if (data == 1) {
+				loadFeedback();
+			}
+		}
+	});
+}
+
+function searchUser() {
 	var keyword = $("#keyword").val();
 	$.ajax({
 		url : '/ny6design_web/searchUsers',
@@ -28,7 +53,7 @@ function searchUser(){
 		}
 	});
 }
-function backIndex(){
+function backIndex() {
 	location.href = '/ny6design_web/loginOut';
 }
 function editUser(_td) {
@@ -41,7 +66,7 @@ function editUser(_td) {
 		success : function(data, status) {
 			$("#maintable").html(data);
 			var countryCode = $("#_countryCode").val();
-			var stateCode =$("#_stateCode").val();
+			var stateCode = $("#_stateCode").val();
 			$.ajax({
 				url : '/ny6design_web/getAllCountries',
 				success : function(data, status) {
@@ -51,17 +76,15 @@ function editUser(_td) {
 						var description = val["fdescription"];
 						var option;
 						if (countryCode === id) {
-							option = $("<option id='" + id + "' selected>"
-									+ description + "</option>");
+							option = $("<option id='" + id + "' selected>" + description + "</option>");
 						} else {
-							option = $("<option id='" + id + "'>" + description
-									+ "</option>");
+							option = $("<option id='" + id + "'>" + description + "</option>");
 						}
 						option.appendTo(select);
 					});
 				}
 			});
-			
+
 			$.ajax({
 				url : '/ny6design_web/getAllStates',
 				success : function(data, status) {
@@ -72,18 +95,16 @@ function editUser(_td) {
 						var id = val["code"];
 						var description = val["fdescription"];
 						var option;
-						if(stateCode === id){
-							option = $("<option id='" + id + "' selected>" + description
-								+ "</option>");
+						if (stateCode === id) {
+							option = $("<option id='" + id + "' selected>" + description + "</option>");
 						} else {
-							option = $("<option id='" + id + "'>" + description
-									+ "</option>");
+							option = $("<option id='" + id + "'>" + description + "</option>");
 						}
 						option.appendTo(select);
 					});
 				}
 			});
-			
+
 		}
 	});
 }

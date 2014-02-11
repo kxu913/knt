@@ -222,6 +222,39 @@ function closeModal(id) {
 	});
 }
 
+function submitFeedback(){
+	var firstName = $("#firstName").val();
+	var lastName = $("#lastName").val();
+	
+	var tel = $("#tel").val();
+	var email = $("#email").val();
+	
+	var address = $("#address").val();
+	var extra = $("#extra").val();
+	
+	$.ajax({
+		url : '/ny6design_web/submitFeedback',
+		type : 'POST',
+		data : {
+			firstName : firstName,
+			lastName : lastName,
+			tel : tel,
+			email : email,
+			address : address,
+			extra : extra
+		},
+		success : function(data, status) {
+			if (data ===0 ) {
+				alert("Your feedback submit successful!");
+				closeModal("addFeedback");
+				showFeedback();
+			} else {
+				alert("Your question submit failed! please check your input");
+			}
+		}
+	});
+}
+
 function submitQeustion(){
 	var firstName = $("#firstName").val();
 	var lastName = $("#lastName").val();

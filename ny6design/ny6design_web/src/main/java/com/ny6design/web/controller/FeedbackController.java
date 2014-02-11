@@ -42,6 +42,12 @@ public class FeedbackController {
 		return new ModelAndView("feedback-list", modelMap);
 	}
 	
+	@RequestMapping("/listFeedbackForAdminpage")
+	public ModelAndView getAllFeedBackForAdminPage(ModelMap modelMap) {
+		modelMap.put("feedbackList", feedbackService.getAllFeedback());
+		return new ModelAndView("feedback-list-admin", modelMap);
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "submitFeedback", method = { RequestMethod.POST,
 			RequestMethod.GET })
@@ -75,6 +81,7 @@ public class FeedbackController {
 		 * set extra fields
 		 */
 		feedback.setFupdatetime(new Date());
+		feedback.setRecommend((short) 0);
 
 		/**
 		 * if user had login in, set userId
@@ -92,5 +99,21 @@ public class FeedbackController {
 		}
 		return 1;
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "updateRecommend", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public int updateRecommend(HttpServletRequest request){
+		String feedbackId = request.getParameter("feedbackId");
+		if(StringUtils.isEmpty(feedbackId)){
+			return 0;
+		}
+		int _feedbackId = Integer.parseInt(feedbackId);
+		String recommend = request.getParameter("recommend");
+		if(StringUtils.isEmpty(recommend)){
+			return 0;
+		}
+		
+		return feedbackService.updateRecommend(_feedbackId,recommend);
+	}
 }

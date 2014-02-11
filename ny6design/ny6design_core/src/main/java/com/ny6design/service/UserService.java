@@ -1,5 +1,7 @@
 package com.ny6design.service;
 
+import static com.ny6design.constant.Constants.WILDCARD;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -75,6 +77,14 @@ public class UserService {
 		} else {
 			this.insert(user);
 		}
+	}
+
+	public List<UserDetail> searchUsers(String keyword) {
+		if (StringUtils.isNotEmpty(keyword)) {
+			keyword = WILDCARD + keyword + WILDCARD;
+			return userMapper.searchUsers(keyword);
+		}
+		return Collections.emptyList();
 	}
 
 }

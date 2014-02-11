@@ -2,7 +2,6 @@ package com.ny6design.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,18 @@ public class UserController {
 
 	}
 
+	
+	@RequestMapping("searchUsers")
+	public ModelAndView searchUsers(ModelMap model, HttpServletRequest request) {
+		String keyword = request.getParameter("keyword");
+		if (log.isTraceEnabled()) {
+			log.trace("Invoke Search user method! keywords is " + keyword);
+		}
+		model.put("userList", userService.searchUsers(keyword));
+		return new ModelAndView("member-list", model);
+
+	}
+	
 	@RequestMapping("getUserById")
 	public ModelAndView getUserById(ModelMap model, HttpServletRequest request) {
 		String userId = request.getParameter("userId");

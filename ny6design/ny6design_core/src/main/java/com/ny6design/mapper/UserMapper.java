@@ -26,4 +26,6 @@ public interface UserMapper {
 	List<UserDetail> getAllUsers();
 	
 	UserDetail getUserById(Integer userId);
+
+	List<UserDetail> searchUsers(String keyword);
 }

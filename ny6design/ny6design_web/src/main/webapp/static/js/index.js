@@ -256,14 +256,14 @@ function submitFeedback(){
 }
 
 function submitQeustion(){
-	var firstName = $("#firstName").val();
-	var lastName = $("#lastName").val();
+	var firstName = $("#firstNameFor").val();
+	var lastName = $("#lastNameFor").val();
 	
-	var tel = $("#tel").val();
-	var email = $("#email").val();
+	var tel = $("#telFor").val();
+	var email = $("#emailFor").val();
 	
-	var address = $("#address").val();
-	var extra = $("#extra").val();
+	var address = $("#addressFor").val();
+	var extra = $("#extraFor").val();
 	
 	$.ajax({
 		url : '/ny6design_web/submitQuestion',

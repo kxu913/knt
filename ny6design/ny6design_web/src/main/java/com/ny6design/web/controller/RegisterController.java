@@ -194,6 +194,10 @@ public class RegisterController {
 		_address.setStatecode(state);
 		_address.setTown(town);
 		_address.setZipcode(zipcode);
+		_address.setFirstname(firstName);
+		_address.setLastname(lastName);
+		_address.setEmailaddress(emailAddress);
+		_address.setTelephone(telephone);
 		_address.setIsDefault(1);
 		addressMapper.insert(_address);
 

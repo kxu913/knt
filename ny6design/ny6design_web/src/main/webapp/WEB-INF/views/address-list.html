@@ -1,0 +1,145 @@
+<div class="row" style="padding: 10px 0px 10px 0px;">
+	<div class="col-sm-10">
+		<p class="text-warning">
+			<strong>Home :: Address Manage</strong>
+		</p>
+	</div>
+	<div class="col-sm-2 text-right">
+		<a id="addressId" href="#addAddress" rel="leanModal"
+			class="btn btn-warning"> <span class="glyphicon glyphicon-plus">
+		</span>Add
+		</a>
+	</div>
+</div>
+<div class="table-responsive" style="padding-top: 10px">
+	<table class="table table-hover table-bordered">
+		<tr>
+			<th style="display: none">userid</th>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Email</th>
+			<th>Telephone</th>
+			<th>Country</th>
+			<th>state</th>
+			<th>address</th>
+			<th>SetDefault</th>
+			<th>Delete</th>
+		</tr>
+		#foreach($address as $!addressList)
+		<tr>
+			<td style="display: none">$address.addressid</td>
+			<td onclick="editUser(this)"><a>$address.firstname</a></td>
+			<td><a>$address.lastname</a></td>
+			<td><a>$address.emailaddress</a></td>
+			<td><a>$address.telephone</a></td>
+			<td>$address.countryDesc</td>
+			<td>$address.stateDesc</td>
+			<td><a>$address.address</a></td>
+			<td>#if($address.isDefault!=1) <a href="#" class="btn btn-info"
+				onclick="setDefault(this)">Default</a> #else #end
+			</td>
+			<td><img src="static/img/aa.gif"
+				style="width: 20px; height: 20px"></td>
+		</tr>
+		#end
+	</table>
+</div>
+
+<div id="addAddress">
+	<div id="signup-ct">
+		<div id="addAddress-header">
+			<h3>Add an Address</h3>
+			<a href="#" class="modal_close"></a>
+		</div>
+		<form class="form-horizontal" role="form" action="">
+			<fieldset>
+				<div class="form-group">
+					<label for="firstName" class="col-sm-2 control-label">First
+						Name:</label>
+					<div class="col-sm-8">
+						<input type="input" class="form-control" id="firstName"
+							placeholder="FirstName" required>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="lastName" class="col-sm-2 control-label">Last
+						Name:</label>
+					<div class="col-sm-8">
+						<input type="input" class="form-control" id="lastName"
+							placeholder="LastName">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tel" class="col-sm-2 control-label">Tel:</label>
+					<div class="col-sm-8">
+						<input type="input" class="form-control" id="tel"
+							placeholder="Telephone">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email" class="col-sm-2 control-label">Email: </label>
+					<div class="col-sm-8">
+						<input type="input" class="form-control" id="email"
+							placeholder="Email">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="address" class="col-sm-2 control-label">Address:
+					</label>
+					<div class="col-sm-8">
+						<input type="input" class="form-control" id="address"
+							placeholder="Address">
+					</div>
+				</div>
+
+				<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+					<label for="town" class="col-sm-2 control-label">Town:</label>
+					<div class="col-sm-8">
+						<input type="input" class="form-control" id="town"
+							placeholder="Town">
+					</div>
+				</div>
+
+				<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+					<label for="statedId" class="col-sm-2 control-label">State:</label>
+					<input type="hidden" id="_stateCode">
+					<div class="col-sm-8" id="stateDiv">
+						<select class="form-control" id="statedId">
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+					<label for="zipcode" class="col-sm-2 control-label">Zip
+						Code:</label>
+					<div class="col-sm-8">
+						<input type="input" class="form-control" id="zipcode"
+							placeholder="Zip Code">
+					</div>
+				</div>
+
+				<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+					<label for="countryId" class="col-sm-2 control-label">Country:</label>
+					<div class="col-sm-8" id="countryDiv">
+						<select class="form-control" id="countryId">
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-5 col-sm-2">
+						<a href="#" class="btn btn-danger"
+							onclick="closeModal('addAddress')">Cancel</a>
+					</div>
+					<div class="col-sm-offset-1 col-sm-2">
+						<button type="button" class="btn btn-primary"
+							onclick="submitAddress()">Submit</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+
+	</div>
+</div>

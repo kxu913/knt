@@ -24,44 +24,52 @@ function loadUser() {
 		url : '/ny6design_web/getUserByIdForAcct',
 		success : function(data, status) {
 			$("#productList").html(data);
-			var countryCode = $("#_countryCode").val();
-			var stateCode = $("#_stateCode").val();
-			$.ajax({
-				url : '/ny6design_web/getAllCountries',
-				success : function(data, status) {
-					var select = $("#countryId");
-					$.each(data, function(key, val) {
-						var id = val["code"];
-						var description = val["fdescription"];
-						var option;
-						if (countryCode === id) {
-							option = $("<option id='" + id + "' selected>" + description + "</option>");
-						} else {
-							option = $("<option id='" + id + "'>" + description + "</option>");
-						}
-						option.appendTo(select);
-					});
-				}
-			});
+			loadCountry();
+			loadStates();
+			
+		}
+	});
+}
 
-			$.ajax({
-				url : '/ny6design_web/getAllStates',
-				success : function(data, status) {
-					var select = $("#statedId");
-					var initOption = $("<option value='-1'>Please choose!</option>");
-					initOption.appendTo(select);
-					$.each(data, function(key, val) {
-						var id = val["code"];
-						var description = val["fdescription"];
-						var option;
-						if (stateCode === id) {
-							option = $("<option id='" + id + "' selected>" + description + "</option>");
-						} else {
-							option = $("<option id='" + id + "'>" + description + "</option>");
-						}
-						option.appendTo(select);
-					});
+function loadCountry(){
+	var countryCode = $("#_countryCode").val();
+	$.ajax({
+		url : '/ny6design_web/getAllCountries',
+		success : function(data, status) {
+			var select = $("#countryId");
+			$.each(data, function(key, val) {
+				var id = val["code"];
+				var description = val["fdescription"];
+				var option;
+				if (countryCode === id) {
+					option = $("<option id='" + id + "' selected>" + description + "</option>");
+				} else {
+					option = $("<option id='" + id + "'>" + description + "</option>");
 				}
+				option.appendTo(select);
+			});
+		}
+	});
+}
+
+function loadStates(){
+	var stateCode = $("#_stateCode").val();
+	$.ajax({
+		url : '/ny6design_web/getAllStates',
+		success : function(data, status) {
+			var select = $("#statedId");
+			var initOption = $("<option value='-1'>Please choose!</option>");
+			initOption.appendTo(select);
+			$.each(data, function(key, val) {
+				var id = val["code"];
+				var description = val["fdescription"];
+				var option;
+				if (stateCode === id) {
+					option = $("<option id='" + id + "' selected>" + description + "</option>");
+				} else {
+					option = $("<option id='" + id + "'>" + description + "</option>");
+				}
+				option.appendTo(select);
 			});
 		}
 	});
@@ -287,6 +295,80 @@ function submitQeustion(){
 		}
 	});
 }
+/* for address */
+function loadAddress(){
+	
+	$.ajax({
+		url : '/ny6design_web/listAddress',
+		success : function(data, status) {
+			$("#ads").html("");
+			$("#productList").html(data);
+			loadCountry();
+			loadStates();
+			$('#addressId').leanModal({
+				top : 100,
+				closeButton : ".modal_close"
+			});
+		}
+	});
+}
+
+function submitAddress(){
+	var firstName = $("#firstName").val();
+	var lastName = $("#lastName").val();
+	
+	var tel = $("#tel").val();
+	var email = $("#email").val();
+	
+	var address = $("#address").val();
+	var town = $("#town").val();
+	
+	var country = $("#countryId option:selected").attr("id");
+	var zipcode = $("#zipcode").val();
+	var statedId = $("#statedId option:selected").attr("id"); 
+	$.ajax({
+		url : '/ny6design_web/submitAddress',
+		type : 'POST',
+		data : {
+			firstName : firstName,
+			lastName : lastName,
+			tel : tel,
+			email : email,
+			address : address,
+			town : town,
+			country : country,
+			zipcode : zipcode,
+			statedId : statedId
+		},
+		success : function(data, status) {
+			if (data ===0 ) {
+				alert("Your Address submit successful!");
+				closeModal("addAddress");
+				loadAddress();
+			} else {
+				alert("Your Address submit failed! please check your input");
+			}
+		}
+	});
+}
+
+function setDefault(_a){
+	var addressId = _a.parentElement.parentElement.children[0].innerHTML;
+	$.ajax({
+		url : '/ny6design_web/updateDefault?addressId='+addressId,
+		success : function(data, status) {
+			if (data ===0 ) {
+				alert("Your default Address update successful!");
+				closeModal("addAddress");
+				loadAddress();
+			} else {
+				alert("Your Address update failed!");
+			}
+		}
+	});
+	
+}
+/* address end!*/
 $(document).ready(function() {
 	init();
 

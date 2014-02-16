@@ -25,11 +25,13 @@ import com.ny6design.mapper.AddressMapper;
 import com.ny6design.mapper.CountryMapper;
 import com.ny6design.mapper.FromMessageMapper;
 import com.ny6design.mapper.StatesMapper;
+import com.ny6design.mapper.UserAddressMapper;
 import com.ny6design.model.Address;
 import com.ny6design.model.Country;
 import com.ny6design.model.FromMessage;
 import com.ny6design.model.States;
 import com.ny6design.model.User;
+import com.ny6design.model.UserAddress;
 import com.ny6design.service.UserService;
 import com.ny6design.web.constant.CONSTANT;
 
@@ -50,6 +52,8 @@ public class RegisterController {
 	FromMessageMapper fromMessageMapper;
 	@Autowired
 	AddressMapper addressMapper;
+	@Autowired
+	UserAddressMapper userAddressMapper;
 	@Autowired
 	UserService userService;
 
@@ -190,6 +194,7 @@ public class RegisterController {
 		_address.setStatecode(state);
 		_address.setTown(town);
 		_address.setZipcode(zipcode);
+		_address.setIsDefault(1);
 		addressMapper.insert(_address);
 
 		User user = new User();
@@ -215,6 +220,11 @@ public class RegisterController {
 		user.setTelephone(telephone);
 		userService.save(user);
 		final int userId = user.getUserid();
+
+		UserAddress userAddress = new UserAddress();
+		userAddress.setAddressid(_address.getAddressid());
+		userAddress.setUserid(userId);
+		userAddressMapper.insert(userAddress);
 		if (!isUpdate) {
 			executor.submit(new Runnable() {
 

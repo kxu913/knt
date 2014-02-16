@@ -10,6 +10,7 @@ function loadUserPanel() {
 }
 
 function gotoMyAccount() {
+	$("#ads").html("");
 	loadUserPanel();
 	loadUser();
 }

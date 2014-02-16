@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,10 +32,20 @@ public class QuestionController {
 	private QuestionService questionService;
 
 	@RequestMapping("getUnrepliedQuestions")
-	public ModelAndView listUnrepliedQuestion(ModelMap model){
-		model.put("unrepliedQuestions", questionService.findAllUnreplyQuestion());
+	public ModelAndView listUnrepliedQuestion(ModelMap model) {
+		model.put("unrepliedQuestions",
+				questionService.findAllUnreplyQuestion());
 		return new ModelAndView("question-list", model);
 	}
+
+	@RequestMapping("/searchQuestion")
+	public ModelAndView searchQuestion(@RequestParam("keyword") String keyword,
+			ModelMap modelMap) {
+		modelMap.put("unrepliedQuestions",
+				questionService.findAllUnreplyQuestionByKeyword(keyword));
+		return new ModelAndView("question-list", modelMap);
+	}
+
 	@ResponseBody
 	@RequestMapping(value = "submitQuestion", method = { RequestMethod.POST,
 			RequestMethod.GET })

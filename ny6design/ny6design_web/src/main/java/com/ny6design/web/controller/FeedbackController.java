@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,19 +36,27 @@ public class FeedbackController {
 	public List<FeedBack> getRecommendFeedback() {
 		return feedbackService.getRecommendFeedback();
 	}
-	
+
 	@RequestMapping("/listFeedback")
 	public ModelAndView getAllFeedBack(ModelMap modelMap) {
 		modelMap.put("feedbackList", feedbackService.getAllFeedback());
 		return new ModelAndView("feedback-list", modelMap);
 	}
-	
+
+	@RequestMapping("/searchFeedback")
+	public ModelAndView searchFeedback(@RequestParam("keyword") String keyword,
+			ModelMap modelMap) {
+		modelMap.put("feedbackList",
+				feedbackService.getFeedbackBykeyword(keyword));
+		return new ModelAndView("feedback-list-admin", modelMap);
+	}
+
 	@RequestMapping("/listFeedbackForAdminpage")
 	public ModelAndView getAllFeedBackForAdminPage(ModelMap modelMap) {
 		modelMap.put("feedbackList", feedbackService.getAllFeedback());
 		return new ModelAndView("feedback-list-admin", modelMap);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "submitFeedback", method = { RequestMethod.POST,
 			RequestMethod.GET })
@@ -99,21 +108,21 @@ public class FeedbackController {
 		}
 		return 1;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "updateRecommend", method = { RequestMethod.POST,
 			RequestMethod.GET })
-	public int updateRecommend(HttpServletRequest request){
+	public int updateRecommend(HttpServletRequest request) {
 		String feedbackId = request.getParameter("feedbackId");
-		if(StringUtils.isEmpty(feedbackId)){
+		if (StringUtils.isEmpty(feedbackId)) {
 			return 0;
 		}
 		int _feedbackId = Integer.parseInt(feedbackId);
 		String recommend = request.getParameter("recommend");
-		if(StringUtils.isEmpty(recommend)){
+		if (StringUtils.isEmpty(recommend)) {
 			return 0;
 		}
-		
-		return feedbackService.updateRecommend(_feedbackId,recommend);
+
+		return feedbackService.updateRecommend(_feedbackId, recommend);
 	}
 }

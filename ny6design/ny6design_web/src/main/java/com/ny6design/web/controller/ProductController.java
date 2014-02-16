@@ -38,6 +38,13 @@ public class ProductController {
 		return new ModelAndView ("pictable",model);
 	}
 	
+	@RequestMapping("/getProductList4Admin")
+	public ModelAndView  getProductList4Admin(ModelMap model) {
+		List<Product> productList = productMapper.getProducts4Admin();
+		model.put("productList", productList);
+		return new ModelAndView ("admin/product/productlist",model);
+	}
+	
 	@RequestMapping("/pdetail/{productId}")
 	public ModelAndView  getProductInfo(@PathVariable int productId, ModelMap model) {
 		Product product = productMapper.getProductDetail(productId);

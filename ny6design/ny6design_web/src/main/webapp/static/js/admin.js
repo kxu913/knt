@@ -1,3 +1,12 @@
+function loadProductList() {
+	$.ajax({
+		url : '/ny6design_web/getProductList4Admin',
+		success : function(data, status) {
+			$("#maintable").html(data);
+		}
+	});
+}
+
 function loadUsers() {
 	$.ajax({
 		url : '/ny6design_web/getAllUsers',

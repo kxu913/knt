@@ -1,11 +1,12 @@
 package com.ny6design.model;
 
-public class Address {
+public class AddressDetail {
 	private Integer addressid;
 
 	private String countrycode;
-
+	private String countryDesc;
 	private String statecode;
+	private String stateDesc;
 
 	private String town;
 
@@ -109,6 +110,22 @@ public class Address {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public String getCountryDesc() {
+		return countryDesc;
+	}
+
+	public void setCountryDesc(String countryDesc) {
+		this.countryDesc = countryDesc;
+	}
+
+	public String getStateDesc() {
+		return stateDesc;
+	}
+
+	public void setStateDesc(String stateDesc) {
+		this.stateDesc = stateDesc;
 	}
 
 }

@@ -20,4 +20,6 @@ public interface FeedBackMapper {
     List<FeedBack> getRecommendFeedback(int count);
 
 	List<FeedBack> getAllFeedback();
+
+	List<FeedBack> findFeedbackBykeyword(String keyword);
 }

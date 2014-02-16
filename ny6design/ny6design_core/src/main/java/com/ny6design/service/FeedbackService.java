@@ -2,9 +2,11 @@ package com.ny6design.service;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.ny6design.constant.Constants.WILDCARD;
 import com.ny6design.mapper.FeedBackMapper;
 import com.ny6design.model.FeedBack;
 
@@ -38,6 +40,14 @@ public class FeedbackService {
 			return feedBackMapper.updateByPrimaryKey(feedback);
 		}
 		return 0;
+	}
+
+	public List<FeedBack> getFeedbackBykeyword(String keyword) {
+		if (StringUtils.isEmpty(keyword)) {
+			return this.getAllFeedback();
+		}
+		return feedBackMapper.findFeedbackBykeyword(WILDCARD + keyword
+				+ WILDCARD);
 	}
 
 }

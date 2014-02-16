@@ -1,6 +1,7 @@
 package com.ny6design.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ny6design.model.Question;
 
@@ -18,4 +19,6 @@ public interface QuestionMapper {
     int updateByPrimaryKey(Question record);
 
 	List<Question> findQuestionsByStatus(int status);
+
+	List<Question> findAllUnreplyQuestionByKeyword(Map<String, Object> params);
 }

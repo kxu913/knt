@@ -37,6 +37,11 @@
     from t_message order by fupdatetime desc
   </select>
   
+   <select id="findFeedbackBykeyword" resultMap="BaseResultMap" parameterType="string" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_message where fdescription like #{keyword}
+  </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_message

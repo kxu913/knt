@@ -12,6 +12,8 @@ public class Address {
     private String zipcode;
 
     private String address;
+    
+    private int isDefault;
 
     public Integer getAddressid() {
         return addressid;
@@ -60,4 +62,13 @@ public class Address {
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
     }
+
+	public int getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(int isDefault) {
+		this.isDefault = isDefault;
+	}
+    
 }

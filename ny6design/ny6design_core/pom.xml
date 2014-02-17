@@ -100,6 +100,12 @@
 			<artifactId>joda-time</artifactId>
 		</dependency>
 		<!-- GENERAL UTILS end -->
+		
+		<!-- JSR303 BeanValidator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
 	
 	</dependencies>
 	<build>

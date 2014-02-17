@@ -7,6 +7,16 @@ function loadProductList() {
 	});
 }
 
+function insertProduct() {
+	$.ajax({
+		url : '/ny6design_web/insertProduct',
+		success : function(data, status) {
+			$("#maintable").html(data);
+		}
+	});
+}
+
+
 function loadUsers() {
 	$.ajax({
 		url : '/ny6design_web/getAllUsers',

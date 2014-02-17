@@ -21,4 +21,6 @@ public interface ProductMapper {
     
     List<Product> getProductsByCategory(Integer categoryId);
     
+    List<Product> getProducts4Admin();
+    
 }

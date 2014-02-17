@@ -85,5 +85,10 @@ public class ProductMapperTest {
 		assertThat(prodList.size()).isGreaterThan(0);
 	}
 	
-
+	@Test
+	public void testGetProducts4Admin(){
+		List<Product> prodList = productMapper.getProducts4Admin();
+		
+		assertThat(prodList.size()).isGreaterThan(0);
+	}
 }

@@ -117,5 +117,7 @@
 	  	p.product_id=pc.product_id
 		and p.product_id = #{product_id}
 	</select>
-    
+    <select id="getProducts4Admin" resultMap="prodDetail">
+	  SELECT * FROM t_product order by date_added desc;
+	</select>
 </mapper>

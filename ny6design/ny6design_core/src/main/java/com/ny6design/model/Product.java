@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.google.common.collect.Lists;
 
 public class Product {
@@ -19,6 +21,7 @@ public class Product {
 
     private Integer stockStatusId;
 
+    @NotEmpty
     private String image;
 
     private Integer manufacturerId;

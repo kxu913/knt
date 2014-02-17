@@ -3,6 +3,8 @@ package com.ny6design.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ProductPrice {
     private Integer productDiscountId;
 
@@ -10,10 +12,12 @@ public class ProductPrice {
 
     private Integer customerGroupId;
 
+    @NotEmpty
     private Integer quantity;
 
     private Integer priority;
-
+    
+    @NotEmpty
     private BigDecimal price;
 
     private Date dateStart;

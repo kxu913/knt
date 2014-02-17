@@ -1,12 +1,16 @@
 package com.ny6design.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ProductDescription extends ProductDescriptionKey {
+	@NotEmpty
     private String name;
 
     private String metaKeywords;
 
     private String metaDescription;
 
+    @NotEmpty
     private String description;
 
     public String getName() {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ny6design.mapper.ProductMapper">
+
   <resultMap id="BaseResultMap" type="com.ny6design.model.Product">
     <id column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="model" jdbcType="VARCHAR" property="model" />
@@ -66,6 +67,31 @@
       #{viewed}, #{sortOrder}, #{subtract}, 
       #{minimum}, #{cost})
   </insert>
+  
+    <insert id="insertProductDesc" parameterType="com.ny6design.model.ProductDescription" >
+    insert into t_product_description (language_id, product_id, name, 
+      meta_keywords, meta_description, description
+      )
+    values (#{languageId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{metaKeywords,jdbcType=VARCHAR}, #{metaDescription,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  
+    <insert id="insertProductImage" parameterType="com.ny6design.model.ProductImage" useGeneratedKeys ="true" keyProperty ="product_image_id">
+    insert into t_product_image (product_id, image
+      )
+    values (#{productId}, #{image}
+      )
+  </insert>
+  
+    <insert id="insert" parameterType="com.ny6design.model.ProductPrice" useGeneratedKeys ="true" keyProperty ="product_discount_id">
+    insert into t_product_price ( product_id, customer_group_id, 
+      quantity, priority, price, 
+      date_start, date_end)
+    values (#{productId}, #{customerGroupId}, 
+      #{quantity}, #{priority}, #{price}, 
+      #{dateStart}, #{dateEnd})
+  </insert>
 
    <!-- product vs product_desc -->
    <resultMap type="com.ny6design.model.Product" id="pordAndDescAndPrice">
@@ -92,6 +118,9 @@
    
    <resultMap type="com.ny6design.model.Product" id="prodDetail">
    	<id property="productId" column="product_id"/>
+   	<result property="orderColumnName" column="orderColumnName"/>
+   	<result property="orderBy" column="orderBy"/>
+   	
    	<association property="categoryId" column="product_id"  select="getCategoryId"/>
    	<association property="productDesc" column="product_id" javaType="com.ny6design.model.ProductDescription" select="getDesc4Product"/>
    	<collection property="productImageList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductImage" select="getImage4Product"/>
@@ -117,7 +146,17 @@
 	  	p.product_id=pc.product_id
 		and p.product_id = #{product_id}
 	</select>
-    <select id="getProducts4Admin" resultMap="prodDetail">
-	  SELECT * FROM t_product order by date_added desc;
+	
+    <select id="getProducts4Admin" resultMap="prodDetail" >
+	  SELECT tp.*, tpd.* 
+	  FROM t_product tp, t_product_description tpd 
+	  where tp.product_id=tpd.product_id
+	  order by 
+	  <if test="orderColumnName != null" >
+        #{orderColumnName} 
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy};
+      </if>
 	</select>
 </mapper>

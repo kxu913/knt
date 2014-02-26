@@ -9,8 +9,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.google.common.collect.Lists;
 
 public class Product {
+	
+	private String orderColumnName="date_added";
+	private String orderBy="DESC";
+	
     private Integer productId;
 
+    @NotEmpty
     private String model;
 
     private String sku;
@@ -21,7 +26,6 @@ public class Product {
 
     private Integer stockStatusId;
 
-    @NotEmpty
     private String image;
 
     private Integer manufacturerId;
@@ -308,9 +312,26 @@ public class Product {
 		this.productPriceList = productPriceList;
 	}
 
+	public String getOrderColumnName() {
+		return orderColumnName;
+	}
+
+	public void setOrderColumnName(String orderColumnName) {
+		this.orderColumnName = orderColumnName;
+	}
+
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", model=" + model
+		return "Product [productId=" + productId + ", orderColumnName=" + orderColumnName
+				+", orderBy=" + orderBy +", model=" + model
 				+ ", sku=" + sku + ", location=" + location + ", quantity="
 				+ quantity + ", stockStatusId=" + stockStatusId + ", image="
 				+ image + ", manufacturerId=" + manufacturerId + ", shipping="

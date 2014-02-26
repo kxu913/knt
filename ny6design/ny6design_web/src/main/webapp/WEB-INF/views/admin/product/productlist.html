@@ -11,18 +11,19 @@
 		  <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);"></td>
 		  <td class="text-center">Image</td>
 		  <td class="text-left">
-			<a href="http://demo.opencart.com/admin/index.php?route=catalog/product&amp;token=4fa4fd21323c6815c58a099e63c7b849&amp;sort=pd.name&amp;order=ASC">Product Name</a>
+			<a id="a_filter_name" onclick="orderby('name','a_filter_name')" class="ASC">Product Name</a>
 		  </td>
 		  <td class="text-left">
-		  	<a href="">Model</a><span class="glyphicon glyphicon-chevron-down"></span>
+ 		  	<a id="a_filter_model" onclick="orderby('model','a_filter_model')" class="ASC">Model</a><!--<span class="glyphicon glyphicon-chevron-down"></span> -->
 		  </td>
 		  <td class="text-left">
-		  	<a href="order=ASC">Price</a>
+		  	<a id="a_filter_price" onclick="orderby('price','a_filter_price')" class="ASC">Price</a>
 		  </td>
 		  <td class="text-right">
-		  	<a href="order=ASC" class="desc">Quantity</a>
+		  	<a id="a_filter_quantity" onclick="orderby('quantity','a_filter_quantity')" class="ASC">Quantity</a>
 		  </td>
-		  <td class="text-left"><a href="order=ASC">Status</a>
+		  <td class="text-left">
+		  	<a id="a_filter_status" onclick="orderby('status','a_filter_status')" class="ASC">Status</a>
 		  </td>
 		  <td class="text-right">Action</td>
 		</tr>
@@ -31,10 +32,16 @@
 		<tr class="success">
 		  <td></td>
 		  <td></td>
-		  <td><input type="text" name="filter_name" value="" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></td>
-		  <td><input type="text" name="filter_model" value="" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></td>
-		  <td align="text-left"><input type="text" name="filter_price" value="" size="8"></td>
-		  <td align="text-right"><input type="text" name="filter_quantity" value="" style="text-align: right;"></td>
+		  <td>
+<!-- 		  	<input type="text" name="filter_name" value="" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"> -->
+			<input type="text" class="form-control" name="filter_name" placeholder="name search">
+		  </td>
+		  <td>
+		  	<input type="text" class="form-control" name="filter_model" placeholder="model search">
+<!-- 		  	<input type="text" name="filter_model" value="" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"> -->
+		  </td>
+		  <td align="text-left"><input type="text" class="form-control" name="filter_price" placeholder="price search"></td>
+		  <td align="text-right"><input type="text" class="form-control" name="filter_quantity" placeholder="quantity search"></td>
 		  <td>
 			<select name="filter_status">
 			  <option value="*"></option>
@@ -42,12 +49,13 @@
 			  <option value="0">Disabled</option>
 			</select>
 		  </td>
-		  <td align="right"><a onclick="filter();" class="button">Filter</a></td>
+		  <td align="right"><button type="button" class="btn btn-primary" onclick="filter();" >Filter</button></td>
 		</tr>
-	
+		
 		#foreach($product as $!productList)
 			#listProduct($product)
 		#end
+		
 	</tbody>
 </table>
 

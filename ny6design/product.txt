@@ -9,10 +9,10 @@
 8. 
 
 product back end todo list
-1. 头部即产品列表外部的div
-2. insert
-3. copy
+1. 头部即产品列表外部的div (done)
+2. insert (done, redirect exist bug)
+3. copy 
 4. delete
-5. 每列的正反排序（点击后才显示向上或向下箭头，没点时不显示）
-6. filter 查询
+5. 每列的正反排序（点击后才显示向上或向下箭头，没点时不显示） (1)
+6. filter 查询 (1)
 7. 列表翻页

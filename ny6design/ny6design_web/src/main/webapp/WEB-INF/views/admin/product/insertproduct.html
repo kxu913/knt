@@ -1,0 +1,86 @@
+<div class="row" style="background-color:#dff0d8">
+ <div class="col-xs-12 col-md-8"><h4>Insert Product</h4></div>
+ <div class="col-xs-6 col-md-4">
+ 	<button type="button" class="btn btn-primary" onclick="addPordcut()">Save</button>
+ 	<button type="button" class="btn btn-info">Cancel</button>
+ </div>
+</div>
+
+<ul id="myTab" class="nav nav-tabs">
+  <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+  <li class=""><a href="#data" data-toggle="tab">Data</a></li>
+  <li class=""><a href="#p_image" data-toggle="tab">Image</a></li>
+</ul>
+
+<form class="form-horizontal" id="addProductForm" method="post" action="/ny6design_web/saveProduct">
+<div id="productTab" class="tab-content">
+
+  <div class="tab-pane fade active in" id="general">
+  	<p>
+	<div class="form-group">
+		<label for="name" class="col-sm-2 control-label"><span style="color:#FF0000; font-weight:bold">*</span> Product Name:</label>
+		<div class="col-sm-10">
+		  <input type="text" class="form-control" id="productDesc.name" name="productDesc.name" placeholder="Product Name">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="productDesc.description" class="col-sm-2 control-label">Description:</label>
+		<div class="col-sm-10">
+		  <textarea class="form-control" id="productDesc.description" name="productDesc.description" placeholder="Description" rows="3"></textarea>
+		</div>
+	</div>
+	</p>
+  </div>
+  
+  
+  
+<!-- Tab 2 data -->
+  <div class="tab-pane fade" id="data">
+  	<p>
+	<div class="form-group">
+		<label for="model" class="col-sm-2 control-label"><span style="color:#FF0000; font-weight:bold">*</span> Model:</label>
+		<div class="col-sm-10">
+		  <input type="text" class="form-control" id="model" name="model" placeholder="Model">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="price" class="col-sm-2 control-label">Price:</label>
+		<div class="col-sm-10">
+		  <input type="text" class="form-control" id="price" placeholder="price">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="image" class="col-sm-2 control-label">Image:</label>
+		<div class="col-sm-10">
+		  <input type="text" class="form-control" name="image" id="image" placeholder="Image">
+		</div>
+	</div>
+	</p>
+  </div>
+  
+  
+<!-- Tab 3 image -->
+  <div class="tab-pane fade" id="p_image">
+  	<p>
+	  	<table class="table table-bordered">
+		  <thead>
+	         <tr>
+	           <th class="text-left">Image:</th>
+	           <th class="text-right">Sort Order:</th>
+	           <th></th>
+	         </tr>
+	       </thead>
+		   <tfoot>
+		     <tr>
+		       <td colspan="2"></td>
+		       <td class="text-left">
+		       	<button type="button" class="btn btn-primary" onclick="addImage();" >Add Image</button>
+		       </td>
+		     </tr>
+		   </tfoot>
+		</table>
+	</p>
+  </div>
+  
+</div>
+</form>

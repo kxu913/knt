@@ -1,10 +1,14 @@
 package com.ny6design.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ProductImage {
+	
     private Integer productImageId;
 
     private Integer productId;
 
+    @NotEmpty
     private String image;
 
     public Integer getProductImageId() {

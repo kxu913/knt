@@ -40,6 +40,10 @@ td img {
 	max-width: 200px;
 }
 
+#ads{
+	min-height: 160px;
+}
+
 .ui-accordion .ui-accordion-content {
 	
 }

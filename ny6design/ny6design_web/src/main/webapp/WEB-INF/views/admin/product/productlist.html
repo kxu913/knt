@@ -1,14 +1,14 @@
 
 <div class="btn-group" style="margin: 9px 0 5px;">
-  <button type="button" class="btn btn-primary">Insert</button>
-  <button type="button" class="btn btn-warning">Copy</button>
-  <button type="button" class="btn btn-danger">Delete</button>
+  <button type="button" class="btn btn-primary" onclick="insertProduct()">Insert</button>
+  <button type="button" class="btn btn-warning" onclick="copyProduct()">Copy</button>
+  <button type="button" class="btn btn-danger" onclick="delProduct()">Delete</button>
 </div>
 
 <table class="table table-bordered">
 	<thead>
 		<tr class="active">
-		  <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);"></td>
+		  <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'productId\']').prop('checked', this.checked);"></td>
 		  <td class="text-center">Image</td>
 		  <td class="text-left">
 			<a id="a_filter_name" onclick="orderby('name','a_filter_name')" class="ASC">Product Name</a>
@@ -34,14 +34,14 @@
 		  <td></td>
 		  <td>
 <!-- 		  	<input type="text" name="filter_name" value="" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"> -->
-			<input type="text" class="form-control" name="filter_name" placeholder="name search">
+			<input type="text" class="form-control" id="filter_name" placeholder="name search">
 		  </td>
 		  <td>
-		  	<input type="text" class="form-control" name="filter_model" placeholder="model search">
+		  	<input type="text" class="form-control" id="filter_model" placeholder="model search">
 <!-- 		  	<input type="text" name="filter_model" value="" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"> -->
 		  </td>
-		  <td align="text-left"><input type="text" class="form-control" name="filter_price" placeholder="price search"></td>
-		  <td align="text-right"><input type="text" class="form-control" name="filter_quantity" placeholder="quantity search"></td>
+		  <td align="text-left"><input type="text" class="form-control" id="filter_price" placeholder="price search"></td>
+		  <td align="text-right"><input type="text" class="form-control" id="filter_quantity" placeholder="quantity search"></td>
 		  <td>
 			<select name="filter_status">
 			  <option value="*"></option>
@@ -49,7 +49,7 @@
 			  <option value="0">Disabled</option>
 			</select>
 		  </td>
-		  <td align="right"><button type="button" class="btn btn-primary" onclick="filter();" >Filter</button></td>
+		  <td align="right"><button type="button" class="btn btn-primary" onclick="productfilter();" >Filter</button></td>
 		</tr>
 		
 		#foreach($product as $!productList)
@@ -64,7 +64,7 @@
 
 #macro(listProduct $product) 
 <tr>
-  <td style="text-align: center;"><input type="checkbox" name="selected[]" value="$!{product.productId}"></td>
+  <td style="text-align: center;"><input type="checkbox" name="productId[]" value="$!{product.productId}"></td>
   <td class="text-center" style="padding£º7px">
   	<div style="width:62px;height:62px"><img src="$!{product.image}" class="img-responsive" alt="Responsive image"></div>
   </td>
@@ -82,7 +82,7 @@
   	Disabled
   #end
   </td>
-  <td class="right">[ <a href="http://demo.opencart.com/admin/index.php?route=catalog/product/update&amp;token=4fa4fd21323c6815c58a099e63c7b849&amp;product_id=47&amp;sort=p.quantity&amp;order=DESC">Edit</a> ]</td>
+  <td class="right">[ <a href="#" onclick="editProduct('$!{product.productId}')">Edit</a> ]</td>
 </tr>
 #end 
 

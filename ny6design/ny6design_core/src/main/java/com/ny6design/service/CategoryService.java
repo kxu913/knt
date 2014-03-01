@@ -88,7 +88,10 @@ public class CategoryService {
 		
 	}
 	
-	public Category getCategoryInfo(long categoryId){
+	public Category getCategoryInfo(Long categoryId){
+		if(null == categoryId)
+			return null;
+		
 		return mapper.getCategoryInfo(categoryId);
 	}
 

@@ -43,10 +43,7 @@
     from t_product
     where product_id = #{productId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_product
-    where product_id = #{productId,jdbcType=INTEGER}
-  </delete>
+
   <insert id="insertProduct" parameterType="com.ny6design.model.Product" useGeneratedKeys ="true" keyProperty ="productId">
     insert into t_product (model, sku, 
       location, quantity, stock_status_id, 
@@ -75,6 +72,15 @@
     values (#{languageId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{metaKeywords,jdbcType=VARCHAR}, #{metaDescription,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}
       )
+  </insert>
+  
+  <insert id="insertProductPrice" parameterType="com.ny6design.model.ProductPrice" useGeneratedKeys ="true" keyProperty ="product_discount_id">
+    insert into t_product_price ( product_id, customer_group_id, 
+      quantity, priority, price, 
+      date_start, date_end)
+    values (#{productId}, #{customerGroupId}, 
+      #{quantity}, #{priority}, #{price}, 
+      #{dateStart}, #{dateEnd})
   </insert>
   
     <insert id="insertProductImage" parameterType="com.ny6design.model.ProductImage" useGeneratedKeys ="true" keyProperty ="product_image_id">
@@ -159,4 +165,24 @@
         #{orderBy};
       </if>
 	</select>
+	
+	
+  <delete id="deleteProductById" parameterType="java.lang.Integer">
+    delete from t_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteProductDescByProductId" parameterType="java.lang.Integer">
+    delete from t_product_description
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteProductImpageByProductId" parameterType="java.lang.Integer">
+    delete from t_product_image
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteProductPriceByProductId" parameterType="java.lang.Integer">
+    delete from t_product_price
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  
+  	
 </mapper>

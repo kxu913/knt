@@ -87,8 +87,22 @@ public class ProductMapperTest {
 	
 	@Test
 	public void testGetProducts4Admin(){
-		List<Product> prodList = productMapper.getProducts4Admin();
+		List<Product> prodList = productMapper.getProducts4Admin(null, null);
 		
 		assertThat(prodList.size()).isGreaterThan(0);
+	}
+	
+	@Test
+	public void testInsertProductPrice(){
+		ProductPrice pp = new ProductPrice();
+		pp.setCustomerGroupId(1);
+		pp.setPrice(new BigDecimal(0.33));
+		pp.setDateEnd(new Date());
+		pp.setDateEnd(new Date());
+		pp.setQuantity(1);
+		pp.setPriority(1);
+		pp.setProductId(59);
+		productMapper.insertProductPrice(pp);
+		assertThat(pp.getProductDiscountId());
 	}
 }

@@ -49,7 +49,7 @@ public class CategoryServiceTest {
 	
 	@Test
 	public void testGetCategoryInfo(){
-		Category category = categoryService.getCategoryInfo(184);
+		Category category = categoryService.getCategoryInfo(new Long(184));
 		assertNotNull(category);
 		assertNotNull(category.getCategoryId());
 	}

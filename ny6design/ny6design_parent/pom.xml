@@ -42,7 +42,7 @@
 		<notificatio.version>develop-SNAPSHOT</notificatio.version>
 		<security.version>develop-SNAPSHOT</security.version>
 		<hibernate-validator.version>5.0.2.Final</hibernate-validator.version>
-
+		<ckeditor.version>3.6.4</ckeditor.version>
 	</properties>
 
 	<dependencyManagement>
@@ -237,13 +237,18 @@
 				<version>1.1.1</version>
 			</dependency>
 			
-					<!-- JSR 303 with Hibernate Validator -->
-		<!-- JSR303 BeanValidator -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
-		</dependency>
+			<!-- JSR 303 with Hibernate Validator -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.ckeditor</groupId>
+				<artifactId>ckeditor-java-core</artifactId>
+				<version>${ckeditor.version}</version>
+			</dependency>
 
 			
 			<!-- mvn install:install-file -Dfile=C:\Users\***\notification-develop-SNAPSHOT.jar -DgroupId=com.kevin -DartifactId=notification -Dversion=develop-SNAPSHOT -Dpackaging=jar -->

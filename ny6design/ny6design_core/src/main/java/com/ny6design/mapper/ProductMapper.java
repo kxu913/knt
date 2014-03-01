@@ -10,16 +10,16 @@ import com.ny6design.model.ProductImage;
 import com.ny6design.model.ProductPrice;
 
 public interface ProductMapper {
-    int deleteByPrimaryKey(Integer productId);
 
     int insertProduct(Product record);
-    
     int insertProductDesc(ProductDescription desc);
     int insertProductPrice(ProductPrice price);
     int insertProductImage(ProductImage image);
     
-    
-    
+    int deleteProductById(Integer productId);
+    int deleteProductDescByProductId(Integer productId);
+    int deleteProductImpageByProductId(Integer productId);
+    int deleteProductPriceByProductId(Integer productId);
 
     Product selectByPrimaryKey(Integer productId);
 

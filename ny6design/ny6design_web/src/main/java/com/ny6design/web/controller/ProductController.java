@@ -35,12 +35,13 @@ public class ProductController {
 	
 	@Autowired
 	ProductService service;
+	
 	@Autowired
 	ProductMapper productMapper;
 
 	@RequestMapping("/insertProduct")
 	public String insertProduct() {
-		return "admin/product/insertproduct";			
+		return "admin/product/insertproduct";
 	}
 	
 	@RequestMapping(value="/saveProduct", method=RequestMethod.POST)
@@ -107,6 +108,37 @@ public class ProductController {
 		return new ModelAndView ("admin/product/productlist",model);
 	}
 	
+	/**
+	 * TODO not done
+	 * @param model
+	 * @param name
+	 * @param pmodel
+	 * @param price
+	 * @param quantity
+	 * @param status
+	 * @return
+	 */
+	
+	@RequestMapping("/productfilter")
+	public ModelAndView  productfilter(ModelMap model, 
+			@RequestParam(value="name", required = false) String name, 
+			@RequestParam(value="model", required = false) String pmodel, 
+			@RequestParam(value="price", required = false) String price, 
+			@RequestParam(value="quantity", required = false) int quantity, 
+			@RequestParam(value="status", required = false) int status) {
+		
+//		List<Product> productList = productMapper.getProducts4Admin(orderColumnName, orderBy);
+//		model.put("productList", productList);
+		return new ModelAndView ("admin/product/productlist",model);
+	}
+	
+	
+	/**
+	 * TODO 这个链接要改名为viewdetail
+	 * @param productId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/pdetail/{productId}")
 	public ModelAndView  getProductInfo(@PathVariable int productId, ModelMap model) {
 		Product product = productMapper.getProductDetail(productId);
@@ -115,5 +147,26 @@ public class ProductController {
 		model.put("catergory", categoryService.getCategoryInfo(product.getCategoryId()));
 		return new ModelAndView ("pdetail",model);
 	}
+	
+	@RequestMapping("/editproduct/{productId}")
+	public String  editproduct(@PathVariable int productId, ModelMap model) {
+		Product product = productMapper.getProductDetail(productId);
+		model.put("product", product);
+		model.put("catergory", categoryService.getCategoryInfo(product.getCategoryId()));
+		return "admin/product/editproduct";
+	}
+	
+	@RequestMapping("/copyproduct/{productIds}")
+	public String  getProductInfo(@PathVariable String productIds, ModelMap model) {
+		service.copyPorduct(productIds);
+		return "redirect:/ny6design_web/getProductList4Admin";
+	}
+	
+	@RequestMapping("/delproduct/{productIds}")
+	public String  delproduct(@PathVariable String productIds, ModelMap model) {
+		service.deleteProduct(productIds);
+		return "redirect:/ny6design_web/getProductList4Admin";
+	}
 
+	
 }

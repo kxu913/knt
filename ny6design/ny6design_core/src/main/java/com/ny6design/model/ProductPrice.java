@@ -4,25 +4,27 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.DateTime;
 
 public class ProductPrice {
     private Integer productDiscountId;
 
     private Integer productId;
 
-    private Integer customerGroupId;
+    private Integer customerGroupId=0;
 
     @NotEmpty
     private Integer quantity;
 
-    private Integer priority;
+    private Integer priority=0;
     
     @NotEmpty
     private BigDecimal price;
 
-    private Date dateStart;
+    DateTime dateTime = new DateTime(2014, 01, 01, 01, 0, 0); 
+    private Date dateStart = dateTime.toDate();
 
-    private Date dateEnd;
+    private Date dateEnd=dateTime.toDate();
 
     public Integer getProductDiscountId() {
         return productDiscountId;

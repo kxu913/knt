@@ -3,12 +3,9 @@
  */
 package com.ny6design.service;
 
-import static org.junit.Assert.*;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -67,4 +64,8 @@ public class ProductServiceTest {
 		productService.insertProduct(product);
 	}
 
+	@Test
+	public void testDeleteProduct(){
+		productService.deleteProduct("61");
+	}
 }

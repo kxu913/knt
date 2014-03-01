@@ -25,14 +25,7 @@
     delete from t_product_price
     where product_discount_id = #{productDiscountId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ny6design.model.ProductPrice" useGeneratedKeys ="true" keyProperty ="product_discount_id">
-    insert into t_product_price ( product_id, customer_group_id, 
-      quantity, priority, price, 
-      date_start, date_end)
-    values (#{productId}, #{customerGroupId}, 
-      #{quantity}, #{priority}, #{price}, 
-      #{dateStart}, #{dateEnd})
-  </insert>
+
   <insert id="insertSelective" parameterType="com.ny6design.model.ProductPrice" >
     insert into t_product_price
     <trim prefix="(" suffix=")" suffixOverrides="," >

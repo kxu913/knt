@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.google.common.collect.Lists;
 
-public class Product {
+public class Product{
 	
 	private String orderColumnName="date_added";
 	private String orderBy="DESC";
@@ -288,11 +288,11 @@ public class Product {
 		this.productDesc = productDesc;
 	}
 
-	public long getCategoryId() {
+	public Long getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(long categoryId) {
+	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
 

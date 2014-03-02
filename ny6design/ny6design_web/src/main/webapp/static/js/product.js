@@ -82,7 +82,7 @@ function getCheckedUser(){
 	  str += listchk[i].value+',';
 	 }
 	}
-	console.log("checked: "+str)
+//	console.log("checked: "+str);
 	return str;
 }
 
@@ -95,19 +95,19 @@ function productfilter(){
 	
 	var url="/ny6design_web/productfilter?";
 	if($.trim(name)!=""){
-		url += "name="name;
+		url += "name="+name;
 	}
 	if($.trim(model)!=""){
-		url += "model="model;
+		url += "model="+model;
 	}
 	if($.trim(price)!=""){
-		url += "price="price;
+		url += "price="+price;
 	}
 	if($.trim(quantity)!=""){
-		url += "quantity="quantity;
+		url += "quantity="+quantity;
 	}
 	if($.trim(status)!=""){
-		url += "status="status;
+		url += "status="+status;
 	}
 	
 	$.ajax({

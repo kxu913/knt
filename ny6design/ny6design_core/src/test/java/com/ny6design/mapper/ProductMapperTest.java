@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -105,4 +107,16 @@ public class ProductMapperTest {
 		productMapper.insertProductPrice(pp);
 		assertThat(pp.getProductDiscountId());
 	}
+	
+	@Test
+	public void testGetFilterProducts4Admin(){
+		Map<String,Object> paras = new HashMap<String, Object>();
+		paras.put("name", "M4 30x28mm Lampwork");
+//		paras.put("model", "test");
+//		paras.put("price", new BigDecimal(21));
+//		paras.put("quantity", 25);
+//		paras.put("status", 0);
+		List<Product> pList = productMapper.getFilterProducts4Admin(paras);
+		assertThat(pList.size()).isGreaterThan(0);
+    }
 }

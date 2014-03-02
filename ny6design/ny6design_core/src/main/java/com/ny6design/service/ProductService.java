@@ -106,6 +106,7 @@ public class ProductService {
     	}
     }
     
+    
 /*    public List<Product> getProductPageList(long categoryId, int start, int end){
     	return productMapper.getProductPageList(categoryId, start, end);
     }

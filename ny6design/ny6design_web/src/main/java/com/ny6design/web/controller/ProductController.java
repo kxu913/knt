@@ -1,6 +1,9 @@
 package com.ny6design.web.controller;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,8 +75,7 @@ public class ProductController {
 			}
 		}
 		
-//		redirectAttrs.addFlashAttribute("message", message);
-		return "redirect:getProductList";			
+		return "forward:/getProductList";			
 	}
 	
 	@RequestMapping("/getProductList")
@@ -123,12 +125,19 @@ public class ProductController {
 	public ModelAndView  productfilter(ModelMap model, 
 			@RequestParam(value="name", required = false) String name, 
 			@RequestParam(value="model", required = false) String pmodel, 
-			@RequestParam(value="price", required = false) String price, 
-			@RequestParam(value="quantity", required = false) int quantity, 
-			@RequestParam(value="status", required = false) int status) {
+			@RequestParam(value="price", required = false) BigDecimal price, 
+			@RequestParam(value="quantity", required = false) Integer quantity, 
+			@RequestParam(value="status", required = false) Integer status) {
 		
-//		List<Product> productList = productMapper.getProducts4Admin(orderColumnName, orderBy);
-//		model.put("productList", productList);
+		Map<String, Object> paras = new HashMap<String, Object>();
+		paras.put("name", name);
+		paras.put("model", pmodel);
+		paras.put("price", price);
+		paras.put("quantity", quantity);
+		paras.put("status", status);
+		
+		List<Product> productList = productMapper.getFilterProducts4Admin(paras);
+		model.put("productList", productList);
 		return new ModelAndView ("admin/product/productlist",model);
 	}
 	
@@ -159,13 +168,13 @@ public class ProductController {
 	@RequestMapping("/copyproduct/{productIds}")
 	public String  getProductInfo(@PathVariable String productIds, ModelMap model) {
 		service.copyPorduct(productIds);
-		return "redirect:/ny6design_web/getProductList4Admin";
+		return "redirect:/getProductList4Admin";
 	}
 	
 	@RequestMapping("/delproduct/{productIds}")
 	public String  delproduct(@PathVariable String productIds, ModelMap model) {
 		service.deleteProduct(productIds);
-		return "redirect:/ny6design_web/getProductList4Admin";
+		return "redirect:/getProductList4Admin";
 	}
 
 	

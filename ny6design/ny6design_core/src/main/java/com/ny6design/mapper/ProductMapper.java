@@ -1,6 +1,7 @@
 package com.ny6design.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -33,4 +34,5 @@ public interface ProductMapper {
     
     List<Product> getProducts4Admin(@Param("orderColumnName") String orderColumnName, @Param("orderBy") String orderBy);
     
+    List<Product> getFilterProducts4Admin(Map<String, Object> params);
 }

@@ -166,6 +166,28 @@
       </if>
 	</select>
 	
+    <select id="getFilterProducts4Admin" resultMap="prodDetail" >
+	  SELECT tp.*, tpd.* 
+	  FROM t_product tp, t_product_description tpd 
+	  where tp.product_id=tpd.product_id
+	  <if test="name != null" >
+       and tpd.name like '%'||#{name}||'%'
+      </if>
+      <if test="model != null" >
+       and tp.model like '%'||#{model}||'%'
+      </if>
+      <if test="price != null" >
+       and tp.price = #{price}
+      </if>
+      <if test="quantity != null" >
+       and tp.quantity = #{quantity}
+      </if>
+      <if test="status != null" >
+       and tp.status = #{status}
+      </if>
+      order by date_added desc;
+	</select>
+	
 	
   <delete id="deleteProductById" parameterType="java.lang.Integer">
     delete from t_product

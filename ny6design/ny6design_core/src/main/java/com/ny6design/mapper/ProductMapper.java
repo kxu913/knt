@@ -12,6 +12,11 @@ import com.ny6design.model.ProductPrice;
 
 public interface ProductMapper {
 
+	int updateProductById(Product record);
+	int updateProductDescByProductId(ProductDescription desc);
+    int updateProductImpageByProductId(ProductImage image);
+    int updateProductPriceByProductId(ProductPrice price);
+	
     int insertProduct(Product record);
     int insertProductDesc(ProductDescription desc);
     int insertProductPrice(ProductPrice price);

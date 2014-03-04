@@ -4,8 +4,7 @@ function addPordcut(){
 	console.log($("#addProductForm").serialize())
 	*/
 	$.post($("#addProductForm").attr("action"), $("#addProductForm").serialize(), function(html) {
-//		retrun false;
-		//or add some success message
+		$("#maintable").html(html);
 	});
 }
 

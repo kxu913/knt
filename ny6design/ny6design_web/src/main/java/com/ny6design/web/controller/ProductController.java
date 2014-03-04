@@ -48,34 +48,56 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/saveProduct", method=RequestMethod.POST)
-	public String processSubmit(Product product, BindingResult result, 
+	public String saveProduct(Product product, BindingResult result, 
 //								@ModelAttribute("ajaxRequest") boolean ajaxRequest, 
 								Model model, RedirectAttributes redirectAttrs) {
 		if (result.hasErrors()) {
 			return null;
 		}
-		
-		productMapper.insertProduct(product);
-		
-		if(product.getProductDesc()!=null){
-			productMapper.insertProductDesc(product.getProductDesc());
+		if(product.getProductId()==null){
+			productMapper.insertProduct(product);
+			
+			if(product.getProductDesc()!=null){
+				productMapper.insertProductDesc(product.getProductDesc());
+			}
+			
+			List<ProductImage> imageList = product.getProductImageList();
+			if(imageList!=null && imageList.size()>0){
+				for(ProductImage image: imageList){
+					productMapper.insertProductImage(image);
+				}
+			}
+			
+			List<ProductPrice> priceList = product.getProductPriceList();
+			if(priceList!=null && priceList.size()>0){
+				for(ProductPrice price:priceList){
+					productMapper.insertProductPrice(price);
+				}
+			}
 		}
-		
-		List<ProductImage> imageList = product.getProductImageList();
-		if(imageList!=null && imageList.size()>0){
-			for(ProductImage image: imageList){
-				productMapper.insertProductImage(image);
+		else{
+			productMapper.updateProductById(product);
+			
+			if(product.getProductDesc()!=null){
+				productMapper.updateProductDescByProductId(product.getProductDesc());
+			}
+			
+			List<ProductImage> imageList = product.getProductImageList();
+			if(imageList!=null && imageList.size()>0){
+				for(ProductImage image: imageList){
+					productMapper.updateProductImpageByProductId(image);
+				}
+			}
+			
+			List<ProductPrice> priceList = product.getProductPriceList();
+			if(priceList!=null && priceList.size()>0){
+				for(ProductPrice price:priceList){
+					productMapper.updateProductPriceByProductId(price);
+				}
 			}
 		}
 		
-		List<ProductPrice> priceList = product.getProductPriceList();
-		if(priceList!=null && priceList.size()>0){
-			for(ProductPrice price:priceList){
-				productMapper.insertProductPrice(price);
-			}
-		}
-		
-		return "forward:/getProductList";			
+		return "redirect:/getProductList4Admin";
 	}
 	
 	@RequestMapping("/getProductList")

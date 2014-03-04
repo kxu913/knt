@@ -206,5 +206,43 @@
     where product_id = #{productId,jdbcType=INTEGER}
   </delete>
   
+  <update id="updateProductById" parameterType="com.ny6design.model.Product" >
+    update t_product 
+    set model=#{model}, sku=#{sku}, 
+      location=#{location}, quantity=#{quantity}, stock_status_id=#{stockStatusId}, 
+      image=#{image}, manufacturer_id=#{manufacturerId}, shipping=#{shipping}, 
+      price=#{price}, tax_class_id=#{taxClassId}, date_available=#{dateAvailable}, 
+      weight=#{weight}, weight_class_id=#{weightClassId}, length=#{length}, 
+      width=#{width}, height=#{height}, length_class_id=#{lengthClassId}, 
+      status=#{status}, date_added=#{dateAdded}, date_modified=#{dateModified}, 
+      viewed=#{viewed}, sort_order=#{sortOrder}, subtract=#{subtract}, 
+      minimum=#{minimum}, cost=#{cost}
+    where product_id = #{productId}
+  </update>
+  <update id="updateProductDescByProductId" parameterType="com.ny6design.model.ProductDescription" >
+    update t_product_description
+    set name = #{name,jdbcType=VARCHAR},
+      meta_keywords = #{metaKeywords,jdbcType=VARCHAR},
+      meta_description = #{metaDescription,jdbcType=VARCHAR}
+    where language_id = #{languageId,jdbcType=INTEGER}
+      and product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateProductImpageByProductId" parameterType="com.ny6design.model.ProductImage" >
+    update t_product_image
+    set product_id = #{productId,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR}
+    where product_image_id = #{productImageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateProductPriceByProductId" parameterType="com.ny6design.model.ProductPrice" >
+    update t_product_price
+    set product_id = #{productId,jdbcType=INTEGER},
+      customer_group_id = #{customerGroupId,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      date_start = #{dateStart,jdbcType=DATE},
+      date_end = #{dateEnd,jdbcType=DATE}
+    where product_discount_id = #{productDiscountId,jdbcType=INTEGER}
+  </update>
   	
 </mapper>

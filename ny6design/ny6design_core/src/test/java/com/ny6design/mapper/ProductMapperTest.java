@@ -119,4 +119,13 @@ public class ProductMapperTest {
 		List<Product> pList = productMapper.getFilterProducts4Admin(paras);
 		assertThat(pList.size()).isGreaterThan(0);
     }
+	
+	@Test
+	public void testUpdateProductById(){
+		Product pp = new Product();
+		pp.setProductId(74);
+		pp.setQuantity(30);
+		productMapper.updateProductById(pp);
+		assertThat(productMapper.getProductDetail(74).getQuantity()).isEqualTo(30);
+	}
 }

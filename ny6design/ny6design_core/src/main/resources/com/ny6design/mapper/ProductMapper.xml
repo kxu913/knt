@@ -171,10 +171,10 @@
 	  FROM t_product tp, t_product_description tpd 
 	  where tp.product_id=tpd.product_id
 	  <if test="name != null" >
-       and tpd.name like '%'||#{name}||'%'
+       and tpd.name like concat('%',#{name},'%')
       </if>
       <if test="model != null" >
-       and tp.model like '%'||#{model}||'%'
+       and tp.model like concat('%',#{model},'%')
       </if>
       <if test="price != null" >
        and tp.price = #{price}

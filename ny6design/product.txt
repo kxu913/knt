@@ -22,3 +22,13 @@ product back end todo list
 10. insert, edit中产品的desc还没加，需要ckedit（TODO）
 11. insert, edit中产品图片功能
 12. insert, edit中产品价格设置（需另考虑）
+
+
+
+
+
+
+
+
+
+

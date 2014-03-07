@@ -5,66 +5,65 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.DateTime;
 
 import com.google.common.collect.Lists;
 
 public class Product{
-	
-	private String orderColumnName="date_added";
-	private String orderBy="DESC";
 	
     private Integer productId;
 
     @NotEmpty
     private String model;
 
-    private String sku;
+    private String sku = "1";
 
-    private String location;
+    private String location = "USA";
 
     private Integer quantity;
 
-    private Integer stockStatusId;
+    private Integer stockStatusId=1;
 
     private String image;
 
-    private Integer manufacturerId;
+    private Integer manufacturerId=1;
 
-    private Integer shipping;
+    private Integer shipping=1;
 
     private BigDecimal price;
 
-    private Integer taxClassId;
+    private Integer taxClassId=1;
 
-    private Date dateAvailable;
+    //set at front end
+    private Date dateAvailable = DateTime.now().toDate();
 
-    private BigDecimal weight;
+    private BigDecimal weight = BigDecimal.ZERO;
 
-    private Integer weightClassId;
+    private Integer weightClassId = 0;
 
-    private BigDecimal length;
+    private BigDecimal length = new BigDecimal(0.00);
 
-    private BigDecimal width;
+    private BigDecimal width = new BigDecimal(0.00);
 
-    private BigDecimal height;
+    private BigDecimal height = new BigDecimal(0.00);
 
-    private Integer lengthClassId;
+    private Integer lengthClassId = 0;
 
-    private Integer status;
+    private Integer status = 0;
 
-    private Date dateAdded;
+    private Date dateAdded = DateTime.now().toDate();
 
-    private Date dateModified;
+    private Date dateModified  = DateTime.now().toDate();
 
-    private Integer viewed;
+    private Integer viewed = 0;
 
-    private Integer sortOrder;
+    private Integer sortOrder = 0;
 
-    private Integer subtract;
+    private Integer subtract = 1;
 
-    private Integer minimum;
+    private Integer minimum = 1;
 
-    private BigDecimal cost;
+    private BigDecimal cost = new BigDecimal(0.0000);
     
 	private ProductDescription productDesc;
 	private Long categoryId;
@@ -312,26 +311,10 @@ public class Product{
 		this.productPriceList = productPriceList;
 	}
 
-	public String getOrderColumnName() {
-		return orderColumnName;
-	}
-
-	public void setOrderColumnName(String orderColumnName) {
-		this.orderColumnName = orderColumnName;
-	}
-
-	public String getOrderBy() {
-		return orderBy;
-	}
-
-	public void setOrderBy(String orderBy) {
-		this.orderBy = orderBy;
-	}
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", orderColumnName=" + orderColumnName
-				+", orderBy=" + orderBy +", model=" + model
+		return "Product [productId=" + productId +", model=" + model
 				+ ", sku=" + sku + ", location=" + location + ", quantity="
 				+ quantity + ", stockStatusId=" + stockStatusId + ", image="
 				+ image + ", manufacturerId=" + manufacturerId + ", shipping="

@@ -11,11 +11,11 @@
 
 product back end todo list
 1. 头部即产品列表外部的div (done)
-2. insert (done, redirect exist bug)
-3. copy （done, redirect exist bug）
-4. delete （done, redirect exist bug）
+2. insert (done)
+3. copy （done）
+4. delete （done）
 5. 每列的正反排序（点击后才显示向上或向下箭头，没点时不显示） (issue: product.js中orderby()方法 貌似没有问题，问题在后台取出后结果集的排序没有变化，不知道是不是缓存的问题，没查出原因)
-6. filter 查询 (name,model 查询还有一点问题，需测试)
+6. filter 查询 (done)
 7. 列表翻页 （TODO）
 8. edit( like insert, not full<image not done>, )
 9. index product (todo)

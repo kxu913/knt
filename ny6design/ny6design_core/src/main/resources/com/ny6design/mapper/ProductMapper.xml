@@ -159,10 +159,10 @@
 	  where tp.product_id=tpd.product_id
 	  order by 
 	  <if test="orderColumnName != null" >
-        #{orderColumnName} 
+        ${orderColumnName} 
       </if>
       <if test="orderBy != null" >
-        #{orderBy};
+        ${orderBy};
       </if>
 	</select>
 	

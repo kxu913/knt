@@ -89,8 +89,10 @@ public class ProductMapperTest {
 	
 	@Test
 	public void testGetProducts4Admin(){
-		List<Product> prodList = productMapper.getProducts4Admin(null, null);
-		
+//		String columnName = "tpd.name";
+		String columnName = "quantity";
+		String orderby = "asc";
+		List<Product> prodList = productMapper.getProducts4Admin(columnName, orderby);
 		assertThat(prodList.size()).isGreaterThan(0);
 	}
 	
@@ -111,11 +113,11 @@ public class ProductMapperTest {
 	@Test
 	public void testGetFilterProducts4Admin(){
 		Map<String,Object> paras = new HashMap<String, Object>();
-		paras.put("name", "M4 30x28mm Lampwork");
+//		paras.put("name", "M4 30x28mm Lampwork");
 //		paras.put("model", "test");
 //		paras.put("price", new BigDecimal(21));
 //		paras.put("quantity", 25);
-//		paras.put("status", 0);
+		paras.put("status", 1);
 		List<Product> pList = productMapper.getFilterProducts4Admin(paras);
 		assertThat(pList.size()).isGreaterThan(0);
     }

@@ -16,7 +16,7 @@ function orderby(orderColumnName, a_id){
 		$( this ).toggleClass( "ASC" );
 		$( this ).toggleClass( "DESC" );
 	}
-	if($("#"+a_id+" .DESC")){
+	else if($("#"+a_id+" .DESC")){
 		orderby="ASC";
 		$( this ).toggleClass( "ASC" );
 		$( this ).toggleClass( "DESC" );

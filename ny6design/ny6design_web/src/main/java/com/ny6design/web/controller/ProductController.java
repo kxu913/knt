@@ -122,7 +122,10 @@ public class ProductController {
 			@RequestParam(value="orderBy", required = false) String orderBy) {
 		if(StringUtils.isEmpty(orderColumnName)){
 			orderColumnName = "date_added";
+		}else if("name".equalsIgnoreCase(orderColumnName)){
+				orderColumnName = "tpd.name";
 		}
+		
 		if(StringUtils.isEmpty(orderBy)){
 			orderBy = "ASC";
 		}
@@ -188,7 +191,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/copyproduct/{productIds}")
-	public String  getProductInfo(@PathVariable String productIds, ModelMap model) {
+	public String  copyproduct(@PathVariable String productIds, ModelMap model) {
 		service.copyPorduct(productIds);
 		return "redirect:/getProductList4Admin";
 	}

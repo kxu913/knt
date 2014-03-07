@@ -54,7 +54,7 @@ public class ProductService {
         	
     		//insert product info
     		existProduct.setProductId(null);
-    		existProduct.setStatus(null);//set Disabled
+    		existProduct.setStatus(1);//set Disabled
     		productMapper.insertProduct(existProduct);
     		
     		int newpId = existProduct.getProductId(); 

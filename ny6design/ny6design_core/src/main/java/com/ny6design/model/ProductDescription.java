@@ -3,12 +3,15 @@ package com.ny6design.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class ProductDescription extends ProductDescriptionKey {
+	
+	private Integer languageId = 1;
+	
 	@NotEmpty
     private String name;
 
-    private String metaKeywords;
+    private String metaKeywords = "";
 
-    private String metaDescription;
+    private String metaDescription = "";
 
     @NotEmpty
     private String description;
@@ -44,12 +47,21 @@ public class ProductDescription extends ProductDescriptionKey {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
+    
+	public Integer getLanguageId() {
+		return languageId;
+	}
+
+	public void setLanguageId(Integer languageId) {
+		this.languageId = languageId;
+	}
 
 	@Override
 	public String toString() {
-		return "ProductDescription [name=" + name + ", metaKeywords="
-				+ metaKeywords + ", metaDescription=" + metaDescription
-				+ ", description=" + description + "]";
+		return "ProductDescription [languageId=" + languageId + ", name="
+				+ name + ", metaKeywords=" + metaKeywords
+				+ ", metaDescription=" + metaDescription + ", description="
+				+ description + "]";
 	}
-    
+
 }

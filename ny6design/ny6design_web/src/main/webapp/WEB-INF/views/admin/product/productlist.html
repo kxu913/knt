@@ -11,19 +11,19 @@
 		  <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'productId\']').prop('checked', this.checked);"></td>
 		  <td class="text-center">Image</td>
 		  <td class="text-left">
-			<a id="a_filter_name" onclick="orderby('name','a_filter_name')" class="ASC">Product Name</a>
+			<a onclick="orderby('name','a_filter_name')" class="ASC">Product Name</a>
 		  </td>
 		  <td class="text-left">
- 		  	<a id="a_filter_model" onclick="orderby('model','a_filter_model')" class="ASC">Model</a><!--<span class="glyphicon glyphicon-chevron-down"></span> -->
+ 		  	<a onclick="orderby('model','a_filter_model')" class="ASC">Model</a><!--<span class="glyphicon glyphicon-chevron-down"></span> -->
 		  </td>
 		  <td class="text-left">
-		  	<a id="a_filter_price" onclick="orderby('price','a_filter_price')" class="ASC">Price</a>
+		  	<a onclick="orderby('price','a_filter_price')" class="ASC">Price</a>
 		  </td>
 		  <td class="text-right">
-		  	<a id="a_filter_quantity" onclick="orderby('quantity','a_filter_quantity')" class="ASC">Quantity</a>
+		  	<a onclick="orderby('quantity','a_filter_quantity')" class="ASC">Quantity</a>
 		  </td>
 		  <td class="text-left">
-		  	<a id="a_filter_status" onclick="orderby('status','a_filter_status')" class="ASC">Status</a>
+		  	<a onclick="orderby('status','a_filter_status')" class="ASC">Status</a>
 		  </td>
 		  <td class="text-right">Action</td>
 		</tr>
@@ -43,10 +43,10 @@
 		  <td align="text-left"><input type="text" class="form-control" id="filter_price" placeholder="price search"></td>
 		  <td align="text-right"><input type="text" class="form-control" id="filter_quantity" placeholder="quantity search"></td>
 		  <td>
-			<select name="filter_status" class="form-control">
+			<select id="filter_status" class="form-control">
 			  <option value="*"></option>
-			  <option value="1">Enabled</option>
-			  <option value="0">Disabled</option>
+			  <option value="0">Enabled</option>
+			  <option value="1">Disabled</option>
 			</select>
 		  </td>
 		  <td align="right"><button type="button" class="btn btn-primary" onclick="productfilter();" >Filter</button></td>

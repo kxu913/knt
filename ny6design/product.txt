@@ -14,7 +14,7 @@ product back end todo list
 2. insert (done)
 3. copy （done）
 4. delete （done）
-5. 每列的正反排序（点击后才显示向上或向下箭头，没点时不显示） (issue: product.js中orderby()方法 貌似没有问题，问题在后台取出后结果集的排序没有变化，不知道是不是缓存的问题，没查出原因)
+5. 每列的正反排序（点击后才显示向上或向下箭头，没点时不显示） (issue: order的值需从server端返回)
 6. filter 查询 (done)
 7. 列表翻页 （TODO）
 8. edit( like insert, not full<image not done>, )
@@ -22,7 +22,9 @@ product back end todo list
 10. insert, edit中产品的desc还没加，需要ckedit（TODO）
 11. insert, edit中产品图片功能
 12. insert, edit中产品价格设置（需另考虑）
-
+13. product copy时只支持一个category(产品可以在多个分类中，是多对多关系， 需改进)
+14. admin product 列表如果只有t_product表有数据的话好象不会显示在列表中，需优化
+15. front end product display issue(more then 3 product bug,貌似只能是在后端先分成3个一组的数组发到前端，不然没法搞)
 
 
 

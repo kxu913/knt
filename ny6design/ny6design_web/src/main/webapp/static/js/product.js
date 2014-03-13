@@ -8,20 +8,43 @@ function addPordcut(){
 	});
 }
 
-function orderby(orderColumnName, a_id){
+function bindOrder(){
+	 $(".btn-link").click(function(){
+         var order="ASC";
+         var columnName= $(this).val();
+         if($(this).hasClass("ASC")){
+        	  $(this).removeClass("class", "ASC");
+              $(this).attr("class", "DESC");
+              order="DESC";
+         }else{
+        	  $(this).removeClass("class", "DESC");
+              $(this).attr("class", "ASC");
+              order="ASC";
+         }
+         var url="/ny6design_web/getProductList4Admin?orderColumnName="+columnName+"&orderBy="+order;
+     	 $.ajax({
+     		url : url,
+     		success : function(data, status) {
+     			$("#maintable").html(data);
+     		}
+     	 });
+    });
+}
+//bindOrder();
+
+function orderby(orderColumnName, elementObj){
 	
-	var orderby = "ASC";
-	if($("#"+a_id+" .ASC")){
-		orderby="DESC";
-		$( this ).toggleClass( "ASC" );
-		$( this ).toggleClass( "DESC" );
-	}
-	else if($("#"+a_id+" .DESC")){
-		orderby="ASC";
-		$( this ).toggleClass( "ASC" );
-		$( this ).toggleClass( "DESC" );
-	}
-	
+	var orderby="ASC";
+    if($(elementObj).hasClass("ASC")){
+    	 $(this).removeClass("class", "ASC");
+         $(elementObj).attr("class", "DESC");
+         orderby="DESC";
+    }else{
+    	 $(this).removeClass("class", "DESC");
+         $(elementObj).attr("class", "ASC");
+         orderby="ASC";
+    }
+    
 	var url="/ny6design_web/getProductList4Admin?orderColumnName="+orderColumnName+"&orderBy="+orderby;
 	
 	$.ajax({

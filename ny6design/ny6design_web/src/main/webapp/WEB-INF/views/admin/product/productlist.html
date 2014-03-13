@@ -11,19 +11,19 @@
 		  <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'productId\']').prop('checked', this.checked);"></td>
 		  <td class="text-center">Image</td>
 		  <td class="text-left">
-			<a onclick="orderby('name','a_filter_name')" class="ASC">Product Name</a>
+			<button type="button" class="btn btn-link ASC" value="orderby('name',this)">Product Name <span class="caret"></span></button>
 		  </td>
 		  <td class="text-left">
- 		  	<a onclick="orderby('model','a_filter_model')" class="ASC">Model</a><!--<span class="glyphicon glyphicon-chevron-down"></span> -->
+ 		  	<button type="button" class="btn btn-link ASC" onclick="orderby('model', this)">Model <span class="glyphicon glyphicon-collapse-down"></span> </button>
 		  </td>
 		  <td class="text-left">
-		  	<a onclick="orderby('price','a_filter_price')" class="ASC">Price</a>
+		  	<button type="button" class="btn btn-link ASC" value="orderby('price', this)">Price </button>
 		  </td>
 		  <td class="text-right">
-		  	<a onclick="orderby('quantity','a_filter_quantity')" class="ASC">Quantity</a>
+		  	<button type="button" class="btn btn-link ASC" value="orderby('quantity', this)">Quantity</button>
 		  </td>
 		  <td class="text-left">
-		  	<a onclick="orderby('status','a_filter_status')" class="ASC">Status</a>
+		  	<button type="button" class="btn btn-link ASC" value="orderby('status', this)">Status</button>
 		  </td>
 		  <td class="text-right">Action</td>
 		</tr>

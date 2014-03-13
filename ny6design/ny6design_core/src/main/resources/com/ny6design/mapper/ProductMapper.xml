@@ -83,14 +83,19 @@
       #{dateStart}, #{dateEnd})
   </insert>
   
-    <insert id="insertProductImage" parameterType="com.ny6design.model.ProductImage" useGeneratedKeys ="true" keyProperty ="product_image_id">
+  <insert id="insertProductImage" parameterType="com.ny6design.model.ProductImage" useGeneratedKeys ="true" keyProperty ="product_image_id">
     insert into t_product_image (product_id, image
       )
     values (#{productId}, #{image}
       )
   </insert>
   
-    <insert id="insert" parameterType="com.ny6design.model.ProductPrice" useGeneratedKeys ="true" keyProperty ="product_discount_id">
+  <insert id="insertProductCategory" parameterType="com.ny6design.model.Product2CategoryKey" >
+    insert into t_product_to_category (category_id, product_id)
+    values (#{categoryId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER})
+  </insert>
+  
+  <insert id="insert" parameterType="com.ny6design.model.ProductPrice" useGeneratedKeys ="true" keyProperty ="product_discount_id">
     insert into t_product_price ( product_id, customer_group_id, 
       quantity, priority, price, 
       date_start, date_end)
@@ -119,6 +124,7 @@
 	FROM t_product as p, t_product_to_category as pc
 	where  pc.product_id=p.product_id
 	and pc.category_id= #{categoryId}
+	and p.status=0
    </select>
    
    
@@ -131,7 +137,9 @@
    	<association property="productDesc" column="product_id" javaType="com.ny6design.model.ProductDescription" select="getDesc4Product"/>
    	<collection property="productImageList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductImage" select="getImage4Product"/>
    	<collection property="productPriceList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductPrice" select="getPrice4Product"/>
+   	<collection property="productCategoryList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.Product2CategoryKey" select="getProductCategoryList"/>
    </resultMap>
+   
    <select id="getProductDetail" resultMap="prodDetail">
 		select
 			*
@@ -142,7 +150,16 @@
    </select>
    <select id="getImage4Product" resultType="com.ny6design.model.ProductImage">
 	  SELECT * FROM t_product_image WHERE product_id = #{product_id}
-	</select>
+   </select>
+   
+   <select id="getProductCategoryList" resultType="com.ny6design.model.Product2CategoryKey">
+	  SELECT 
+	   category_id as categoryId,
+	   product_id as productId
+	  FROM t_product_to_category 
+	  WHERE product_id = #{product_id}
+   </select>
+   
    <select id="getCategoryId" resultType="java.lang.Long">
 	  select 
 	  	pc.category_id as categoryId 
@@ -188,7 +205,11 @@
       order by date_added desc;
 	</select>
 	
-	
+
+  <delete id="deletePCByProductId" parameterType="com.ny6design.model.Product2CategoryKey" >
+    delete from t_product_to_category
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteProductById" parameterType="java.lang.Integer">
     delete from t_product
     where product_id = #{productId,jdbcType=INTEGER}

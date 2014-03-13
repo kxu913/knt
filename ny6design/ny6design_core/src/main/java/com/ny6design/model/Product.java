@@ -69,6 +69,7 @@ public class Product{
 	private Long categoryId;
 	private List<ProductImage> productImageList = Lists.newArrayList();
 	private List<ProductPrice> productPriceList = Lists.newArrayList();
+	private List<Product2CategoryKey> productCategoryList = Lists.newArrayList();
 
 	
     public Integer getProductId() {
@@ -311,10 +312,17 @@ public class Product{
 		this.productPriceList = productPriceList;
 	}
 
+	public List<Product2CategoryKey> getProductCategoryList() {
+		return productCategoryList;
+	}
+
+	public void setProductCategoryList(List<Product2CategoryKey> productCategoryList) {
+		this.productCategoryList = productCategoryList;
+	}
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId +", model=" + model
+		return "Product [productId=" + productId + ", model=" + model
 				+ ", sku=" + sku + ", location=" + location + ", quantity="
 				+ quantity + ", stockStatusId=" + stockStatusId + ", image="
 				+ image + ", manufacturerId=" + manufacturerId + ", shipping="
@@ -328,7 +336,9 @@ public class Product{
 				+ ", subtract=" + subtract + ", minimum=" + minimum + ", cost="
 				+ cost + ", productDesc=" + productDesc + ", categoryId="
 				+ categoryId + ", productImageList=" + productImageList
-				+ ", productPriceList=" + productPriceList + "]";
+				+ ", productPriceList=" + productPriceList
+				+ ", productCategoryList=" + productCategoryList + "]";
 	}
+
     
 }

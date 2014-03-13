@@ -56,6 +56,10 @@ public class ProductController {
 		}
 		if(product.getProductId()==null){
 			productMapper.insertProduct(product);
+			/**
+			 * TODO add categorys
+			 */
+//			productMapper.insertProductCategory(p2c)
 			
 			if(product.getProductDesc()!=null){
 				productMapper.insertProductDesc(product.getProductDesc());
@@ -77,6 +81,10 @@ public class ProductController {
 		}
 		else{
 			productMapper.updateProductById(product);
+			
+			/**
+			 * todo update category info
+			 */
 			
 			if(product.getProductDesc()!=null){
 				productMapper.updateProductDescByProductId(product.getProductDesc());

@@ -16,6 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.ny6design.core.Env;
 import com.ny6design.core.MappForMybatis;
 import com.ny6design.model.Product;
+import com.ny6design.model.Product2CategoryKey;
 import com.ny6design.model.ProductPrice;
 
 public class ProductMapperTest {
@@ -80,10 +81,16 @@ public class ProductMapperTest {
 		assertThat(priceList.size()).isGreaterThan(0);
 	}
 	
+	
+	@Test
+	public void testGetProductCategoryList(){
+		List<Product2CategoryKey> pcList = productMapper.getProductCategoryList(51);
+		assertThat(pcList.size()).isGreaterThan(0);
+	}
+	
 	@Test
 	public void testGetProductsByCategory(){
 		List<Product> prodList = productMapper.getProductsByCategory(184);
-		
 		assertThat(prodList.size()).isGreaterThan(0);
 	}
 	
@@ -130,4 +137,6 @@ public class ProductMapperTest {
 		productMapper.updateProductById(pp);
 		assertThat(productMapper.getProductDetail(74).getQuantity()).isEqualTo(30);
 	}
+
+	
 }

@@ -20,4 +20,11 @@ public class Product2CategoryKey {
     public void setProductId(Integer productId) {
         this.productId = productId;
     }
+
+	@Override
+	public String toString() {
+		return "Product2CategoryKey [categoryId=" + categoryId + ", productId="
+				+ productId + "]";
+	}
+    
 }

@@ -15,6 +15,7 @@ import com.ny6design.mapper.ProductImageMapper;
 import com.ny6design.mapper.ProductMapper;
 import com.ny6design.mapper.ProductPriceMapper;
 import com.ny6design.model.Product;
+import com.ny6design.model.Product2CategoryKey;
 import com.ny6design.model.ProductDescription;
 import com.ny6design.model.ProductImage;
 import com.ny6design.model.ProductPrice;
@@ -51,7 +52,10 @@ public class ProductService {
     		ProductDescription pd = existProduct.getProductDesc();
         	List<ProductPrice> ppList = existProduct.getProductPriceList();
         	List<ProductImage> piList = existProduct.getProductImageList();
+        	List<Product2CategoryKey> pcList = existProduct.getProductCategoryList();
         	
+			
+			
     		//insert product info
     		existProduct.setProductId(null);
     		existProduct.setStatus(1);//set Disabled
@@ -72,7 +76,15 @@ public class ProductService {
     			}
     		}
     		
-    		//TOBE add productImage
+    		if(pcList!=null && pcList.size()>0){
+    			for(Product2CategoryKey pc : pcList){
+    				if(pc==null) continue;
+    				pc.setProductId(newpId);
+    				productMapper.insertProductCategory(pc);
+    			}
+    		}
+    		
+    		//TODO add productImage
     		if(piList!=null && piList.size()>0){
     			
     		}

@@ -34,6 +34,8 @@ import com.ny6design.model.User;
 import com.ny6design.model.UserAddress;
 import com.ny6design.service.UserService;
 import com.ny6design.web.constant.CONSTANT;
+import com.ny6design.web.email.EmailPropertiesFactory;
+import com.ny6design.web.email.VerifyEmailThread;
 
 /**
  * 
@@ -44,6 +46,8 @@ import com.ny6design.web.constant.CONSTANT;
 public class RegisterController {
 	@Autowired
 	MimeMailService mimeMailService;
+	@Autowired
+	EmailPropertiesFactory emailPropertiesFactory;
 	@Autowired
 	CountryMapper contryMapper;
 	@Autowired
@@ -101,6 +105,7 @@ public class RegisterController {
 		boolean isUpdate = StringUtils.isNotEmpty(userid)
 				&& !"0".equalsIgnoreCase(userid);
 		final String emailAddress = request.getParameter("emailAddress");
+
 		if (!isUpdate && StringUtils.isEmpty(emailAddress)) {
 			rtn.put("index", 0);
 			rtn.put(CONSTANT.ERROR_MESSAGE, "email address can't be null");
@@ -210,6 +215,7 @@ public class RegisterController {
 		if (!isUpdate) {
 			user.setEmailaddress(emailAddress);
 		}
+
 		user.setFactive("0");
 		user.setFax(fax);
 		user.setFirstname(firstName);
@@ -222,6 +228,10 @@ public class RegisterController {
 			user.setTaxid(new BigDecimal(taxId));
 		}
 		user.setTelephone(telephone);
+		String isPublicEmail = request.getParameter("isPublicEmail");
+		user.setPublicEmail("1".equals(isPublicEmail));
+		String isPublicTel = request.getParameter("isPublicTel");
+		user.setPublicTel("1".equals(isPublicTel));
 		userService.save(user);
 		final int userId = user.getUserid();
 
@@ -230,30 +240,8 @@ public class RegisterController {
 		userAddress.setUserid(userId);
 		userAddressMapper.insert(userAddress);
 		if (!isUpdate) {
-			executor.submit(new Runnable() {
-
-				@Override
-				public void run() {
-					EmailNotify notify = new EmailNotify();
-					notify.setFromEmail("kxu913@gmail.com");
-					notify.setSubject("Verify email");
-					notify.setToEmail(emailAddress);
-					Map<String, Object> context = new HashMap<String, Object>();
-					context.put(
-							"link",
-							"http://localhost:8080/ny6design_web/verifyEmail?userId="
-									+ userId + "&time="
-									+ System.currentTimeMillis());
-
-					notify.setTemplateName("test.vm");
-					notify.setContext(context);
-					try {
-						mimeMailService.sendPredefinedTemplateMail(notify);
-					} catch (MessagingException e) {
-						e.printStackTrace();
-					}
-				}
-			});
+			executor.submit(new VerifyEmailThread(emailPropertiesFactory,
+					mimeMailService, userId, emailAddress));
 		}
 		return rtn;
 	}

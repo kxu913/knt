@@ -57,6 +57,7 @@ function register(isUpdate) {
 
 	var userid = $("#userid").val();
 	var emailAddress = $("#inputEmail").val();
+	var isPublicEmail = $("#publicEmail").attr("checked");
 	var password = $("#inputPassword").val();
 	var confirmedPassword = $("#inputConfirmedPassword").val();
 
@@ -72,6 +73,8 @@ function register(isUpdate) {
 	var country = $("#countryId option:selected").attr("id");
 
 	var telephone = $("#telephone").val();
+	var isPublicTel = $("#publicTel").attr("checked");
+	
 	var fax = $("#fax").val();
 
 	var taxId = $("#taxId").val();
@@ -82,6 +85,7 @@ function register(isUpdate) {
 		data : {
 			userid : userid,
 			emailAddress : emailAddress,
+			isPublicEmail : isPublicEmail,
 			password : password,
 			confirmedPassword : confirmedPassword,
 			firstName : firstName,
@@ -92,6 +96,7 @@ function register(isUpdate) {
 			zipcode : zipcode,
 			country : country,
 			telephone : telephone,
+			isPublicTel: isPublicTel,
 			fax : fax,
 			taxId : taxId,
 			hearUs : hearUs,

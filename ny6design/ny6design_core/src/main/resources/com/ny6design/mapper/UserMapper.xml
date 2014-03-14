@@ -16,6 +16,8 @@
 		<result column="factive" property="factive" jdbcType="VARCHAR" />
 		<result column="isAdmin" property="isAdmin" jdbcType="INTEGER" />
 		<result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="isPublicTel" property="isPublicTel" jdbcType="INTEGER" />
+		<result column="isPublicEmail" property="isPublicEmail" jdbcType="INTEGER" />
 	</resultMap>
 	
 	<resultMap id="UserDetailMap" type="com.ny6design.model.UserDetail" >
@@ -37,11 +39,14 @@
 		<result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
 		<result column="fax" property="fax" jdbcType="VARCHAR" />
 		<result column="fromId" property="fromid" jdbcType="INTEGER" />
+		
+		<result column="isPublicTel" property="isPublicTel" jdbcType="INTEGER" />
+		<result column="isPublicEmail" property="isPublicEmail" jdbcType="INTEGER" />
 	</resultMap>
 	
 	<sql id="Base_Column_List" >
     userId, emailAddress, password, salt, firstName, lastName, addressId, telephone, fax, taxId, 
-    fromId, factive,isAdmin,updateTime
+    fromId, factive,isAdmin,updateTime,isPublicTel,isPublicEmail
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

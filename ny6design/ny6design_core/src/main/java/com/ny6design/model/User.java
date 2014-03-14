@@ -27,10 +27,14 @@ public class User {
 	private String factive;
 	// used for password
 	private byte[] salt;
-	
+
 	private Date updateTime;
-	
+
 	private boolean isAdmin;
+
+	private boolean isPublicEmail;
+
+	private boolean isPublicTel;
 
 	public byte[] getSalt() {
 		return salt;
@@ -143,5 +147,33 @@ public class User {
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
+
+	public boolean isPublicEmail() {
+		return isPublicEmail;
+	}
+
+	public void setPublicEmail(boolean isPublicEmail) {
+		this.isPublicEmail = isPublicEmail;
+	}
+
+	public boolean isPublicTel() {
+		return isPublicTel;
+	}
+
+	public void setPublicTel(boolean isPublicTel) {
+		this.isPublicTel = isPublicTel;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", emailaddress=" + emailaddress
+				+ ", password=" + password + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", addressid=" + addressid
+				+ ", telephone=" + telephone + ", fax=" + fax + ", taxid="
+				+ taxid + ", fromid=" + fromid + ", factive=" + factive
+				+ ", updateTime="
+				+ updateTime + ", isAdmin=" + isAdmin + ", isPublicEmail="
+				+ isPublicEmail + ", isPublicTel=" + isPublicTel + "]";
+	}
+
 }

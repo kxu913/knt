@@ -17,13 +17,18 @@
 		<strong>PERSONAL INFORMATION</strong>
 	</p>
 	<form class="form-horizontal" role="form">
-		<div class="form-group">
+		<div class="form-group form-inline" >
 			<label for="inputEmail" class="col-sm-2 control-label">Your
 				E-mail *</label>
 			<div class="col-sm-3">
 				<input type="email" class="form-control" id="inputEmail"
 					placeholder="abc@gmail.com">
 			</div>
+			<div class="checkbox col-sm-2">
+			    <label>
+			      <input type="checkbox"  checked="checked" id="publicTel"> Public
+			    </label>
+  			</div>
 			<div class="col-sm-4 control-label" for="inputEmail" style="text-align: left">
 				<label id="errorMsg0" style="color: red"></label>
 			</div>
@@ -132,13 +137,20 @@
 			</div>
 		</div>
 
-		<div class="form-group">
+		<div class="form-group form-inline">
 			<label for="telephone" class="col-sm-2 control-label">Telephone
 				*</label>
 			<div class="col-sm-3">
 				<input type="input" class="form-control" id="telephone"
 					placeholder="Telephone">
 			</div>
+			
+			<div class="checkbox col-sm-2">
+			    <label>
+			      <input type="checkbox" checked="checked" id="publicTel"> Public
+			    </label>
+  			</div>
+			
 			<div class="col-sm-4 control-label" for="telephone" style="text-align: left">
 				<label id="errorMsg10" style="color: red"></label>
 			</div>

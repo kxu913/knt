@@ -77,6 +77,26 @@ function loadStates(){
 function loginOut() {
 	location.href = '/ny6design_web/loginOut';
 }
+
+function resetPassword(){
+	$.ajax({
+		url : '/ny6design_web/loadReset',
+		success : function(data, status) {
+			$("#productList").html(data);
+		}
+	});
+}
+
+function doReset(){
+	var email = $("#inputEmailForReset").val();
+	$.ajax({
+		url : '/ny6design_web/doReset?email='+email,
+		success : function(data, status) {
+			alert(data);
+			loginOut();
+		}
+	});
+}
 function loadToolBar() {
 	$.ajax({
 		url : '/ny6design_web/getToolBar',

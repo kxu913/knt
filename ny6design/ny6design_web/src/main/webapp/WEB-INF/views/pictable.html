@@ -1,3 +1,12 @@
+<table>
+#foreach($productList as $plist)
+  <tr>
+    <td>#displayLine($productList)</td>
+  </tr>
+#end
+</table>
+
+#macro(displayLine $productList) 
 <table class="table table-bordered">
 	<tr>
 		#foreach($product as $!productList)
@@ -29,7 +38,7 @@
 		#end
 	</tr>
 </table>
-
+#end 
 
 #macro(getLabelName $product) 
 	#foreach($prodPrice as $!product.productPriceList)

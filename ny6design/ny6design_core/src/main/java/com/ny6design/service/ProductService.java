@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
 import com.ny6design.mapper.Product2CategoryMapper;
 import com.ny6design.mapper.ProductDescriptionMapper;
 import com.ny6design.mapper.ProductImageMapper;
@@ -102,6 +103,34 @@ public class ProductService {
     			}
     		}
     	}
+    }
+    
+    public List<List<Product>> getProductList4Front(int categoryId, int numInLine){
+    	List<Product> productList = productMapper.getProductsByCategory(categoryId);
+    	List<List<Product>> resultList = Lists.newArrayList();
+		if(productList!=null && productList.size()>0){
+			int size = productList.size();
+			List<Product> temp = null;
+			for(int i=0; i<size; i++){
+				if(i==0){
+					temp = Lists.newArrayList();
+				}
+				temp.add(productList.get(i));
+				if(  (i+1)%numInLine == 0 ){
+					resultList.add(temp);
+					temp = Lists.newArrayList();
+				}
+				if((i+1)==size){
+					if(temp.size()<numInLine){
+						while(temp.size()<numInLine){
+							temp.add(null);
+						}
+					}
+					resultList.add(temp);
+				}
+			}
+		}
+		return resultList;
     }
     
     public void deleteProduct(String productIds){

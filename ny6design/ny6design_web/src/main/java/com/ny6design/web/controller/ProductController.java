@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.collect.Lists;
 import com.ny6design.mapper.ProductMapper;
 import com.ny6design.model.Product;
 import com.ny6design.model.ProductImage;
@@ -33,6 +34,8 @@ import com.ny6design.service.ProductService;
 @Controller
 public class ProductController {
 
+	private static int NumInLines = 3;
+	
 	@Autowired
 	CategoryService categoryService;
 	
@@ -109,10 +112,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/getProductList")
-	public ModelAndView  getProductList(ModelMap model) {
-		List<Product> productList = productMapper.getProductsByCategory(184);
-		
-		model.put("productList", productList);
+	public ModelAndView  getProductList4Client(ModelMap model) {
+		List<List<Product>> productList = service.getProductList4Front(184, NumInLines);
+		model.put("plist", productList);
 		return new ModelAndView ("pictable",model);
 	}
 	

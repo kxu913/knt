@@ -3,8 +3,11 @@
  */
 package com.ny6design.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,5 +70,14 @@ public class ProductServiceTest {
 	@Test
 	public void testDeleteProduct(){
 		productService.deleteProduct("61");
+	}
+	
+	@Test
+	public void testGetProductList4Front(){
+		int numInLine = 3;
+		List<List<Product>> list = productService.getProductList4Front(184, numInLine);
+		if(list!=null && list.size()>0){
+			assertThat(list.get(0).size()).isLessThanOrEqualTo(3);
+		}
 	}
 }

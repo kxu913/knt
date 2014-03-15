@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Lists;
 import com.ny6design.mapper.ProductMapper;
 import com.ny6design.model.Product;
 import com.ny6design.model.ProductImage;
@@ -142,6 +141,8 @@ public class ProductController {
 		
 		List<Product> productList = productMapper.getProducts4Admin(orderColumnName, orderBy);
 		model.put("productList", productList);
+		model.put("orderColumnName", orderColumnName);
+		model.put("orderBy", orderBy);
 		return new ModelAndView ("admin/product/productlist",model);
 	}
 	

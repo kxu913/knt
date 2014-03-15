@@ -8,39 +8,15 @@ function addPordcut(){
 	});
 }
 
-function bindOrder(){
-	 $(".btn-link").click(function(){
-         var order="ASC";
-         var columnName= $(this).val();
-         if($(this).hasClass("ASC")){
-        	  $(this).removeClass("class", "ASC");
-              $(this).attr("class", "DESC");
-              order="DESC";
-         }else{
-        	  $(this).removeClass("class", "DESC");
-              $(this).attr("class", "ASC");
-              order="ASC";
-         }
-         var url="/ny6design_web/getProductList4Admin?orderColumnName="+columnName+"&orderBy="+order;
-     	 $.ajax({
-     		url : url,
-     		success : function(data, status) {
-     			$("#maintable").html(data);
-     		}
-     	 });
-    });
-}
-//bindOrder();
-
 function orderby(orderColumnName, elementObj){
 	
-	var orderby="ASC";
+/*	var orderby="ASC";
     if($(elementObj).hasClass("ASC")){
-    	 $(this).removeClass("class", "ASC");
+    	 $(this).removeClass("ASC");
          $(elementObj).attr("class", "DESC");
          orderby="DESC";
     }else{
-    	 $(this).removeClass("class", "DESC");
+    	 $(this).removeClass("DESC");
          $(elementObj).attr("class", "ASC");
          orderby="ASC";
     }
@@ -51,8 +27,9 @@ function orderby(orderColumnName, elementObj){
 		url : url,
 		success : function(data, status) {
 			$("#maintable").html(data);
+			
 		}
-	});
+	});*/
 }
 
 function copyProduct(){

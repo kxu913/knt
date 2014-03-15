@@ -4,26 +4,26 @@
   <button type="button" class="btn btn-warning" onclick="copyProduct()">Copy</button>
   <button type="button" class="btn btn-danger" onclick="delProduct()">Delete</button>
 </div>
-
 <table class="table table-bordered">
 	<thead>
+		#set( $colNames = ["tpd.name","model","price","quantity","status"] )
 		<tr class="active">
 		  <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'productId\']').prop('checked', this.checked);"></td>
 		  <td class="text-center">Image</td>
 		  <td class="text-left">
-			<button type="button" class="btn btn-link ASC" value="orderby('name',this)">Product Name <span class="caret"></span></button>
+			<button type="button" name="name" class="btn btn-link $orderBy">Product Name #addOrderByCode($colNames[0])</button>
 		  </td>
 		  <td class="text-left">
- 		  	<button type="button" class="btn btn-link ASC" onclick="orderby('model', this)">Model <span class="glyphicon glyphicon-collapse-down"></span> </button>
+ 		  	<button type="button" name="model" class="btn btn-link $orderBy">Model #addOrderByCode($colNames[1])</button>
 		  </td>
 		  <td class="text-left">
-		  	<button type="button" class="btn btn-link ASC" value="orderby('price', this)">Price </button>
+		  	<button type="button" name="price" class="btn btn-link $orderBy">Price #addOrderByCode($colNames[2])</button>
 		  </td>
 		  <td class="text-right">
-		  	<button type="button" class="btn btn-link ASC" value="orderby('quantity', this)">Quantity</button>
+		  	<button type="button" name="quantity" class="btn btn-link $orderBy">Quantity #addOrderByCode($colNames[3])</button>
 		  </td>
 		  <td class="text-left">
-		  	<button type="button" class="btn btn-link ASC" value="orderby('status', this)">Status</button>
+		  	<button type="button" name="status" class="btn btn-link $orderBy">Status #addOrderByCode($colNames[4])</button>
 		  </td>
 		  <td class="text-right">Action</td>
 		</tr>
@@ -59,8 +59,16 @@
 	</tbody>
 </table>
 
-
-
+#macro(addOrderByCode $columnName) 
+	#if($columnName==$orderColumnName)
+		#if($orderBy=="ASC")
+			<span class="glyphicon glyphicon-collapse-up"></span>
+		#else
+			<span class="glyphicon glyphicon-collapse-down"></span>
+		#end
+		
+	#end
+#end
 
 #macro(listProduct $product) 
 <tr>
@@ -86,4 +94,27 @@
 </tr>
 #end 
 
-
+<script>
+$(".btn-link").each(function(){
+	 $(this).click(function(){
+			var orderColumnName = $(this).attr("name");
+			var orderby="ASC";
+		    if($(this).hasClass("ASC")){
+		    	 $(this).removeClass("ASC");
+		         $(this).addClass("DESC");
+		         orderby="DESC";
+		    }else{
+		    	 $(this).removeClass("DESC");
+		    	 $(this).addClass("ASC");
+		         orderby="ASC";
+		    }
+			var url="/ny6design_web/getProductList4Admin?orderColumnName="+orderColumnName+"&orderBy="+orderby;
+			$.ajax({
+				url : url,
+				success : function(data, status) {
+					$("#maintable").html(data);
+				}
+			});
+	    }); 
+});
+</script>

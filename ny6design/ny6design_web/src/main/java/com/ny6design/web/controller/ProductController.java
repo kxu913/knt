@@ -110,9 +110,14 @@ public class ProductController {
 		return "redirect:/getProductList4Admin";
 	}
 	
-	@RequestMapping("/getProductList")
-	public ModelAndView  getProductList4Client(ModelMap model) {
-		List<List<Product>> productList = service.getProductList4Front(184, NumInLines);
+	/**
+	 * FE means front end
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/getCategoryProductList4FE/{categoryId}")
+	public ModelAndView  getCategoryProductList4FE(@PathVariable int categoryId, ModelMap model) {
+		List<List<Product>> productList = service.getProductList4Front(categoryId, NumInLines);
 		model.put("plist", productList);
 		return new ModelAndView ("pictable",model);
 	}

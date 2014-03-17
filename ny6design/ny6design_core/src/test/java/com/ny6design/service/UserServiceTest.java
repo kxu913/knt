@@ -46,7 +46,7 @@ public class UserServiceTest {
 		user.setFromid(5);
 		user.setFactive("0");
 		user.setAdmin(true);
-		user.setEmailaddress("admin@gmail.com");
+		user.setEmailaddress("admin");
 		user.setPassword("123");
 		userService.insert(user);
 	}

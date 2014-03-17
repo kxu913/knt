@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.ny6design.constant.Constants.WILDCARD;
+
 import com.ny6design.mapper.FeedBackMapper;
 import com.ny6design.model.FeedBack;
+import com.ny6design.mybatis.Page;
 
 /**
  * 
@@ -25,8 +27,8 @@ public class FeedbackService {
 		return feedBackMapper.getRecommendFeedback(COUNT);
 	}
 
-	public List<FeedBack> getAllFeedback() {
-		return feedBackMapper.getAllFeedback();
+	public List<FeedBack> getAllFeedback(Page<FeedBack> page) {
+		return feedBackMapper.getAllFeedbackByPage(page);
 	}
 
 	public void submitFeedback(FeedBack feedback) {
@@ -42,12 +44,16 @@ public class FeedbackService {
 		return 0;
 	}
 
-	public List<FeedBack> getFeedbackBykeyword(String keyword) {
+	public List<FeedBack> getFeedbackBykeyword(String keyword,Page<FeedBack> page) {
 		if (StringUtils.isEmpty(keyword)) {
-			return this.getAllFeedback();
+			return this.getAllFeedback(page);
 		}
 		return feedBackMapper.findFeedbackBykeyword(WILDCARD + keyword
 				+ WILDCARD);
+	}
+
+	public int getTotalOfFeedback() {
+		return feedBackMapper.getTotalAccount();
 	}
 
 }

@@ -54,7 +54,6 @@ function initSelect() {
 }
 
 function register(isUpdate) {
-
 	var userid = $("#userid").val();
 	var emailAddress = $("#inputEmail").val();
 	var isPublicEmail = $("#publicEmail").attr("checked");

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ny6design.model.FeedBack;
+import com.ny6design.mybatis.Page;
 import com.ny6design.service.FeedbackService;
 
 /**
@@ -28,6 +29,7 @@ import com.ny6design.service.FeedbackService;
 @Controller
 public class FeedbackController {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
+	private int pageSize = 5;
 	@Autowired
 	private FeedbackService feedbackService;
 
@@ -38,22 +40,31 @@ public class FeedbackController {
 	}
 
 	@RequestMapping("/listFeedback")
-	public ModelAndView getAllFeedBack(ModelMap modelMap) {
-		modelMap.put("feedbackList", feedbackService.getAllFeedback());
+	public ModelAndView getAllFeedBack(@RequestParam("page") int _page, ModelMap modelMap) {
+		int total = feedbackService.getTotalOfFeedback();
+		Page<FeedBack> page = new Page<FeedBack>(total, pageSize, _page-1);
+		modelMap.put("feedbackList", feedbackService.getAllFeedback(page));
+		modelMap.put("totalNumber", total);
+		modelMap.put("pageSize", pageSize);
+		modelMap.put("totalPage", page.getTotalPage());
 		return new ModelAndView("feedback-list", modelMap);
 	}
 
 	@RequestMapping("/searchFeedback")
 	public ModelAndView searchFeedback(@RequestParam("keyword") String keyword,
 			ModelMap modelMap) {
+		int total = feedbackService.getTotalOfFeedback();
+		Page<FeedBack> page = new Page<FeedBack>(total, pageSize, 0);
 		modelMap.put("feedbackList",
-				feedbackService.getFeedbackBykeyword(keyword));
+				feedbackService.getFeedbackBykeyword(keyword,page));
 		return new ModelAndView("feedback-list-admin", modelMap);
 	}
 
 	@RequestMapping("/listFeedbackForAdminpage")
 	public ModelAndView getAllFeedBackForAdminPage(ModelMap modelMap) {
-		modelMap.put("feedbackList", feedbackService.getAllFeedback());
+		int total = feedbackService.getTotalOfFeedback();
+		Page<FeedBack> page = new Page<FeedBack>(total, pageSize, 0);
+		modelMap.put("feedbackList", feedbackService.getAllFeedback(page));
 		return new ModelAndView("feedback-list-admin", modelMap);
 	}
 

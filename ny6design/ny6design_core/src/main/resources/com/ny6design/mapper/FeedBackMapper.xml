@@ -31,10 +31,14 @@
     limit #{count,jdbcType=INTEGER}
   </select>
   
-    <select id="getAllFeedback" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <select id="getAllFeedbackByPage" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from t_message order by fupdatetime desc
+  </select>
+  
+   <select id="getTotalAccount" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    	select count(1) from t_message 
   </select>
   
    <select id="findFeedbackBykeyword" resultMap="BaseResultMap" parameterType="string" >

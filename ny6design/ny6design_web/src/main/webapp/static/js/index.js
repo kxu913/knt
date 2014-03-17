@@ -145,7 +145,7 @@ function loadCategories() {
 				if (-1 == pid) {
 					newItem = $(appendDiv).append('<div><h3><a/></h3><div><ul></ul></div></div>');
 					$(newItem).find('>div:last').attr('id', 'category' + id).find("h3 a").text(name);
-
+					
 				} else {
 					pNode = '#category' + pid;
 					newItem = $(pNode).find('ul').append("<li><a/></li>");
@@ -160,14 +160,22 @@ function loadCategories() {
 				"icons" : null,
 				header : "> div > h3"
 			});
+			
+			$("#child div ul li a").each(function(){
+				$(this).click(function(){
+					var catId = $(this).parent().attr("id").replace("category", "");
+					loadProducts(catId);
+				});
+			});
+			
 		}
 	});
 
 }
 
-function loadProducts() {
+function loadProducts(categoryId) {
 	$.ajax({
-		url : '/ny6design_web/getProductList',
+		url : '/ny6design_web/getCategoryProductList4FE/'+categoryId,
 		success : function(data, status) {
 			$("#productList").html(data);
 		}

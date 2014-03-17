@@ -11,7 +11,7 @@
 	<tr>
 		#foreach($product as $!productList)
 		<td width="20%">
-			<img src=$!{product.image} style='height: 160px; width: 190px; cursor: pointer;' onclick="javascript:window.open('pdetail/$!{product.productId}')"></img>
+			<img src='$!{product.image}' style="height:160px; width: 190px; cursor: pointer;" onclick="javascript:window.open('pdetail/$!{product.productId}')"></img>
 		</td> 
 		#end
 	</tr>

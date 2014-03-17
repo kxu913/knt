@@ -1,44 +1,79 @@
-<table>
+#set ($rowProductNum=3)
+<table width="100%">
 #foreach($productList as $plist)
+	#if ($productList && $productList.size()>0)
   <tr>
     <td>#displayLine($productList)</td>
   </tr>
+	#end
 #end
 </table>
 
 #macro(displayLine $productList) 
-<table class="table table-bordered">
-	<tr>
-		#foreach($product as $!productList)
-		<td width="20%">
-			<img src='$!{product.image}' style='height: 160px; width: 190px; cursor: pointer;' onclick="javascript:window.open('pdetail/$!{product.productId}')"></img>
-		</td> 
-		#end
-	</tr>
-	<tr>
-		#foreach($product as $!productList)
-		<td>
-			<table class="table table-bordered">
-				<tr>
-					<td rowspan="2"><img src="static/img/buy-now.jpg"></img></td>
-					#getLabelName($product)
-				</tr>
-				<tr>
-					#getLabelValue($product)
-				</tr>
-			</table>
-		</td> 
-		#end
-	</tr>
-	<tr>
-		#foreach($product as $!productList)
-		<td>
-			<h5>$!{product.productDesc.name}</h5>
-		</td> 
-		#end
-	</tr>
-</table>
+	#set($listSize=$productList.size())
+	#set($emptyNum=($rowProductNum - $listSize))
+	#if ($productList && $listSize>0)
+	#set($tdWidth = 33.3 * $emptyNum)
+	<table class="table table-bordered">
+		<tr>
+			#if($listSize <= $rowProductNum)
+    			#foreach($product as $!productList)
+					<td width="33.3%" style="text-align:center">
+						#if ($product)
+						<img src='$!{product.image}' style="height:160px; width: 190px; cursor: pointer;" onclick="javascript:window.open('pdetail/$!{product.productId}')"></img>
+						#end
+					</td>
+    			#end
+			#end
+			
+			#if(($emptyNum) > 0)
+				<td width="$tdWidth%"  colspan="$emptyNum" ></td>
+			#end
+		</tr>
+		<tr>
+			#if($listSize <= $rowProductNum)
+    			#foreach($product as $!productList)
+    					<td>
+    						#if ($product)
+    						<table class="table table-bordered">
+    							<tr>
+    								<td rowspan="2"><img src="static/img/buy-now.jpg"></img></td>
+    								#getLabelName($product)
+    							</tr>
+    							<tr>
+    								#getLabelValue($product)
+    							</tr>
+    						</table>
+    						#end
+    					</td>
+    			#end
+			#end
+			#if(($emptyNum) > 0)
+				<td width="$tdWidth%"  colspan="$emptyNum" ></td>
+			#end
+		</tr>
+		<tr>
+			#if($listSize <= $rowProductNum)
+    			#foreach($product as $!productList)
+    					<td>
+    						#if ($product)
+    						<h5>$!{product.productDesc.name}</h5>
+    						#end
+    					</td> 
+    			#end
+			#end
+			#if(($emptyNum) > 0)
+				<td width="$tdWidth%"  colspan="$emptyNum" ></td>
+			#end
+		</tr>
+	</table>
+	#end
 #end 
+
+#macro(getwidth $product) 
+
+	
+#end
 
 #macro(getLabelName $product) 
 	#foreach($prodPrice as $!product.productPriceList)

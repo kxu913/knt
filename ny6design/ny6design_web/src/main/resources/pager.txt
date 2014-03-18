@@ -1,6 +1,11 @@
 1. 前端引入bootstrap-paginator.js 以及 bootstrap-combined.min.css。
-2. 在要加分页的页面增加一个div，参考 feedback-list-admin.html 
+2. 在要加分页的页面增加一个div，以及隐藏div传值到分页控件，参考 feedback-list-admin.html 
 	<div id="feedbackpager" style="margin-top: 0px;padding-top: 0px;"></div>
+	<div style="display: none">
+	<input type="hidden" id="feedbackTotal" value="$!totalNumber">
+	<input type="hidden" id="feedbackPageSize" value="$!pageSize">
+	<input type="hidden" id="feedbackTotalPage" value="$!totalPage">
+	</div>
 3. 在js里面添加如下代码， 参考admin.js
 	var options = {
 					currentPage : 1,

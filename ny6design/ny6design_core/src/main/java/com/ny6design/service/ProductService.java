@@ -121,11 +121,11 @@ public class ProductService {
 					temp = Lists.newArrayList();
 				}
 				if((i+1)==size){
-					if(temp.size()<numInLine){
+					/*if(temp.size()<numInLine && temp.size()>0){
 						while(temp.size()<numInLine){
 							temp.add(null);
 						}
-					}
+					}*/
 					resultList.add(temp);
 				}
 			}

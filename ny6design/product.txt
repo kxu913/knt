@@ -19,13 +19,14 @@ product back end todo list
 7. 列表翻页 （TODO）
 8. edit( like insert, not full<image not done>, )
 9. index product (todo)
-10. insert, edit中产品的desc还没加，需要ckedit（TODO）
+10. insert, edit中产品的desc还没加，需要ckedit（done）
 11. insert, edit中产品图片功能
 12. insert, edit中产品价格设置（需另考虑）
 13. product copy时只支持一个category(产品可以在多个分类中，是多对多关系， 需改进)
 14. admin product 列表如果只有t_product表有数据的话好象不会显示在列表中，需优化
-15. front end product display issue(more then 3 product bug,貌似只能是在后端先分成3个一组的数组发到前端，不然没法搞)
-
+15. front end product display issue (done)
+16. 网站点击category显示产品 (done)
+17. product edit category (ongoing)
 
 
 

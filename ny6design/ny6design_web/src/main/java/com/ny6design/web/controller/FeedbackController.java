@@ -41,30 +41,35 @@ public class FeedbackController {
 
 	@RequestMapping("/listFeedback")
 	public ModelAndView getAllFeedBack(@RequestParam("page") int _page, ModelMap modelMap) {
-		int total = feedbackService.getTotalOfFeedback();
-		Page<FeedBack> page = new Page<FeedBack>(total, pageSize, _page-1);
+		Page<FeedBack> page = new Page<FeedBack>(pageSize, _page-1);
 		modelMap.put("feedbackList", feedbackService.getAllFeedback(page));
-		modelMap.put("totalNumber", total);
+		modelMap.put("totalNumber", page.getTotalRecord());
 		modelMap.put("pageSize", pageSize);
 		modelMap.put("totalPage", page.getTotalPage());
 		return new ModelAndView("feedback-list", modelMap);
 	}
 
 	@RequestMapping("/searchFeedback")
-	public ModelAndView searchFeedback(@RequestParam("keyword") String keyword,
+	public ModelAndView searchFeedback(@RequestParam("page") int _page,@RequestParam("keyword") String keyword,
 			ModelMap modelMap) {
-		int total = feedbackService.getTotalOfFeedback();
-		Page<FeedBack> page = new Page<FeedBack>(total, pageSize, 0);
+//		int total = feedbackService.getTotalOfFeedback();
+		Page<FeedBack> page = new Page<FeedBack>(pageSize, _page-1);
 		modelMap.put("feedbackList",
 				feedbackService.getFeedbackBykeyword(keyword,page));
+		modelMap.put("totalNumber", page.getTotalRecord());
+		modelMap.put("pageSize", pageSize);
+		modelMap.put("totalPage", page.getTotalPage());
 		return new ModelAndView("feedback-list-admin", modelMap);
 	}
 
 	@RequestMapping("/listFeedbackForAdminpage")
-	public ModelAndView getAllFeedBackForAdminPage(ModelMap modelMap) {
-		int total = feedbackService.getTotalOfFeedback();
-		Page<FeedBack> page = new Page<FeedBack>(total, pageSize, 0);
+	public ModelAndView getAllFeedBackForAdminPage(@RequestParam("page") int _page, ModelMap modelMap) {
+//		int total = feedbackService.getTotalOfFeedback();
+		Page<FeedBack> page = new Page<FeedBack>(pageSize, _page-1);
 		modelMap.put("feedbackList", feedbackService.getAllFeedback(page));
+		modelMap.put("totalNumber", page.getTotalRecord());
+		modelMap.put("pageSize", pageSize);
+		modelMap.put("totalPage", page.getTotalPage());
 		return new ModelAndView("feedback-list-admin", modelMap);
 	}
 

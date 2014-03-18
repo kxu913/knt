@@ -16,7 +16,6 @@ function insertProduct() {
 	});
 }
 
-
 function loadUsers() {
 	$.ajax({
 		url : '/ny6design_web/getAllUsers',
@@ -49,9 +48,66 @@ function searchQuestion(keyword) {
 /* for feedback */
 function loadFeedback() {
 	$.ajax({
-		url : '/ny6design_web/listFeedbackForAdminpage',
+		url : '/ny6design_web/listFeedbackForAdminpage?page=0',
 		success : function(data, status) {
 			$("#maintable").html(data);
+			var options = {
+					currentPage : 1,
+					totalPages : $("#feedbackTotalPage").val(),
+					onPageClicked : loadFeedBackClicked
+				};
+				$('#feedbackpager').bootstrapPaginator(options);
+		}
+	});
+}
+
+var loadFeedBackClicked = function(event, originalEvent,
+		type, page){
+	$.ajax({
+		url : '/ny6design_web/listFeedbackForAdminpage?page=' + page,
+		success : function(data, status) {
+			$("#maintable").html(data);
+			var options = {
+				currentPage : page,
+				totalPages : $("#feedbackTotalPage").val(),
+				onPageClicked : loadFeedBackClicked
+			};
+			$('#feedbackpager').bootstrapPaginator(options);
+		}
+	});
+}
+
+function searchFeedback(keyword) {
+	var keyword = $("#keyword").val();
+	$.ajax({
+		url : '/ny6design_web/searchFeedback?page=0&keyword=' + keyword,
+		success : function(data, status) {
+			$("#maintable").html(data);
+			$("#keyword").val(keyword);
+			var options = {
+				currentPage : 1,
+				totalPages : $("#feedbackTotalPage").val(),
+				onPageClicked : searchFeedBackClicked
+			};
+			$('#feedbackpager').bootstrapPaginator(options);
+		}
+	});
+}
+
+var searchFeedBackClicked = function(event, originalEvent,
+		type, page){
+	var keyword = $("#keyword").val();
+	$.ajax({
+		url : '/ny6design_web/searchFeedback?page=' + page
+				+ '&keyword=' + keyword,
+		success : function(data, status) {
+			$("#maintable").html(data);
+			var options = {
+				currentPage : page,
+				totalPages : $("#feedbackTotalPage").val(),
+				onPageClicked : searchFeedBackClicked
+			};
+			$('#feedbackpager').bootstrapPaginator(options);
 		}
 	});
 }
@@ -72,15 +128,7 @@ function updateRecommend(_a, recommend) {
 	});
 }
 
-function searchFeedback(keyword) {
-	var keyword = $("#keyword").val();
-	$.ajax({
-		url : '/ny6design_web/searchFeedback?keyword=' + keyword,
-		success : function(data, status) {
-			$("#maintable").html(data);
-		}
-	});
-}
+
 /* feedback end! */
 function searchUser() {
 	var keyword = $("#keyword").val();

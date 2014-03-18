@@ -3,7 +3,10 @@ function addPordcut(){
 	console.log("--------------")
 	console.log($("#addProductForm").serialize())
 	*/
-	$.post($("#addProductForm").attr("action"), $("#addProductForm").serialize(), function(html) {
+	console.log($("#categorySelector").val())
+	var para="&categorieIds="+$("#categorySelector").val();
+	
+	$.post($("#addProductForm").attr("action"), $("#addProductForm").serialize()+para, function(html) {
 		$("#maintable").html(html);
 	});
 }

@@ -17,8 +17,7 @@
 <input type="hidden" id="productId" name="productId" value="$!{product.productId}">
 <div id="productTab" class="tab-content"> 
 
-  <div class="tab-pane fade active in" id="general">
-  	<p>
+  <div class="tab-pane fade active in" id="general" style="margin-top:15px">
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label"><span style="color:#FF0000; font-weight:bold">*</span> Product Name:</label>
 		<div class="col-sm-8">
@@ -34,12 +33,10 @@
 		  </script>
 		</div>
 	</div>
-	</p>
   </div>
   
 <!-- Tab 2 data -->
-  <div class="tab-pane fade" id="data">
-  	<p>
+  <div class="tab-pane fade" id="data" style="margin-top:15px">
 	<div class="form-group">
 		<label for="model" class="col-sm-2 control-label"><span style="color:#FF0000; font-weight:bold">*</span> Model:</label>
 		<div class="col-sm-4">
@@ -78,16 +75,14 @@
 	<div class="form-group">
 		<label for="Categories" class="col-sm-2 control-label">Categories:</label>
 		<div class="col-sm-6" id="categorySelectorDiv">
-			<select multiple="multiple" class="form-control multiselect" name="Categories" id="categorySelector"></select>
+			<select multiple="multiple" class="form-control multiselect" id="categorySelector"></select>
 		</div>
 	</div>
-	</p>
   </div>
   
   
 <!-- Tab 3 image -->
-  <div class="tab-pane fade" id="p_image">
-  	<p>
+  <div class="tab-pane fade" id="p_image" style="margin-top:15px">
 	  	<table class="table table-bordered">
 		  <thead>
 	         <tr>
@@ -105,15 +100,14 @@
 		     </tr>
 		   </tfoot>
 		</table>
-	</p>
   </div>
   
 </div>
 </form>
 
 <script type="text/javascript">
-//TODO: http://wenzhixin.net.cn/p/multiple-select/#with-optgroups1
 function loadCategories() {
+	
 	$.getJSON(
 		'/ny6design_web/getAllCategoryList',
 		function(data) {
@@ -130,13 +124,18 @@ function loadCategories() {
 					pNode = '#cseletor' + pid;
 					newItem = $(pNode).append('<option></option>');
 					$(newItem).find('option:last').prop('value', id).text(name);
+					
+					#foreach($category as $product.productCategoryList)
+						if($category.categoryId==id){
+							$(newItem).find('option:last').prop('selected', true);
+						}
+					#end
 				}
 			});
 			
 			$('.multiselect').multiselect({
 			      maxHeight: 300
 		    });
-			
 		}
 	);
 

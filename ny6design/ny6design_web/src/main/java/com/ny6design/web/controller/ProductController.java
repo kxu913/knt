@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ny6design.mapper.ProductMapper;
 import com.ny6design.model.Product;
+import com.ny6design.model.Product2CategoryKey;
 import com.ny6design.model.ProductImage;
 import com.ny6design.model.ProductPrice;
 import com.ny6design.service.CategoryService;
@@ -51,17 +53,25 @@ public class ProductController {
 	
 	@RequestMapping(value="/saveProduct", method=RequestMethod.POST)
 	public String saveProduct(Product product, BindingResult result, 
-//								@ModelAttribute("ajaxRequest") boolean ajaxRequest, 
+								@ModelAttribute("categorieIds") String categorieIds, 
 								Model model, RedirectAttributes redirectAttrs) {
 		if (result.hasErrors()) {
 			return null;
 		}
 		if(product.getProductId()==null){
 			productMapper.insertProduct(product);
-			/**
-			 * TODO add categorys
-			 */
-//			productMapper.insertProductCategory(p2c)
+			
+			if(StringUtils.isNotEmpty(categorieIds)){
+				String[] cIds = categorieIds.split(",");
+				if(cIds.length>0){
+					for(int i=0; i<cIds.length; i++){
+						if(StringUtils.isNotEmpty(cIds[i])){
+							Product2CategoryKey p2c = new Product2CategoryKey(new Integer(cIds[i]),product.getProductId());
+							productMapper.insertProductCategory(p2c);
+						}
+					}
+				}
+			}
 			
 			if(product.getProductDesc()!=null){
 				productMapper.insertProductDesc(product.getProductDesc());
@@ -84,9 +94,18 @@ public class ProductController {
 		else{
 			productMapper.updateProductById(product);
 			
-			/**
-			 * todo update category info
-			 */
+			productMapper.deletePCByProductId(product.getProductId());
+			if(StringUtils.isNotEmpty(categorieIds)){
+				String[] cIds = categorieIds.split(",");
+				if(cIds.length>0){
+					for(int i=0; i<cIds.length; i++){
+						if(StringUtils.isNotEmpty(cIds[i])){
+							Product2CategoryKey p2c = new Product2CategoryKey(new Integer(cIds[i]),product.getProductId());
+							productMapper.insertProductCategory(p2c);
+						}
+					}
+				}
+			}
 			
 			if(product.getProductDesc()!=null){
 				productMapper.updateProductDescByProductId(product.getProductDesc());

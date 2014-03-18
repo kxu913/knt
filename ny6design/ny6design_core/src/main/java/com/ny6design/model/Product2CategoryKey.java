@@ -1,7 +1,18 @@
 package com.ny6design.model;
 
 public class Product2CategoryKey {
-    private Integer categoryId;
+	
+	public Product2CategoryKey() {
+		super();
+	}
+	
+    public Product2CategoryKey(Integer categoryId, Integer productId) {
+		super();
+		this.categoryId = categoryId;
+		this.productId = productId;
+	}
+
+	private Integer categoryId;
 
     private Integer productId;
 

@@ -26,5 +26,5 @@ public interface FeedBackMapper {
 
 	List<FeedBack> getAllFeedbackByPage(@Param("page")Page<FeedBack> page);
 
-	List<FeedBack> findFeedbackBykeyword(String keyword);
+	List<FeedBack> findFeedbackBykeyword(@Param("keyword")String keyword,@Param("page")Page<FeedBack> page);
 }

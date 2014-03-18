@@ -1,6 +1,9 @@
 package com.ny6design.mybatis;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -16,6 +19,9 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.alibaba.druid.proxy.jdbc.StatementProxyImpl;
+import com.mysql.jdbc.PreparedStatement;
 
 @Intercepts({ @Signature(method = "prepare", type = StatementHandler.class, args = { Connection.class }) })
 public class PageInterceptor implements Interceptor {
@@ -49,8 +55,16 @@ public class PageInterceptor implements Interceptor {
 		String originalSql = (String) metaStatementHandler
 				.getValue("delegate.boundSql.sql");
 		if (page != null) {
-			metaStatementHandler.setValue("delegate.boundSql.sql", dialect
-					.getLimitString(originalSql, page.getOffset(), page.getPageSize()));
+			int total = getTotal(invocation, metaStatementHandler, dialect,
+					originalSql, args);
+			page.setTotalRecord(total);
+			if (log.isDebugEnabled()) {
+				log.debug("total : " + total);
+			}
+			metaStatementHandler.setValue(
+					"delegate.boundSql.sql",
+					dialect.getLimitString(originalSql, page.getOffset(),
+							page.getPageSize()));
 			metaStatementHandler.setValue("delegate.rowBounds.offset",
 					RowBounds.NO_ROW_OFFSET);
 			metaStatementHandler.setValue("delegate.rowBounds.limit",
@@ -63,6 +77,20 @@ public class PageInterceptor implements Interceptor {
 		}
 
 		return invocation.proceed();
+	}
+
+	private int getTotal(Invocation invocation,
+			MetaObject metaStatementHandler, Dialect dialect,
+			String originalSql, Object args) throws InvocationTargetException,
+			IllegalAccessException, SQLException {
+		java.sql.Statement statement = (java.sql.Statement) invocation
+				.proceed();
+		ResultSet rs = statement.executeQuery(dialect.getCountString(
+				originalSql, args));
+		while (rs.next()) {
+			return rs.getInt(1);
+		}
+		throw new SQLException("Can't get total");
 	}
 
 	private Page getPageFromArgs(Object args) {

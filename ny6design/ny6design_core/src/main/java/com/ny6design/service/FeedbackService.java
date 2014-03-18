@@ -49,7 +49,7 @@ public class FeedbackService {
 			return this.getAllFeedback(page);
 		}
 		return feedBackMapper.findFeedbackBykeyword(WILDCARD + keyword
-				+ WILDCARD);
+				+ WILDCARD,page);
 	}
 
 	public int getTotalOfFeedback() {

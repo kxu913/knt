@@ -19,11 +19,10 @@ public class Page<T> {
 	 * @param pageSize
 	 * @param pageNo
 	 */
-	public Page(int totalRecord, int pageSize,int pageNo) {
+	public Page(int pageSize,int pageNo) {
 		super();
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
-		this.totalRecord = totalRecord;
 		setOffset(pageNo * pageSize);
 		int totalPage = 1;
 		if (totalRecord % pageSize == 0) {
@@ -63,16 +62,16 @@ public class Page<T> {
 		return totalRecord;
 	}
 
-//	public void setTotalRecord(int totalRecord) {
-//		this.totalRecord = totalRecord;
-//		int totalPage = 1;
-//		if (totalRecord % pageSize == 0) {
-//			totalPage = totalRecord / pageSize;
-//		} else {
-//			totalPage = totalRecord / pageSize + 1;
-//		}
-//		this.setTotalPage(totalPage);
-//	}
+	public void setTotalRecord(int totalRecord) {
+		this.totalRecord = totalRecord;
+		int totalPage = 1;
+		if (totalRecord % pageSize == 0) {
+			totalPage = totalRecord / pageSize;
+		} else {
+			totalPage = totalRecord / pageSize + 1;
+		}
+		this.setTotalPage(totalPage);
+	}
 
 	public int getTotalPage() {
 		return totalPage;

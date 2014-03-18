@@ -12,4 +12,6 @@ public interface Dialect {
 	public String getLimitString(String sql, int offset, int limit);
 
 	public boolean supportsLimitOffset();
+	
+	public String getCountString(String sql,Object args);
 }

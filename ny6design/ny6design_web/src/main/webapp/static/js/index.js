@@ -245,6 +245,7 @@ function showFeedback(){
 			});
 		}
 	});
+	console.log("test");
 }
 function init() {
 	loadToolBar();

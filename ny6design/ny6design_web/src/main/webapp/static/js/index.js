@@ -235,9 +235,10 @@ function doRegister() {
 
 function showFeedback(){
 	$.ajax({
-		url : '/ny6design_web/listFeedback',
+		url : '/ny6design_web/listFeedback?page=1',
 		success : function(data, status) {
 			$("#ads").html("");
+			$("#ads").hide();
 			$("#productList").html(data);
 			var options = {
 					currentPage : 1,

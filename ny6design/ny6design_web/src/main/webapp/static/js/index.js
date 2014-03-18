@@ -239,6 +239,12 @@ function showFeedback(){
 		success : function(data, status) {
 			$("#ads").html("");
 			$("#productList").html(data);
+			var options = {
+					currentPage : 1,
+					totalPages : $("#feedbackTotalPage").val(),
+					onPageClicked : feedBackPageClick
+				};
+			$('#feedbackpager').bootstrapPaginator(options);
 			$('#feedbackId').leanModal({
 				top : 100,
 				closeButton : ".modal_close"
@@ -247,6 +253,30 @@ function showFeedback(){
 	});
 	console.log("test");
 }
+
+/**
+ * for feedback pager
+ */
+var feedBackPageClick =  function(event,originalEvent,type,page){
+	$.ajax({
+		url : '/ny6design_web/listFeedback?page='+page,
+		success : function(data, status) {
+			$("#ads").hide();
+			$("#productList").html(data);
+			var options = {
+					currentPage : page,
+					totalPages : $("#feedbackTotalPage").val(),
+					onPageClicked : feedBackPageClick
+				};
+			$('#feedbackpager').bootstrapPaginator(options);
+			$('#feedbackId').leanModal({
+				top : 100,
+				closeButton : ".modal_close"
+			});
+		}
+	});
+};
+
 function init() {
 	loadToolBar();
 	loadMessages();

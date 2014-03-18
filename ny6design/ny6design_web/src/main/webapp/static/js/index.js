@@ -249,6 +249,7 @@ function showFeedback(){
 			});
 		}
 	});
+	consol.log("test1");
 }
 
 /**

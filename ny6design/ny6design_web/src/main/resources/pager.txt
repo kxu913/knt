@@ -1,0 +1,26 @@
+1. 前端引入bootstrap-paginator.js 以及 bootstrap-combined.min.css。
+2. 在要加分页的页面增加一个div，参考 feedback-list-admin.html 
+	<div id="feedbackpager" style="margin-top: 0px;padding-top: 0px;"></div>
+3. 在js里面添加如下代码， 参考admin.js
+	var options = {
+					currentPage : 1,
+					totalPages : $("#feedbackTotalPage").val(),
+					onPageClicked : loadFeedBackClicked
+				};
+				$('#feedbackpager').bootstrapPaginator(options);
+4. controller 参考FeedbackController
+	Page<FeedBack> page = new Page<FeedBack>(pageSize, _page-1);
+		modelMap.put("feedbackList",
+				feedbackService.getFeedbackBykeyword(keyword,page));
+		modelMap.put("totalNumber", page.getTotalRecord());
+		modelMap.put("pageSize", pageSize);
+		modelMap.put("totalPage", page.getTotalPage());
+5. mapper 对应如下
+		List<FeedBack> getAllFeedbackByPage(@Param("page")Page<FeedBack> page);
+
+	List<FeedBack> findFeedbackBykeyword(@Param("keyword")String keyword,@Param("page")Page<FeedBack> page);
+	
+	注意有参数查询的时候加上@Param， 值对应配置文件的属性名。
+	暂时不支持集合类参数
+
+				

@@ -31,6 +31,8 @@ function loadUser() {
 	});
 }
 
+
+
 function loadCountry(){
 	var countryCode = $("#_countryCode").val();
 	$.ajax({
@@ -249,7 +251,9 @@ function showFeedback(){
 			});
 		}
 	});
-	consol.log("test1");
+
+
+
 }
 
 /**

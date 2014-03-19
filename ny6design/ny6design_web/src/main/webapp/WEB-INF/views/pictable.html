@@ -20,7 +20,7 @@
     			#foreach($product as $!productList)
 					<td width="33.3%" style="text-align:center">
 						#if ($product)
-						<img src='$!{product.image}' style="height:160px; width: 190px; cursor: pointer;" onclick="javascript:window.open('pdetail/$!{product.productId}')"></img>
+						<img src='$!{product.image}' style="height:160px; width: 190px; cursor: pointer;" onclick="javascript:window.open('viewPdetail/$!{product.productId}/$!{catergory.categoryId}')"></img>
 						#end
 					</td>
     			#end

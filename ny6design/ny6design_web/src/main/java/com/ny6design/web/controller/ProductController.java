@@ -138,6 +138,7 @@ public class ProductController {
 	public ModelAndView  getCategoryProductList4FE(@PathVariable int categoryId, ModelMap model) {
 		List<List<Product>> productList = service.getProductList4Front(categoryId, NumInLines);
 		model.put("plist", productList);
+		model.put("catergory", categoryService.getCategoryInfo((long)categoryId));
 		return new ModelAndView ("pictable",model);
 	}
 	
@@ -208,12 +209,11 @@ public class ProductController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/pdetail/{productId}")
-	public ModelAndView  getProductInfo(@PathVariable int productId, ModelMap model) {
+	@RequestMapping("/viewPdetail/{productId}/{categoryId}")
+	public ModelAndView  getProductInfo(@PathVariable int productId, @PathVariable long categoryId, ModelMap model) {
 		Product product = productMapper.getProductDetail(productId);
-
 		model.put("product", product);
-		model.put("catergory", categoryService.getCategoryInfo(product.getCategoryId()));
+		model.put("catergory", categoryService.getCategoryInfo(categoryId));
 		return new ModelAndView ("pdetail",model);
 	}
 	
@@ -221,7 +221,6 @@ public class ProductController {
 	public String  editproduct(@PathVariable int productId, ModelMap model) {
 		Product product = productMapper.getProductDetail(productId);
 		model.put("product", product);
-		model.put("catergory", categoryService.getCategoryInfo(product.getCategoryId()));
 		return "admin/product/editproduct";
 	}
 	

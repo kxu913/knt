@@ -100,16 +100,16 @@ function productfilter(){
 		url += "name="+name;
 	}
 	if($.trim(model)!=""){
-		url += "model="+model;
+		url += "&model="+model;
 	}
 	if($.trim(price)!=""){
-		url += "price="+price;
+		url += "&price="+price;
 	}
 	if($.trim(quantity)!=""){
-		url += "quantity="+quantity;
+		url += "&quantity="+quantity;
 	}
 	if($.trim(status)!=""){
-		url += "status="+status;
+		url += "&status="+status;
 	}
 	
 	$.ajax({

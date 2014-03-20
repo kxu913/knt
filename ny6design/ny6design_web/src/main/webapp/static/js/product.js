@@ -3,7 +3,10 @@ function addPordcut(){
 	console.log("--------------")
 	console.log($("#addProductForm").serialize())
 	*/
-	$.post($("#addProductForm").attr("action"), $("#addProductForm").serialize(), function(html) {
+	console.log($("#categorySelector").val())
+	var para="&categorieIds="+$("#categorySelector").val();
+	
+	$.post($("#addProductForm").attr("action"), $("#addProductForm").serialize()+para, function(html) {
 		$("#maintable").html(html);
 	});
 }
@@ -97,16 +100,16 @@ function productfilter(){
 		url += "name="+name;
 	}
 	if($.trim(model)!=""){
-		url += "model="+model;
+		url += "&model="+model;
 	}
 	if($.trim(price)!=""){
-		url += "price="+price;
+		url += "&price="+price;
 	}
 	if($.trim(quantity)!=""){
-		url += "quantity="+quantity;
+		url += "&quantity="+quantity;
 	}
 	if($.trim(status)!=""){
-		url += "status="+status;
+		url += "&status="+status;
 	}
 	
 	$.ajax({

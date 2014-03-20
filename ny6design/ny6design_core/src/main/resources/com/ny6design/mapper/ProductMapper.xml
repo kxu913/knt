@@ -133,7 +133,7 @@
    	<result property="orderColumnName" column="orderColumnName"/>
    	<result property="orderBy" column="orderBy"/>
    	
-   	<association property="categoryId" column="product_id"  select="getCategoryId"/>
+   	<association property="categoryId" column="product_id"  select="getCategoryId"/> <!-- need to remove -->
    	<association property="productDesc" column="product_id" javaType="com.ny6design.model.ProductDescription" select="getDesc4Product"/>
    	<collection property="productImageList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductImage" select="getImage4Product"/>
    	<collection property="productPriceList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductPrice" select="getPrice4Product"/>

@@ -8,9 +8,12 @@ function loadUserPanel() {
 		}
 	});
 }
-
-function gotoMyAccount() {
+function hideAds(){
 	$("#ads").html("");
+	$("#ads").hide();
+}
+function gotoMyAccount() {
+	hideAds();
 	loadUserPanel();
 	loadUser();
 }
@@ -226,7 +229,7 @@ function doRegister() {
 	$.ajax({
 		url : '/ny6design_web/doRegist',
 		success : function(data, status) {
-			$("#ads").html("");
+			hideAds();
 			initSelect();
 			$("#productList").html(data);
 		}
@@ -237,8 +240,7 @@ function showFeedback(){
 	$.ajax({
 		url : '/ny6design_web/listFeedback?page=1',
 		success : function(data, status) {
-			$("#ads").html("");
-			$("#ads").hide();
+			hideAds();
 			$("#productList").html(data);
 			var options = {
 					currentPage : 1,
@@ -365,7 +367,7 @@ function loadAddress(){
 	$.ajax({
 		url : '/ny6design_web/listAddress',
 		success : function(data, status) {
-			$("#ads").html("");
+			hideAds();
 			$("#productList").html(data);
 			loadCountry();
 			loadStates();

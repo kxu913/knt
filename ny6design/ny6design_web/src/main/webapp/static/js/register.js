@@ -54,6 +54,11 @@ function initSelect() {
 }
 
 function register(isUpdate) {
+	$("#_registform").validation();
+	if ($("#_registform").valid()==false){
+        $("#error-text").text("填写信息不完整。");
+        return false;
+      }
 	var userid = $("#userid").val();
 	var emailAddress = $("#inputEmail").val();
 	var isPublicEmail = $("#publicEmail").attr("checked");

@@ -22,27 +22,20 @@
 				E-mail *</label>
 			<div class="col-sm-3">
 				<input type="email" class="form-control" id="inputEmail"
-					placeholder="abc@gmail.com" btvd-type="mail"
-	 btvd-class='btvdclass' 	btvd-err="email formatter error!">
+					placeholder="abc@gmail.com" check-type="mail required">
 			</div>
 			<div class="checkbox col-sm-2">
 			    <label>
 			      <input type="checkbox"  checked="checked" id="publicTel"> Public
 			    </label>
   			</div>
-			<div class="col-sm-4 control-label" for="inputEmail" style="text-align: left">
-				<label id="errorMsg0" style="color: red"></label>
-			</div>
 		</div>
 		<div class="form-group">
 			<label for="inputPassword" class="col-sm-2 control-label">Password
 				*</label>
 			<div class="col-sm-3">
 				<input type="password" class="form-control" id="inputPassword"
-					placeholder="Password">
-			</div>
-			<div class="col-sm-4 control-label" for="inputPassword" style="text-align: left">
-				<label id="errorMsg1" style="color: red"></label>
+					placeholder="Password" check-type="required">
 			</div>
 		</div>
 
@@ -51,10 +44,7 @@
 				*</label>
 			<div class="col-sm-3">
 				<input type="password" class="form-control" id="inputConfirmedPassword"
-					placeholder="Confirm Password">
-			</div>
-			<div class="col-sm-4 control-label" for="inputConfirmedPassword" style="text-align: left">
-				<label id="errorMsg2" style="color: red"></label>
+					placeholder="Confirm Password"  check-type="required">
 			</div>
 		</div>
 
@@ -63,10 +53,7 @@
 				Name *</label>
 			<div class="col-sm-3">
 				<input type="input" class="form-control" id="firstName"
-					placeholder="FirstName">
-			</div>
-			<div class="col-sm-4 control-label" for="firstName" style="text-align: left">
-				<label id="errorMsg3" style="color: red"></label>
+					placeholder="FirstName"  check-type="required">
 			</div>
 		</div>
 
@@ -75,10 +62,7 @@
 				Name *</label>
 			<div class="col-sm-3">
 				<input type="input" class="form-control" id="lastName"
-					placeholder="LastName">
-			</div>
-			<div class="col-sm-4 control-label" for="lastName" style="text-align: left">
-				<label id="errorMsg4" style="color: red"></label>
+					placeholder="LastName"  check-type="required">
 			</div>
 		</div>
 
@@ -86,10 +70,7 @@
 			<label for="address" class="col-sm-2 control-label">Address *</label>
 			<div class="col-sm-3">
 				<input type="input" class="form-control" id="address"
-					placeholder="Address">
-			</div>
-			<div class="col-sm-4 control-label" for="address" style="text-align: left">
-				<label id="errorMsg5" style="color: red"></label>
+					placeholder="Address"  check-type="required">
 			</div>
 		</div>
 
@@ -97,21 +78,15 @@
 			<label for="town" class="col-sm-2 control-label">Town *</label>
 			<div class="col-sm-3">
 				<input type="input" class="form-control" id="town"
-					placeholder="Town">
-			</div>
-			<div class="col-sm-4 control-label" for="town" style="text-align: left">
-				<label id="errorMsg6" style="color: red"></label>
+					placeholder="Town" check-type="required">
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="statedId" class="col-sm-2 control-label">State *</label>
 			<div class="col-sm-3" id="stateDiv">
-				<select class="form-control" id="statedId">
+				<select class="form-control" id="statedId"  check-type="required">
 				</select>
-			</div>
-			<div class="col-sm-4 control-label" for="statedId" style="text-align: left">
-				<label id="errorMsg7" style="color: red"></label>
 			</div>
 		</div>
 
@@ -120,10 +95,7 @@
 				*</label>
 			<div class="col-sm-3">
 				<input type="input" class="form-control" id="zipcode"
-					placeholder="Zip Code">
-			</div>
-			<div class="col-sm-4 control-label" for="zipcode" style="text-align: left">
-				<label id="errorMsg8" style="color: red"></label>
+					placeholder="Zip Code"  check-type="required">
 			</div>
 		</div>
 
@@ -133,9 +105,6 @@
 				<select class="form-control" id="countryId">
 				</select>
 			</div>
-			<div class="col-sm-4 control-label" for="countryId" style="text-align: left">
-				<label id="errorMsg9" style="color: red"></label>
-			</div>
 		</div>
 
 		<div class="form-group form-inline">
@@ -143,7 +112,7 @@
 				*</label>
 			<div class="col-sm-3">
 				<input type="input" class="form-control" id="telephone"
-					placeholder="Telephone">
+					placeholder="Telephone"  check-type="required">
 			</div>
 			
 			<div class="checkbox col-sm-2">
@@ -151,20 +120,13 @@
 			      <input type="checkbox" checked="checked" id="publicTel"> Public
 			    </label>
   			</div>
-			
-			<div class="col-sm-4 control-label" for="telephone" style="text-align: left">
-				<label id="errorMsg10" style="color: red"></label>
-			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="fax" class="col-sm-2 control-label">Fax</label>
 			<div class="col-sm-3">
 				<input type="input" class="form-control input-small" id="fax"
-					placeholder="Fax">
-			</div>
-			<div class="col-sm-4 control-label" for="fax" style="text-align: left">
-				<label id="errorMsg11" style="color: red"></label>
+					placeholder="Fax"  check-type="required">
 			</div>
 		</div>
 
@@ -173,10 +135,7 @@
 				Id# (Texas only)</label>
 			<div class="col-sm-3">
 				<input type="input" class="form-control" id="taxId"
-					placeholder="TaxId">
-			</div>
-			<div class="col-sm-4 control-label" for="taxId" style="text-align: left">
-				<label id="errorMsg12" style="color: red"></label>
+					placeholder="TaxId"  check-type="required">
 			</div>
 		</div>
 
@@ -186,9 +145,6 @@
 			<div class="col-sm-3" id="fromWhere">
 				<select class="form-control" id="hearUs">
 				</select>
-			</div>
-			<div class="col-sm-4 control-label" for="fromWhere" style="text-align: left">
-				<label id="errorMsg13" style="color: red"></label>
 			</div>
 		</div>
 

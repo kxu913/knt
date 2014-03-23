@@ -139,7 +139,16 @@ public class ProductController {
 		List<List<Product>> productList = service.getProductList4Front(categoryId, NumInLines);
 		model.put("plist", productList);
 		model.put("catergory", categoryService.getCategoryInfo((long)categoryId));
-		return new ModelAndView ("pictable",model);
+		return new ModelAndView ("product-list",model);
+	}
+	
+	@RequestMapping("/getIndexProductList4FE")
+	public ModelAndView  getIndexProductList4FE(ModelMap model) {
+		List<List<Product>> productList = service.getIndexProductList4Front(NumInLines);
+		model.put("plist", productList);
+//		model.put("catergory", categoryService.getCategoryInfo((long)categoryId));
+		model.put("catergory", 0);
+		return new ModelAndView ("product-list",model);
 	}
 	
 /*	@RequestMapping("/orderProduct")
@@ -169,6 +178,27 @@ public class ProductController {
 		model.put("orderColumnName", orderColumnName);
 		model.put("orderBy", orderBy);
 		return new ModelAndView ("admin/product/productlist",model);
+	}
+	
+	@RequestMapping("/getIndexList4Admin")
+	public ModelAndView  getIndexList4Admin(ModelMap model, 
+			@RequestParam(value="orderColumnName", required = false) String orderColumnName, 
+			@RequestParam(value="orderBy", required = false) String orderBy) {
+		if(StringUtils.isEmpty(orderColumnName)){
+			orderColumnName = "date_added";
+		}else if("name".equalsIgnoreCase(orderColumnName)){
+			orderColumnName = "tpd.name";
+		}
+		
+		if(StringUtils.isEmpty(orderBy)){
+			orderBy = "ASC";
+		}
+		
+		List<Product> productList = productMapper.getIndexList4Admin(orderColumnName, orderBy);
+		model.put("productList", productList);
+		model.put("orderColumnName", orderColumnName);
+		model.put("orderBy", orderBy);
+		return new ModelAndView ("admin/product/indexlist",model);
 	}
 	
 	/**
@@ -203,18 +233,12 @@ public class ProductController {
 	}
 	
 	
-	/**
-	 * TODO 这个链接要改名为viewdetail
-	 * @param productId
-	 * @param model
-	 * @return
-	 */
 	@RequestMapping("/viewPdetail/{productId}/{categoryId}")
 	public ModelAndView  getProductInfo(@PathVariable int productId, @PathVariable long categoryId, ModelMap model) {
 		Product product = productMapper.getProductDetail(productId);
 		model.put("product", product);
 		model.put("catergory", categoryService.getCategoryInfo(categoryId));
-		return new ModelAndView ("pdetail",model);
+		return new ModelAndView ("product-info",model);
 	}
 	
 	@RequestMapping("/editproduct/{productId}")
@@ -222,6 +246,15 @@ public class ProductController {
 		Product product = productMapper.getProductDetail(productId);
 		model.put("product", product);
 		return "admin/product/editproduct";
+	}
+	
+	@RequestMapping("/asindex/{pagefrom}/{productIds}/{isIndex}")
+	public String  asindex(@PathVariable int pagefrom, @PathVariable String productIds, @PathVariable int isIndex, ModelMap model) {
+		service.setPorductWithIndex(productIds, isIndex);
+		if(pagefrom==0)
+			return "redirect:/getIndexList4Admin";
+		else
+			return "redirect:/getProductList4Admin";
 	}
 	
 	@RequestMapping("/copyproduct/{productIds}")

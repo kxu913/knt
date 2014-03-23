@@ -66,10 +66,22 @@ public class ProductServiceTest {
 		
 		productService.insertProduct(product);
 	}
+	
+	@Test
+	public void testSetPorductAsIndex(){
+		productService.setPorductWithIndex("50", 1);
+		assertThat(1).isNotEqualTo(productService.getProductInfo(50).getIndex());
+	}
 
 	@Test
 	public void testDeleteProduct(){
 		productService.deleteProduct("61");
+	}
+	
+	
+	@Test
+	public void testGetIndexProducts4FE(){
+		assertThat(productService.getIndexProductList4Front(3)).isNotEmpty();
 	}
 	
 	@Test

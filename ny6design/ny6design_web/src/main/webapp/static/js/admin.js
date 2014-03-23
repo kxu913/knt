@@ -7,6 +7,15 @@ function loadProductList() {
 	});
 }
 
+function loadIndexList() {
+	$.ajax({
+		url : '/ny6design_web/getIndexList4Admin',
+		success : function(data, status) {
+			$("#maintable").html(data);
+		}
+	});
+}
+
 function insertProduct() {
 	$.ajax({
 		url : '/ny6design_web/insertProduct',

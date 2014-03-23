@@ -105,8 +105,52 @@ public class ProductService {
     	}
     }
     
+    public void setPorductWithIndex(String productIds, Integer asIndex){
+    	if(StringUtils.contains(productIds+",", ",")){
+    		String[] productIdArray = productIds.split(",");
+    		if(productIdArray.length>0){
+    			for(String productId: productIdArray){
+    				Product prodcut = productMapper.getProductDetail(Integer.parseInt(productId));
+    				if(prodcut!=null && asIndex!=null && !(asIndex==prodcut.getIndex())){
+    					prodcut.setIndex(asIndex);
+    					productMapper.updateProductById(prodcut);
+    				}
+    			}
+    		}
+    	}
+    }
+    
     public List<List<Product>> getProductList4Front(int categoryId, int numInLine){
     	List<Product> productList = productMapper.getProductsByCategory(categoryId);
+    	List<List<Product>> resultList = Lists.newArrayList();
+		if(productList!=null && productList.size()>0){
+			int size = productList.size();
+			List<Product> temp = null;
+			for(int i=0; i<size; i++){
+				if(i==0){
+					temp = Lists.newArrayList();
+				}
+				temp.add(productList.get(i));
+				if(  (i+1)%numInLine == 0 ){
+					resultList.add(temp);
+					temp = Lists.newArrayList();
+				}
+				if((i+1)==size){
+					/*if(temp.size()<numInLine && temp.size()>0){
+						while(temp.size()<numInLine){
+							temp.add(null);
+						}
+					}*/
+					resultList.add(temp);
+				}
+			}
+		}
+		return resultList;
+    }
+    
+    
+    public List<List<Product>> getIndexProductList4Front(int numInLine){
+    	List<Product> productList = productMapper.getIndexProducts4FE();
     	List<List<Product>> resultList = Lists.newArrayList();
 		if(productList!=null && productList.size()>0){
 			int size = productList.size();
@@ -147,6 +191,9 @@ public class ProductService {
     	}
     }
     
+    public Product getProductInfo(Integer productId){
+    	return productMapper.getProductDetail(productId);
+    }
     
 /*    public List<Product> getProductPageList(long categoryId, int start, int end){
     	return productMapper.getProductPageList(categoryId, start, end);

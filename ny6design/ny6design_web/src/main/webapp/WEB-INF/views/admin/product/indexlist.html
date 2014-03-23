@@ -1,9 +1,5 @@
-
 <div class="btn-group" style="margin: 9px 0 5px;">
-  <button type="button" class="btn btn-primary" onclick="insertProduct()">Insert</button>
-  <button type="button" class="btn btn-primary" id="asIndex">As Index</button>
-  <button type="button" class="btn btn-warning" onclick="copyProduct()">Copy</button>
-  <button type="button" class="btn btn-danger" onclick="delProduct()">Delete</button>
+  <button type="button" class="btn btn-danger" id="removeMultiIndex">Remove</button>
 </div>
 <table class="table table-bordered">
 	<thead>
@@ -90,18 +86,19 @@
   	Disabled
   #end
   </td>
-  <td class="right">[ <a href="#" onclick="editProduct('$!{product.productId}')">Edit</a> ]</td>
+  <td class="right">[ <a href="#" onclick="removeIndex('$!{product.productId}')">remove</a> ]</td>
 </tr>
 #end 
 
 <script>
-$("#asIndex").click(function(){
+
+$("#removeMultiIndex").click(function(){
 	var productIds = getCheckedUser();
 	if($.trim(productIds)==""){
 		alert("please choose at least one product!");
 	}
 	$.ajax({
-		url : "/ny6design_web/asindex/1/"+productIds+"/1",
+		url : "/ny6design_web/asindex/0/"+productIds+"/0",
 		success : function(data, status) {
 			$("#maintable").html(data);
 		}

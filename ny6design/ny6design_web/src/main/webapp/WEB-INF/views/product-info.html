@@ -1,18 +1,13 @@
-	<link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css">
-
-		<div class="row" style="margin-left:3">
-		  <div>
-		  	<ol class="breadcrumb">
-			  <li><a href="#">$!{catergory.parentName}</a></li>
-			  <li><a href="#">$!{catergory.name}</a></li>
-			  <li class="active">$!{product.productDesc.name}</li>
-			</ol>
-		  </div>
-		  <h3>$!{product.productDesc.name}</h3>
-		  
-		  <div class="row">
+	  	<div class="nav">
+	  	<ol class="breadcrumb" style="margin-left:-15px">
+		  <li><a>$!{catergory.parentName}</a></li>
+		  <li><a href="#">$!{catergory.name}</a></li>
+		  <li class="active">$!{product.productDesc.name}</li>
+		</ol>
+		<h3>$!{product.productDesc.name}</h3>
+		</div>
 		  	<div class="col-sm-3">
-		  		<img alt="" src="../static/img/thumbnail2.jpg" class="img-thumbnail" width="250">
+		  		<img alt="" src="static/img/thumbnail2.jpg" class="img-thumbnail" width="250">
 		  	</div>
 		  	<div class="col-sm-7">
 		  		<div class="table-responsive">
@@ -37,20 +32,20 @@
 				<div id="detail"  class="panel-group panel">$!{product.productDesc.description}</div>
 			    
 			    <div class="panel-group panel">
-			    	<font color="#CE6D05"> <strong>Email: </strong></font>FOR ANY QUESTION</br>
+			    	<font color="#CE6D05"> <strong>Email: </strong></font>FOR ANY QUESTION<br>
 			    	<font color="#CE6D05"> <strong>Email: </strong></font>Sales@ny6design.com
 			    </div>
 			    
 			    <div class="panel-group panel">
 			    	<font color="#CE6D05"> <strong>Approximate Shipping Time: </strong></font>
-			    	</br>2-4days *Large Qty order please add more times.
+			    	<br>2-4days *Large Qty order please add more times.
 			    </div>
 			    
 			    <div class="panel-group panel">
 		    		<div class="form-inline">
 		    			<label for="Quantity">Quantity: </label>&nbsp;&nbsp;&nbsp;<input id="Quantity" type="text" name="Quantity">
-		    			&nbsp;<a href="javascript:alert('already add it')"><img alt="" src="../static/img/add2cart.gif"></a>
-		    			&nbsp;<a href="javascript:alert('already add it')">Add to wish list &nbsp;<img alt="" src="../static/img/go.gif"></a>
+		    			&nbsp;<a href="javascript:alert('already add it')"><img alt="" src="static/img/add2cart.gif"></a>
+		    			&nbsp;<a href="javascript:alert('already add it')">Add to wish list &nbsp;<img alt="" src="static/img/go.gif"></a>
 		    		</div>
 			    
 			    	<!-- AddThis Button BEGIN -->
@@ -65,16 +60,10 @@
 					<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 					<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52f252646f04e60e"></script>
 					<!-- AddThis Button END -->
-			    	<label for="Extras:"><font color="#CE6D05">Extras:</font></label></br>
+			    	<label for="Extras:"><font color="#CE6D05">Extras:</font></label><br>
 					<textarea class="form-control" rows="3"></textarea>
 			    </div>
 		  	</div>
-		  </div>
-		  
-		</div>
-		
-	</div>
-</div>
 
 #macro(getLabelName $product) 
 	#foreach($prodPrice as $!product.productPriceList)
@@ -105,13 +94,3 @@
 		</td>
 	#end 
 #end 
-
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="../static/js/jquery/jquery-2.0.2.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="../static/js/bootstrap/bootstrap.min.js"></script>
-
-
-

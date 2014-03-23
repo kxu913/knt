@@ -29,13 +29,14 @@
     <result column="subtract" jdbcType="INTEGER" property="subtract" />
     <result column="minimum" jdbcType="INTEGER" property="minimum" />
     <result column="cost" jdbcType="DECIMAL" property="cost" />
+    <result column="as_Index" jdbcType="INTEGER" property="index" />
   </resultMap>
   
   <sql id="Base_Column_List">
     product_id, model, sku, location, quantity, stock_status_id, image, manufacturer_id, 
     shipping, price, tax_class_id, date_available, weight, weight_class_id, length, width, 
     height, length_class_id, status, date_added, date_modified, viewed, sort_order, subtract, 
-    minimum, cost
+    minimum, cost, as_Index
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -53,7 +54,7 @@
       width, height, length_class_id, 
       status, date_added, date_modified, 
       viewed, sort_order, subtract, 
-      minimum, cost)
+      minimum, cost, as_Index)
     values (#{model}, #{sku}, 
       #{location}, #{quantity}, #{stockStatusId}, 
       #{image}, #{manufacturerId}, #{shipping}, 
@@ -62,7 +63,7 @@
       #{width}, #{height}, #{lengthClassId}, 
       #{status}, #{dateAdded}, #{dateModified}, 
       #{viewed}, #{sortOrder}, #{subtract}, 
-      #{minimum}, #{cost})
+      #{minimum}, #{cost}, #{index})
   </insert>
   
     <insert id="insertProductDesc" parameterType="com.ny6design.model.ProductDescription" >
@@ -132,8 +133,6 @@
    	<id property="productId" column="product_id"/>
    	<result property="orderColumnName" column="orderColumnName"/>
    	<result property="orderBy" column="orderBy"/>
-   	
-   	<association property="categoryId" column="product_id"  select="getCategoryId"/> <!-- need to remove -->
    	<association property="productDesc" column="product_id" javaType="com.ny6design.model.ProductDescription" select="getDesc4Product"/>
    	<collection property="productImageList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductImage" select="getImage4Product"/>
    	<collection property="productPriceList" javaType="ArrayList" column="product_id" ofType="com.ny6design.model.ProductPrice" select="getPrice4Product"/>
@@ -148,6 +147,7 @@
 		where 
 			product_id = #{product_id}
    </select>
+   
    <select id="getImage4Product" resultType="com.ny6design.model.ProductImage">
 	  SELECT * FROM t_product_image WHERE product_id = #{product_id}
    </select>
@@ -160,20 +160,34 @@
 	  WHERE product_id = #{product_id}
    </select>
    
-   <select id="getCategoryId" resultType="java.lang.Long">
-	  select 
-	  	pc.category_id as categoryId 
-	  from 
-	  	t_product p, t_product_to_category pc
-	  where 
-	  	p.product_id=pc.product_id
-		and p.product_id = #{product_id}
-	</select>
 	
     <select id="getProducts4Admin" resultMap="prodDetail" >
 	  SELECT tp.*, tpd.* 
 	  FROM t_product tp, t_product_description tpd 
 	  where tp.product_id=tpd.product_id
+	  order by 
+	  <if test="orderColumnName != null" >
+        ${orderColumnName} 
+      </if>
+      <if test="orderBy != null" >
+        ${orderBy};
+      </if>
+	</select>
+	
+	
+    <select id="getIndexProducts4FE" resultMap="prodDetail" >
+	  SELECT tp.*, tpd.* 
+	  FROM t_product tp, t_product_description tpd 
+	  where tp.product_id=tpd.product_id
+	  and tp.as_index=1
+	  order by tp.date_added DESC
+	</select>
+	
+    <select id="getIndexList4Admin" resultMap="prodDetail" >
+	  SELECT tp.*, tpd.* 
+	  FROM t_product tp, t_product_description tpd 
+	  where tp.product_id=tpd.product_id
+	  and tp.as_index=1
 	  order by 
 	  <if test="orderColumnName != null" >
         ${orderColumnName} 
@@ -237,9 +251,16 @@
       width=#{width}, height=#{height}, length_class_id=#{lengthClassId}, 
       status=#{status}, date_added=#{dateAdded}, date_modified=#{dateModified}, 
       viewed=#{viewed}, sort_order=#{sortOrder}, subtract=#{subtract}, 
-      minimum=#{minimum}, cost=#{cost}
+      minimum=#{minimum}, cost=#{cost}, as_index=#{index}
     where product_id = #{productId}
   </update>
+  
+  <update id="setPorductAsIndex" parameterType="com.ny6design.model.Product" >
+    update t_product 
+    set as_Index=#{index}
+    where product_id = #{productId}
+  </update>
+  
   <update id="updateProductDescByProductId" parameterType="com.ny6design.model.ProductDescription" >
     update t_product_description
     set name = #{name,jdbcType=VARCHAR},
@@ -248,6 +269,7 @@
     where language_id = #{languageId,jdbcType=INTEGER}
       and product_id = #{productId,jdbcType=INTEGER}
   </update>
+  
   <update id="updateProductImpageByProductId" parameterType="com.ny6design.model.ProductImage" >
     update t_product_image
     set product_id = #{productId,jdbcType=INTEGER},

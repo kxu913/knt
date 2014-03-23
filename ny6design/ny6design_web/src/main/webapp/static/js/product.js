@@ -76,13 +76,37 @@ function editProduct(productId){
 	});
 }
 
+function removeIndex(productId){
+	$.confirm({
+        text: "It will be remove from Index List! Please confirm:",
+        confirm: function(button) {
+            if($.trim(productId)==""){
+        		alert("please choose at least one product!");
+        	}
+        	$.ajax({
+        		url : "/ny6design_web/asindex/0/"+productId+"/0",
+        		success : function(data, status) {
+        			$("#maintable").html(data);
+        		}
+        	});
+        },
+        cancel: function(button) {
+        }
+    });
+}
+
+
 function getCheckedUser(){
 	var str="";
 	var listchk = $("input[name='productId[]']");
-	for(i=0;i<listchk.length;i++){
+	for(var i=0;i<listchk.length;i++){
 	 if(listchk[i].checked){
 	  str += listchk[i].value+',';
 	 }
+	}
+	
+	if(str.length>0){
+		str = str.substring(0, str.length-1);
 	}
 //	console.log("checked: "+str);
 	return str;

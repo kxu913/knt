@@ -13,6 +13,7 @@ import com.ny6design.model.ProductPrice;
 
 public interface ProductMapper {
 
+	int setPorductAsIndex(Product record);
 	int updateProductById(Product record);
 	int updateProductDescByProductId(ProductDescription desc);
     int updateProductImpageByProductId(ProductImage image);
@@ -43,6 +44,9 @@ public interface ProductMapper {
     List<Product> getProductsByCategory(Integer categoryId);
     
     List<Product> getProducts4Admin(@Param("orderColumnName") String orderColumnName, @Param("orderBy") String orderBy);
+    List<Product> getIndexList4Admin(@Param("orderColumnName") String orderColumnName, @Param("orderBy") String orderBy);
     
     List<Product> getFilterProducts4Admin(Map<String, Object> params);
+    
+    List<Product> getIndexProducts4FE();
 }

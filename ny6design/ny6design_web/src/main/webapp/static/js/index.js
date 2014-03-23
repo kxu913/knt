@@ -178,14 +178,36 @@ function loadCategories() {
 
 }
 
-function loadProducts(categoryId) {
+function loadIndexProducts(){
 	$.ajax({
-		url : '/ny6design_web/getCategoryProductList4FE/'+categoryId,
+		url : '/ny6design_web/getIndexProductList4FE',
 		success : function(data, status) {
 			$("#productList").html(data);
 		}
 	});
 }
+
+
+function loadProducts(categoryId) {
+	if(categoryId!=undefined && $.trim(categoryId)!=""){
+		$.ajax({
+			url : '/ny6design_web/getCategoryProductList4FE/'+categoryId,
+			success : function(data, status) {
+				$("#productList").html(data);
+			}
+		});
+	}
+}
+
+function viewProduct(url){
+	$.ajax({
+		url : '/ny6design_web/'+url,
+		success : function(data, status) {
+			$("#productList").html(data);
+		}
+	});
+}
+
 
 function doLogin() {
 	var emailAddress = $("#inputEmail3").val();
@@ -286,8 +308,7 @@ function init() {
 	loadToolBar();
 	loadMessages();
 	loadCategories();
-	loadProducts();
-
+	loadIndexProducts();
 }
 
 function closeModal(id) {
@@ -434,8 +455,10 @@ function setDefault(_a){
 	});
 	
 }
+
 /* address end!*/
 $(document).ready(function() {
 	init();
 
 });
+

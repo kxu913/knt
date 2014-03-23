@@ -26,7 +26,9 @@ product back end todo list
 14. admin product 列表如果只有t_product表有数据的话好象不会显示在列表中，需优化
 15. front end product display issue (done)
 16. 网站点击category显示产品 (done)
-17. product edit category (ongoing)
+17. product edit category (done)
+18. 搞完前端分页，index首显产品，产品显示（today）
+
 
 
 

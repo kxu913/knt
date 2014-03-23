@@ -62,11 +62,12 @@ public class Product{
     private Integer subtract = 1;
 
     private Integer minimum = 1;
+    
+    private Integer index;
 
     private BigDecimal cost = new BigDecimal(0.0000);
     
 	private ProductDescription productDesc;
-	private Long categoryId;
 	private List<ProductImage> productImageList = Lists.newArrayList();
 	private List<ProductPrice> productPriceList = Lists.newArrayList();
 	private List<Product2CategoryKey> productCategoryList = Lists.newArrayList();
@@ -288,14 +289,6 @@ public class Product{
 		this.productDesc = productDesc;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
 	public List<ProductImage> getProductImageList() {
 		return productImageList;
 	}
@@ -320,9 +313,17 @@ public class Product{
 		this.productCategoryList = productCategoryList;
 	}
 
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", model=" + model
+		return "Product [productId=" + productId + ", model=" + model + ", index=" + index
 				+ ", sku=" + sku + ", location=" + location + ", quantity="
 				+ quantity + ", stockStatusId=" + stockStatusId + ", image="
 				+ image + ", manufacturerId=" + manufacturerId + ", shipping="
@@ -334,8 +335,7 @@ public class Product{
 				+ ", dateAdded=" + dateAdded + ", dateModified=" + dateModified
 				+ ", viewed=" + viewed + ", sortOrder=" + sortOrder
 				+ ", subtract=" + subtract + ", minimum=" + minimum + ", cost="
-				+ cost + ", productDesc=" + productDesc + ", categoryId="
-				+ categoryId + ", productImageList=" + productImageList
+				+ cost + ", productDesc=" + productDesc  + ", productImageList=" + productImageList
 				+ ", productPriceList=" + productPriceList
 				+ ", productCategoryList=" + productCategoryList + "]";
 	}

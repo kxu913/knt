@@ -27,6 +27,15 @@
 			        </tbody>
 			      </table>
 			    </div>
+		    	<!-- buy & add to wish list -->
+			    <div class="panel-group panel">
+		    		<div class="form-inline">
+		    			<label for="Quantity">Quantity: </label>&nbsp;&nbsp;&nbsp;<input id="Quantity" type="text" name="Quantity" >
+		    			<a href="javascript:alert('already add it')"><img alt="" src="static/img/add2cart.gif"></a> Or <a id="add2wishlist">Add to wish list</a>
+		    			 
+		    		</div>
+		    	</div>
+	    		<!-- buy & add to wish list end -->
 			    
 			    
 				<div id="detail"  class="panel-group panel">$!{product.productDesc.description}</div>
@@ -40,14 +49,9 @@
 			    	<font color="#CE6D05"> <strong>Approximate Shipping Time: </strong></font>
 			    	<br>2-4days *Large Qty order please add more times.
 			    </div>
+
 			    
 			    <div class="panel-group panel">
-		    		<div class="form-inline">
-		    			<label for="Quantity">Quantity: </label>&nbsp;&nbsp;&nbsp;<input id="Quantity" type="text" name="Quantity">
-		    			&nbsp;<a href="javascript:alert('already add it')"><img alt="" src="static/img/add2cart.gif"></a>
-		    			&nbsp;<a href="javascript:alert('already add it')">Add to wish list &nbsp;<img alt="" src="static/img/go.gif"></a>
-		    		</div>
-			    
 			    	<!-- AddThis Button BEGIN -->
 					<div class="addthis_toolbox addthis_default_style ">
 					<a class="addthis_button_preferred_3"></a>
@@ -60,9 +64,12 @@
 					<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 					<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52f252646f04e60e"></script>
 					<!-- AddThis Button END -->
-			    	<label for="Extras:"><font color="#CE6D05">Extras:</font></label><br>
-					<textarea class="form-control" rows="3"></textarea>
 			    </div>
+			    
+			    <div class="panel-group panel">
+				    <label for="Extras:"><font color="#CE6D05">Extras:</font></label>
+					<textarea class="form-control" rows="3"></textarea>
+				</div>
 		  	</div>
 
 #macro(getLabelName $product) 
@@ -94,3 +101,11 @@
 		</td>
 	#end 
 #end 
+
+<script>
+$("#add2wishlist").click(function(){
+	
+	
+})	
+</script>
+

@@ -39,14 +39,14 @@ public class UserServiceTest {
 	@Test
 	public void testSave(){
 		User user = new User();
-		user.setFirstname("Tait");
-		user.setLastname("Xie");
-		user.setAddressid(24);
-		user.setTelephone("13587451234");
-		user.setFromid(5);
+		user.setFirstname("Green");
+		user.setLastname("Yellow");
+		user.setAddressid(123);
+		user.setTelephone("123456789");
+		user.setFromid(2);
 		user.setFactive("0");
 		user.setAdmin(true);
-		user.setEmailaddress("admin");
+		user.setEmailaddress("aa@gmail.com");
 		user.setPassword("123");
 		userService.insert(user);
 	}

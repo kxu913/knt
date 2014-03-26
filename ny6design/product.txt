@@ -27,7 +27,10 @@ product back end todo list
 15. front end product display issue (done)
 16. 网站点击category显示产品 (done)
 17. product edit category (done)
-18. 搞完前端分页，index首显产品，产品显示（today）
+18. index首显产品(done),
+19. 搞完前端分页，产品显示 (todo)
+20. wishlist (todo)
+
 
 
 

@@ -3,16 +3,16 @@
 <mapper namespace="com.ny6design.mapper.WishListMapper" >
   <resultMap id="BaseResultMap" type="com.ny6design.model.WishListKey" >
     <id column="product_id" property="productId" jdbcType="INTEGER" />
-    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <id column="userId" property="userId" jdbcType="INTEGER" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="com.ny6design.model.WishListKey" >
     delete from t_wishlist
     where product_id = #{productId,jdbcType=INTEGER}
-      and userId = #{userid,jdbcType=INTEGER}
+      and userId = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ny6design.model.WishListKey" >
     insert into t_wishlist (product_id, userId)
-    values (#{productId,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER})
+    values (#{productId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ny6design.model.WishListKey" >
     insert into t_wishlist
@@ -20,7 +20,7 @@
       <if test="productId != null" >
         product_id,
       </if>
-      <if test="userid != null" >
+      <if test="userId != null" >
         userId,
       </if>
     </trim>
@@ -28,9 +28,17 @@
       <if test="productId != null" >
         #{productId,jdbcType=INTEGER},
       </if>
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
+  
+  <select id="getWishListByUserId" resultType="com.ny6design.model.WishListKey">
+  	select product_id as productId,
+  	userId as userId
+  	from t_wishlist
+  	where userId = #{userId}
+  </select>
+  
 </mapper>

@@ -259,7 +259,7 @@
 				inner join e_country c on b.countryCode = c.code
 				inner join e_states d on b.stateCode= d.code
 			where isAdmin !=1 and b.fdefault=1 and (
- 				a.lastName like #{keyword} or a.firstName like #{keyword} 
+ 				a.lastName like concat('%',#{keyword},'%') or a.firstName like concat('%',#{keyword},'%') 
 			)
 	</select>
 	<select id="getUserById"  resultMap="UserDetailMap" parameterType="long">

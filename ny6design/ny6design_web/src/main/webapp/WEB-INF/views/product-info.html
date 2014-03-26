@@ -105,6 +105,13 @@
 <script>
 $("#add2wishlist").click(function(){
 	
+	$.ajax({
+		url: "/ny6design_web/wishlist/add/"+13+"/"+$!{product.productId},
+		success: function(data){
+			console.log("success:"+data);			
+		}
+		
+	})
 	
 })	
 </script>

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -234,10 +236,11 @@ public class ProductController {
 	
 	
 	@RequestMapping("/viewPdetail/{productId}/{categoryId}")
-	public ModelAndView  getProductInfo(@PathVariable int productId, @PathVariable long categoryId, ModelMap model) {
+	public ModelAndView  getProductInfo(@PathVariable int productId, @PathVariable long categoryId, ModelMap model, HttpServletRequest request) {
 		Product product = productMapper.getProductDetail(productId);
 		model.put("product", product);
 		model.put("catergory", categoryService.getCategoryInfo(categoryId));
+		model.put("userId", request.getSession().getAttribute("userid"));
 		return new ModelAndView ("product-info",model);
 	}
 	

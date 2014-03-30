@@ -66,5 +66,13 @@ public class WishListServiceTest {
 		assertThat(wishListService.getWishListByUserId(13).size()).isEqualTo(3);
 	}
 	
+	@Test
+	public void TestFindWishList(){
+		WishListKey wishListKey = new WishListKey();
+		wishListKey.setProductId(49);
+		wishListKey.setUserId(13);
+		
+		assertThat(wishListService.isWishProductExist(wishListKey)).isTrue();
+	}
 	
 }

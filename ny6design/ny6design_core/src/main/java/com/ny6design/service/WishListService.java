@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ny6design.mapper.WishListMapper;
 import com.ny6design.model.WishListKey;
+import com.ny6design.model.WishProduct;
 
 
 @Service
@@ -25,6 +26,17 @@ public class WishListService {
 	
 	public List<WishListKey> getWishListByUserId(Integer userId){
 		return wishListMapper.getWishListByUserId(userId);
+	}
+	
+	public boolean isWishProductExist(WishListKey record){
+		if(wishListMapper.findWishProduct(record)!=null)
+			return true;
+		else
+			return false;
+	}
+	
+	public List<WishProduct> getAllProductInWishList(Integer userId){
+		return wishListMapper.getWishProductListByUserId(userId);
 	}
 
 }

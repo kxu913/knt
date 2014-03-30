@@ -76,15 +76,4 @@ public class UserController {
 		return "userpanel";
 	}
 	
-	
-	@RequestMapping("getUserWishList")
-	public ModelAndView getUserWishList(ModelMap model, HttpServletRequest request) {
-		String userId = request.getParameter("userId");
-		if (log.isTraceEnabled()) {
-			log.trace("Invoke Get User by Id!" + userId);
-		}
-		model.put("user", userService.getUserById(userId));
-		return new ModelAndView("member-edit", model);
-	}
-	
 }

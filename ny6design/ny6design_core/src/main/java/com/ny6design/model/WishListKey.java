@@ -1,9 +1,21 @@
 package com.ny6design.model;
 
 public class WishListKey {
+	
+	
 	private Integer productId;
 
 	private Integer userId;
+
+	public WishListKey() {
+		super();
+	}
+
+	public WishListKey(Integer productId, Integer userId) {
+		super();
+		this.productId = productId;
+		this.userId = userId;
+	}
 
 	public Integer getProductId() {
 		return productId;

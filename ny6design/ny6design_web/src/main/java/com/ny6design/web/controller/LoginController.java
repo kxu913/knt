@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kevin.security.token.EmailPasswordToken;
-import com.ny6design.mapper.UserMapper;
 import com.ny6design.model.User;
 import com.ny6design.service.UserService;
 import com.ny6design.web.constant.CONSTANT;

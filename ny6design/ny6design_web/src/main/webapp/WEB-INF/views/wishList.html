@@ -1,0 +1,40 @@
+<div>
+	<h3>My Wish List</h3>
+	
+	<div>
+		<input type="hidden" id="wishListSize" value="${wishList.size()}">
+		<table class="table">
+			<thead>
+	          <tr>
+	            <th>Image</th>
+	            <th>Product Name</th>
+	            <th>Model</th>
+	            <th>Stock</th>
+	            <th>Unit Price</th>
+	            <th>Action</th>
+	          </tr>
+	        </thead>
+	        
+			<tbody>
+				#foreach($product as $!wishList)
+				<tr>
+				  <td>$!{product.image}</td>
+				  <td>$!{product.productName}</td>
+				  <td>$!{product.model}</td>
+				  <td>$!{product.stockStatus}</td>
+				  <td>$numberTool.format("0.00", $product.price)</td>
+				  <td>
+				  	<button type="button" class="btn btn-primary">
+					  	<span class="glyphicon glyphicon-shopping-cart"  onclick="viewProduct('viewPdetail/$!{product.productId}/#if(${catergory.categoryId})${catergory.categoryId}#else 0 #end')" title="add to cart"></span>
+					  	<span class="glyphicon glyphicon-remove" onclick="removeFromWishList($!{product.productId})" title="remove"></span>
+				  	</button>
+				  </td>
+				</tr>
+				#end
+			</tbody>
+		
+		</table>
+	</div>
+</div>
+
+

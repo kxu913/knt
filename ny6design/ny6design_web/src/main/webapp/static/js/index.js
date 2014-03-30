@@ -444,7 +444,7 @@ function setDefault(_a){
 	$.ajax({
 		url : '/ny6design_web/updateDefault?addressId='+addressId,
 		success : function(data, status) {
-			if (data ===0 ) {
+			if (data ===0) {
 				alert("Your default Address update successful!");
 				closeModal("addAddress");
 				loadAddress();
@@ -457,8 +457,32 @@ function setDefault(_a){
 }
 
 /* address end!*/
+
+
+/*** wish list start */
+function viewWishList(){
+	$.ajax({
+		url : '/ny6design_web/wishList',
+		success : function(data, status) {
+			$("#productList").html(data);
+		}
+	});
+}
+
+function removeFromWishList(productId){
+	$.ajax({
+		url : '/ny6design_web/wishList/removeproduct?productId='+productId,
+		success : function(data, status) {
+			$("#productList").html(data);
+			$(".glyphicon-heart").next().html($("#wishListSize").val());
+		}
+	});
+}
+
+/*** wish list end */
+
+
 $(document).ready(function() {
 	init();
-
 });
 

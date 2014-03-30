@@ -41,4 +41,29 @@
   	where userId = #{userId}
   </select>
   
+  <select id="getWishProductListByUserId" resultType="com.ny6design.model.WishProduct">
+	select p.product_id as productId,
+	p.model as model,
+	p.price as price,
+	p.image as image,
+	pd.name as productName,
+	ss.name as stockStatus
+	from ny6design.t_wishlist as wl,
+	ny6design.t_product as p, 
+	ny6design.t_stock_status ss,
+	ny6design.t_product_description pd
+	where wl.product_id=p.product_id
+	and ss.stock_status_id=p.stock_status_id
+	and pd.product_id=p.product_id
+	and userId=#{userId}
+  </select>
+  
+  <select id="findWishProduct" resultType="com.ny6design.model.WishListKey" parameterType="com.ny6design.model.WishListKey" >
+  	select product_id as productId,
+  	userId as userId
+  	from t_wishlist
+    where product_id = #{productId,jdbcType=INTEGER}
+      and userId = #{userId,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

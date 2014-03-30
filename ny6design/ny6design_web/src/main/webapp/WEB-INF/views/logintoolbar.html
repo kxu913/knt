@@ -16,10 +16,10 @@
 <div class="navbar-form btn-group">
 	<button type="submit" class="btn btn-info">
 		<span class="glyphicon glyphicon-shopping-cart"></span> <span
-			class='badge' style='color: red'>12</span>
+			class='badge' style='color: red'></span>
 	</button>
-	<button type="submit" class="btn btn-info">
-		<span class="glyphicon glyphicon-heart"></span> <span class='badge'>2</span>
+	<button type="submit" class="btn btn-info" onclick="viewWishList();">
+		<span class="glyphicon glyphicon-heart"></span> <span class='badge'>#if(!($null.isNull($userName))) $!wishListNum #end</span>
 	</button>
 </div>
 <div class="navbar-form btn-group">

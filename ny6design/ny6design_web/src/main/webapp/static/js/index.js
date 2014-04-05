@@ -107,6 +107,7 @@ function loadToolBar() {
 		url : '/ny6design_web/getToolBar',
 		success : function(data, status) {
 			$("#toolbar").html(data);
+			getOrderCount();
 			$('#questionId').leanModal({
 				top : 100,
 				closeButton : ".modal_close"
@@ -481,7 +482,26 @@ function removeFromWishList(productId){
 
 /*** wish list end */
 
-
+/** shopping cart start */
+function getOrderCount(){
+	$.ajax({
+		url : 'shoppingcart/orderCount',
+		success : function(data, status) {
+			$("#shopping-cart-count").html(data);
+		}
+	});
+}
+function  openShoppingCart(){
+	$.ajax({
+		url : 'shoppingcart/open',
+		success : function(data, status) {
+			hideAds();
+			$("#productList").html(data);
+		}
+	});
+	
+}
+/** shopping cart end */
 $(document).ready(function() {
 	init();
 });

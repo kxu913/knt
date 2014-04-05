@@ -1,4 +1,4 @@
-
+drop table `t_product`;
 CREATE TABLE `t_product` (
   `product_id` int(11) NOT NULL auto_increment,
   `model` varchar(64) collate utf8_bin default NULL,

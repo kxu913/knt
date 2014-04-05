@@ -63,6 +63,7 @@ public class ResetController {
 				return SUCCESS;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			log.error("Send Email failed!" + e);
 		}
 		return SENDEMAILFAILED;

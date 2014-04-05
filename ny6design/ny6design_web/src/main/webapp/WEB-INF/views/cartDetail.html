@@ -1,0 +1,96 @@
+<div style="padding: 10px 0px 0px 10px;">
+	<p class="text-warning">
+		<strong>Home :: YOUR SHOPPING BAG</strong>
+	</p>
+	<p class="text-info" style="padding-left: 10px;">Shopping Cart
+		items</p>
+	<div style="min-height: 50px;">
+	#foreach($orderDetail as $!cart.orders)
+	<table
+		class="table table-bordered table-striped responsive-utilities table-condensed">
+		<tr>
+			<td rowspan="3"><img alt="" src="static/img/thumbnail2.jpg"
+				class="img-thumbnail" width="300px;"></td>
+			<td>$!orderDetail.product.productDesc.name</td>
+		</tr>
+		<tr>
+			<td>
+				<table
+					class="table table-bordered table-striped responsive-utilities table-condensed">
+					<thead>
+						<tr>
+							<th colspan="3" class="text-center">Order More for the Best
+								Prices</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>#getLabelName($!orderDetail.product)
+						</tr>
+						<tr>#getLabelValue($orderDetail.product)
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="Quantity">$!orderDetail.product.productPriceList[0].price
+							*</label>&nbsp;&nbsp;&nbsp;<input id="Quantity" type="text"
+							name="Quantity" value="$!{orderDetail.order.amount}">
+					</div>
+					<div class="col-md-3"></div>
+					<div class="col-md-3">
+						<div style="display: none"></div>
+						<button type="button" class="btn btn-danger"
+							id="btn_$!orderDetail.order.id">Delete</button>
+					</div>
+				</div>
+			</td>
+
+		</tr>
+		<script>
+			var btn = "#btn_" + $!orderDetail.order.id
+			$(btn).click(function() {
+				$.ajax({
+					url : "shoppingcart/remove/$!orderDetail.order.id",
+					success : function(data) {
+						console.log(data);
+						$("#productList").html(data);
+						$.ajax({
+							url : 'shoppingcart/orderCount',
+							success : function(data, status) {
+								$("#shopping-cart-count").html(data);
+							}
+						});
+					}
+				})
+			})
+		</script>
+	</table>
+	#end
+	</div>
+	<div style="text-align: right;">
+		<p class="text-info">Subtotal: $$!cart.subtotal</p>
+	</div>
+
+
+<ul class="nav nav-tabs">
+  <li class="active" ><a href="index.html" style="background-color: #EEA63F; color: #fff;cursor: pointer;"><strong>Back to Shopping</strong></a></li>
+</ul>
+<p class="text-info" style="padding-left: 10px; padding-top: 10px;color:#EEA63F"><strong>You may also like</strong></p>
+<table
+		class="table table-bordered table-striped responsive-utilities table-condensed">
+<tr>
+	#foreach($product as $!indexProducts)
+	<td><img src='$!{product.image}' style="height:160px; width: 190px; cursor: pointer;"></img></td>
+	#end
+</tr>
+<tr>
+	#foreach($product as $!indexProducts)
+	<td>$!{product.productDesc.name}</td>
+	#end
+</tr>
+</table>
+</div>

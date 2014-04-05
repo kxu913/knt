@@ -173,17 +173,7 @@ public class RegisterController {
 			return rtn;
 		}
 		String fax = request.getParameter("fax");
-		if (StringUtils.isEmpty(fax)) {
-			rtn.put("index", 11);
-			rtn.put(CONSTANT.ERROR_MESSAGE, "fax can't be null");
-			return rtn;
-		}
 		String taxId = request.getParameter("taxId");
-		if ("TX".equals(state) && StringUtils.isEmpty(taxId)) {
-			rtn.put("index", 12);
-			rtn.put(CONSTANT.ERROR_MESSAGE, "taxId can't be null in Texas");
-			return rtn;
-		}
 		String hearUs = request.getParameter("hearUs");
 		if (!isUpdate && StringUtils.isEmpty(hearUs)) {
 			rtn.put("index", 13);
@@ -243,6 +233,10 @@ public class RegisterController {
 			executor.submit(new VerifyEmailThread(emailPropertiesFactory,
 					mimeMailService, userId, emailAddress));
 		}
+		request.getSession().setAttribute("userName",
+				user.getFirstname() + " " + user.getLastname());
+		request.getSession().setAttribute("userid",
+				user.getUserid());
 		return rtn;
 	}
 

@@ -7,7 +7,7 @@
 		<h3>$!{product.productDesc.name}</h3>
 		</div>
 		  	<div class="col-sm-3">
-		  		<img alt="" src="static/img/thumbnail2.jpg" class="img-thumbnail" width="250">
+		  		<img alt="" src="static/img/thumbnail2.jpg" class="img-thumbnail" width="250px;">
 		  	</div>
 		  	<div class="col-sm-7">
 		  		<div class="table-responsive">
@@ -31,7 +31,7 @@
 			    <div class="panel-group panel">
 		    		<div class="form-inline">
 		    			<label for="Quantity">Quantity: </label>&nbsp;&nbsp;&nbsp;<input id="Quantity" type="text" name="Quantity" >
-		    			<a href="javascript:alert('already add it')"><img alt="" src="static/img/add2cart.gif"></a> Or <a id="add2wishlist">Add to wish list</a>
+		    			<a id="addToCart"><img alt="" src="static/img/add2cart.gif"></a> Or <a id="add2wishlist">Add to wish list</a>
 		    			 
 		    		</div>
 		    	</div>
@@ -112,5 +112,21 @@ $("#add2wishlist").click(function(){
 		}
 	})
 })	
+$("#addToCart").click(function(){
+	var amount = $("#Quantity").val();
+	$.ajax({
+		url: "shoppingcart/add/$!{product.productId}/"+amount,
+		success: function(data){
+			console.log(data);
+			$("#productList").html(data);
+			$.ajax({
+				url : 'shoppingcart/orderCount',
+				success : function(data, status) {
+					$("#shopping-cart-count").html(data);
+				}
+			});
+		}
+	})
+})
 </script>
 

@@ -28,6 +28,7 @@ import com.ny6design.model.ProductImage;
 import com.ny6design.model.ProductPrice;
 import com.ny6design.service.CategoryService;
 import com.ny6design.service.ProductService;
+import com.ny6design.web.constant.CONSTANT;
 
 /**
  * 
@@ -37,8 +38,6 @@ import com.ny6design.service.ProductService;
 @Controller
 public class ProductController {
 
-	private static int NumInLines = 3;
-	
 	@Autowired
 	CategoryService categoryService;
 	
@@ -138,7 +137,7 @@ public class ProductController {
 	 */
 	@RequestMapping("/getCategoryProductList4FE/{categoryId}")
 	public ModelAndView  getCategoryProductList4FE(@PathVariable int categoryId, ModelMap model) {
-		List<List<Product>> productList = service.getProductList4Front(categoryId, NumInLines);
+		List<List<Product>> productList = service.getProductList4Front(categoryId, CONSTANT.NumInLines);
 		model.put("plist", productList);
 		model.put("catergory", categoryService.getCategoryInfo((long)categoryId));
 		return new ModelAndView ("product-list",model);
@@ -146,7 +145,7 @@ public class ProductController {
 	
 	@RequestMapping("/getIndexProductList4FE")
 	public ModelAndView  getIndexProductList4FE(ModelMap model) {
-		List<List<Product>> productList = service.getIndexProductList4Front(NumInLines);
+		List<List<Product>> productList = service.getIndexProductList4Front(CONSTANT.NumInLines);
 		model.put("plist", productList);
 //		model.put("catergory", categoryService.getCategoryInfo((long)categoryId));
 		model.put("catergory", 0);

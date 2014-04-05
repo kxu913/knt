@@ -56,7 +56,7 @@
 		<!--<table tableName="t_message" domainObjectName="UserMessage"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false" escapeWildcards="true"/>-->
+			selectByExampleQueryId="false" escapeWildcards="true"/>
 		<table tableName="e_country" domainObjectName="Country"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
@@ -78,6 +78,24 @@
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" escapeWildcards="true"/>
+			<table tableName="t_question" domainObjectName="Question"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>-->
+				<table tableName="t_shoppingcart" domainObjectName="ShoppingCart"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>
+				<table tableName="t_order" domainObjectName="Order"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>
+				<table tableName="t_cart_order" domainObjectName="CartOrderMapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>
+				
+				
 	</context>
 
 </generatorConfiguration>

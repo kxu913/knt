@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ny6design.mapper.OrderMapper">
+	<resultMap id="BaseResultMap" type="com.ny6design.model.Order">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="productId" property="productid" jdbcType="INTEGER" />
+		<result column="amount" property="amount" jdbcType="INTEGER" />
+		<result column="cost" property="cost" jdbcType="DECIMAL" />
+		<result column="status" property="status" jdbcType="SMALLINT" />
+		<result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, productId, amount, cost, status, createTime, lastUpdateTime
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_order
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_order
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ny6design.model.Order" useGeneratedKeys="true" keyProperty="id">
+		insert into t_order ( productId, amount,
+		cost, status, createTime,
+		lastUpdateTime)
+		values ( #{productid,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER},
+		#{cost,jdbcType=DECIMAL}, #{status,jdbcType=SMALLINT}, #{createtime,jdbcType=TIMESTAMP},
+		#{lastupdatetime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ny6design.model.Order">
+	    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="productid != null">
+				productId,
+			</if>
+			<if test="amount != null">
+				amount,
+			</if>
+			<if test="cost != null">
+				cost,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createtime != null">
+				createTime,
+			</if>
+			<if test="lastupdatetime != null">
+				lastUpdateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="productid != null">
+				#{productid,jdbcType=INTEGER},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=INTEGER},
+			</if>
+			<if test="cost != null">
+				#{cost,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=SMALLINT},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastupdatetime != null">
+				#{lastupdatetime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ny6design.model.Order">
+		update t_order
+		<set>
+			<if test="productid != null">
+				productId = #{productid,jdbcType=INTEGER},
+			</if>
+			<if test="amount != null">
+				amount = #{amount,jdbcType=INTEGER},
+			</if>
+			<if test="cost != null">
+				cost = #{cost,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=SMALLINT},
+			</if>
+			<if test="createtime != null">
+				createTime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastupdatetime != null">
+				lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ny6design.model.Order">
+		update t_order
+		set productId = #{productid,jdbcType=INTEGER},
+		amount = #{amount,jdbcType=INTEGER},
+		cost = #{cost,jdbcType=DECIMAL},
+		status = #{status,jdbcType=SMALLINT},
+		createTime = #{createtime,jdbcType=TIMESTAMP},
+		lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="getAllOrdersByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		c.id, c.productId, c.amount, c.cost, c.status, c.createTime, c.lastUpdateTime
+		from t_shoppingcart a 
+		inner join t_cart_order b on a.id = b.cartId
+		inner join t_order c on b.orderId=c.id
+		where a.userId = #{userId,jdbcType=INTEGER}
+	</select>
+</mapper>

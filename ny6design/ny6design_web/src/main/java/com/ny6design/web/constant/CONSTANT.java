@@ -11,4 +11,5 @@ public final class CONSTANT {
 	public static final String URL = "url";
 	public static final String QUESTION_SUCCESS = "Your question had been submit successful!";
 	public static final String QUESTION_FAILED = "Your question had been submit failed, please check your input.";
+	public static final int NumInLines = 3;
 }

@@ -2,10 +2,13 @@ package com.ny6design.web.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,52 +36,67 @@ import com.ny6design.web.constant.CONSTANT;
 @RequestMapping("shoppingcart")
 @SessionAttributes("cart")
 public class OrderProcessController {
-	private static final String[] ORDERVIEWS = new String[] { "cartDetail", "checkout", "address", "discount", "ship",
-			"submit" };
+	Logger log = LoggerFactory.getLogger(this.getClass());
+	private static final String[] ORDERVIEWS = new String[] { "cartDetail",
+			"checkout", "address", "discount", "ship", "submit" };
 	@Autowired
 	ShoppingCartService shoppingCartService;
 	@Autowired
 	ProductService productService;
 
 	@RequestMapping("add/{productId}/{amount}")
-	public ModelAndView addCart(@PathVariable("productId") int productId, @PathVariable("amount") int amount,
-			HttpServletRequest request, final ModelMap model) {
+	public ModelAndView addCart(@PathVariable("productId") int productId,
+			@PathVariable("amount") int amount, HttpServletRequest request,
+			final ModelMap model) {
 
 		CartDetail cart = (CartDetail) model.get("cart");
 		if (cart == null) {
 			cart = new CartDetail();
 			model.put("cart", cart);
-			ShoppingCart shoppingCart = shoppingCartService.getShoppingCart(getUserId(request));
+			ShoppingCart shoppingCart = shoppingCartService
+					.getShoppingCart(getUserId(request));
 			cart.setCart(shoppingCart);
 			List<OrderDetail> orders = new ArrayList<OrderDetail>();
 			cart.setOrders(orders);
 		}
 		// if user not login, can't get order from DB, so need add into list
 		if (getUserId(request) <= 0) {
-			cart.getOrders().add(shoppingCartService.addProductToCart(cart.getCart(), productId, amount));
+			cart.getOrders().add(
+					shoppingCartService.addProductToCart(cart.getCart(),
+							productId, amount));
 		}
-		cart.getOrders().addAll(shoppingCartService.getAllOrders(getUserId(request)));
+		cart.getOrders().addAll(
+				shoppingCartService.getAllOrders(getUserId(request)));
 		cart.setSubtotal(getSubTotal(cart.getOrders()));
 		model.put("indexProducts", getIndexProducts());
 		return new ModelAndView(ORDERVIEWS[0], model);
 	}
-	
-	private List<Product> getIndexProducts(){
-		return productService.getIndexProductList4Front(CONSTANT.NumInLines).get(0);
+
+	private List<Product> getIndexProducts() {
+		try {
+			return productService
+					.getIndexProductList4Front(CONSTANT.NumInLines).get(0);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return Collections.emptyList();
 	}
 
 	@RequestMapping("open")
-	public ModelAndView openShoppingCart(HttpServletRequest request, final ModelMap model) {
+	public ModelAndView openShoppingCart(HttpServletRequest request,
+			final ModelMap model) {
 		CartDetail cart = (CartDetail) model.get("cart");
 		if (cart == null) {
 			cart = new CartDetail();
 			model.put("cart", cart);
-			ShoppingCart shoppingCart = shoppingCartService.getShoppingCart(getUserId(request));
+			ShoppingCart shoppingCart = shoppingCartService
+					.getShoppingCart(getUserId(request));
 			cart.setCart(shoppingCart);
 			List<OrderDetail> orders = new ArrayList<OrderDetail>();
 			cart.setOrders(orders);
 		}
-		cart.getOrders().addAll(shoppingCartService.getAllOrders(getUserId(request)));
+		cart.getOrders().addAll(
+				shoppingCartService.getAllOrders(getUserId(request)));
 		cart.setSubtotal(getSubTotal(cart.getOrders()));
 		model.put("indexProducts", getIndexProducts());
 		return new ModelAndView(ORDERVIEWS[0], model);
@@ -106,8 +124,8 @@ public class OrderProcessController {
 	}
 
 	@RequestMapping("remove/{orderId}")
-	public ModelAndView removeFromCart(@PathVariable("orderId") int orderId, HttpServletRequest request,
-			final ModelMap model) {
+	public ModelAndView removeFromCart(@PathVariable("orderId") int orderId,
+			HttpServletRequest request, final ModelMap model) {
 		CartDetail cart = (CartDetail) model.get("cart");
 		OrderDetail detail = null;
 		for (OrderDetail _detail : cart.getOrders()) {
@@ -117,7 +135,8 @@ public class OrderProcessController {
 		}
 		cart.getOrders().remove(detail);
 		shoppingCartService.removeOrderFromCart(orderId);
-		cart.getOrders().addAll(shoppingCartService.getAllOrders(getUserId(request)));
+		cart.getOrders().addAll(
+				shoppingCartService.getAllOrders(getUserId(request)));
 		cart.setSubtotal(getSubTotal(cart.getOrders()));
 		model.put("indexProducts", getIndexProducts());
 		return new ModelAndView(ORDERVIEWS[0], model);

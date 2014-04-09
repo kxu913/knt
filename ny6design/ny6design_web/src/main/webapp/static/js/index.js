@@ -8,7 +8,7 @@ function loadUserPanel() {
 		}
 	});
 }
-function hideAds(){
+function hideAds() {
 	$("#ads").html("");
 	$("#ads").hide();
 }
@@ -29,14 +29,12 @@ function loadUser() {
 			$("#productList").html(data);
 			loadCountry();
 			loadStates();
-			
+
 		}
 	});
 }
 
-
-
-function loadCountry(){
+function loadCountry() {
 	var countryCode = $("#_countryCode").val();
 	$.ajax({
 		url : '/ny6design_web/getAllCountries',
@@ -47,9 +45,11 @@ function loadCountry(){
 				var description = val["fdescription"];
 				var option;
 				if (countryCode === id) {
-					option = $("<option id='" + id + "' selected>" + description + "</option>");
+					option = $("<option id='" + id + "' selected>"
+							+ description + "</option>");
 				} else {
-					option = $("<option id='" + id + "'>" + description + "</option>");
+					option = $("<option id='" + id + "'>" + description
+							+ "</option>");
 				}
 				option.appendTo(select);
 			});
@@ -57,7 +57,7 @@ function loadCountry(){
 	});
 }
 
-function loadStates(){
+function loadStates() {
 	var stateCode = $("#_stateCode").val();
 	$.ajax({
 		url : '/ny6design_web/getAllStates',
@@ -70,9 +70,11 @@ function loadStates(){
 				var description = val["fdescription"];
 				var option;
 				if (stateCode === id) {
-					option = $("<option id='" + id + "' selected>" + description + "</option>");
+					option = $("<option id='" + id + "' selected>"
+							+ description + "</option>");
 				} else {
-					option = $("<option id='" + id + "'>" + description + "</option>");
+					option = $("<option id='" + id + "'>" + description
+							+ "</option>");
 				}
 				option.appendTo(select);
 			});
@@ -83,7 +85,7 @@ function loginOut() {
 	location.href = '/ny6design_web/loginOut';
 }
 
-function resetPassword(){
+function resetPassword() {
 	$.ajax({
 		url : '/ny6design_web/loadReset',
 		success : function(data, status) {
@@ -92,10 +94,10 @@ function resetPassword(){
 	});
 }
 
-function doReset(){
+function doReset() {
 	var email = $("#inputEmailForReset").val();
 	$.ajax({
-		url : '/ny6design_web/doReset?email='+email,
+		url : '/ny6design_web/doReset?email=' + email,
 		success : function(data, status) {
 			alert(data);
 			loginOut();
@@ -150,13 +152,16 @@ function loadCategories() {
 				pid = val["parentId"];
 				name = val["name"];
 				if (-1 == pid) {
-					newItem = $(appendDiv).append('<div><h3><a/></h3><div><ul></ul></div></div>');
-					$(newItem).find('>div:last').attr('id', 'category' + id).find("h3 a").text(name);
-					
+					newItem = $(appendDiv).append(
+							'<div><h3><a/></h3><div><ul></ul></div></div>');
+					$(newItem).find('>div:last').attr('id', 'category' + id)
+							.find("h3 a").text(name);
+
 				} else {
 					pNode = '#category' + pid;
 					newItem = $(pNode).find('ul').append("<li><a/></li>");
-					$(newItem).find('>li:last').attr('id', 'category' + id).find("a").text(name);
+					$(newItem).find('>li:last').attr('id', 'category' + id)
+							.find("a").text(name);
 				}
 			});
 			$(appendDiv).accordion({
@@ -167,20 +172,23 @@ function loadCategories() {
 				"icons" : null,
 				header : "> div > h3"
 			});
-			
-			$("#child div ul li a").each(function(){
-				$(this).click(function(){
-					var catId = $(this).parent().attr("id").replace("category", "");
-					loadProducts(catId);
-				});
-			});
-			
+
+			$("#child div ul li a").each(
+					function() {
+						$(this).click(
+								function() {
+									var catId = $(this).parent().attr("id")
+											.replace("category", "");
+									loadProducts(catId);
+								});
+					});
+
 		}
 	});
 
 }
 
-function loadIndexProducts(){
+function loadIndexProducts() {
 	$.ajax({
 		url : '/ny6design_web/getIndexProductList4FE',
 		success : function(data, status) {
@@ -189,11 +197,10 @@ function loadIndexProducts(){
 	});
 }
 
-
 function loadProducts(categoryId) {
-	if(categoryId!=undefined && $.trim(categoryId)!=""){
+	if (categoryId != undefined && $.trim(categoryId) != "") {
 		$.ajax({
-			url : '/ny6design_web/getCategoryProductList4FE/'+categoryId,
+			url : '/ny6design_web/getCategoryProductList4FE/' + categoryId,
 			success : function(data, status) {
 				$("#productList").html(data);
 			}
@@ -201,15 +208,14 @@ function loadProducts(categoryId) {
 	}
 }
 
-function viewProduct(url){
+function viewProduct(url) {
 	$.ajax({
-		url : '/ny6design_web/'+url,
+		url : '/ny6design_web/' + url,
 		success : function(data, status) {
 			$("#productList").html(data);
 		}
 	});
 }
-
 
 function doLogin() {
 	var emailAddress = $("#inputEmail3").val();
@@ -221,6 +227,27 @@ function doLogin() {
 			email : emailAddress,
 			password : password,
 			url : window.location.pathname
+		},
+		success : function(data, status) {
+			if (typeof (data.errormsg) !== "undefined") {
+				$("#errorMsg").html(data.errormsg);
+			} else {
+				window.location.href = data.url;
+			}
+		}
+	});
+}
+
+function loginForShip(){
+	var emailAddress = $("#inputEmail3").val();
+	var password = $("#inputPassword3").val();
+	$.ajax({
+		url : '/ny6design_web/login',
+		type : 'POST',
+		data : {
+			email : emailAddress,
+			password : password,
+			url : "shoppingcart/ship"
 		},
 		success : function(data, status) {
 			if (typeof (data.errormsg) !== "undefined") {
@@ -260,17 +287,17 @@ function doRegister() {
 	});
 }
 
-function showFeedback(){
+function showFeedback() {
 	$.ajax({
 		url : '/ny6design_web/listFeedback?page=1',
 		success : function(data, status) {
 			hideAds();
 			$("#productList").html(data);
 			var options = {
-					currentPage : 1,
-					totalPages : $("#feedbackTotalPage").val(),
-					onPageClicked : feedBackPageClick
-				};
+				currentPage : 1,
+				totalPages : $("#feedbackTotalPage").val(),
+				onPageClicked : feedBackPageClick
+			};
 			$('#feedbackpager').bootstrapPaginator(options);
 			$('#feedbackId').leanModal({
 				top : 100,
@@ -279,24 +306,22 @@ function showFeedback(){
 		}
 	});
 
-
-
 }
 
 /**
  * for feedback pager
  */
-var feedBackPageClick =  function(event,originalEvent,type,page){
+var feedBackPageClick = function(event, originalEvent, type, page) {
 	$.ajax({
-		url : '/ny6design_web/listFeedback?page='+page,
+		url : '/ny6design_web/listFeedback?page=' + page,
 		success : function(data, status) {
 			$("#ads").hide();
 			$("#productList").html(data);
 			var options = {
-					currentPage : page,
-					totalPages : $("#feedbackTotalPage").val(),
-					onPageClicked : feedBackPageClick
-				};
+				currentPage : page,
+				totalPages : $("#feedbackTotalPage").val(),
+				onPageClicked : feedBackPageClick
+			};
 			$('#feedbackpager').bootstrapPaginator(options);
 			$('#feedbackId').leanModal({
 				top : 100,
@@ -320,16 +345,16 @@ function closeModal(id) {
 	});
 }
 
-function submitFeedback(){
+function submitFeedback() {
 	var firstName = $("#firstName").val();
 	var lastName = $("#lastName").val();
-	
+
 	var tel = $("#tel").val();
 	var email = $("#email").val();
-	
+
 	var address = $("#address").val();
 	var extra = $("#extra").val();
-	
+
 	$.ajax({
 		url : '/ny6design_web/submitFeedback',
 		type : 'POST',
@@ -342,7 +367,7 @@ function submitFeedback(){
 			extra : extra
 		},
 		success : function(data, status) {
-			if (data ===0 ) {
+			if (data === 0) {
 				alert("Your feedback submit successful!");
 				closeModal("addFeedback");
 				showFeedback();
@@ -353,16 +378,16 @@ function submitFeedback(){
 	});
 }
 
-function submitQeustion(){
+function submitQeustion() {
 	var firstName = $("#firstNameFor").val();
 	var lastName = $("#lastNameFor").val();
-	
+
 	var tel = $("#telFor").val();
 	var email = $("#emailFor").val();
-	
+
 	var address = $("#addressFor").val();
 	var extra = $("#extraFor").val();
-	
+
 	$.ajax({
 		url : '/ny6design_web/submitQuestion',
 		type : 'POST',
@@ -375,7 +400,7 @@ function submitQeustion(){
 			extra : extra
 		},
 		success : function(data, status) {
-			if (data ===0 ) {
+			if (data === 0) {
 				alert("Your question submit successful!");
 				closeModal("addQuestion");
 			} else {
@@ -385,8 +410,8 @@ function submitQeustion(){
 	});
 }
 /* for address */
-function loadAddress(){
-	
+function loadAddress() {
+
 	$.ajax({
 		url : '/ny6design_web/listAddress',
 		success : function(data, status) {
@@ -402,19 +427,19 @@ function loadAddress(){
 	});
 }
 
-function submitAddress(){
+function submitAddress() {
 	var firstName = $("#firstName").val();
 	var lastName = $("#lastName").val();
-	
+
 	var tel = $("#tel").val();
 	var email = $("#email").val();
-	
+
 	var address = $("#address").val();
 	var town = $("#town").val();
-	
+
 	var country = $("#countryId option:selected").attr("id");
 	var zipcode = $("#zipcode").val();
-	var statedId = $("#statedId option:selected").attr("id"); 
+	var statedId = $("#statedId option:selected").attr("id");
 	$.ajax({
 		url : '/ny6design_web/submitAddress',
 		type : 'POST',
@@ -430,7 +455,7 @@ function submitAddress(){
 			statedId : statedId
 		},
 		success : function(data, status) {
-			if (data ===0 ) {
+			if (data === 0) {
 				alert("Your Address submit successful!");
 				closeModal("addAddress");
 				loadAddress();
@@ -441,12 +466,12 @@ function submitAddress(){
 	});
 }
 
-function setDefault(_a){
+function setDefault(_a) {
 	var addressId = _a.parentElement.parentElement.children[0].innerHTML;
 	$.ajax({
-		url : '/ny6design_web/updateDefault?addressId='+addressId,
+		url : '/ny6design_web/updateDefault?addressId=' + addressId,
 		success : function(data, status) {
-			if (data ===0) {
+			if (data === 0) {
 				alert("Your default Address update successful!");
 				closeModal("addAddress");
 				loadAddress();
@@ -455,14 +480,13 @@ function setDefault(_a){
 			}
 		}
 	});
-	
+
 }
 
-/* address end!*/
+/* address end! */
 
-
-/*** wish list start */
-function viewWishList(){
+/** * wish list start */
+function viewWishList() {
 	$.ajax({
 		url : '/ny6design_web/wishList',
 		success : function(data, status) {
@@ -471,9 +495,9 @@ function viewWishList(){
 	});
 }
 
-function removeFromWishList(productId){
+function removeFromWishList(productId) {
 	$.ajax({
-		url : '/ny6design_web/wishList/removeproduct?productId='+productId,
+		url : '/ny6design_web/wishList/removeproduct?productId=' + productId,
 		success : function(data, status) {
 			$("#productList").html(data);
 			$(".glyphicon-heart").next().html($("#wishListSize").val());
@@ -489,11 +513,10 @@ function getWishListTotalNum(){
 		}
 	});
 }
-
 /*** wish list end */
 
 /** shopping cart start */
-function getOrderCount(){
+function getOrderCount() {
 	$.ajax({
 		url : 'shoppingcart/orderCount',
 		success : function(data, status) {
@@ -501,7 +524,7 @@ function getOrderCount(){
 		}
 	});
 }
-function  openShoppingCart(){
+function openShoppingCart() {
 	$.ajax({
 		url : 'shoppingcart/open',
 		success : function(data, status) {
@@ -509,14 +532,14 @@ function  openShoppingCart(){
 			$("#productList").html(data);
 		}
 	});
-	
+
 }
 /** shopping cart end */
 $(document).ready(function() {
 	init();
 });
 
-function checkout(){
+function checkout() {
 	$.ajax({
 		url : 'shoppingcart/checkout',
 		success : function(data, status) {
@@ -526,3 +549,13 @@ function checkout(){
 	});
 }
 
+function gotoShip() {
+	$.ajax({
+		url : 'shoppingcart/ship',
+		success : function(data, status) {
+			hideAds();
+			$("#productList").html(data);
+		}
+	});
+
+}

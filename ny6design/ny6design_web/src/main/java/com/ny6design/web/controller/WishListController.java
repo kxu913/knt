@@ -31,10 +31,9 @@ public class WishListController {
 	@RequestMapping("wishlist/gettotalnum")
 	public Integer getTotalNum(HttpServletRequest request, ModelMap model){
 		Object userId = request.getSession().getAttribute("userid");
-		model.addAttribute("userid", userId); //初始化 @SessionAttributes("userid")，方便后继使用
-		
 		List<WishProduct> temp = null;
 		if(userId!=null){
+			model.addAttribute("userid", userId); //初始化 @SessionAttributes("userid")，方便后继使用
 			temp = wishListService.getAllProductInWishList((Integer) userId);
 		}
 		
@@ -51,19 +50,25 @@ public class WishListController {
 	@RequestMapping(value="wishlist/add/{productId}", method=RequestMethod.GET)
 	public Integer add2WishList(@ModelAttribute("userid") Integer userId, 
 			@PathVariable Integer productId){
-		WishListKey wishListKey = new WishListKey();
-		wishListKey.setProductId(productId);
-		wishListKey.setUserId(userId);
+		if(userId!=null){
+			WishListKey wishListKey = new WishListKey();
+			wishListKey.setProductId(productId);
+			wishListKey.setUserId(userId);
+			
+			if(!wishListService.isWishProductExist(wishListKey)){
+				wishListService.insertWishProduct(wishListKey);
+			}
+			List<WishProduct> temp = wishListService.getAllProductInWishList(userId);
+			if(temp!=null && temp.size()>0){
+				return temp.size();
+			}else{
+				return null;
+			}
+		}
+		else{
+			return -1;
+		}
 		
-		if(!wishListService.isWishProductExist(wishListKey)){
-			wishListService.insertWishProduct(wishListKey);
-		}
-		List<WishProduct> temp = wishListService.getAllProductInWishList(userId);
-		if(temp!=null && temp.size()>0){
-			return temp.size();
-		}else{
-			return null;
-		}
 	}
 	
 	@RequestMapping("wishList")

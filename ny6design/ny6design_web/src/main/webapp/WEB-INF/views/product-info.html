@@ -107,17 +107,33 @@ $("#add2wishlist").click(function(){
 	$.ajax({
 		url: "/ny6design_web/wishlist/add/$!{product.productId}",
 		success: function(data){
-			console.log(data)
+			if(data>0)
 			$(".glyphicon-heart").next().html(data);
+			else{
+				$.confirm({
+			        text: "Please login first",
+			        confirm: function(button) {
+/* 			        	$.ajax({
+			        		url : "/ny6design_web/asindex/0/"+productId+"/0",
+			        		success : function(data, status) {
+			        			$("#maintable").html(data);
+			        		}
+			        	});
+ */			        },
+			        cancel: function(button) {
+			        }
+			    });
+				
+			}
 		}
 	})
-})	
+})
+
 $("#addToCart").click(function(){
 	var amount = $("#Quantity").val();
 	$.ajax({
 		url: "shoppingcart/add/$!{product.productId}/"+amount,
 		success: function(data){
-			console.log(data);
 			$("#productList").html(data);
 			$.ajax({
 				url : 'shoppingcart/orderCount',

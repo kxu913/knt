@@ -24,6 +24,7 @@ import com.ny6design.model.Product;
 import com.ny6design.model.ShoppingCart;
 import com.ny6design.service.ProductService;
 import com.ny6design.service.ShoppingCartService;
+import com.ny6design.service.ShoppingRuleService;
 import com.ny6design.web.constant.CONSTANT;
 
 /**
@@ -37,12 +38,14 @@ import com.ny6design.web.constant.CONSTANT;
 @SessionAttributes("cart")
 public class OrderProcessController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
-	private static final String[] ORDERVIEWS = new String[] { "cartDetail",
-			"checkout", "address", "discount", "ship", "submit" };
+	private static final String[] ORDERVIEWS = new String[] { "shoppingcart/cartDetail",
+			"shoppingcart/checkout", "shoppingcart/address", "shoppingcart/discount", "shoppingcart/ship", "shoppingcart/submit" };
 	@Autowired
 	ShoppingCartService shoppingCartService;
 	@Autowired
 	ProductService productService;
+	@Autowired
+	ShoppingRuleService shoppingRuleService;
 
 	@RequestMapping("add/{productId}/{amount}")
 	public ModelAndView addCart(@PathVariable("productId") int productId,
@@ -70,6 +73,17 @@ public class OrderProcessController {
 		cart.setSubtotal(getSubTotal(cart.getOrders()));
 		model.put("indexProducts", getIndexProducts());
 		return new ModelAndView(ORDERVIEWS[0], model);
+	}
+
+	@RequestMapping("checkout")
+	public ModelAndView addCart(HttpServletRequest request, final ModelMap model) {
+
+		CartDetail cart = (CartDetail) model.get("cart");
+		cart.getOrders().addAll(
+				shoppingCartService.getAllOrders(getUserId(request)));
+		cart.setSubtotal(getSubTotal(cart.getOrders()));
+		model.put("rules", shoppingRuleService.getRulesByPage(ORDERVIEWS[1]));
+		return new ModelAndView(ORDERVIEWS[1], model);
 	}
 
 	private List<Product> getIndexProducts() {

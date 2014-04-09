@@ -506,3 +506,13 @@ $(document).ready(function() {
 	init();
 });
 
+function checkout(){
+	$.ajax({
+		url : 'shoppingcart/checkout',
+		success : function(data, status) {
+			hideAds();
+			$("#productList").html(data);
+		}
+	});
+}
+

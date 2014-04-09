@@ -19,9 +19,9 @@
 		
 		#foreach($orderDetail as $!cart.orders)
 		<tr>
-			<td>-</td>
+			<td>$!orderDetail.product.model</td>
 			<td>$!orderDetail.product.productDesc.name</td>
-			<td>-</td>
+			<td>$!orderDetail.product.quantity</td>
 			<td>$$!orderDetail.product.productPriceList[0].price</td>
 			<td><input id="Quantity" type="text" name="Quantity" value="$!{orderDetail.order.amount}"></td>
 			<td>$!orderDetail.order.cost</td>
@@ -32,28 +32,24 @@
 	</table>
 	
 	</div>
-	<div style="text-align: right;">
-		<p class="text-info">Subtotal: $$!cart.subtotal</p>
+	<div  class="row" >
+		<div class="col-lg-8  col-md-8" >&nbsp;</div>
+		<div class="col-lg-4  col-md-4" style="padding-bottom: 20px; border-bottom: 1px solid orange"><p class="text-info">Subtotal: $$!cart.subtotal</p></div>
+	</div>
+	<div style="text-align: right;padding: 5px 0px 5px 0px;" >
+		<button type="button" class="btn btn-primary" id="btn_$!orderDetail.order.id">Recalculate</button>
+	</div>
+	<div style="border: 1px solid orange;color: #CE6D05; font-size:12px; font-weight: lighter;">
+		#foreach($rule as $!rules)
+			<p>$!rule.description</p>
+		#end
+	</div>
+	
+	<div  class="row" style="text-align: right;padding-top: 5px;">
+		<div class="col-lg-4  col-md-4" >&nbsp;</div>
+		<div class="col-lg-2  col-md-2"><a data-role="button" class="btn btn-default" style="width: 100%;color:#CE6D05; font-weight: bolder;" href="index.html">Back</a></div>
+		<div class="col-lg-2  col-md-2"><button type="button" class="btn btn-default" style="width: 100%;color:#CE6D05; font-weight: bolder;">Next</button></div>
+		<div class="col-lg-4  col-md-4">&nbsp;</div>
 	</div>
 
-
-<ul class="nav nav-tabs">
-  <li class="active" ><a href="index.html" style="background-color: #EEA63F; color: #fff;cursor: pointer;"><strong>Back to Shopping</strong></a></li>
-   <li class="active" style="float: right"><a href="index.html" style="background-color: #EEA63F; color: #fff;cursor: pointer;"><strong>Proceed To CheckOut</strong></a></li>
-</ul>
-
-<p class="text-info" style="padding-left: 10px; padding-top: 10px;color:#EEA63F"><strong>You may also like</strong></p>
-<table
-		class="table table-bordered table-striped responsive-utilities table-condensed">
-<tr>
-	#foreach($product as $!indexProducts)
-	<td><img src='$!{product.image}' style="height:160px; width: 190px; cursor: pointer;"></img></td>
-	#end
-</tr>
-<tr>
-	#foreach($product as $!indexProducts)
-	<td>$!{product.productDesc.name}</td>
-	#end
-</tr>
-</table>
 </div>

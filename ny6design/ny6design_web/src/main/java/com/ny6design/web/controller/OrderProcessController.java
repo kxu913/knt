@@ -86,16 +86,6 @@ public class OrderProcessController {
 		return new ModelAndView(ORDERVIEWS[1], model);
 	}
 
-	private List<Product> getIndexProducts() {
-		try {
-			return productService
-					.getIndexProductList4Front(CONSTANT.NumInLines).get(0);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-		return Collections.emptyList();
-	}
-
 	@RequestMapping("open")
 	public ModelAndView openShoppingCart(HttpServletRequest request,
 			final ModelMap model) {
@@ -126,16 +116,6 @@ public class OrderProcessController {
 		return shoppingCartService.getAllOrders(getUserId(request)).size();
 	}
 
-	private BigDecimal getSubTotal(List<OrderDetail> orders) {
-		BigDecimal subtotal = BigDecimal.ZERO;
-		subtotal.setScale(2);
-		if (!orders.isEmpty()) {
-			for (OrderDetail order : orders) {
-				subtotal = subtotal.add(order.getOrder().getCost());
-			}
-		}
-		return subtotal;
-	}
 
 	@RequestMapping("remove/{orderId}")
 	public ModelAndView removeFromCart(@PathVariable("orderId") int orderId,
@@ -164,4 +144,26 @@ public class OrderProcessController {
 		}
 		return userId;
 	}
+	
+	private BigDecimal getSubTotal(List<OrderDetail> orders) {
+		BigDecimal subtotal = BigDecimal.ZERO;
+		subtotal.setScale(2);
+		if (!orders.isEmpty()) {
+			for (OrderDetail order : orders) {
+				subtotal = subtotal.add(order.getOrder().getCost());
+			}
+		}
+		return subtotal;
+	}
+	
+	private List<Product> getIndexProducts() {
+		try {
+			return productService
+					.getIndexProductList4Front(CONSTANT.NumInLines).get(0);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return Collections.emptyList();
+	}
+
 }

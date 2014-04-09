@@ -1,0 +1,95 @@
+<div style="padding: 10px 0px 0px 10px;">
+	<p class="text-warning">
+		<strong>Home :: (--Check Out--) :: Your order invoice</strong>
+	</p>
+	<p class="text-info" style="padding-left: 10px;"> Product information</p>
+	<div style="min-height: 50px;">
+	
+	<table
+		class="table table-bordered">
+		<tr>
+			<td style="width:5%">Code</td>
+			<td style="width:60%">Description</td>
+			<td style="width:15%">Limited QTY</td>
+			<td style="width:15%">Unit Price</td>
+			<td style="width:10%">Quantity</td>
+			<td style="width:10%">Total</td>
+		</tr>
+		
+		#foreach($orderDetail as $!cart.orders)
+		<tr>
+			<td>$!orderDetail.product.model</td>
+			<td>$!orderDetail.product.productDesc.name</td>
+			<td>$!orderDetail.product.quantity</td>
+			<td>$$!orderDetail.product.productPriceList[0].price</td>
+			<td><input id="Quantity" style="width:30px;" type="text" name="Quantity" value="$!{orderDetail.order.amount}"></td>
+			<td>$!orderDetail.order.cost</td>
+			
+		</tr>
+		#end
+	</table>
+	
+	</div>
+	<div  class="row" >
+		<div class="col-lg-8  col-md-8" >&nbsp;</div>
+		<div class="col-lg-4  col-md-4" style="text-align:right;"><p class="text-info" style=" padding-bottom: 20px; border-bottom: 1px solid orange">Subtotal: $$!cart.subtotal</p></div>
+	</div>
+	
+	<div style="vertical-align: middle; padding-left: 10px;"><p class="text-info"> Shipping Address</p></div>
+	<div id="_address" style="padding-left: 10%; border: 1px solid orange">
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div class="col-lg-2  col-md-2" style="text-align: left" style="text-align: left">FirstName:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!user.firstname</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">LastName:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!user.lastname</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Tel:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!user.telephone</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Address:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!user.address</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Zip Code:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!user.zipcode</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Town:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!user.town</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">State:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!user.stateDesc</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Country:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!user.countryDesc</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding: 5px 0 5px 0;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left"> E-mail:</div>
+			<div class="col-lg-3  col-md-3" style="text-align: left">$!user.emailaddress</div>
+			<div class="col-lg-5  col-md-5"><span style="color: #CE6D05;font-weight: bolder;text-align: right;">[Change Shipping Address]</span></div>
+		</div>
+	</div>
+	
+	<div  class="row" style="text-align: right;padding-top: 10px;">
+		<input type="hidden" value="$!user.userid" id="">
+		<div class="col-lg-4  col-md-4" >&nbsp;</div>
+		<div class="col-lg-2  col-md-2"><a data-role="button" class="btn btn-default" style="width: 100%;color:#CE6D05; font-weight: bolder;" href="index.html">Back</a></div>
+		<div class="col-lg-2  col-md-2"><button type="button" class="btn btn-default" style="width: 100%;color:#CE6D05; font-weight: bolder;" onclick="gotoShip()">Next</button></div>
+		<div class="col-lg-4  col-md-4">&nbsp;</div>
+	</div>
+
+</div>

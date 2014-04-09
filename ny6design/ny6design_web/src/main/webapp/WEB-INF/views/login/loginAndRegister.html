@@ -1,0 +1,199 @@
+<div style="padding: 10px 0px 0px 10px;">
+	<p class="text-warning">
+		<strong>Home :: Please Sign in first, if you are a member</strong>
+	</p>
+	<HR color=#987cb9 SIZE=3 />
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+			<div class="col-sm-3">
+				<input type="email" class="form-control" id="inputEmail3"
+					placeholder="Email" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-2 control-label">Password:</label>
+			<div class="col-sm-3">
+				<input type="password" class="form-control" id="inputPassword3"
+					placeholder="Password">
+			</div>
+			<label for="inputPassword3" class="col-sm-2 control-label"
+				style="text-align: left;cursor: pointer;" onclick="resetPassword()">Forget password?</label>
+		</div>
+		
+		<div>
+			<div class="col-sm-offset-3 col-sm-9">
+				<p id="errorMsg" style="color: red"></p>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-9">
+				<button type="button" class="btn btn-primary" onclick="loginForShip()">Submit
+					to login in</button>
+			</div>
+		</div>
+
+	</form>
+
+</div>
+
+<div style="padding: 10px 0px 0px 10px;">
+	<p class="text-warning">
+		<strong>NEW CUSTOMERS</strong>
+	</p>
+	<hr color=#00ffff SIZE=1000 />
+	<p>Please take a moment to complete the form below Important
+		notice: Your security and privacy is important to us. We use a trusted
+		third party, PayPal, to process all credit card transactions. At no
+		time do we store your credit card information on our system, and none
+		of our employees have access to your credit card number. Your e-mail
+		address will only be used for order and shipment notification
+		purposes.</p>
+	<p>
+		<strong>Profile detail</strong>
+	</p>
+	<p>
+		<strong>PERSONAL INFORMATION</strong>
+	</p>
+	<form class="form-horizontal" role="form" id="_registform">
+		<div class="form-group form-inline" >
+			<label for="inputEmail" class="col-sm-2 control-label">Your
+				E-mail *</label>
+			<div class="col-sm-3">
+				<input type="email" class="form-control" id="inputEmail"
+					placeholder="abc@gmail.com" check-type="mail required">
+			</div>
+			<div class="checkbox col-sm-2">
+			    <label>
+			      <input type="checkbox"  checked="checked" id="publicTel"> Public
+			    </label>
+  			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword" class="col-sm-2 control-label">Password
+				*</label>
+			<div class="col-sm-3">
+				<input type="password" class="form-control" id="inputPassword"
+					placeholder="Password" check-type="required">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="inputConfirmedPassword" class="col-sm-2 control-label">PasswordConfirm
+				*</label>
+			<div class="col-sm-3">
+				<input type="password" class="form-control" id="inputConfirmedPassword"
+					placeholder="Confirm Password"  check-type="required">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="firstName" class="col-sm-2 control-label">First
+				Name *</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control" id="firstName"
+					placeholder="FirstName"  check-type="required">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="lastName" class="col-sm-2 control-label">Last
+				Name *</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control" id="lastName"
+					placeholder="LastName"  check-type="required">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="address" class="col-sm-2 control-label">Address *</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control" id="address"
+					placeholder="Address"  check-type="required">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="town" class="col-sm-2 control-label">Town *</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control" id="town"
+					placeholder="Town" check-type="required">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="statedId" class="col-sm-2 control-label">State *</label>
+			<div class="col-sm-3" id="stateDiv">
+				<select class="form-control" id="statedId"  check-type="required">
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="zipcode" class="col-sm-2 control-label">Zip Code
+				*</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control" id="zipcode"
+					placeholder="Zip Code"  check-type="required">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="countryId" class="col-sm-2 control-label">Country *</label>
+			<div class="col-sm-3" id="countryDiv">
+				<select class="form-control" id="countryId">
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group form-inline">
+			<label for="telephone" class="col-sm-2 control-label">Telephone
+				*</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control" id="telephone"
+					placeholder="Telephone"  check-type="required">
+			</div>
+			
+			<div class="checkbox col-sm-2">
+			    <label>
+			      <input type="checkbox" checked="checked" id="publicTel"> Public
+			    </label>
+  			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="fax" class="col-sm-2 control-label">Fax</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control input-small" id="fax"
+					placeholder="Fax">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="taxId" class="col-sm-2 control-label text-danger">Tax
+				Id# (Texas only)</label>
+			<div class="col-sm-3">
+				<input type="input" class="form-control" id="taxId"
+					placeholder="TaxId">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="hearUs" class="col-sm-2 control-label">How did
+				you hear about us? *</label>
+			<div class="col-sm-3" id="fromWhere">
+				<select class="form-control" id="hearUs">
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-9">
+				<button type="button" class="btn btn-danger" onclick="register()">Submit to sign
+					in</button>
+			</div>
+		</div>
+	</form>
+
+</div>

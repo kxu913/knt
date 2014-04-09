@@ -24,6 +24,11 @@ td {
 	vertical-align: middle;
 }
 
+th {
+	text-align: center;
+	vertical-align: middle;
+}
+
 td img {
 	height: 50px;
 	width: 80px;
@@ -40,7 +45,7 @@ td img {
 	max-width: 200px;
 }
 
-#ads{
+#ads {
 	min-height: 185px;
 }
 
@@ -164,7 +169,7 @@ a {
 	width: 100px;
 }
 
-#addAddress-header{
+#addAddress-header {
 	background: url("../img/hd-bg.png") repeat scroll 0 0 transparent;
 	border-bottom: 1px solid #CCCCCC;
 	border-top-left-radius: 5px;
@@ -173,7 +178,7 @@ a {
 	margin-bottom: 8px;
 }
 
-#addAddress{
+#addAddress {
 	background: none repeat scroll 0 0 #FFFFFF;
 	border-radius: 5px 5px 5px 5px;
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
@@ -191,4 +196,3 @@ a {
 #addAddress label {
 	width: 100px;
 }
-

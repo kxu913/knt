@@ -108,6 +108,7 @@ function loadToolBar() {
 		success : function(data, status) {
 			$("#toolbar").html(data);
 			getOrderCount();
+			getWishListTotalNum();
 			$('#questionId').leanModal({
 				top : 100,
 				closeButton : ".modal_close"
@@ -476,6 +477,15 @@ function removeFromWishList(productId){
 		success : function(data, status) {
 			$("#productList").html(data);
 			$(".glyphicon-heart").next().html($("#wishListSize").val());
+		}
+	});
+}
+
+function getWishListTotalNum(){
+	$.ajax({
+		url: 'wishlist/gettotalnum',
+		success: function(data, status){
+			$(".glyphicon-heart").next().html(data);
 		}
 	});
 }

@@ -1,0 +1,59 @@
+<div style="padding: 10px 0px 0px 10px;">
+	<p class="text-warning">
+		<strong>Home :: (--Check Out--) :: Your order invoice</strong>
+	</p>
+	<p class="text-info" style="padding-left: 10px;"> Product information</p>
+	<div style="min-height: 50px;">
+	
+	<table
+		class="table table-bordered table-striped responsive-utilities table-condensed">
+		<tr>
+			<td>Code</td>
+			<td>Description</td>
+			<td>Limited QTY</td>
+			<td>Unit Price</td>
+			<td>Quantity</td>
+			<td>Total</td>
+			<td> </td>
+		</tr>
+		
+		#foreach($orderDetail as $!cart.orders)
+		<tr>
+			<td>-</td>
+			<td>$!orderDetail.product.productDesc.name</td>
+			<td>-</td>
+			<td>$$!orderDetail.product.productPriceList[0].price</td>
+			<td><input id="Quantity" type="text" name="Quantity" value="$!{orderDetail.order.amount}"></td>
+			<td>$!orderDetail.order.cost</td>
+			<td><button type="button" class="btn btn-danger" id="btn_$!orderDetail.order.id">Delete</button></td>
+			
+		</tr>
+		#end
+	</table>
+	
+	</div>
+	<div style="text-align: right;">
+		<p class="text-info">Subtotal: $$!cart.subtotal</p>
+	</div>
+
+
+<ul class="nav nav-tabs">
+  <li class="active" ><a href="index.html" style="background-color: #EEA63F; color: #fff;cursor: pointer;"><strong>Back to Shopping</strong></a></li>
+   <li class="active" style="float: right"><a href="index.html" style="background-color: #EEA63F; color: #fff;cursor: pointer;"><strong>Proceed To CheckOut</strong></a></li>
+</ul>
+
+<p class="text-info" style="padding-left: 10px; padding-top: 10px;color:#EEA63F"><strong>You may also like</strong></p>
+<table
+		class="table table-bordered table-striped responsive-utilities table-condensed">
+<tr>
+	#foreach($product as $!indexProducts)
+	<td><img src='$!{product.image}' style="height:160px; width: 190px; cursor: pointer;"></img></td>
+	#end
+</tr>
+<tr>
+	#foreach($product as $!indexProducts)
+	<td>$!{product.productDesc.name}</td>
+	#end
+</tr>
+</table>
+</div>

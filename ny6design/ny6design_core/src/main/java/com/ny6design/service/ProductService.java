@@ -198,8 +198,19 @@ public class ProductService {
 	 */
 
 	public BigDecimal getTotalCost(int pId, int amount) {
-		// TODO
-		return this.getProductInfo(pId).getPrice().multiply(new BigDecimal(amount));
+		Product product = getProductInfo(pId);
+		BigDecimal price = BigDecimal.ZERO;
+		if(product!=null){
+			List<ProductPrice> priceList = product.getProductPriceList();
+			if(priceList!=null && priceList.size()>0){
+				for(ProductPrice pp : priceList){
+					if(pp.getQuantity() <= amount){
+						price = pp.getPrice();
+					}
+				}
+			}
+		}
+		return price.multiply(new BigDecimal(amount));
 	}
 
 	/*

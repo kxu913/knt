@@ -92,4 +92,18 @@ public class ProductServiceTest {
 			assertThat(list.get(0).size()).isLessThanOrEqualTo(3);
 		}
 	}
+	
+	
+	@Test
+	public void testGetTotalCost(){
+		BigDecimal total = productService.getTotalCost(49, 1);
+		assertThat(total.compareTo(BigDecimal.valueOf(3.99))).isEqualTo(0);
+		
+		total = productService.getTotalCost(49, 6);
+		assertThat(total.compareTo(BigDecimal.valueOf(3.39*6))).isEqualTo(0);
+		
+		total = productService.getTotalCost(49, 21);
+		assertThat(total.compareTo(BigDecimal.valueOf(2.80*21))).isEqualTo(0);
+		
+	}
 }

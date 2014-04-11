@@ -30,7 +30,7 @@
 		    	<!-- buy & add to wish list -->
 			    <div class="panel-group panel">
 		    		<div class="form-inline">
-		    			<label for="Quantity">Quantity: </label>&nbsp;&nbsp;&nbsp;<input id="Quantity" type="text" name="Quantity" >
+		    			<label for="Quantity">Quantity: </label>&nbsp;&nbsp;&nbsp;<input id="Quantity" type="text" name="Quantity" value=1 >
 		    			<a id="addToCart"><img alt="" src="static/img/add2cart.gif"></a> Or <a id="add2wishlist">Add to wish list</a>
 		    			 
 		    		</div>
@@ -105,19 +105,35 @@
 <script>
 $("#add2wishlist").click(function(){
 	$.ajax({
-		url: "/ny6design_web/wishlist/add/$!{userId}/$!{product.productId}",
+		url: "/ny6design_web/wishlist/add/$!{product.productId}",
 		success: function(data){
-			console.log(data)
+			if(data>0)
 			$(".glyphicon-heart").next().html(data);
+			else{
+				$.confirm({
+			        text: "Please login first",
+			        confirm: function(button) {
+/* 			        	$.ajax({
+			        		url : "/ny6design_web/asindex/0/"+productId+"/0",
+			        		success : function(data, status) {
+			        			$("#maintable").html(data);
+			        		}
+			        	});
+ */			        },
+			        cancel: function(button) {
+			        }
+			    });
+				
+			}
 		}
 	})
-})	
+})
+
 $("#addToCart").click(function(){
 	var amount = $("#Quantity").val();
 	$.ajax({
 		url: "shoppingcart/add/$!{product.productId}/"+amount,
 		success: function(data){
-			console.log(data);
 			$("#productList").html(data);
 			$.ajax({
 				url : 'shoppingcart/orderCount',

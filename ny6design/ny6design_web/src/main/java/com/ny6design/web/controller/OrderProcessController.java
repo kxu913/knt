@@ -144,7 +144,15 @@ public class OrderProcessController {
 		}
 		return new ModelAndView(ORDERVIEWS[2], model);
 	}
+	
+	@RequestMapping("discount")
+	public ModelAndView discount(HttpServletRequest request, final ModelMap model) {
+		model.put("rules", shoppingRuleService.getRulesByPage(ORDERVIEWS[3]));
+		return new ModelAndView(ORDERVIEWS[3], model);
+	}
 
+
+	
 	private int getUserId(HttpServletRequest request) {
 		Object _userId = request.getSession().getAttribute("userid");
 		int userId = 0;

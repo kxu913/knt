@@ -14,5 +14,7 @@ INSERT INTO `ny6design`.`t_shopping_rule` (`id`, `description`, `html`, `active`
 UPDATE `ny6design`.`t_shopping_rule` SET `html`='shoppingcart/checkout' WHERE `id`='1';
 UPDATE `ny6design`.`t_shopping_rule` SET `html`='shoppingcart/checkout' WHERE `id`='2';
 UPDATE `ny6design`.`t_shopping_rule` SET `description`='<strong>Domestic Express Mail pls Call 214-244-5851!</strong><br/>Otherwise: USA & Canadian buyer will pay S/H $4.95 for first items and $1.95 for each additional items. INTERNATIONAL buyer will pay $7.95 for first items and $2.95 for each additional items.' WHERE `id`='2';
+INSERT INTO `ny6design`.`t_shopping_rule` (`id`, `description`, `html`, `active`, `forder`) VALUES ('3', 'When you continue with checkout Voucher Code will be calculated.<br/>DISCOUNT VOUCHER will be calculated in subtotal page after checkout. <br/>Please be patient, this may take a minute.', 'shoppingcart/discount', '1', '1');
+
 
 

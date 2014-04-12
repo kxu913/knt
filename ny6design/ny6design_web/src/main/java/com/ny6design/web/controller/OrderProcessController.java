@@ -23,7 +23,9 @@ import com.ny6design.model.OrderDetail;
 import com.ny6design.model.Product;
 import com.ny6design.model.ShoppingCart;
 import com.ny6design.model.UserDetail;
+import com.ny6design.service.PayMethodService;
 import com.ny6design.service.ProductService;
+import com.ny6design.service.ShipMethodService;
 import com.ny6design.service.ShoppingCartService;
 import com.ny6design.service.ShoppingRuleService;
 import com.ny6design.service.UserService;
@@ -41,14 +43,18 @@ import com.ny6design.web.constant.CONSTANT;
 public class OrderProcessController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	private static final String[] ORDERVIEWS = new String[] { "shoppingcart/cartDetail", "shoppingcart/checkout",
-			"shoppingcart/address", "shoppingcart/discount", "shoppingcart/shipmethod", "shoppingcart/ship", "shoppingcart/submit" };
+			"shoppingcart/address", "shoppingcart/discount", "shoppingcart/shipmethod", "shoppingcart/paymethod",
+			"shoppingcart/submit" };
 	@Autowired
 	ShoppingCartService shoppingCartService;
 	@Autowired
 	ProductService productService;
 	@Autowired
 	ShoppingRuleService shoppingRuleService;
-
+	@Autowired
+	ShipMethodService shipMethodService;
+	@Autowired
+	PayMethodService payMethodService;
 	@Autowired
 	UserService userService;
 
@@ -65,27 +71,15 @@ public class OrderProcessController {
 			List<OrderDetail> orders = new ArrayList<OrderDetail>();
 			cart.setOrders(orders);
 		}
-		// if user not login, can't get order from DB, so need add into list
-		if (getUserId(request) <= 0) {
-			cart.getOrders().add(shoppingCartService.addProductToCart(cart.getCart(), productId, amount));
-		} else {
+		addOrdersFromDBIntoCart(cart, getUserId(request));
+		addProductIntoCart(cart, productId, amount);
+		if (getUserId(request) > 0) {
 			UserDetail user = userService.getUserById(request.getSession().getAttribute("userid").toString());
 			model.put("user", user);
 		}
-		cart.getOrders().addAll(shoppingCartService.getAllOrders(getUserId(request)));
-		cart.setSubtotal(getSubTotal(cart.getOrders()));
+		cart.setSubtotal(cart.calcSubTotal());
 		model.put("indexProducts", getIndexProducts());
 		return new ModelAndView(ORDERVIEWS[0], model);
-	}
-
-	@RequestMapping("checkout")
-	public ModelAndView addCart(HttpServletRequest request, final ModelMap model) {
-
-		CartDetail cart = (CartDetail) model.get("cart");
-		cart.getOrders().addAll(shoppingCartService.getAllOrders(getUserId(request)));
-		cart.setSubtotal(getSubTotal(cart.getOrders()));
-		model.put("rules", shoppingRuleService.getRulesByPage(ORDERVIEWS[1]));
-		return new ModelAndView(ORDERVIEWS[1], model);
 	}
 
 	@RequestMapping("open")
@@ -99,10 +93,21 @@ public class OrderProcessController {
 			List<OrderDetail> orders = new ArrayList<OrderDetail>();
 			cart.setOrders(orders);
 		}
-		cart.getOrders().addAll(shoppingCartService.getAllOrders(getUserId(request)));
-		cart.setSubtotal(getSubTotal(cart.getOrders()));
+		this.addOrdersFromDBIntoCart(cart, getUserId(request));
+		cart.setSubtotal(cart.calcSubTotal());
+		cart.setSubtotal(cart.calcSubTotal());
 		model.put("indexProducts", getIndexProducts());
 		return new ModelAndView(ORDERVIEWS[0], model);
+	}
+
+	@RequestMapping("checkout")
+	public ModelAndView addCart(HttpServletRequest request, final ModelMap model) {
+
+		CartDetail cart = (CartDetail) model.get("cart");
+		cart.setSubtotal(cart.calcSubTotal());
+		cart.setSubtotal(cart.calcSubTotal());
+		model.put("rules", shoppingRuleService.getRulesByPage(ORDERVIEWS[1]));
+		return new ModelAndView(ORDERVIEWS[1], model);
 	}
 
 	@RequestMapping("orderCount")
@@ -128,9 +133,11 @@ public class OrderProcessController {
 		}
 		cart.getOrders().remove(detail);
 		shoppingCartService.removeOrderFromCart(orderId);
-		cart.getOrders().addAll(shoppingCartService.getAllOrders(getUserId(request)));
-		cart.setSubtotal(getSubTotal(cart.getOrders()));
-		model.put("indexProducts", getIndexProducts());
+		cart.setSubtotal(cart.calcSubTotal());
+		cart.setSubtotal(cart.calcSubTotal());
+		if (ORDERVIEWS[0].equalsIgnoreCase(url)) {
+			model.put("indexProducts", getIndexProducts());
+		}
 		return new ModelAndView(url, model);
 	}
 
@@ -144,15 +151,48 @@ public class OrderProcessController {
 		}
 		return new ModelAndView(ORDERVIEWS[2], model);
 	}
-	
+
 	@RequestMapping("discount")
 	public ModelAndView discount(HttpServletRequest request, final ModelMap model) {
 		model.put("rules", shoppingRuleService.getRulesByPage(ORDERVIEWS[3]));
 		return new ModelAndView(ORDERVIEWS[3], model);
 	}
 
+	@RequestMapping("shipmethod")
+	public ModelAndView shipmethod(HttpServletRequest request, final ModelMap model) {
+		CartDetail cart = (CartDetail) model.get("cart");
+		cart.setShipMethod(shipMethodService.getDefaultShipMethod());
+		cart.setTotal(cart.calcTotal());
+		model.put("shipmethods", shipMethodService.getAllShipMethods());
+		model.put("rules", shoppingRuleService.getRulesByPage(ORDERVIEWS[1]));
+		return new ModelAndView(ORDERVIEWS[4], model);
+	}
 
-	
+	@RequestMapping("recalc")
+	@ResponseBody
+	public BigDecimal reCalc(HttpServletRequest request, final ModelMap model) {
+		CartDetail cart = (CartDetail) model.get("cart");
+		String shipMethodId = request.getParameter("shipMethodId");
+		cart.setShipMethod(shipMethodService.getShipById(shipMethodId));
+		return cart.calcTotal();
+	}
+
+	@RequestMapping("paymethod")
+	public ModelAndView PayMethod(HttpServletRequest request, final ModelMap model) {
+		model.put("paymethods", payMethodService.getAllPayMethods());
+		return new ModelAndView(ORDERVIEWS[5], model);
+	}
+
+	@RequestMapping("submit")
+	public ModelAndView submit(HttpServletRequest request, final ModelMap model) {
+		String payMethodId = request.getParameter("paymethodId");
+		String notice = request.getParameter("notice");
+		CartDetail cart = (CartDetail) model.get("cart");
+		cart.setPayMethod(payMethodService.getPayMethodById(payMethodId));
+		cart.setNotice(notice);
+		return new ModelAndView(ORDERVIEWS[6], model);
+	}
+
 	private int getUserId(HttpServletRequest request) {
 		Object _userId = request.getSession().getAttribute("userid");
 		int userId = 0;
@@ -162,15 +202,18 @@ public class OrderProcessController {
 		return userId;
 	}
 
-	private BigDecimal getSubTotal(List<OrderDetail> orders) {
-		BigDecimal subtotal = BigDecimal.ZERO;
-		subtotal.setScale(2);
-		if (!orders.isEmpty()) {
-			for (OrderDetail order : orders) {
-				subtotal = subtotal.add(order.getOrder().getCost());
-			}
+	private void addOrdersFromDBIntoCart(CartDetail cart, int userId) {
+		if (userId >= 0 && !cart.isHasInited()) {
+			cart.getOrders().addAll(shoppingCartService.getAllOrders(userId));
+			cart.setHasInited(true);
 		}
-		return subtotal;
+	}
+
+	private void addProductIntoCart(CartDetail cart, int productId, int amount) {
+		OrderDetail detail = shoppingCartService.addProductToCart(cart, productId, amount);
+		if (!detail.isInCart()) {
+			cart.getOrders().add(detail);
+		}
 	}
 
 	private List<Product> getIndexProducts() {

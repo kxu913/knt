@@ -18,11 +18,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.kevin.security.token.EmailPasswordToken;
+import com.ny6design.model.CartDetail;
 import com.ny6design.model.User;
 import com.ny6design.service.UserService;
 import com.ny6design.web.constant.CONSTANT;
@@ -88,8 +91,9 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "loginOut", method = { RequestMethod.POST, RequestMethod.GET })
-	public String loginOut(HttpServletRequest request, HttpServletResponse response) {
+	public String loginOut(HttpServletRequest request, HttpServletResponse response, final ModelMap model,final SessionStatus status) {
 		request.getSession().removeAttribute("userName");
+		status.setComplete();
 		return "redirect:index.html";
 	}
 

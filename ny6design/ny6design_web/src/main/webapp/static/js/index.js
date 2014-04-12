@@ -237,7 +237,6 @@ function doLogin() {
 		}
 	});
 }
-
 function login() {
 	if (tab !== 0) {
 		loadCategories();
@@ -495,6 +494,29 @@ function getWishListTotalNum() {
 /** * wish list end */
 
 /** shopping cart start */
+
+function loginForShip(){
+	var emailAddress = $("#inputEmail3").val();
+	var password = $("#inputPassword3").val();
+	$.ajax({
+		url : 'login',
+		type : 'POST',
+		data : {
+			email : emailAddress,
+			password : password,
+			url : "shoppingcart/ship"
+		},
+		success : function(data, status) {
+			if (typeof (data.errormsg) !== "undefined") {
+				$("#errorMsg").html(data.errormsg);
+			} else {
+				loadToolBar();
+				gotoShip();
+			}
+		}
+	});
+}
+
 function getOrderCount() {
 	$.ajax({
 		url : 'shoppingcart/orderCount',

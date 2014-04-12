@@ -143,9 +143,12 @@ public class OrderProcessController {
 
 	@RequestMapping("ship")
 	public ModelAndView ship(HttpServletRequest request, final ModelMap model) {
-		if (getUserId(request) > 0) {
+		CartDetail cart = (CartDetail) model.get("cart");
+		int userId =getUserId(request);
+		if (userId > 0) {
 			UserDetail user = userService.getUserById(request.getSession().getAttribute("userid").toString());
 			model.put("user", user);
+			shoppingCartService.updateOrders(cart,userId);
 		} else {
 			return new ModelAndView("login/loginAndRegister", model);
 		}
@@ -203,7 +206,7 @@ public class OrderProcessController {
 	}
 
 	private void addOrdersFromDBIntoCart(CartDetail cart, int userId) {
-		if (userId >= 0 && !cart.isHasInited()) {
+		if (userId > 0 && !cart.isHasInited()) {
 			cart.getOrders().addAll(shoppingCartService.getAllOrders(userId));
 			cart.setHasInited(true);
 		}

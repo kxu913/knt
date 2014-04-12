@@ -238,27 +238,6 @@ function doLogin() {
 	});
 }
 
-function loginForShip(){
-	var emailAddress = $("#inputEmail3").val();
-	var password = $("#inputPassword3").val();
-	$.ajax({
-		url : '/ny6design_web/login',
-		type : 'POST',
-		data : {
-			email : emailAddress,
-			password : password,
-			url : "shoppingcart/ship"
-		},
-		success : function(data, status) {
-			if (typeof (data.errormsg) !== "undefined") {
-				$("#errorMsg").html(data.errormsg);
-			} else {
-				window.location.href = data.url;
-			}
-		}
-	});
-}
-
 function login() {
 	if (tab !== 0) {
 		loadCategories();
@@ -557,5 +536,14 @@ function gotoShip() {
 			$("#productList").html(data);
 		}
 	});
+}
 
+function gotoDiscount(){
+	$.ajax({
+		url : 'shoppingcart/discount',
+		success : function(data, status) {
+			hideAds();
+			$("#productList").html(data);
+		}
+	});
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ny6design.mapper.ShipMethodMapper">
+  <resultMap id="BaseResultMap" type="com.ny6design.model.ShipMethod">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="cost" jdbcType="DOUBLE" property="cost" />
+    <result column="fdefault" jdbcType="INTEGER" property="fdefault" />
+    <result column="forder" jdbcType="INTEGER" property="forder" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, description, cost, fdefault, forder
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from e_ship_method
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+   <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from e_ship_method order by forder asc;
+  </select>
+  
+    <select id="getDefaultShipMethod" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from e_ship_method where fdefault=1;
+  </select>
+  
+   
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from e_ship_method
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ny6design.model.ShipMethod">
+    insert into e_ship_method (id, description, cost, 
+      fdefault, forder)
+    values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{cost,jdbcType=DOUBLE}, 
+      #{fdefault,jdbcType=INTEGER}, #{forder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ny6design.model.ShipMethod">
+    insert into e_ship_method
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="fdefault != null">
+        fdefault,
+      </if>
+      <if test="forder != null">
+        forder,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="fdefault != null">
+        #{fdefault,jdbcType=INTEGER},
+      </if>
+      <if test="forder != null">
+        #{forder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ny6design.model.ShipMethod">
+    update e_ship_method
+    <set>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="fdefault != null">
+        fdefault = #{fdefault,jdbcType=INTEGER},
+      </if>
+      <if test="forder != null">
+        forder = #{forder,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ny6design.model.ShipMethod">
+    update e_ship_method
+    set description = #{description,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DOUBLE},
+      fdefault = #{fdefault,jdbcType=INTEGER},
+      forder = #{forder,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

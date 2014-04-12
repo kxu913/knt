@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ny6design.core.Env;
+import com.ny6design.model.CartDetail;
 import com.ny6design.model.Order;
 import com.ny6design.model.OrderDetail;
 import com.ny6design.model.ShoppingCart;
@@ -31,10 +32,12 @@ public class ShoppingCartServiceTest {
 
 	@Test
 	public void addProductToCart() {
+		CartDetail detail = new CartDetail();
 		ShoppingCart cart = shoppingCartService.getShoppingCart(1);
-		OrderDetail order1 = shoppingCartService.addProductToCart(cart, 49, 2);
+		detail.setCart(cart);
+		OrderDetail order1 = shoppingCartService.addProductToCart(detail, 49, 2);
 		System.out.println(order1.getProduct().getPrice());
-		OrderDetail order2 = shoppingCartService.addProductToCart(cart, 50, 3);
+		OrderDetail order2 = shoppingCartService.addProductToCart(detail, 50, 3);
 		System.out.println(order2.getProduct().getPrice());
 	}
 
@@ -45,7 +48,7 @@ public class ShoppingCartServiceTest {
 			System.out.println(detail.getOrder().getId() + "/" + detail.getProduct().getProductId());
 		}
 	}
-	
+
 	@Test
 	public void removeOrderFromCart() {
 		shoppingCartService.removeOrderFromCart(1);

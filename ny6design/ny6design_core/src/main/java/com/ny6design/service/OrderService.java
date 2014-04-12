@@ -30,4 +30,8 @@ public class OrderService {
 	public void deleteOrder(int orderId) {
 		orderMappper.deleteByPrimaryKey(orderId);
 	}
+
+	public void updateOrder(Order order) {
+		orderMappper.updateByPrimaryKey(order);
+	}
 }

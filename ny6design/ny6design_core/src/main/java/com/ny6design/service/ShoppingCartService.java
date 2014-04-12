@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ny6design.constant.OrderStatus;
 import com.ny6design.mapper.CartOrderMappingMapper;
 import com.ny6design.mapper.ShoppingCartMapper;
+import com.ny6design.model.CartDetail;
 import com.ny6design.model.CartOrderMapping;
 import com.ny6design.model.Order;
 import com.ny6design.model.OrderDetail;
@@ -49,16 +50,49 @@ public class ShoppingCartService {
 	/**
 	 * add a product into shopping cart
 	 * 
-	 * @param shoppingCart
+	 * @param cart
 	 * @param productId
 	 * @param _amount
 	 * @return order
 	 */
-	public OrderDetail addProductToCart(ShoppingCart shoppingCart, int productId, int amount) {
+	public OrderDetail addProductToCart(CartDetail cart, int productId, int amount) {
 		if (productId > 0 && amount > 0) {
-			Order order = createOrder(productId, amount);
-			this.insertMapping(shoppingCart.getId(), order.getId());
-			return createDetail(order);
+			OrderDetail detail = checkProductIsExistInCart(cart, productId);
+			// if not exist, create one
+			if (detail == null) {
+				Order order = createOrder(productId, amount);
+				this.insertMapping(cart.getCart().getId(), order.getId());
+				return createDetail(order);
+			}// if exist, add amount in order
+			else {
+				Order order = detail.getOrder();
+				int _amount = order.getAmount() + amount;
+				order.setAmount(_amount);
+				order.setCost(productService.getTotalCost(productId, _amount));
+				orderService.updateOrder(order);
+				detail.setOrder(order);
+				detail.setInCart(true);
+				return detail;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * check product is exist in shopping cart
+	 * 
+	 * @param cart
+	 * @param prodcutId
+	 * @return
+	 */
+	private OrderDetail checkProductIsExistInCart(CartDetail cart, int prodcutId) {
+		List<OrderDetail> orders = cart.getOrders();
+		if (orders != null && !orders.isEmpty()) {
+			for (OrderDetail order : orders) {
+				if (order.getProduct().getProductId() == prodcutId) {
+					return order;
+				}
+			}
 		}
 		return null;
 	}
@@ -127,7 +161,6 @@ public class ShoppingCartService {
 		mapping.setOrderid(oriderId);
 		cartOrderMappingMapper.insert(mapping);
 	}
-
 
 	public void removeOrderFromCart(int orderId) {
 		orderService.deleteOrder(orderId);

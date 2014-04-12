@@ -15,7 +15,6 @@
 				<td style="width: 10%">Quantity</td>
 				<td style="width: 10%">Total</td>
 			</tr>
-
 			#foreach($orderDetail as $!cart.orders)
 			<tr>
 				<td>$!orderDetail.product.model</td>
@@ -24,7 +23,6 @@
 				<td>$$!orderDetail.product.productPriceList[0].price</td>
 				<td>$!{orderDetail.order.amount}</td>
 				<td>$!orderDetail.order.cost</td>
-
 			</tr>
 			#end
 		</table>
@@ -33,19 +31,20 @@
 	<div class="row">
 		<div class="col-lg-8  col-md-8">&nbsp;</div>
 		<div class="col-lg-4  col-md-4" style="text-align: right;">
-			<p class="text-info"
-				style="padding-bottom: 5px;">Subtotal:
+			<p class="text-info" style="padding-bottom: 5px;">Subtotal:
 				$$!cart.subtotal</p>
 			<p class="text-info"
-				style="padding-bottom: 5px; border-bottom: 1px solid red">Shipping & Hnadling:
-				<span id="_shipcost">$$!cart.shipMethod.cost</span></p>
+				style="padding-bottom: 5px; border-bottom: 1px solid red">
+				Shipping & Hnadling: <span id="_shipcost">$$!cart.shipMethod.cost</span>
+			</p>
 			<p class="text-info"
-				style="padding-bottom: 10px; border-bottom: 1px solid orange">Total:
-				<span id="_total">$$!cart.total</span></p>
+				style="padding-bottom: 10px; border-bottom: 1px solid orange">
+				Total: <span id="_total">$$!cart.total</span>
+			</p>
 		</div>
 	</div>
 
-	<div id="_address" class="orderinfo_header">
+	<div id="_address" class="orderinfo_head">
 		<p class="text-info">Shipping Address</p>
 		<div class="orderinfo_content">
 			<div class="row" style="text-align: right;">
@@ -87,29 +86,26 @@
 		</div>
 	</div>
 
-	<div id="_vouchercode" class="orderinfo_header">
-		<p class="text-info">Shipping Method</p>
+	<div id="_shippingmethod" class="orderinfo_head">
+		<p class="text-info">Your Shipping Method</p>
 		<div class="orderinfo_content">
-			<form class="form-horizontal" role="form">
-				<div class="form-group">
-					<label for="shipMethodId" class="control-label col-lg-10 col-md-10" style="text-align: left">Please select shipping method below:</label>
-						<div class="col-lg-4 col-md-4">
-						<select class="form-control" id="shipMethodId"  check-type="required">
-							#foreach($shipmethod as $!shipmethods)
-								#if($!shipmethod.fdefault==1)
-								<option id="$!shipmethod.id" cost="$!shipmethod.cost" selected>$!shipmethod.description</option>
-								#else
-								<option id="$!shipmethod.id" cost="$!shipmethod.cost">$!shipmethod.description</option>
-								#end
-							#end
-						</select>
-						</div>
-				</div>
-			</form>
 			<div>
-				#foreach($rule as $!rules) <span class="help-block"
-					style="color: #CE6D05;">$!rule.description </span> #end
+				<span class="help-block" style="color: blue;">$!cart.shipMethod.description </span>
 			</div>
+		</div>
+	</div>
+
+	<div id="_paymethod" class="orderinfo_head">
+		<p class="text-info">Your payment method</p>
+		<div style="border: 1px solid orange; padding: 5px">
+			<span class="help-block" style="color: blue;">$!cart.payMethod.description </span>
+		</div>
+	</div>
+
+	<div id="_notice" class="orderinfo_head">
+		<p class="text-info">Notices: </p>
+		<div style="padding: 5px">
+			<span class="help-block"> <font style="color: blue;">$!cart.notice </font></span>
 		</div>
 	</div>
 
@@ -119,31 +115,14 @@
 		<div class="col-lg-2  col-md-2">
 			<a data-role="button" class="btn btn-default"
 				style="width: 100%; color: #CE6D05; font-weight: bolder;"
-				onclick="gotoDiscount()">Back</a>
+				onclick="gotoPaymethod()">Back</a>
 		</div>
 		<div class="col-lg-2  col-md-2">
 			<button type="button" class="btn btn-default"
 				style="width: 100%; color: #CE6D05; font-weight: bolder;"
-				onclick="gotoPaymethod()">Next</button>
+				onclick="gotoShip()">Submit Order</button>
 		</div>
 		<div class="col-lg-4  col-md-4">&nbsp;</div>
 	</div>
 
 </div>
-
-<script>
-	$("#shipMethodId").change(function(){
-		var cost = $("#shipMethodId option:selected").attr("cost");
-		$("#_shipcost").html($("#shipMethodId option:selected").attr("cost"));
-		$.ajax({
-			url : 'shoppingcart/recalc',
-			data: {
-				shipMethodId: $("#shipMethodId option:selected").attr("id")
-			},
-			success : function(data, status) {
-				$("#_total").html(data);
-			}
-		});
-
-	})
-</script>

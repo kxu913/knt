@@ -484,15 +484,15 @@ function removeFromWishList(productId) {
 	});
 }
 
-function getWishListTotalNum(){
+function getWishListTotalNum() {
 	$.ajax({
-		url: 'wishlist/gettotalnum',
-		success: function(data, status){
+		url : 'wishlist/gettotalnum',
+		success : function(data, status) {
 			$(".glyphicon-heart").next().html(data);
 		}
 	});
 }
-/*** wish list end */
+/** * wish list end */
 
 /** shopping cart start */
 function getOrderCount() {
@@ -538,9 +538,29 @@ function gotoShip() {
 	});
 }
 
-function gotoDiscount(){
+function gotoDiscount() {
 	$.ajax({
 		url : 'shoppingcart/discount',
+		success : function(data, status) {
+			hideAds();
+			$("#productList").html(data);
+		}
+	});
+}
+
+function gotShipmethod() {
+	$.ajax({
+		url : 'shoppingcart/shipmethod',
+		success : function(data, status) {
+			hideAds();
+			$("#productList").html(data);
+		}
+	});
+}
+
+function gotoPaymethod() {
+	$.ajax({
+		url : 'shoppingcart/paymethod',
 		success : function(data, status) {
 			hideAds();
 			$("#productList").html(data);

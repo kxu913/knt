@@ -78,8 +78,6 @@ td img {
 	max-height: 200px;
 }
 
-
-
 .form-group {
 	margin-bottom: 10px;
 }
@@ -192,4 +190,14 @@ a {
 
 #addAddress label {
 	width: 100px;
+}
+
+.orderinfo_header {
+	vertical-align: middle;
+	margin: 5px 0px 5px 0px;
+}
+
+.orderinfo_content {
+	border: 1px solid orange;
+	padding: 5px
 }

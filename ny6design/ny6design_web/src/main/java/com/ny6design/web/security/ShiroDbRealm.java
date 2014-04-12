@@ -41,7 +41,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 				.iterator().next();
 
 		if (emailAddress != null) {
-			// 查询用户授权信息
+			// get user permissions
 			User user = userService.findUserByEmail(emailAddress);
 			if (user != null && user.isAdmin()) {
 				SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
@@ -57,10 +57,10 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authcToken) throws AuthenticationException {
 		EmailPasswordToken token = (EmailPasswordToken) authcToken;
-		// 通过表单接收的用户名
+		// get eamil address
 		String emailAddress = token.getEmail();
 		if (StringUtils.isEmpty(emailAddress)) {
-			throw new EmailValidationException("Email is empty！");
+			throw new EmailValidationException("Email is empty!");
 		}
 
 		User user = userService.findUserByEmail(emailAddress);
@@ -78,7 +78,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	}
 
 	/**
-	 * 设定Password校验的Hash算法与迭代次数.
+	 * set password hash and iterator
 	 */
 	@PostConstruct
 	public void initCredentialsMatcher() {

@@ -44,64 +44,51 @@ public class LoginController {
 		return "login";
 	}
 
-	@RequestMapping(value = "login", method = { RequestMethod.POST,
-			RequestMethod.GET })
+	@RequestMapping(value = "login", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
-	public Map<String, Object> login(HttpServletRequest request,
-			HttpServletResponse response) {
+	public Map<String, Object> login(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> rtn = new HashMap<String, Object>();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String url = request.getParameter("url");
-		// 获取当前的Subject
+		// get subject
 		Subject currentUser = SecurityUtils.getSubject();
 		if (StringUtils.isNotEmpty(email)) {
-			EmailPasswordToken token = new EmailPasswordToken(email, password,
-					true, request.getRemoteHost(), email);
+			EmailPasswordToken token = new EmailPasswordToken(email, password, true, request.getRemoteHost(), email);
 			try {
-				if (log.isInfoEnabled()) {
-					log.info("对用户[" + email + "]进行登录验证..验证开始");
-				}
+				log.info("Start [" + email + "] validating...");
 				currentUser.login(token);
 				User user = userService.findUserByEmail(email);
 				if (user != null) {
 					rtn.put(CONSTANT.EMAIL, email);
 					rtn.put(CONSTANT.URL, url);
-					request.getSession().setAttribute("userName",
-							user.getFirstname() + " " + user.getLastname());
-					request.getSession().setAttribute("userid",
-							user.getUserid());
+					request.getSession().setAttribute("userName", user.getFirstname() + " " + user.getLastname());
+					request.getSession().setAttribute("userid", user.getUserid());
 				}
-				if (log.isInfoEnabled()) {
-					log.info("对用户[" + email + "]进行登录验证..验证通过");
-				}
+				log.info("The [" + email + "] passed!");
 
 			} catch (UnknownAccountException uae) {
-				log.error("对用户[" + email + "]进行登录验证..验证未通过,未知账户");
+				log.error("The [" + email + "] validated fail, unkown user!");
 				rtn.put(CONSTANT.ERROR_MESSAGE, "Eamil or password error!");
 			} catch (IncorrectCredentialsException ice) {
-				log.error("对用户[" + email + "]进行登录验证..验证未通过,错误的凭证");
+				log.error("The[" + email + "]validated fail, error password!");
 				rtn.put(CONSTANT.ERROR_MESSAGE, "Eamil or password error!");
 			} catch (LockedAccountException lae) {
-				log.error("对用户[" + email + "]进行登录验证..验证未通过,账户已锁定");
+				log.error("The[" + email + "]validated fail, user been locked!");
 				rtn.put(CONSTANT.ERROR_MESSAGE, "Eamil or password error!");
 			} catch (ExcessiveAttemptsException eae) {
-				log.error("对用户[" + email + "]进行登录验证..验证未通过,错误次数过多");
-				rtn.put(CONSTANT.ERROR_MESSAGE, "Eamil or password error!");
+				log.error("The[" + email + "]validated fail, tried too many times");
+				rtn.put(CONSTANT.ERROR_MESSAGE, "Tried too many times!");
 			} catch (AuthenticationException ae) {
-				// 通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
-				log.error("对用户[" + email + "]进行登录验证..验证未通过,堆栈轨迹如下");
-				ae.printStackTrace();
-				rtn.put(CONSTANT.ERROR_MESSAGE, "Eamil or password error!");
+				log.error("The [" + email + "]validated fail, the error stack as below: ", ae);
+				rtn.put(CONSTANT.ERROR_MESSAGE, "Login failed!");
 			}
 		}
 		return rtn;
 	}
 
-	@RequestMapping(value = "loginOut", method = { RequestMethod.POST,
-			RequestMethod.GET })
-	public String loginOut(HttpServletRequest request,
-			HttpServletResponse response) {
+	@RequestMapping(value = "loginOut", method = { RequestMethod.POST, RequestMethod.GET })
+	public String loginOut(HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().removeAttribute("userName");
 		return "redirect:index.html";
 	}

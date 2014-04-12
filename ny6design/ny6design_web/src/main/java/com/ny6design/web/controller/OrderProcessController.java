@@ -41,7 +41,7 @@ import com.ny6design.web.constant.CONSTANT;
 public class OrderProcessController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	private static final String[] ORDERVIEWS = new String[] { "shoppingcart/cartDetail", "shoppingcart/checkout",
-			"shoppingcart/address", "shoppingcart/discount", "shoppingcart/ship", "shoppingcart/submit" };
+			"shoppingcart/address", "shoppingcart/discount", "shoppingcart/shipmethod", "shoppingcart/ship", "shoppingcart/submit" };
 	@Autowired
 	ShoppingCartService shoppingCartService;
 	@Autowired

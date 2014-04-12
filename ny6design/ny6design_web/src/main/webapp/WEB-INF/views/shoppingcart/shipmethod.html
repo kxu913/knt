@@ -35,8 +35,14 @@
 		<div class="col-lg-8  col-md-8">&nbsp;</div>
 		<div class="col-lg-4  col-md-4" style="text-align: right;">
 			<p class="text-info"
-				style="padding-bottom: 20px; border-bottom: 1px solid orange">Subtotal:
+				style="padding-bottom: 20px;>Subtotal:
 				$$!cart.subtotal</p>
+			<p class="text-info"
+				style="padding-bottom: 20px; border-bottom: 1px solid red">Shipping & Hnadling:
+				$$!cart.shipingcost</p>
+			<p class="text-info"
+				style="padding-bottom: 20px; border-bottom: 1px solid orange">Total:
+				$$!cart.total</p>
 		</div>
 	</div>
 
@@ -89,11 +95,17 @@
 		<div style="padding: 5px">
 			<form class="form-horizontal" role="form">
 				<div class="form-group">
-					<label for="discountCode" class="col-lg-4 col-md-4 control-label"
-						style="font-size: 13px; text-align: left">Enter
-						Voucher code if you have one:</label>
-					<div class="col-lg-3 col-md-3">
-						<input type="text" class="form-control" id="discountCode">
+					<label for="shipMethodId" class="control-label">State *</label>
+					<div class="col-sm-3" id="stateDiv">
+						<select class="form-control" id="shipMethodId"  check-type="required">
+							#foreach($shipmethod as $!shipmethods)
+								#if($!shipmethod.default==1)
+								<option id="$!shipmethod.id" selected>$!shipmethod.desc</option>
+								#else
+								<option id="$!shipmethod.id">$!shipmethod.desc</option>
+								#end
+							#end
+						</select>
 					</div>
 				</div>
 			</form>
@@ -121,3 +133,9 @@
 	</div>
 
 </div>
+
+<script>
+	$("#shipMethodId").change(function(oldid,newid){
+		
+	})
+</script>

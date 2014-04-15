@@ -166,4 +166,19 @@ public class ShoppingCartService {
 		orderService.deleteOrder(orderId);
 		cartOrderMappingMapper.deleteByOrderId(orderId);
 	}
+
+	public void updateOrders(CartDetail cart, int userId) {
+		ShoppingCart _cart = cart.getCart();
+		if (_cart.getUserId() <= 0) {
+			_cart.setUserId(userId);
+			shoppingCartMapper.updateByPrimaryKey(_cart);
+		}
+
+	}
+
+	public void emptyCart(CartDetail cart) {
+		int userId =cart.getCart().getUserId();
+		shoppingCartMapper.emptyShoppingCart(userId);
+		cartOrderMappingMapper.deleteByCartId(cart.getCart().getId());
+	}
 }

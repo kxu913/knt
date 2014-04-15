@@ -17,5 +17,7 @@ public interface ShoppingCartMapper {
     int updateByPrimaryKeySelective(ShoppingCart record);
 
     int updateByPrimaryKey(ShoppingCart record);
+
+	void emptyShoppingCart(int userId);
 	
 }

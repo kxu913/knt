@@ -16,4 +16,6 @@ public interface CartOrderMappingMapper {
     int updateByPrimaryKey(CartOrderMapping record);
 
 	void deleteByOrderId(int orderId);
+
+	void deleteByCartId(int cartId);
 }

@@ -91,4 +91,9 @@
 		#{lastupdatetime,jdbcType=TIMESTAMP}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	
+	<delete id="emptyShoppingCart" parameterType="java.lang.Integer">
+		delete from t_shoppingcart
+		where userId = #{userId,jdbcType=INTEGER}
+	</delete>
 </mapper>

@@ -74,4 +74,10 @@
       orderId = #{orderid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+   <delete id="deleteByCartId" parameterType="java.lang.Integer" >
+    delete from t_cart_order
+    where cartId = #{cartId,jdbcType=INTEGER}
+  </delete>
+  
 </mapper>

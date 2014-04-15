@@ -93,6 +93,7 @@ public class LoginController {
 	@RequestMapping(value = "loginOut", method = { RequestMethod.POST, RequestMethod.GET })
 	public String loginOut(HttpServletRequest request, HttpServletResponse response, final ModelMap model,final SessionStatus status) {
 		request.getSession().removeAttribute("userName");
+		request.getSession().removeAttribute("userid");
 		status.setComplete();
 		return "redirect:index.html";
 	}

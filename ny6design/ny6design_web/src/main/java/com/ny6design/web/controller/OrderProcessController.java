@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ny6design.model.CartDetail;
 import com.ny6design.model.OrderDetail;
 import com.ny6design.model.Product;
 import com.ny6design.model.ShoppingCart;
+import com.ny6design.model.User;
 import com.ny6design.model.UserDetail;
 import com.ny6design.service.PayMethodService;
 import com.ny6design.service.ProductService;
@@ -29,6 +31,7 @@ import com.ny6design.service.ShipMethodService;
 import com.ny6design.service.ShoppingCartService;
 import com.ny6design.service.ShoppingRuleService;
 import com.ny6design.service.UserService;
+import com.ny6design.service.OrderSummayService;
 import com.ny6design.web.constant.CONSTANT;
 
 /**
@@ -57,6 +60,8 @@ public class OrderProcessController {
 	PayMethodService payMethodService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	OrderSummayService orderSummayService;
 
 	@RequestMapping("add/{productId}/{amount}")
 	public ModelAndView addCart(@PathVariable("productId") int productId, @PathVariable("amount") int amount,
@@ -144,11 +149,11 @@ public class OrderProcessController {
 	@RequestMapping("ship")
 	public ModelAndView ship(HttpServletRequest request, final ModelMap model) {
 		CartDetail cart = (CartDetail) model.get("cart");
-		int userId =getUserId(request);
+		int userId = getUserId(request);
 		if (userId > 0) {
 			UserDetail user = userService.getUserById(request.getSession().getAttribute("userid").toString());
 			model.put("user", user);
-			shoppingCartService.updateOrders(cart,userId);
+			shoppingCartService.updateOrders(cart, userId);
 		} else {
 			return new ModelAndView("login/loginAndRegister", model);
 		}
@@ -186,14 +191,27 @@ public class OrderProcessController {
 		return new ModelAndView(ORDERVIEWS[5], model);
 	}
 
-	@RequestMapping("submit")
-	public ModelAndView submit(HttpServletRequest request, final ModelMap model) {
+	@RequestMapping("goTosubmit")
+	public ModelAndView goTosubmit(HttpServletRequest request, final ModelMap model) {
 		String payMethodId = request.getParameter("paymethodId");
 		String notice = request.getParameter("notice");
 		CartDetail cart = (CartDetail) model.get("cart");
 		cart.setPayMethod(payMethodService.getPayMethodById(payMethodId));
 		cart.setNotice(notice);
 		return new ModelAndView(ORDERVIEWS[6], model);
+	}
+
+	@RequestMapping("submit")
+	@ResponseBody
+	public String submit(HttpServletRequest request, final ModelMap model, final SessionStatus status) {
+		CartDetail cart = (CartDetail) model.get("cart");
+		UserDetail user =(UserDetail) model.get("user");
+		orderSummayService.insertOrder(cart);
+		shoppingCartService.emptyCart(cart);
+		model.remove(cart);
+		model.remove(user);
+		status.setComplete();
+		return "0";
 	}
 
 	private int getUserId(HttpServletRequest request) {

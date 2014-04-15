@@ -83,6 +83,7 @@ function loadStates() {
 }
 function loginOut() {
 	location.href = '/ny6design_web/loginOut';
+	getOrderCount();
 }
 
 function resetPassword() {
@@ -586,6 +587,16 @@ function gotoPaymethod() {
 		success : function(data, status) {
 			hideAds();
 			$("#productList").html(data);
+		}
+	});
+}
+
+function submit(){
+	$.ajax({
+		url : 'shoppingcart/submit',
+		success : function(data, status) {
+			window.location.href = "index.html";
+			getOrderCount();
 		}
 	});
 }

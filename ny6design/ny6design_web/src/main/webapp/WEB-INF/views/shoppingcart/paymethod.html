@@ -151,7 +151,7 @@
 		var notice =$("#noticeinput").val();
 		var paymethodId = $('input[name="optionsRadios"]:checked').val();
 		$.ajax({
-			url : 'shoppingcart/submit',
+			url : 'shoppingcart/goTosubmit',
 			data :{
 				notice : notice,
 				paymethodId: paymethodId

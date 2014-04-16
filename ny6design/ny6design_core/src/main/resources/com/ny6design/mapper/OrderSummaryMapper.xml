@@ -1,167 +1,286 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ny6design.mapper.OrderSummaryMapper" >
-  <resultMap id="BaseResultMap" type="com.ny6design.model.OrderSummary" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="shipmethodId" property="shipmethodid" jdbcType="INTEGER" />
-    <result column="paymethodId" property="paymethodid" jdbcType="INTEGER" />
-    <result column="discountId" property="discountid" jdbcType="INTEGER" />
-    <result column="subtotal" property="subtotal" jdbcType="DOUBLE" />
-    <result column="total" property="total" jdbcType="DOUBLE" />
-    <result column="notice" property="notice" jdbcType="VARCHAR" />
-    <result column="userId" property="userid" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="lastupdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, shipmethodId, paymethodId, discountId, subtotal, total, notice, userId, status, 
-    createTime, lastupdateTime
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_order_summary
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_order_summary
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.ny6design.model.OrderSummary" >
-       <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+<mapper namespace="com.ny6design.mapper.OrderSummaryMapper">
+	<resultMap id="BaseResultMap" type="com.ny6design.model.OrderSummary">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="shipmethodId" property="shipmethodid" jdbcType="INTEGER" />
+		<result column="paymethodId" property="paymethodid" jdbcType="INTEGER" />
+		<result column="discountId" property="discountid" jdbcType="INTEGER" />
+		<result column="subtotal" property="subtotal" jdbcType="DOUBLE" />
+		<result column="total" property="total" jdbcType="DOUBLE" />
+		<result column="notice" property="notice" jdbcType="VARCHAR" />
+		<result column="userId" property="userid" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="lastupdateTime" property="lastupdatetime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, shipmethodId, paymethodId, discountId, subtotal, total,
+		notice,
+		userId, status,
+		createTime, lastupdateTime
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_order_summary
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		t_order_summary
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ny6design.model.OrderSummary">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
 		</selectKey>
-    insert into t_order_summary (id, shipmethodId, paymethodId, 
-      discountId, subtotal, total, 
-      notice, userId, status, 
-      createTime, lastupdateTime)
-    values (#{id,jdbcType=INTEGER}, #{shipmethodid,jdbcType=INTEGER}, #{paymethodid,jdbcType=INTEGER}, 
-      #{discountid,jdbcType=INTEGER}, #{subtotal,jdbcType=DOUBLE}, #{total,jdbcType=DOUBLE}, 
-      #{notice,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{lastupdatetime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ny6design.model.OrderSummary" >
-    insert into t_order_summary
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="shipmethodid != null" >
-        shipmethodId,
-      </if>
-      <if test="paymethodid != null" >
-        paymethodId,
-      </if>
-      <if test="discountid != null" >
-        discountId,
-      </if>
-      <if test="subtotal != null" >
-        subtotal,
-      </if>
-      <if test="total != null" >
-        total,
-      </if>
-      <if test="notice != null" >
-        notice,
-      </if>
-      <if test="userid != null" >
-        userId,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="createtime != null" >
-        createTime,
-      </if>
-      <if test="lastupdatetime != null" >
-        lastupdateTime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="shipmethodid != null" >
-        #{shipmethodid,jdbcType=INTEGER},
-      </if>
-      <if test="paymethodid != null" >
-        #{paymethodid,jdbcType=INTEGER},
-      </if>
-      <if test="discountid != null" >
-        #{discountid,jdbcType=INTEGER},
-      </if>
-      <if test="subtotal != null" >
-        #{subtotal,jdbcType=DOUBLE},
-      </if>
-      <if test="total != null" >
-        #{total,jdbcType=DOUBLE},
-      </if>
-      <if test="notice != null" >
-        #{notice,jdbcType=VARCHAR},
-      </if>
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastupdatetime != null" >
-        #{lastupdatetime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ny6design.model.OrderSummary" >
-    update t_order_summary
-    <set >
-      <if test="shipmethodid != null" >
-        shipmethodId = #{shipmethodid,jdbcType=INTEGER},
-      </if>
-      <if test="paymethodid != null" >
-        paymethodId = #{paymethodid,jdbcType=INTEGER},
-      </if>
-      <if test="discountid != null" >
-        discountId = #{discountid,jdbcType=INTEGER},
-      </if>
-      <if test="subtotal != null" >
-        subtotal = #{subtotal,jdbcType=DOUBLE},
-      </if>
-      <if test="total != null" >
-        total = #{total,jdbcType=DOUBLE},
-      </if>
-      <if test="notice != null" >
-        notice = #{notice,jdbcType=VARCHAR},
-      </if>
-      <if test="userid != null" >
-        userId = #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        createTime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastupdatetime != null" >
-        lastupdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ny6design.model.OrderSummary" >
-    update t_order_summary
-    set shipmethodId = #{shipmethodid,jdbcType=INTEGER},
-      paymethodId = #{paymethodid,jdbcType=INTEGER},
-      discountId = #{discountid,jdbcType=INTEGER},
-      subtotal = #{subtotal,jdbcType=DOUBLE},
-      total = #{total,jdbcType=DOUBLE},
-      notice = #{notice,jdbcType=VARCHAR},
-      userId = #{userid,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      lastupdateTime = #{lastupdatetime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+		insert into t_order_summary (id, shipmethodId, paymethodId,
+		discountId, subtotal, total,
+		notice, userId, status,
+		createTime,
+		lastupdateTime)
+		values (#{id,jdbcType=INTEGER},
+		#{shipmethodid,jdbcType=INTEGER},
+		#{paymethodid,jdbcType=INTEGER},
+		#{discountid,jdbcType=INTEGER}, #{subtotal,jdbcType=DOUBLE},
+		#{total,jdbcType=DOUBLE},
+		#{notice,jdbcType=VARCHAR},
+		#{userid,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{createtime,jdbcType=TIMESTAMP},
+		#{lastupdatetime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ny6design.model.OrderSummary">
+		insert into t_order_summary
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="shipmethodid != null">
+				shipmethodId,
+			</if>
+			<if test="paymethodid != null">
+				paymethodId,
+			</if>
+			<if test="discountid != null">
+				discountId,
+			</if>
+			<if test="subtotal != null">
+				subtotal,
+			</if>
+			<if test="total != null">
+				total,
+			</if>
+			<if test="notice != null">
+				notice,
+			</if>
+			<if test="userid != null">
+				userId,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createtime != null">
+				createTime,
+			</if>
+			<if test="lastupdatetime != null">
+				lastupdateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="shipmethodid != null">
+				#{shipmethodid,jdbcType=INTEGER},
+			</if>
+			<if test="paymethodid != null">
+				#{paymethodid,jdbcType=INTEGER},
+			</if>
+			<if test="discountid != null">
+				#{discountid,jdbcType=INTEGER},
+			</if>
+			<if test="subtotal != null">
+				#{subtotal,jdbcType=DOUBLE},
+			</if>
+			<if test="total != null">
+				#{total,jdbcType=DOUBLE},
+			</if>
+			<if test="notice != null">
+				#{notice,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastupdatetime != null">
+				#{lastupdatetime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ny6design.model.OrderSummary">
+		update t_order_summary
+		<set>
+			<if test="shipmethodid != null">
+				shipmethodId = #{shipmethodid,jdbcType=INTEGER},
+			</if>
+			<if test="paymethodid != null">
+				paymethodId = #{paymethodid,jdbcType=INTEGER},
+			</if>
+			<if test="discountid != null">
+				discountId = #{discountid,jdbcType=INTEGER},
+			</if>
+			<if test="subtotal != null">
+				subtotal = #{subtotal,jdbcType=DOUBLE},
+			</if>
+			<if test="total != null">
+				total = #{total,jdbcType=DOUBLE},
+			</if>
+			<if test="notice != null">
+				notice = #{notice,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				userId = #{userid,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createtime != null">
+				createTime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastupdatetime != null">
+				lastupdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ny6design.model.OrderSummary">
+		update
+		t_order_summary
+		set shipmethodId = #{shipmethodid,jdbcType=INTEGER},
+		paymethodId = #{paymethodid,jdbcType=INTEGER},
+		discountId =
+		#{discountid,jdbcType=INTEGER},
+		subtotal = #{subtotal,jdbcType=DOUBLE},
+		total = #{total,jdbcType=DOUBLE},
+		notice = #{notice,jdbcType=VARCHAR},
+		userId = #{userid,jdbcType=INTEGER},
+		status =
+		#{status,jdbcType=INTEGER},
+		createTime =
+		#{createtime,jdbcType=TIMESTAMP},
+		lastupdateTime =
+		#{lastupdatetime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- add by manually -->
+	<select id="selectOrdersByUserId" parameterType="java.lang.Integer"
+		resultMap="orderSummaryDetail">
+		select * from t_order_summary where userId = #{userId,jdbcType=INTEGER}
+	</select>
+
+	<resultMap type="com.ny6design.model.OrderSummaryDetail" id="orderSummaryDetail">
+
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="subtotal" property="subtotal" jdbcType="DOUBLE" />
+		<result column="total" property="total" jdbcType="DOUBLE" />
+		<result column="notice" property="notice" jdbcType="VARCHAR" />
+		<result column="userId" property="userid" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="lastupdateTime" property="lastupdatetime"
+			jdbcType="TIMESTAMP" />
+		<association property="paymethod" column="paymethodId"
+			javaType="com.ny6design.model.PayMethod" select="getPayMethod" />
+		<association property="shipmethod" column="shipmethodId"
+			javaType="com.ny6design.model.ShipMethod" select="getShipMethod" />
+		<collection property="orderDetails" javaType="ArrayList"
+			column="id" ofType="orderDetailMap"
+			select="getSummaryMapping" />
+	</resultMap>
+
+	<select id="getPayMethod" resultType="com.ny6design.model.PayMethod">
+		select * from e_pay_method
+		where id = #{paymethodId,jdbcType=INTEGER}
+	</select>
+
+	<select id="getShipMethod" parameterType="java.lang.Integer"
+		resultType="com.ny6design.model.ShipMethod">
+		select * from e_ship_method where id =
+		#{shipmethodId,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getSummaryMapping" resultMap="orderDetailMap">
+		select b.id as orderId, b.productId productId from t_order_mapping a 
+		inner join t_order b on a.orderId=b.id
+		where ordersummaryId = #{id,jdbcType=INTEGER}
+	</select>
+
+	<resultMap type="com.ny6design.model.OrderDetail" id="orderDetailMap">
+		<association property="order" column="orderId"
+			javaType="com.ny6design.model.Order" select="getOrder" />
+		<association property="product" column="productId"
+			javaType="com.ny6design.model.Product" select="getProductDetail" />
+	</resultMap>
+	
+	<select id="getOrder" resultType="com.ny6design.model.Order">
+		select * from t_order
+		where id = #{orderId,jdbcType=INTEGER}
+	</select>
+	
+	
+	<resultMap type="com.ny6design.model.Product" id="prodDetail">
+		<id property="productId" column="product_id" />
+		<result property="orderColumnName" column="orderColumnName" />
+		<result property="orderBy" column="orderBy" />
+		<association property="productDesc" column="product_id"
+			javaType="com.ny6design.model.ProductDescription" select="getDesc4Product" />
+		<collection property="productImageList" javaType="ArrayList"
+			column="product_id" ofType="com.ny6design.model.ProductImage" select="getImage4Product" />
+		<collection property="productPriceList" javaType="ArrayList"
+			column="product_id" ofType="com.ny6design.model.ProductPrice" select="getPrice4Product" />
+		<collection property="productCategoryList" javaType="ArrayList"
+			column="product_id" ofType="com.ny6design.model.Product2CategoryKey"
+			select="getProductCategoryList" />
+	</resultMap>
+
+	
+	<select id="getProductDetail" resultMap="prodDetail">
+		select
+		*
+		from
+		t_product
+		where
+		product_id = #{productId}
+	</select>
+
+	<select id="getPrice4Product" resultType="com.ny6design.model.ProductPrice">
+	  SELECT * FROM t_product_price WHERE product_id = #{productId}
+	</select>
+	
+	<select id="getDesc4Product" resultType="com.ny6design.model.ProductDescription">
+	  SELECT * FROM t_product_description WHERE product_id = #{productId}
+	</select>
+	<select id="getImage4Product" resultType="com.ny6design.model.ProductImage">
+		SELECT * FROM t_product_image WHERE product_id = #{productId}
+	</select>
+
+	<select id="getProductCategoryList" resultType="com.ny6design.model.Product2CategoryKey">
+		SELECT
+		category_id as categoryId,
+		product_id as productId
+		FROM t_product_to_category
+		WHERE product_id = #{productId}
+	</select>
+
 </mapper>

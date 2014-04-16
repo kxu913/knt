@@ -6,14 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ny6design.constant.OrderStatus;
 import com.ny6design.constant.OrderSummaryStatus;
 import com.ny6design.mapper.OrderSummaryMapper;
 import com.ny6design.mapper.OrderSummaryMappingMapper;
 import com.ny6design.model.CartDetail;
-import com.ny6design.model.Order;
 import com.ny6design.model.OrderDetail;
 import com.ny6design.model.OrderSummary;
+import com.ny6design.model.OrderSummaryDetail;
 import com.ny6design.model.OrderSummaryMapping;
 
 /**
@@ -62,5 +61,9 @@ public class OrderSummayService {
 		summary.setSubtotal(detail.getTotal().doubleValue());
 		summary.setTotal(detail.getTotal().doubleValue());
 		summary.setUserid(detail.getCart().getUserId());
+	}
+
+	public List<OrderSummaryDetail> findOrdersByUserId(int userId) {
+		return orderSummaryMapper.selectOrdersByUserId(userId);
 	}
 }

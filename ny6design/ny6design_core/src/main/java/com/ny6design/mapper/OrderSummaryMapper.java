@@ -1,6 +1,9 @@
 package com.ny6design.mapper;
 
+import java.util.List;
+
 import com.ny6design.model.OrderSummary;
+import com.ny6design.model.OrderSummaryDetail;
 
 public interface OrderSummaryMapper {
 	
@@ -16,4 +19,6 @@ public interface OrderSummaryMapper {
 	int updateByPrimaryKeySelective(OrderSummary record);
 
 	int updateByPrimaryKey(OrderSummary record);
+	
+	List<OrderSummaryDetail> selectOrdersByUserId(int userId);
 }

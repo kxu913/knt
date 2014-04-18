@@ -600,3 +600,13 @@ function submit(){
 		}
 	});
 }
+
+function gotoOrderList(){
+	$.ajax({
+		url : 'order/listForUser',
+		success : function(data, status) {
+			hideAds();
+			$("#productList").html(data);
+		}
+	});
+}

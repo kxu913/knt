@@ -1,5 +1,6 @@
 package com.ny6design.model;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class OrderSummaryDetail {
 
 	private Date lastupdatetime;
 	
-	private List<OrderDetail> orderDetails;
+	private List<OrderDetail> orderDetails = Collections.emptyList();
 
 	public Integer getId() {
 		return id;

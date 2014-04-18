@@ -12,8 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ny6design.model.OrderDetail;
-import com.ny6design.model.OrderSummary;
 import com.ny6design.model.OrderSummaryDetail;
 import com.ny6design.service.OrderSummayService;
 
@@ -29,14 +27,14 @@ public class OrderController {
 	OrderSummayService orderSummaryService;
 
 	@RequestMapping("listForUser")
-	public ModelAndView listOrdersForUser(HttpServletRequest request, HttpServletResponse response,
-			final ModelMap model) {
+	public ModelAndView listOrdersForUser(HttpServletRequest request, HttpServletResponse response, final ModelMap model) {
 		int userId = getUserId(request);
 		List<OrderSummaryDetail> rtn = Collections.emptyList();
 		if (userId > 0) {
 			rtn = orderSummaryService.findOrdersByUserId(userId);
 		}
-		return new ModelAndView("user/orders", model);
+		model.put("orders", rtn);
+		return new ModelAndView("user/orderlist", model);
 	}
 
 	private int getUserId(HttpServletRequest request) {

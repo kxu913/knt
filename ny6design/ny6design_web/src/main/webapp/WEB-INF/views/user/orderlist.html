@@ -1,0 +1,41 @@
+<div class="row" style="padding: 10px 0px 10px 0px;">
+	<div class="col-sm-10">
+		<p class="text-warning">
+			<strong>Home :: Order List</strong>
+		</p>
+	</div>
+</div>
+<div class="table-responsive" style="padding-top: 10px">
+	#foreach($orderSummary as $!orders)
+	<table class="table table-hover table-bordered">
+		<tr>
+			<td>OrderNum:</td>
+			<td>$orderSummary.id</td>
+			<td>UpdateTime:</td>
+			<td>$orderSummary.lastupdatetime</td>
+			<td>$list.size($orders)</td>
+		</tr>
+			#if ($list.isNull($!orderSummary.orderDetails))
+			
+			#else
+				#foreach($!orderDetail as $!orderSummary.orderDetails)
+				<tr>
+					#if ($list.isNull($!orderDetail.product.productImageList))
+						<td class="smallImg"><img alt="" src="$!orderDetail.product.image"></td>
+					#else
+						<td class="smallImg"><img alt="" src="$!orderDetail.product.productImageList[0].image"></td>
+					#end
+					<td>$!orderDetail.product.productDesc.description</td>
+					<td>$!orderDetail.product.productPriceList[0].price</td>
+					<td>$!orderDetail.order.amount</td>
+					<td>$!orderDetail.order.cost</td>
+					<td>$!orderSummary.total</td>
+					<td>$!orderSummary.status</td>
+				</tr>
+				#end
+			#end
+	</table>
+	#end
+</div>
+
+

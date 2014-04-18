@@ -26,8 +26,10 @@ public class OrderSummayServiceTest {
 	public void testFindOrdersByUserId() {
 		List<OrderSummaryDetail> list = orderService.findOrdersByUserId(8);
 		for(OrderSummaryDetail detail : list){
-			OrderDetail order = detail.getOrderDetails().get(0);
-			System.out.println(order.getProduct().getProductDesc().getDescription());
+			for(OrderDetail order : detail.getOrderDetails()){
+				System.out.println(order.getProduct().getProductDesc().getDescription());
+			}
+			
 		}
 	}
 

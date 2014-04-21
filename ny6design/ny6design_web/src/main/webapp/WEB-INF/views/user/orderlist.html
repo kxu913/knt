@@ -5,32 +5,69 @@
 		</p>
 	</div>
 </div>
+<div class="row" style="margin: 0px;">
+	<div class="col-lg-4  col-md-4" style="margin: 0px; padding: 0px">
+		<div class="input-group">
+			<span class="input-group-addon">Search Order</span> <input type="text"
+				id="keyword" class="form-control" placeholder="Order number">
+		</div>
+	</div>
+	<div class="col-lg-8  col-md-8">
+		<form class="navbar-form navbar-left"
+			style="margin: 0px; padding: 0px">
+			<button type="button" class="btn btn-success"
+				onclick="searchFeedback()">
+				<span class="glyphicon glyphicon-search"> </span> Search
+			</button>
+			<button type="button" class="btn btn-success"
+				onclick="loadFeedback()">
+				<span class="glyphicon glyphicon-search"> </span> View All
+			</button>
+		</form>
+	</div>
+</div>
 <div class="table-responsive" style="padding-top: 10px">
 	#foreach($orderSummary as $!orders)
-	<table class="table table-hover table-bordered">
-		<tr>
-			<td>OrderNum:</td>
-			<td>$!orderSummary.orderNumber</td>
-			<td>UpdateTime:</td>
-			<td>$orderSummary.lastupdatetime</td>
-			<td>$list.size($orders)</td>
+	<table class="table table-hover table-bordered" style="margin-bottom: 0px; width: 100%;">
+		<tr style="background-color: #F9F9F9">
+			<td colspan="8">
+				<div class="row">
+					<div class="col-lg-1 col-sm-2 text-left">
+						<span>OrderNum:</span>
+					</div>
+					<div class="col-lg-7 col-sm-4 text-left">
+					<span style="color:#005EA7; cursor: pointer;">$!orderSummary.orderNumber</span>
+					</div>
+				</div>
+			</td>
 		</tr>
-			#if ($list.isNull($!orderSummary.orderDetails))
+		#if ($list.isNull($!orderSummary.orderDetails))
 			
 			#else
 				#foreach($!orderDetail as $!orderSummary.orderDetails)
 				<tr>
 					#if ($list.isNull($!orderDetail.product.productImageList))
-						<td class="smallImg"><img alt="" src="$!orderDetail.product.image"></td>
+						<td class="smallImg" width="10%;"><img alt="" src="$!orderDetail.product.image"></td>
 					#else
-						<td class="smallImg"><img alt="" src="$!orderDetail.product.productImageList[0].image"></td>
+						<td class="smallImg" width="10%;"><img alt="" src="$!orderDetail.product.productImageList[0].image"></td>
 					#end
-					<td>$!orderDetail.product.productDesc.description</td>
-					<td>$!orderDetail.product.productPriceList[0].price</td>
-					<td>$!orderDetail.order.amount</td>
-					<td>$!orderDetail.order.cost</td>
-					<td>$!orderSummary.total</td>
-					<td>$!orderSummary.status</td>
+					<td width="30%;">$!orderDetail.product.productDesc.description</td>
+					<td width="10%;">$!orderDetail.product.productPriceList[0].price</td>
+					<td width="10%;">$!orderDetail.order.amount</td>
+					<td width="10%;">$!orderDetail.order.cost</td>
+					<td width="10%;">$!orderSummary.total</td>
+					#if ($!{velocityCount}==1)
+						#if ($!orderSummary.status==1)
+							<td width="20%;" rowspan="$list.size($!orderSummary.orderDetails)" style="vertical-align: middle;"> $!orderSummary.createtime</td>
+							<td width="10%;" rowspan="$list.size($!orderSummary.orderDetails)" style="vertical-align: middle;"> Created</td>
+						#else
+							<td>Shipping</td>
+						#end
+					#else
+					#end
+					
+					
+					
 				</tr>
 				#end
 			#end

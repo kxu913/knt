@@ -107,8 +107,10 @@ public class OrderProcessController {
 
 	@RequestMapping("checkout")
 	public ModelAndView addCart(HttpServletRequest request, final ModelMap model) {
-
 		CartDetail cart = (CartDetail) model.get("cart");
+		if (cart == null || cart.getOrders() == null || cart.getOrders().isEmpty()) {
+			return new ModelAndView("shoppingcart/selectProduct", model);
+		}
 		cart.setSubtotal(cart.calcSubTotal());
 		cart.setSubtotal(cart.calcSubTotal());
 		model.put("rules", shoppingRuleService.getRulesByPage(ORDERVIEWS[1]));
@@ -205,13 +207,22 @@ public class OrderProcessController {
 	@ResponseBody
 	public String submit(HttpServletRequest request, final ModelMap model, final SessionStatus status) {
 		CartDetail cart = (CartDetail) model.get("cart");
-		UserDetail user =(UserDetail) model.get("user");
+		UserDetail user = (UserDetail) model.get("user");
 		orderSummayService.insertOrder(cart);
 		shoppingCartService.emptyCart(cart);
 		model.remove(cart);
 		model.remove(user);
 		status.setComplete();
 		return "0";
+	}
+
+	@RequestMapping("productNumber")
+	public ModelAndView getProductNumber(HttpServletRequest request, final ModelMap model) {
+		CartDetail cart = (CartDetail) model.get("cart");
+		if (cart == null || cart.getOrders() == null || cart.getOrders().isEmpty()) {
+			return new ModelAndView("shoppingcart/selectProduct", model);
+		}
+		return new ModelAndView(ORDERVIEWS[1], model);
 	}
 
 	private int getUserId(HttpServletRequest request) {

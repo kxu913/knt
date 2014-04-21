@@ -1,0 +1,30 @@
+<div style="padding: 10px 0px 0px 10px;">
+	<p class="text-warning">
+		<strong>Home :: YOUR SHOPPING BAG</strong>
+	</p>
+	<p class="text-info" style="padding-left: 10px;">Shopping Cart
+		items</p>
+	<div style="min-height: 50px;">
+		<h1>please select a product firstly!</h1>
+	</div>
+
+<ul class="nav nav-tabs">
+  <li class="active" ><a href="index.html" style="background-color: #EEA63F; color: #fff;cursor: pointer;"><strong>Back to Shopping</strong></a></li>
+   <li class="active" style="float: right"><a onclick="checkout()" style="background-color: #EEA63F; color: #fff;cursor: pointer;"><strong>Proceed To CheckOut</strong></a></li>
+</ul>
+
+<p class="text-info" style="padding-left: 10px; padding-top: 10px;color:#EEA63F"><strong>You may also like</strong></p>
+<table
+		class="table table-bordered table-striped responsive-utilities table-condensed">
+<tr>
+	#foreach($product as $!indexProducts)
+	<td><img src='$!{product.image}' style="height:160px; width: 190px; cursor: pointer;"></img></td>
+	#end
+</tr>
+<tr>
+	#foreach($product as $!indexProducts)
+	<td>$!{product.productDesc.name}</td>
+	#end
+</tr>
+</table>
+</div>

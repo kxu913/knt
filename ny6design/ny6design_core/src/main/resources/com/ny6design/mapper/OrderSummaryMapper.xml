@@ -3,6 +3,7 @@
 <mapper namespace="com.ny6design.mapper.OrderSummaryMapper">
 	<resultMap id="BaseResultMap" type="com.ny6design.model.OrderSummary">
 		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="orderNumber" property="orderNumber" jdbcType="VARCHAR" />
 		<result column="shipmethodId" property="shipmethodid" jdbcType="INTEGER" />
 		<result column="paymethodId" property="paymethodid" jdbcType="INTEGER" />
 		<result column="discountId" property="discountid" jdbcType="INTEGER" />
@@ -16,7 +17,7 @@
 			jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, shipmethodId, paymethodId, discountId, subtotal, total,
+		id, orderNumber,shipmethodId, paymethodId, discountId, subtotal, total,
 		notice,
 		userId, status,
 		createTime, lastupdateTime
@@ -38,12 +39,13 @@
 			keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
 		</selectKey>
-		insert into t_order_summary (id, shipmethodId, paymethodId,
+		insert into t_order_summary ( orderNumber,shipmethodId, paymethodId,
 		discountId, subtotal, total,
 		notice, userId, status,
 		createTime,
 		lastupdateTime)
-		values (#{id,jdbcType=INTEGER},
+		values (
+		#{orderNumber,jdbcType=VARCHAR},
 		#{shipmethodid,jdbcType=INTEGER},
 		#{paymethodid,jdbcType=INTEGER},
 		#{discountid,jdbcType=INTEGER}, #{subtotal,jdbcType=DOUBLE},
@@ -54,119 +56,12 @@
 		#{createtime,jdbcType=TIMESTAMP},
 		#{lastupdatetime,jdbcType=TIMESTAMP})
 	</insert>
-	<insert id="insertSelective" parameterType="com.ny6design.model.OrderSummary">
-		insert into t_order_summary
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="shipmethodid != null">
-				shipmethodId,
-			</if>
-			<if test="paymethodid != null">
-				paymethodId,
-			</if>
-			<if test="discountid != null">
-				discountId,
-			</if>
-			<if test="subtotal != null">
-				subtotal,
-			</if>
-			<if test="total != null">
-				total,
-			</if>
-			<if test="notice != null">
-				notice,
-			</if>
-			<if test="userid != null">
-				userId,
-			</if>
-			<if test="status != null">
-				status,
-			</if>
-			<if test="createtime != null">
-				createTime,
-			</if>
-			<if test="lastupdatetime != null">
-				lastupdateTime,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="shipmethodid != null">
-				#{shipmethodid,jdbcType=INTEGER},
-			</if>
-			<if test="paymethodid != null">
-				#{paymethodid,jdbcType=INTEGER},
-			</if>
-			<if test="discountid != null">
-				#{discountid,jdbcType=INTEGER},
-			</if>
-			<if test="subtotal != null">
-				#{subtotal,jdbcType=DOUBLE},
-			</if>
-			<if test="total != null">
-				#{total,jdbcType=DOUBLE},
-			</if>
-			<if test="notice != null">
-				#{notice,jdbcType=VARCHAR},
-			</if>
-			<if test="userid != null">
-				#{userid,jdbcType=INTEGER},
-			</if>
-			<if test="status != null">
-				#{status,jdbcType=INTEGER},
-			</if>
-			<if test="createtime != null">
-				#{createtime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="lastupdatetime != null">
-				#{lastupdatetime,jdbcType=TIMESTAMP},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.ny6design.model.OrderSummary">
-		update t_order_summary
-		<set>
-			<if test="shipmethodid != null">
-				shipmethodId = #{shipmethodid,jdbcType=INTEGER},
-			</if>
-			<if test="paymethodid != null">
-				paymethodId = #{paymethodid,jdbcType=INTEGER},
-			</if>
-			<if test="discountid != null">
-				discountId = #{discountid,jdbcType=INTEGER},
-			</if>
-			<if test="subtotal != null">
-				subtotal = #{subtotal,jdbcType=DOUBLE},
-			</if>
-			<if test="total != null">
-				total = #{total,jdbcType=DOUBLE},
-			</if>
-			<if test="notice != null">
-				notice = #{notice,jdbcType=VARCHAR},
-			</if>
-			<if test="userid != null">
-				userId = #{userid,jdbcType=INTEGER},
-			</if>
-			<if test="status != null">
-				status = #{status,jdbcType=INTEGER},
-			</if>
-			<if test="createtime != null">
-				createTime = #{createtime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="lastupdatetime != null">
-				lastupdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
+	
 	<update id="updateByPrimaryKey" parameterType="com.ny6design.model.OrderSummary">
 		update
 		t_order_summary
 		set shipmethodId = #{shipmethodid,jdbcType=INTEGER},
+		orderNumber = #{orderNumber,jdbcType=VARCHAR},
 		paymethodId = #{paymethodid,jdbcType=INTEGER},
 		discountId =
 		#{discountid,jdbcType=INTEGER},
@@ -186,12 +81,13 @@
 	<!-- add by manually -->
 	<select id="selectOrdersByUserId" parameterType="java.lang.Integer"
 		resultMap="orderSummaryDetail">
-		select * from t_order_summary where userId = #{userId,jdbcType=INTEGER}
+		select * from t_order_summary where userId = #{userId,jdbcType=INTEGER} order by lastupdateTime desc;
 	</select>
 
 	<resultMap type="com.ny6design.model.OrderSummaryDetail" id="orderSummaryDetail">
 
 		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="orderNumber" property="orderNumber" jdbcType="VARCHAR" />
 		<result column="subtotal" property="subtotal" jdbcType="DOUBLE" />
 		<result column="total" property="total" jdbcType="DOUBLE" />
 		<result column="notice" property="notice" jdbcType="VARCHAR" />

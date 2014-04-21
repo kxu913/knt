@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class OrderSummaryDetail {
 	private Integer id;
+	
+	private String orderNumber;
 
 	private ShipMethod shipmethod;
 
@@ -41,6 +43,14 @@ public class OrderSummaryDetail {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 	public ShipMethod getShipmethod() {

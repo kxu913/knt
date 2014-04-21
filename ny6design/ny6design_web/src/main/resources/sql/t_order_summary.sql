@@ -12,3 +12,6 @@ CREATE TABLE `ny6design`.`t_order_summary` (
   `lastupdateTime` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
 COMMENT = 'used to store order total information';
+
+ALTER TABLE `ny6design`.`t_order_summary` 
+ADD COLUMN `orderNumber` VARCHAR(30) NOT NULL AFTER `id`;

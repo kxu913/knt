@@ -31,82 +31,6 @@
 		#{cost,jdbcType=DECIMAL}, #{status,jdbcType=SMALLINT}, #{createtime,jdbcType=TIMESTAMP},
 		#{lastupdatetime,jdbcType=TIMESTAMP})
 	</insert>
-	<insert id="insertSelective" parameterType="com.ny6design.model.Order">
-	    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
-			SELECT LAST_INSERT_ID() AS id
-		</selectKey>
-		insert into t_order
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="productid != null">
-				productId,
-			</if>
-			<if test="amount != null">
-				amount,
-			</if>
-			<if test="cost != null">
-				cost,
-			</if>
-			<if test="status != null">
-				status,
-			</if>
-			<if test="createtime != null">
-				createTime,
-			</if>
-			<if test="lastupdatetime != null">
-				lastUpdateTime,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="productid != null">
-				#{productid,jdbcType=INTEGER},
-			</if>
-			<if test="amount != null">
-				#{amount,jdbcType=INTEGER},
-			</if>
-			<if test="cost != null">
-				#{cost,jdbcType=DECIMAL},
-			</if>
-			<if test="status != null">
-				#{status,jdbcType=SMALLINT},
-			</if>
-			<if test="createtime != null">
-				#{createtime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="lastupdatetime != null">
-				#{lastupdatetime,jdbcType=TIMESTAMP},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.ny6design.model.Order">
-		update t_order
-		<set>
-			<if test="productid != null">
-				productId = #{productid,jdbcType=INTEGER},
-			</if>
-			<if test="amount != null">
-				amount = #{amount,jdbcType=INTEGER},
-			</if>
-			<if test="cost != null">
-				cost = #{cost,jdbcType=DECIMAL},
-			</if>
-			<if test="status != null">
-				status = #{status,jdbcType=SMALLINT},
-			</if>
-			<if test="createtime != null">
-				createTime = #{createtime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="lastupdatetime != null">
-				lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
 	<update id="updateByPrimaryKey" parameterType="com.ny6design.model.Order">
 		update t_order
 		set productId = #{productid,jdbcType=INTEGER},
@@ -124,6 +48,6 @@
 		from t_shoppingcart a 
 		inner join t_cart_order b on a.id = b.cartId
 		inner join t_order c on b.orderId=c.id
-		where a.userId = #{userId,jdbcType=INTEGER}
+		where a.userId = #{userId,jdbcType=INTEGER} and c.status =0;
 	</select>
 </mapper>

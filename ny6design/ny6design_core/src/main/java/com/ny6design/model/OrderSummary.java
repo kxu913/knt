@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class OrderSummary {
     private Integer id;
+    
+    private String orderNumber;
 
     private Integer shipmethodid;
 
@@ -32,8 +34,16 @@ public class OrderSummary {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public String getOrderNumber() {
+		return orderNumber;
+	}
 
-    public Integer getShipmethodid() {
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public Integer getShipmethodid() {
         return shipmethodid;
     }
 

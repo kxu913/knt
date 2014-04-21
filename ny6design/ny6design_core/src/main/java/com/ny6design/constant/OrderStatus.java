@@ -7,7 +7,8 @@ package com.ny6design.constant;
  * 
  */
 public enum OrderStatus {
-	/*a productCode added */Added((short)0), Canceled((short)-1), Payed((short)1);
+	/* a productCode added */Added((short) 0),
+	/* order had been created into order summary */Created((short) 1), Canceled((short) -1), Payed((short) 2);
 	public short actualValue = 0;
 
 	OrderStatus(short actualValue) {

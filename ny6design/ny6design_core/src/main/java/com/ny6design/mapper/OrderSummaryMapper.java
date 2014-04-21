@@ -12,11 +12,7 @@ public interface OrderSummaryMapper {
 
 	int insert(OrderSummary record);
 
-	int insertSelective(OrderSummary record);
-
 	OrderSummary selectByPrimaryKey(Integer id);
-
-	int updateByPrimaryKeySelective(OrderSummary record);
 
 	int updateByPrimaryKey(OrderSummary record);
 	

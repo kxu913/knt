@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class Order {
     private Integer id;
+    
+    private String orderNumber;
 
     private Integer productid;
 
@@ -25,8 +27,16 @@ public class Order {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public String getOrderNumber() {
+		return orderNumber;
+	}
 
-    public Integer getProductid() {
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public Integer getProductid() {
         return productid;
     }
 

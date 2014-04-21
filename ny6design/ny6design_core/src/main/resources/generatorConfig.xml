@@ -3,7 +3,7 @@
 <generatorConfiguration>
 	<!-- classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 -->
 	<classPathEntry
-		location="C:/Users/kevin/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar" />
+		location="C:/Users/kxu/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar" />
 
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 
@@ -14,7 +14,7 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3307/ny6design" userId="root"
+			connectionURL="jdbc:mysql://localhost:3306/ny6design" userId="root"
 			password="888888">
 		</jdbcConnection>
 
@@ -24,16 +24,16 @@
 
 		<!-- targetProject:自动生成代码的位置 -->
 		<javaModelGenerator targetPackage="com.ny6design.model"
-			targetProject="C:\Users\kevin\git\knt\ny6design\ny6design_core\src\main\java">
+			targetProject="D:\git_self\knt\ny6design\ny6design_core\src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		<sqlMapGenerator targetPackage="com.ny6design.mapper"
-			targetProject="C:\Users\kevin\git\knt\ny6design\ny6design_core\src\main\resources">
+			targetProject="D:\git_self\knt\ny6design\ny6design_core\src\main\resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.ny6design.mapper" targetProject="C:\Users\kevin\git\knt\ny6design\ny6design_core\src\main\java">
+			targetPackage="com.ny6design.mapper" targetProject="D:\git_self\knt\ny6design\ny6design_core\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
@@ -81,7 +81,7 @@
 			<table tableName="t_question" domainObjectName="Question"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false" escapeWildcards="true"/>-->
+			selectByExampleQueryId="false" escapeWildcards="true"/>
 				<table tableName="t_shoppingcart" domainObjectName="ShoppingCart"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
@@ -93,7 +93,30 @@
 				<table tableName="t_cart_order" domainObjectName="CartOrderMapping"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>-->
+				
+			<!-- <table tableName="t_shopping_rule" domainObjectName="ShoppingRule"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" escapeWildcards="true"/>
+			
+			 
+			 <table tableName="e_ship_method" domainObjectName="ShipMethod"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>
+			<table tableName="e_pay_method" domainObjectName="PayMethod"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/>  
+			<table tableName="t_order_summary" domainObjectName="OrderSummary"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/> -->
+			<table tableName="t_order_mapping" domainObjectName="OrderSummaryMapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" escapeWildcards="true"/> 
 				
 				
 	</context>

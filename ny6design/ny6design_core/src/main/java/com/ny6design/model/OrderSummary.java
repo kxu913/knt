@@ -20,6 +20,8 @@ public class OrderSummary {
     private String notice;
 
     private Integer userid;
+    
+    private Integer addressId;
 
     private Integer status;
 
@@ -41,6 +43,14 @@ public class OrderSummary {
 
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
+	}
+
+	public Integer getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
 	}
 
 	public Integer getShipmethodid() {

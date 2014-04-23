@@ -90,9 +90,14 @@ public class OrderSummayService {
 		summary.setSubtotal(detail.getTotal().doubleValue());
 		summary.setTotal(detail.getTotal().doubleValue());
 		summary.setUserid(detail.getCart().getUserId());
+		summary.setAddressId(detail.getCart().getAddressId());
 	}
 
 	public List<OrderSummaryDetail> findOrdersByUserId(int userId) {
 		return orderSummaryMapper.selectOrdersByUserId(userId);
+	}
+
+	public OrderSummaryDetail getOrderDetailById(int orderId) {
+		return orderSummaryMapper.getOrderDetailById(orderId);
 	}
 }

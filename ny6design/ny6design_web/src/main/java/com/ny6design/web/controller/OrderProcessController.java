@@ -156,6 +156,7 @@ public class OrderProcessController {
 			UserDetail user = userService.getUserById(request.getSession().getAttribute("userid").toString());
 			model.put("user", user);
 			shoppingCartService.updateOrders(cart, userId);
+			cart.getCart().setAddressId(user.getDefaultAddressId());
 		} else {
 			return new ModelAndView("login/loginAndRegister", model);
 		}

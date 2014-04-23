@@ -606,6 +606,18 @@ function gotoOrderList(){
 		url : 'order/listForUser',
 		success : function(data, status) {
 			hideAds();
+			loadUserPanel();
+			$("#productList").html(data);
+		}
+	});
+}
+
+function gotoOrderDetail(id){
+	$.ajax({
+		url : 'order/detail/'+id,
+		success : function(data, status) {
+			hideAds();
+			loadUserPanel();
 			$("#productList").html(data);
 		}
 	});

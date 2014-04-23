@@ -17,4 +17,6 @@ public interface OrderSummaryMapper {
 	int updateByPrimaryKey(OrderSummary record);
 	
 	List<OrderSummaryDetail> selectOrdersByUserId(int userId);
+
+	OrderSummaryDetail getOrderDetailById(int orderId);
 }

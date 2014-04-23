@@ -23,6 +23,7 @@ public class UserDetail implements Serializable {
 	private boolean isAdmin;
 	private Date updateTime;
 
+	private int defaultAddressId;
 	private String address;
 	private String town;
 	private String countryCode;
@@ -95,6 +96,14 @@ public class UserDetail implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public int getDefaultAddressId() {
+		return defaultAddressId;
+	}
+
+	public void setDefaultAddressId(int defaultAddressId) {
+		this.defaultAddressId = defaultAddressId;
 	}
 
 	public String getAddress() {

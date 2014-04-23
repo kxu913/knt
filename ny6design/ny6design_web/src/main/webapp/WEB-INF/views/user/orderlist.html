@@ -35,7 +35,7 @@
 					<div class="col-lg-1 col-sm-2 text-left">
 						<span>OrderNum:</span>
 					</div>
-					<div class="col-lg-7 col-sm-4 text-left">
+					<div class="col-lg-7 col-sm-4 text-left" onclick="gotoOrderDetail($!orderSummary.id)">
 					<span style="color:#005EA7; cursor: pointer;">$!orderSummary.orderNumber</span>
 					</div>
 				</div>
@@ -55,8 +55,8 @@
 					<td width="10%;">$!orderDetail.product.productPriceList[0].price</td>
 					<td width="10%;">$!orderDetail.order.amount</td>
 					<td width="10%;">$!orderDetail.order.cost</td>
-					<td width="10%;">$!orderSummary.total</td>
 					#if ($!{velocityCount}==1)
+						<td width="10%;" rowspan="$list.size($!orderSummary.orderDetails)" style="vertical-align: middle;">$!orderSummary.total</td>
 						#if ($!orderSummary.status==1)
 							<td width="20%;" rowspan="$list.size($!orderSummary.orderDetails)" style="vertical-align: middle;"> $!orderSummary.createtime</td>
 							<td width="10%;" rowspan="$list.size($!orderSummary.orderDetails)" style="vertical-align: middle;"> Created</td>
@@ -65,9 +65,6 @@
 						#end
 					#else
 					#end
-					
-					
-					
 				</tr>
 				#end
 			#end

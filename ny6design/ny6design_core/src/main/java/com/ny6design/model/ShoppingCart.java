@@ -8,6 +8,8 @@ public class ShoppingCart {
 	private Integer userId;
 
 	private Integer orderid;
+	
+	private Integer addressId;
 
 	private Date lastupdatetime;
 
@@ -33,6 +35,14 @@ public class ShoppingCart {
 
 	public void setOrderid(Integer orderid) {
 		this.orderid = orderid;
+	}
+
+	public Integer getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
 	}
 
 	public Date getLastupdatetime() {

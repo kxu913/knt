@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,6 +36,13 @@ public class OrderController {
 		}
 		model.put("orders", rtn);
 		return new ModelAndView("user/orderlist", model);
+	}
+	
+	@RequestMapping("detail/{orderId}")
+	public ModelAndView getOrderDetail(@PathVariable int orderId, final ModelMap model) {
+		OrderSummaryDetail detail = orderSummaryService.getOrderDetailById(orderId);
+		model.put("orderSummary", detail);
+		return new ModelAndView("user/orderdetail", model);
 	}
 
 	private int getUserId(HttpServletRequest request) {

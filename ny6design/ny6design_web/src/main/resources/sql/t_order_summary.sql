@@ -15,3 +15,6 @@ COMMENT = 'used to store order total information';
 
 ALTER TABLE `ny6design`.`t_order_summary` 
 ADD COLUMN `orderNumber` VARCHAR(30) NOT NULL AFTER `id`;
+
+ALTER TABLE `ny6design`.`t_order_summary` 
+ADD COLUMN `addressId` INT(11) NOT NULL AFTER `orderNumber`;

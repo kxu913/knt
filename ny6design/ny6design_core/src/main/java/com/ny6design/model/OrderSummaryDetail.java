@@ -12,8 +12,10 @@ import java.util.List;
  */
 public class OrderSummaryDetail {
 	private Integer id;
-	
+
 	private String orderNumber;
+	
+	private AddressDetail address;
 
 	private ShipMethod shipmethod;
 
@@ -29,12 +31,14 @@ public class OrderSummaryDetail {
 
 	private Integer userid;
 
+	private User user;
+
 	private Integer status;
 
 	private Date createtime;
 
 	private Date lastupdatetime;
-	
+
 	private List<OrderDetail> orderDetails = Collections.emptyList();
 
 	public Integer getId() {
@@ -44,13 +48,21 @@ public class OrderSummaryDetail {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getOrderNumber() {
 		return orderNumber;
 	}
 
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
+	}
+
+	public AddressDetail getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressDetail address) {
+		this.address = address;
 	}
 
 	public ShipMethod getShipmethod() {
@@ -109,6 +121,14 @@ public class OrderSummaryDetail {
 		this.userid = userid;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -140,5 +160,5 @@ public class OrderSummaryDetail {
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-	
+
 }

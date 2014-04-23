@@ -30,6 +30,7 @@
 		<result column="isAdmin" property="isAdmin" jdbcType="INTEGER" />
 		<result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
 		
+		<result column="addressId" property="defaultAddressId" jdbcType="INTEGER" />
 		<result column="address" property="address" jdbcType="VARCHAR" />
 		<result column="town" property="town" jdbcType="VARCHAR" />
 		<result column="countryDesc" property="countryDesc" jdbcType="VARCHAR" />
@@ -239,7 +240,7 @@
 	
 	<select id="getAllUsers"  resultMap="UserDetailMap">
 			select a.userId, a.emailAddress, a.password,a.firstName,a.lastName ,a.isAdmin, a.fromId,
-				a.telephone, a.updateTime, b.address,b.town, b.countryCode, b.stateCode,
+				a.telephone, a.updateTime, b.addressId addressId, b.address,b.town, b.countryCode, b.stateCode,
 				c.fdescription as countryDesc, d.fdescription as stateDesc
 				from t_user a
 				inner join t_address b on a.addressId= b.addressId
@@ -251,7 +252,7 @@
 	
 	<select id="searchUsers" resultMap="UserDetailMap" parameterType="string">
 		select a.userId, a.emailAddress, a.password,a.firstName,a.lastName ,a.isAdmin, a.fromId,
-				a.telephone, a.updateTime, b.address,b.town, b.countryCode, b.stateCode,
+				a.telephone, a.updateTime, b.addressId addressId, b.address,b.town, b.countryCode, b.stateCode,
 				c.fdescription as countryDesc, d.fdescription as stateDesc
 				from t_user a
 				inner join t_address b on a.addressId= b.addressId
@@ -265,7 +266,7 @@
 	<select id="getUserById"  resultMap="UserDetailMap" parameterType="long">
 			select a.userId, a.emailAddress, a.password,a.firstName,a.lastName ,a.isAdmin, a.fromId,
 				a.fax, a.telephone, a.updateTime, 
-				b.address,b.town, b.countryCode, b.stateCode, b.zipcode,
+				b.addressId addressId, b.address,b.town, b.countryCode, b.stateCode, b.zipcode,
 				c.fdescription as countryDesc, d.fdescription as stateDesc
 				from t_user a
 				inner join t_address b on a.addressId= b.addressId

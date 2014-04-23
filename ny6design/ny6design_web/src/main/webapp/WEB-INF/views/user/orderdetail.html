@@ -1,0 +1,126 @@
+<div class="row" style="padding: 10px 0px 10px 0px;">
+	<div class="col-sm-10">
+		<p class="text-warning">
+			<strong>Home :: Order Detail</strong>
+		</p>
+	</div>
+</div>
+
+<div class="orderinfo_header"><p class="text-info"> Shipping Address</p></div>
+	<div id="_address" style="padding-left: 10%; border: 1px solid orange">
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div class="col-lg-2  col-md-2" style="text-align: left" style="text-align: left">FirstName:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!orderSummary.user.firstname</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">LastName:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!orderSummary.user.lastname</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Tel:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!orderSummary.user.telephone</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Address:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!orderSummary.address.address</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Zip Code:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!orderSummary.address.zipcode</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Town:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!orderSummary.address.town</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">State:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!orderSummary.address.stateDesc</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding-top: 5px;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left">Country:</div>
+			<div  class="col-lg-3  col-md-3" style="text-align: left">$!orderSummary.address.countryDesc</div>
+		</div>
+		
+		<div  class="row" style="text-align: right;padding: 5px 0 5px 0;">
+			<div  class="col-lg-2  col-md-2" style="text-align: left"> E-mail:</div>
+			<div class="col-lg-3  col-md-3" style="text-align: left">$!orderSummary.user.emailaddress</div>
+		</div>
+	</div>
+	
+	<div id="_shippingmethod" class="orderinfo_head">
+		<p class="text-info">Your Shipping Method</p>
+		<div class="orderinfo_content">
+			<div>
+				<span class="help-block" style="color: blue;">$!orderSummary.shipmethod.description </span>
+			</div>
+		</div>
+	</div>
+
+	<div id="_paymethod" class="orderinfo_head">
+		<p class="text-info">Your payment method</p>
+		<div style="border: 1px solid orange; padding: 5px">
+			<span class="help-block" style="color: blue;">$!orderSummary.paymethod.description </span>
+		</div>
+	</div>
+
+	<div id="_notice" class="orderinfo_head">
+		<p class="text-info">Notices: </p>
+		<div style="padding: 5px">
+			<span class="help-block"> <font style="color: blue;">$!orderSummary.notice </font></span>
+		</div>
+	</div>
+	
+<div class="table-responsive" style="padding-top: 10px">
+	<table class="table table-hover table-bordered" style="margin-bottom: 0px; width: 100%;">
+		<tr style="background-color: #F9F9F9">
+			<th>OrderNumber</th>
+			<th>ProductPicture</th>
+			<th>ProductDescription</th>
+			<th>Price</th>
+			<th>Number</th>
+			<th>Subtotal</th>
+		</tr>
+		#if ($list.isNull($!orderSummary.orderDetails))
+			
+			#else
+				#foreach($!orderDetail as $!orderSummary.orderDetails)
+				<tr>
+					<td class="smallImg" width="10%;">$!orderSummary.orderNumber</td>
+					#if ($list.isNull($!orderDetail.product.productImageList))
+						<td class="smallImg" width="10%;"><img alt="" src="/ny6design_web/$!orderDetail.product.image"></td>
+					#else
+						<td class="smallImg" width="10%;"><img alt="" src="/ny6design_web/$!orderDetail.product.productImageList[0].image"></td>
+					#end
+					<td width="30%;">$!orderDetail.product.productDesc.description</td>
+					<td width="10%;">$!orderDetail.product.productPriceList[0].price</td>
+					<td width="10%;">$!orderDetail.order.amount</td>
+					<td width="10%;">$!orderDetail.order.cost</td>
+				</tr>
+				#end
+			#end
+	</table>
+</div>
+<div class="row">
+		<div class="col-lg-8  col-md-8">&nbsp;</div>
+		<div class="col-lg-4  col-md-4" style="text-align: right;">
+			<p class="text-info" style="padding-bottom: 5px;">Subtotal:
+				$$!orderSummary.subtotal</p>
+			<p class="text-info"
+				style="padding-bottom: 5px; border-bottom: 1px solid red">
+				Shipping & Hnadling: <span id="_shipcost">$$!orderSummary.shipmethod.cost</span>
+			</p>
+			<p class="text-info"
+				style="padding-bottom: 10px; border-bottom: 1px solid orange">
+				Total: <span id="_total">$$!orderSummary.total</span>
+			</p>
+		</div>
+	</div>
+
+

@@ -23,6 +23,7 @@
 		<dom4j.version>1.6.1</dom4j.version>
 		<activemq.version>5.7.0</activemq.version>
 		<google.guava.version>14.0.1</google.guava.version>
+		<httpclient.version>4.3.1</httpclient.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -90,6 +91,11 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${google.guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${httpclient.version}</version>
 			</dependency>
 		</dependencies>
 

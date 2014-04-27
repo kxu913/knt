@@ -5,33 +5,41 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class RandomSeedTest {
-
+	class RandomThread{
+		
+		public int getCode(){
+			return RandomSeed.getInstance().createValidationCode();
+		}
+		
+		public boolean valid(int code){
+			return RandomSeed.getInstance().valide(code);
+		}
+	}
+	
+	@Test
+	public void testAnotherValid() throws InterruptedException{
+		int code = new RandomThread().getCode();
+		System.out.println(code);
+		Thread.sleep(3000);
+		System.out.println(new RandomThread().valid(code));
+	}
 	@Test
 	public void testValide() throws InterruptedException {
-		RandomSeed seed = new RandomSeed.RandomSeedBulder().setDigit(4).setExpiredMinutes(1).build();
+		RandomSeed seed = RandomSeed.getInstance(6, 1);
+		RandomSeed seed2 = RandomSeed.getInstance(5, 2);
+		
 		int number = seed.createValidationCode();
 		System.out.println(number);
-		assertFalse(seed.valide(number + 1));
-		Thread.sleep(30000);
-		assertTrue(seed.valide(number));
-		Thread.sleep(31000);
-		assertFalse(seed.valide(number));
-
-		number = seed.createValidationCode();
-		System.out.println(number);
-		assertFalse(seed.valide(number + 1));
-		Thread.sleep(30000);
-		assertTrue(seed.valide(number));
-		Thread.sleep(31000);
-		assertFalse(seed.valide(number));
+		System.out.println(seed.valide(number));
+		System.out.println(seed2.valide(number));
+		
 	}
 
 	@Test
 	public void testMulitipyValide() throws InterruptedException {
-		
-		for (int i = 0; i < 100; i++) {
+		final RandomSeed seed =  RandomSeed.getInstance();
+		for (int i = 0; i < 10000; i++) {
 			new Thread(new Runnable() {
-				RandomSeed seed = new RandomSeed.RandomSeedBulder().build();
 				@Override
 				public void run() {
 					int number = seed.createValidationCode();
@@ -41,13 +49,17 @@ public class RandomSeedTest {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					System.out.println(Thread.currentThread().getName() + " :1: " + seed.valide(number));
+					if(!seed.valide(number)){
+						System.out.println(Thread.currentThread().getName() + " :1: " + seed.valide(number));
+					}
 					try {
 						Thread.sleep(31000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					System.out.println(Thread.currentThread().getName() + " :2: " + seed.valide(number));
+					if(seed.valide(number)){
+						System.out.println(Thread.currentThread().getName() + " :2: " + seed.valide(number));
+					}
 				}
 			}).start();
 		}

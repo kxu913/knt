@@ -8,7 +8,7 @@ public class RandomSeedTest {
 
 	@Test
 	public void testValide() throws InterruptedException {
-		RandomSeed seed = RandomSeed.getDefaultSeedInstance(4, 1);
+		RandomSeed seed = new RandomSeed.RandomSeedBulder().setDigit(4).setExpiredMinutes(1).build();
 		int number = seed.createValidationCode();
 		System.out.println(number);
 		assertFalse(seed.valide(number + 1));
@@ -28,10 +28,10 @@ public class RandomSeedTest {
 
 	@Test
 	public void testMulitipyValide() throws InterruptedException {
-		final RandomSeed seed = RandomSeed.getDefaultSeedInstance();
+		
 		for (int i = 0; i < 100; i++) {
 			new Thread(new Runnable() {
-
+				RandomSeed seed = new RandomSeed.RandomSeedBulder().build();
 				@Override
 				public void run() {
 					int number = seed.createValidationCode();

@@ -19,33 +19,16 @@ public class RandomSeed {
 	 */
 	private final int expiredTime;
 
-	private int seed;
+	private transient int seed;
 
-	private long createTime;
-
-	private static ThreadLocal<RandomSeed> POOL = new ThreadLocal<RandomSeed>() {
-
-		@Override
-		protected RandomSeed initialValue() {
-			return new RandomSeedBulder().build();
-		}
-
-	};
-
-	public static RandomSeed getDefaultSeedInstance() {
-		return POOL.get();
-	}
-
-	public static RandomSeed getDefaultSeedInstance(int digit, int expiredMinutes) {
-		return new RandomSeedBulder().setDigit(digit).setExpiredMinutes(expiredMinutes).build();
-	}
+	private transient long createTime;
 
 	private RandomSeed(RandomSeedBulder builder) {
 		this.digit = builder.digit;
 		this.expiredTime = builder.expiredTime;
 	}
 
-	private static class RandomSeedBulder {
+	public static class RandomSeedBulder {
 		private int digit = 6;
 		/**
 		 * expired time, unit is minutes

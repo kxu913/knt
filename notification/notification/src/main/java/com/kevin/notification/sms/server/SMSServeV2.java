@@ -16,7 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * create a SMS Server, need username and password, host and so on
+ * create a SMS Server, need username and password, host and so on if you need use defined message or default SMS servers, you can create a
+ * sms.properties and replace this properties
  * 
  * @author kxu
  * 
@@ -29,6 +30,7 @@ public class SMSServeV2 {
 	private static String defaultUserName;
 	private static String defaultPassword;
 	private static String validateMsg;
+	private static String tempPasswordMsg;
 	private final String url;
 	static {
 		Properties p = new Properties();
@@ -40,6 +42,7 @@ public class SMSServeV2 {
 			defaultUserName = p.getProperty("defaultUserName");
 			defaultPassword = p.getProperty("defaultPassword");
 			validateMsg = p.getProperty("validateMsg");
+			tempPasswordMsg = p.getProperty("tempPasswordMsg");
 		} catch (IOException e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
@@ -107,6 +110,10 @@ public class SMSServeV2 {
 			}
 		}
 		return null;
+	}
+
+	public String sendGetTempPasswordMsg(String tel, int number) {
+		return this.sendMessage(tel, String.format(tempPasswordMsg, number));
 	}
 
 }
